@@ -1,4 +1,4 @@
-package kr.co.bit.cr.user;
+﻿package kr.co.bit.cr.user;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,7 +17,7 @@ public class UserController {
 	
 	@RequestMapping("/join.cr")
 	public void join(UserVO user){
-		
+		System.out.println("join-----");
 	}
 	@RequestMapping("/login.cr")
 	public void login(UserVO user){
