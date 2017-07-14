@@ -1,0 +1,144 @@
+#nav-bar{ background: #CC6913;}
+
+#current:after,
+.mean-container .mean-nav ul li a:hover,
+.touching.medium a.hover-zoom,
+.touching.medium a.hover-link,
+.gDot,
+.list_style.circle li a i,
+.flickr-feed li .hover,
+.progress_skill .bar,
+.swipe-navi .swipe-left,
+.swipe-navi .swipe-right,
+.blogteam_pic .blog-hover .icon,
+.list_style.square li a i,
+.highlight.default,
+.blog_large .day, .blog_single .day,
+#filter li.selected a:before,
+.carousel-pagination li.active,
+.slider-read,
+.slider .new,.slider .light-pink{
+	background: #e67e22 !important;
+}
+#header{background:#e67e22;}
+
+.menu > ul > li ul > li:first-child > a{border-top-color:#e67e22;}
+.menu > ul > li > ul:before{ border-bottom-color: #e67e22;}
+.menu ul ul li a:hover.sf-with-ul:after{ border-color: #FBFBFB #FBFBFB #FBFBFB #e67e22;}
+
+.fraction-slider .next:hover,
+.fraction-slider .prev:hover,
+.fraction-slider .next:hover:before,
+.fraction-slider .prev:hover:before { color:#e67e22!important;   border-color:#e67e22!important;}
+
+.pb_action .btn.btn-danger { border-bottom-color:#BB6113; background:#e67e22;}
+.pb_action .btn.btn-danger:hover,.btn.btn-default:hover, .btn.btn-default:focus, .btn-group:focus .btn.btn-default.dropdown-toggle
+{ border-bottom-color:#A95C19; background:#D0711F;}
+
+.blog_large .post_meta h2:hover a, .blog_single .post_meta h2:hover a { color:#e67e22 ;}
+.author_bio > h5 { border-bottom-color:#EB9347;}
+.author_desc .author-team_pic > img{border-color:#e67e22;}
+.author_desc .author-team_pic > img{border-color:#e67e22;}
+.blog_medium .post_meta h2:hover a{color:#e67e22;}
+.blog_medium .day{background:#e67e22;}
+.recent-item:hover .item-description{border-bottom:2px solid #e67e22; }
+#site-searchform #searchsubmit{background-color:#e67e22;}
+#site-searchform #s:focus{ border-color:#e67e22;}
+
+a,
+a.read:hover, 
+.testimonial-review small,
+.list_style li a:hover,
+#breadcrumbs ul li:last-child a, #breadcrumbs ul li a,
+.menu ul li a:hover .sf-sub-indicator,
+.menu ul ul li a:hover,
+.tp-caption.large_bold_red,
+.blogMeta a:hover, .blogTitle span:hover,
+.serviceBox_3:hover i,
+.dropcap.default,
+.blogTitle > a:hover h2,
+.sidebar ul.archives_list li a:hover, .sidebar ul.arrows_list1 li a:hover i,
+.blog_large .post_meta .metaInfo > span > a:hover, .blog_single .post_meta .metaInfo > span > a:hover,
+#comment-list li .comment-container:hover a,
+#comment-list li .comment-container:hover .comment-date,
+.sidebar ul.arrows_list li a:hover, .sidebar ul.arrows_list1 li a:hover i,
+.serviceBox_2:hover i,
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus,
+.nav-tabs li.active, .nav-tabs li.active a, .nav-tabs li.active a:hover,
+.panel-heading:hover  a,
+.panel-heading:hover .accordian-icon,
+.active_acc .panel-title a, .active_acc .accordian-icon,
+.recent_tab_list li a:hover,
+.menu ul ul li a.sf-with-ul:after,
+.comments_list a,
+.blog_medium .post_meta .metaInfo > span > a:hover
+{
+  color: #e67e22;
+}
+#site-search-form #s:focus{border-color:#e67e22; }
+
+.testimonial-item blockquote {
+	border-left: 3px solid #e67e22;
+}
+.testimonial-review > img {
+	border: 2px solid #e67e22;
+}
+#contactForm .btn.btn-default{border-bottom-color:#BE6416;}
+#contactForm .btn.btn-default:hover{background:#e67e22;}
+.btn.btn-default {border-bottom-color: #C26718;}
+.btn.btn-default:hover {background: #CC6913; border-bottom-color: #A4540E;}
+
+.btn.btn-default,
+.tp-caption.modern_big_redbg,
+.tp-caption.medium_bg_red,
+.dropcap_block.default,
+.btn.btn-default.dark:hover,
+.btn.btn-default.dark:focus,
+.btn-group:focus .btn.btn-default.dark.dropdown-toggle,
+.icon_lists .fa-hover a:hover,
+#site-search-form #searchsubmit,
+.tags li a:hover,
+.shares li a:hover{
+	background-color:#e67e22;
+}
+
+.about_author{background:#e67e22; }
+.about_author{border-left-color:#A2510C; }
+.author_social li a{background:#A2510C;}
+
+.table-theme-color span{background:#E67E22; }
+.table-theme-color span.heading{background:#D35400; }
+.table-theme-color span.price-head,.table-theme-color span.price-head span{background:#e67e22; border:none;}
+.table-theme-color .btn.btn-default.dark{background:#DD6904;}
+
+.nav-tabs li.active, .nav-tabs li.active a, .nav-tabs li.active a:hover,
+.panel.active_acc,.panel:hover{ border-top-color:#e67e22!important;}
+
+.progress_skill:hover .bar { background: #d35400 !important;}
+
+.control-group.focus textarea, .control-group.focus input[type="text"], .control-group.focus input[type="password"], .control-group.focus input[type="datetime"], .control-group.focus input[type="datetime-local"], .control-group.focus input[type="date"], .control-group.focus input[type="month"], .control-group.focus input[type="time"], .control-group.focus input[type="week"], .control-group.focus input[type="number"], .control-group.focus input[type="email"], .control-group.focus input[type="url"], .control-group.focus input[type="search"], .control-group.focus input[type="tel"], .control-group.focus input[type="color"], .control-group.focus .uneditable-input, textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus{
+	border-color:#e67e22;
+}
+
+blockquote.default{ border-color:#e67e22;}
+.team_pic:hover img, .team_social_media:hover{border-color:#EAB17F;}
+
+#filter li.selected a, #filter li a:hover,
+#filter li.selected a, #filter li a:hover { background:#e67e22;}
+
+.touching.medium a.hover-zoom:hover,
+.touching.medium a.hover-link:hover{    background: #333!important;}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background:#e67e22; border-color: #e67e22; }
+
+.comment-container:hover { border-color:#e67e22;}
+
+.serviceBox_2:hover i,
+.serviceBox_3:hover i,
+.serviceBox_1:hover .icon_service i{ border-color:#e67e22;	color:#e67e22;}
+.service-2-new:hover i{border-color:#e67e22 }
+
+.footer{background:#e67e22;}
+.footer_bottom{background:#CC6913;}
+.footer h4 > span{background:#e67e22; }
