@@ -21,7 +21,7 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
     		destroy-method="close">
     		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-    		<property name="url" value="jdbc:oracle:thin:@localhost:1523:xe"/>
+    		<property name="url" value="jdbc:oracle:thin:@121.138.83.21:1523:xe"/>
     		<property name="username" value="hr"/>
     		<property name="password" value="hr"/>
     </bean>
@@ -45,7 +45,7 @@
    	
    	<tx:annotation-driven/>
     
-	<context:component-scan base-package="kr.co.bit" />
+	<context:component-scan base-package="kr.co.bit.cr" />
     
     <mvc:annotation-driven>
 		<mvc:message-converters>
@@ -83,6 +83,6 @@
 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
 	</mvc:view-resolvers>
 	
-	<mvc:view-controller path="/file/uploadForm.do"	view-name="file/fileUploadForm"/>
-	<mvc:view-controller path="/include/footer.do" view-name="include/bottom"/>
+<!-- 	<mvc:view-controller path="/file/uploadForm.do"	view-name="file/fileUploadForm"/>
+	<mvc:view-controller path="/include/footer.do" view-name="include/bottom"/> -->
 </beans>

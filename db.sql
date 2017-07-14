@@ -507,3 +507,71 @@ ALTER TABLE chart
     ADD CONSTRAINT FK_chart_city_no_city_no FOREIGN KEY (city_no)
         REFERENCES city (no)
 /
+//////////////////////////////////////////
+더미데이터
+owner
+select * from owner
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 01', 'password 01', 'name 01', 01, 01, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 02', 'password 02', 'name 02', 02, 02, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 03', 'password 03', 'name 03', 03, 03, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 04', 'password 04', 'name 04', 04, 04, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 05', 'password 05', 'name 05', 05, 05, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 06', 'password 06', 'name 06', 06, 06, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 07', 'password 07', 'name 07', 07, 07, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 08', 'password 08', 'name 08', 08, 08, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 09', 'password 09', 'name 09', 09, 09, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 10', 'password 10', 'name 10', 10, 10, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 11', 'password 11', 'name 11', 11, 11, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 12', 'password 12', 'name 12', 12, 12, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 13', 'password 13', 'name 13', 13, 13, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 14', 'password 14', 'name 14', 14, 14, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 15', 'password 15', 'name 15', 15, 15, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 16', 'password 16', 'name 16', 16, 16, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 17', 'password 17', 'name 17', 17, 17, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 18', 'password 18', 'name 18', 18, 18, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 19', 'password 19', 'name 19', 19, 19, sysdate);
+INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 20', 'password 20', 'name 20', 20, 20, sysdate);
+//////////////////////////////////////////////
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 01, 01, 'name 01', 'N', 01, 'N', 'N', 'N', 'N', 'N', 'description 01', 'checkin 01', 'checkout 01', 'addr 01', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 02, 02, 'name 02', 'N', 02, 'N', 'N', 'N', 'N', 'N', 'description 02', 'checkin 02', 'checkout 02', 'addr 02', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 03, 03, 'name 03', 'N', 03, 'N', 'N', 'N', 'N', 'N', 'description 03', 'checkin 03', 'checkout 03', 'addr 03', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 04, 04, 'name 04', 'N', 04, 'N', 'N', 'N', 'N', 'N', 'description 04', 'checkin 04', 'checkout 04', 'addr 04', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 05, 05, 'name 05', 'N', 05, 'N', 'N', 'N', 'N', 'N', 'description 05', 'checkin 05', 'checkout 05', 'addr 05', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 06, 06, 'name 06', 'N', 06, 'N', 'N', 'N', 'N', 'N', 'description 06', 'checkin 06', 'checkout 06', 'addr 06', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 07, 07, 'name 07', 'N', 07, 'N', 'N', 'N', 'N', 'N', 'description 07', 'checkin 07', 'checkout 07', 'addr 07', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 08, 08, 'name 08', 'N', 08, 'N', 'N', 'N', 'N', 'N', 'description 08', 'checkin 08', 'checkout 08', 'addr 08', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 09, 09, 'name 09', 'N', 09, 'N', 'N', 'N', 'N', 'N', 'description 09', 'checkin 09', 'checkout 09', 'addr 09', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 10, 10, 'name 10', 'N', 10, 'N', 'N', 'N', 'N', 'N', 'description 10', 'checkin 10', 'checkout 10', 'addr 10', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 11, 11, 'name 11', 'N', 11, 'N', 'N', 'N', 'N', 'N', 'description 11', 'checkin 11', 'checkout 11', 'addr 11', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 12, 12, 'name 12', 'N', 12, 'N', 'N', 'N', 'N', 'N', 'description 12', 'checkin 12', 'checkout 12', 'addr 12', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 13, 13, 'name 13', 'N', 13, 'N', 'N', 'N', 'N', 'N', 'description 13', 'checkin 13', 'checkout 13', 'addr 13', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 14, 14, 'name 14', 'N', 14, 'N', 'N', 'N', 'N', 'N', 'description 14', 'checkin 14', 'checkout 14', 'addr 14', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 15, 15, 'name 15', 'N', 15, 'N', 'N', 'N', 'N', 'N', 'description 15', 'checkin 15', 'checkout 15', 'addr 15', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 16, 16, 'name 16', 'N', 16, 'N', 'N', 'N', 'N', 'N', 'description 16', 'checkin 16', 'checkout 16', 'addr 16', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 17, 17, 'name 17', 'N', 17, 'N', 'N', 'N', 'N', 'N', 'description 17', 'checkin 17', 'checkout 17', 'addr 17', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 18, 18, 'name 18', 'N', 18, 'N', 'N', 'N', 'N', 'N', 'description 18', 'checkin 18', 'checkout 18', 'addr 18', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 19, 19, 'name 19', 'N', 19, 'N', 'N', 'N', 'N', 'N', 'description 19', 'checkin 19', 'checkout 19', 'addr 19', sysdate);
+INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 20, 20, 'name 20', 'N', 20, 'N', 'N', 'N', 'N', 'N', 'description 20', 'checkin 20', 'checkout 20', 'addr 20', sysdate);
+////////////////////////////////////////////////
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 01, 'name 01', 01, 01, 01, 01, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 02, 'name 02', 02, 02, 02, 02, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 03, 'name 03', 03, 03, 03, 03, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 04, 'name 04', 04, 04, 04, 04, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 05, 'name 05', 05, 05, 05, 05, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 06, 'name 06', 06, 06, 06, 06, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 07, 'name 07', 07, 07, 07, 07, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 08, 'name 08', 08, 08, 08, 08, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 09, 'name 09', 09, 09, 09, 09, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 10, 'name 10', 10, 10, 10, 10, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 11, 'name 11', 11, 11, 11, 11, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 12, 'name 12', 12, 12, 12, 12, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 13, 'name 13', 13, 13, 13, 13, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 14, 'name 14', 14, 14, 14, 14, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 15, 'name 15', 15, 15, 15, 15, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 16, 'name 16', 16, 16, 16, 16, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 17, 'name 17', 17, 17, 17, 17, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 18, 'name 18', 18, 18, 18, 18, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 19, 'name 19', 19, 19, 19, 19, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 20, 'name 20', 20, 20, 20, 20, 'N', 'N', 'N');
+
+select * from hotel

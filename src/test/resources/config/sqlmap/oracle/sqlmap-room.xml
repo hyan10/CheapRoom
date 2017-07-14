@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="room.dao.RoomDAO">
+	<sql id="select">
+		select no ,hotel_no as hotelNo , name, price, min_person as minPerson , max_person as maxPerson, add_price as addPrice, cooking, TV, AC 
+		 from room
+	</sql>
+	<insert id="registerRoom">
+		INSERT INTO room (no ,hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) 
+		 VALUES (room_seq.nextval,#{hotelNo}, #{name}, #{price}, #{minPerson}, #{maxPerson}, #{addPrice}, #{cooking}, #{TV}, #{AC});
+	</insert>
+</mapper>

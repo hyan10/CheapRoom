@@ -1,9 +1,27 @@
-package kr.co.bit.cr.room;
+package kr.co.bit.cr.image;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ImageVO {
 	private int no;
 	private int roomNo;
 	private String url;
+	
+	
+	
+	public ImageVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ImageVO(int no, int roomNo, String url) {
+		super();
+		this.no = no;
+		this.roomNo = roomNo;
+		this.url = url;
+	}
+
 	public int getNo() {
 		return no;
 	}

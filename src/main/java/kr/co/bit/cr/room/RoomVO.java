@@ -2,6 +2,11 @@ package kr.co.bit.cr.room;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+import kr.co.bit.cr.image.ImageVO;
+
+@Repository
 public class RoomVO {
 	private Integer no;
 
@@ -29,8 +34,41 @@ public class RoomVO {
     //  에어컨 (Y/N)
     private String ac;
     
-    private List<ImageVO>
-    public Integer getNo() {
+    //사진 리스트
+    private List<ImageVO> images;
+    
+    
+    
+    public RoomVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+	public RoomVO(Integer no, Integer hotelNo, String name, Integer price, Integer minPerson, Integer maxPerson,
+			Integer addPrice, String cooking, String tv, String ac, List<ImageVO> images) {
+		super();
+		this.no = no;
+		this.hotelNo = hotelNo;
+		this.name = name;
+		this.price = price;
+		this.minPerson = minPerson;
+		this.maxPerson = maxPerson;
+		this.addPrice = addPrice;
+		this.cooking = cooking;
+		this.tv = tv;
+		this.ac = ac;
+		this.images = images;
+	}
+
+	public List<ImageVO> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ImageVO> images) {
+		this.images = images;
+	}
+
+	public Integer getNo() {
         return no;
     }
 
@@ -109,4 +147,5 @@ public class RoomVO {
     public void setAc(String ac) {
         this.ac = ac;
     }
+    
 }

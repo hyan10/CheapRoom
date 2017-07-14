@@ -2,8 +2,11 @@ package kr.co.bit.cr.hotel;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import kr.co.bit.cr.room.RoomVO;
 
+@Repository
 public class HotelVO {
 	private Integer no;
 
@@ -47,7 +50,49 @@ public class HotelVO {
 
     private List<RoomVO> rooms;
     
-    public List<RoomVO> getRooms() {
+    
+    
+    public HotelVO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+    
+    
+
+	public HotelVO(Integer no, Integer ownerNo, Integer cityNo, String name, String blind, Integer tel, String parking,
+			String wifi, String smoking, String pool, String bbq, String description, String checkin, String checkout,
+			String addr, List<RoomVO> rooms) {
+		super();
+		this.no = no;
+		this.ownerNo = ownerNo;
+		this.cityNo = cityNo;
+		this.name = name;
+		this.blind = blind;
+		this.tel = tel;
+		this.parking = parking;
+		this.wifi = wifi;
+		this.smoking = smoking;
+		this.pool = pool;
+		this.bbq = bbq;
+		this.description = description;
+		this.checkin = checkin;
+		this.checkout = checkout;
+		this.addr = addr;
+		//this.regDate = regDate;
+		this.rooms = rooms;
+	}
+
+
+/*
+	public HotelVO(int i, int j, int k, String string, String string2, String string3, String string4, String string5,
+			String string6, String string7, String string8, String string9, String string10, String string11,
+			String string12, List<RoomVO> rooms2) {
+		// TODO Auto-generated constructor stub
+	}
+*/
+
+
+	public List<RoomVO> getRooms() {
 		return rooms;
 	}
 

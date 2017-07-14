@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hotel.dao.HotelDAO">
+	<sql id="select">
+		select no, owner_no as ownerNo, city_no as cityNo, name, blind, tel, parking, wifi, smoking, pool, bbq, 
+		description, checkin, checkout, addr, to_char(reg_date,'yyyy-mm-dd') as regDate
+		from hotel
+	</sql>
+	
+	<insert id="registerHotel" parameterType="hotel">
+		INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, bbq, 
+		 description, checkin, checkout, addr, reg_date) 
+		 VALUES (hotel_seq.nextval , #{ownerNo}, #{cityNo}, #{name}, #{blind}, #{blind}, #{tel}
+		  , #{parking}, #{wifi}, #{smoking}, #{pool}, #{bbq}, #{description}, #{checkin},#{checkout},#{addr} ,sysdate);
+	</insert>
+</mapper>

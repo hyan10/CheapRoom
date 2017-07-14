@@ -12,9 +12,14 @@ public class HotelController {
 	private HotelService service;
 	
 	//호텔 + 방 같이 등록
-	@RequestMapping("/registerHotel.cr")
-	public void addHotel(HotelVO hotel){
+	@RequestMapping("/register.cr")
+	public String registerHotel(HotelVO hotel){
 		
+		if(service.registerHotel(hotel)==1){
+			
+		}
+		
+		return "redirect:/owner/info.cr";
 	}
 	//검색 : 지역 번호, 체크인, 체크아웃 날짜, 인원수 
 	//
