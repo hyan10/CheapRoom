@@ -1,0 +1,143 @@
+#nav-bar{
+    background: #19937D;
+}
+
+#current:after,
+.mean-container .mean-nav ul li a:hover,
+.touching.medium a.hover-zoom,
+.touching.medium a.hover-link,
+.list_style.circle li a i,
+.flickr-feed li .hover,
+.progress_skill .bar,
+.swipe-navi .swipe-left,
+.swipe-navi .swipe-right,
+.blogteam_pic .blog-hover .icon,
+.list_style.square li a i,
+.highlight.default,
+.blog_large .day, .blog_single .day,
+#filter li.selected a:before,
+.carousel-pagination li.active,
+.slider-read,
+.slider .new,.slider .light-pink{
+	background: #1abc9c !important;
+}
+#header{background:#1abc9c;}
+
+.menu > ul > li ul > li:first-child > a{border-top-color:#1abc9c;}
+.menu > ul > li > ul:before{ border-bottom-color: #1abc9c;}
+.menu ul ul li a:hover.sf-with-ul:after{ border-color: #FBFBFB #FBFBFB #FBFBFB #1abc9c;}
+.menu ul > ul > li:first-child a{border-top-color: #1abc9c;}
+
+.pb_action .btn.btn-danger { border-bottom-color:#1A9D85; background:#1abc9c;}
+.pb_action .btn.btn-danger:hover,.btn.btn-default:hover, .btn.btn-default:focus, .btn-group:focus .btn.btn-default.dropdown-toggle
+{ border-bottom-color:#168772; background:#18A38A;}
+
+.fraction-slider .next:hover,
+.fraction-slider .prev:hover,
+.fraction-slider .next:hover:before,
+.fraction-slider .prev:hover:before{ color:#1abc9c!important;  border-color:#1abc9c!important;}
+
+.recent-item:hover .item-description{border-bottom:2px solid #1abc9c; }
+
+a,
+a.read:hover, 
+.testimonial-review small,
+.list_style li a:hover,
+#breadcrumbs ul li:last-child a, #breadcrumbs ul li a,
+.menu ul li a:hover .sf-sub-indicator,
+.menu ul ul li a:hover,
+.tp-caption.large_bold_red,
+.blogMeta a:hover, .blogTitle span:hover,
+.serviceBox_3:hover i,
+.dropcap.default,
+.blogTitle > a:hover h2,
+.sidebar ul.archives_list li a:hover, .sidebar ul.arrows_list1 li a:hover i,
+.blog_large .post_meta .metaInfo > span > a:hover, .blog_single .post_meta .metaInfo > span > a:hover,
+#comment-list li .comment-container:hover a,
+#comment-list li .comment-container:hover .comment-date,
+.sidebar ul.arrows_list li a:hover, .sidebar ul.arrows_list1 li a:hover i,
+.serviceBox_2:hover i,
+.serviceBox_1:hover .icon_service i,
+.panel-heading:hover  a,
+.panel-heading:hover .accordian-icon,
+.active_acc .panel-title a, .active_acc .accordian-icon,
+.recent_tab_list li a:hover,
+.menu ul ul li a.sf-with-ul:after,
+.comments_list a,
+.blog_medium .post_meta .metaInfo > span > a:hover
+{
+  color: #1abc9c;
+}
+#site-search-form #s:focus{border-color:#1abc9c; }
+.testimonial-item blockquote {
+	border-left: 3px solid #1abc9c;
+}
+.blog_large .post_meta h2:hover a, .blog_single .post_meta h2:hover a { color:#1abc9c ; }
+.author_bio > h5{ border-bottom-color:#54CBB5; }
+.author_desc .author-team_pic > img { border-color:#1abc9c;}
+.about_author{border-left-color:#0D8872; }
+.blog_medium .post_meta h2:hover a {color:#1abc9c;}
+.blog_medium .post_meta h2:hover a{color:#1abc9c;}
+.blog_medium .day{background:#1abc9c;}
+#site-searchform #searchsubmit{background-color:#1abc9c;}
+#site-searchform #s:focus{ border-color:#1abc9c;}
+
+.progress_skill:hover .bar{ background: #16a085 !important;}
+.team_pic:hover img, .team_social_media:hover{border-color:#4CC1AB;}
+
+.about_author{background:#1ABC9C; }
+.author_social li a{background:#0D8872;}
+
+.testimonial-review > img { border: 2px solid #1abc9c;}
+
+.btn.btn-default,
+.tp-caption.modern_big_redbg,
+.tp-caption.medium_bg_red,
+.dropcap_block.default,
+.btn.btn-default.dark:hover,
+.btn.btn-default.dark:focus,
+.btn-group:focus .btn.btn-default.dark.dropdown-toggle,
+.icon_lists .fa-hover a:hover,
+#site-search-form #searchsubmit,
+.tags li a:hover,
+.shares li a:hover {background-color:#1abc9c;}
+
+#contactForm .btn.btn-default{border-bottom-color:#14957D;}
+#contactForm .btn.btn-default:hover{background:#1abc9c;}
+.btn.btn-default {border-bottom-color: #149D84;}
+.btn.btn-default:hover {background: #18A087; border-bottom-color: #15816D;}
+
+.table-theme-color span,
+.pricingTable.business .pricingTable-header span.price-value{background:#16A085; }
+.table-theme-color span.heading{background:#187D6A; }
+.table-theme-color span.price-head,.table-theme-color span.price-head span{background:#1abc9c; border:none;}
+.table-theme-color .btn.btn-default.dark{background:#199D85;}
+
+.nav-tabs li.active, .nav-tabs li.active a, .nav-tabs li.active a:hover,
+.panel.active_acc,.panel:hover{ border-top-color:#1abc9c!important; }
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {color:#1abc9c; }
+
+.control-group.focus textarea, .control-group.focus input[type="text"], .control-group.focus input[type="password"], .control-group.focus input[type="datetime"], .control-group.focus input[type="datetime-local"], .control-group.focus input[type="date"], .control-group.focus input[type="month"], .control-group.focus input[type="time"], .control-group.focus input[type="week"], .control-group.focus input[type="number"], .control-group.focus input[type="email"], .control-group.focus input[type="url"], .control-group.focus input[type="search"], .control-group.focus input[type="tel"], .control-group.focus input[type="color"], .control-group.focus .uneditable-input, textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus{
+	border-color:#1abc9c;}
+
+blockquote.default{ border-color:#1abc9c;}
+
+#filter li.selected a, #filter li a:hover,
+#filter li.selected a, #filter li a:hover { background:#1abc9c;}
+
+.touching.medium a.hover-zoom:hover,
+.touching.medium a.hover-link:hover{ background: #333!important;}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background:#1abc9c;
+    border-color: #1abc9c;}
+
+.comment-container:hover { border-color:#1abc9c;}
+
+.serviceBox_2:hover i,
+.serviceBox_3:hover i,
+.serviceBox_1:hover .icon_service i{border-color:#1abc9c }
+
+.footer{background:#1abc9c;}
+.footer_bottom{background:#19937D;}
+.footer h4 > span{background:#1abc9c; }
