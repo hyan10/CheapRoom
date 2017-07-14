@@ -45,7 +45,7 @@
    	
    	<tx:annotation-driven/>
     
-	<context:component-scan base-package="kr.co.bit" />
+	<context:component-scan base-package="kr.co.bit.cr" />
     
     <mvc:annotation-driven>
 		<mvc:message-converters>

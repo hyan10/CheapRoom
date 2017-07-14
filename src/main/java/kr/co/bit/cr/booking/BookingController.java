@@ -13,16 +13,17 @@ public class BookingController {
 	//예약
 	@RequestMapping("/book.cr")
 	public void book(BookingVO booking){
-		
+		int result = service.book(booking);
 	}
 	//예약 수정
 	@RequestMapping("/update.cr")
 	public void updateBook(BookingVO booking){
-		
+		int result = service.updateBook(booking);
 	}
 	//예약 취소
 	@RequestMapping("/cancle.cr")
-	public void cancleBook(){
-		
+	public void cancleBook(BookingVO booking){
+		int result = service.cancleBook(booking);
 	}
+
 }

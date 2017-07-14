@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="booking.BookingDAO">
+	
+	<sql id="selectAll">
+		select *
+		from booking
+	</sql>
+	
+	<sql id="selectList">
+		select h.name as hotelName, r.name as roomName,
+				start_date as startDate, end_date as endDate,
+				total_person as totalPerson, total_price as totalPrice,
+				card_type as cardType, card_no as cardNo, card_date as cardDate,
+				user_name as userName, user_email as userEmail, user_phone as userPhone,
+				reg_date as regDate
+		from booking b join hotel h on (b.hotel_no=h.no) join room r on (h.no=r.hotel_no)
+	</sql>
+	
+	<sql id="insertValue">
+		<!-- insert into booking (no, user_no, hotel_no, room_no, start_date, end_date,
+					total_person, total_price, card_type, card_no, card_date,
+					reg_date, user_name, user_email, user_phone) -->
+		(booking_SEQ.nextval, #{userNo}, #{hotelNo}, #{roomNo}, #{startDate}, #{endDate},
+		#{totalPerson},#{totalPrice},#{cardType},#{cardNo},#{cardDate},
+		#{userName},#{user_email},#{userPhone}, sysdate)
+			)
+	</sql>
+
+	<sql id="insertHistoryValue">
+		<!-- insert into booking_history (no, user_no, hotel_no, room_no, type, start_date, end_date,
+					total_person, total_price, card_type, card_no, card_date,
+					reg_date, user_name, user_email, user_phone) -->
+		(booking_SEQ.nextval, #{userNo}, #{hotelNo}, #{roomNo}, #{type}, #{startDate}, #{endDate},
+		#{totalPerson},#{totalPrice},#{cardType},#{cardNo},#{cardDate},
+		#{userName},#{user_email},#{userPhone}, sysdate)
+			)
+	</sql>
+	
+	<!-- 유저의 예약 현황 조회 -->
+	<select id="selectByUser" parameterType="int" resultType="booking">
+		<include refid="selectList"/>
+		where user_no = #{no}
+	</select>
+
+	<!-- 사업자의 예약 현황 조회 -->
+	<select id="selectByOwner" parameterType="int" resultType="booking">
+		<include refid="selectList"/>
+		where owner_no = #{no}
+	</select>
+	
+	<!-- 예약 추가 -->
+	<insert id="insertBook" parameterType="booking">
+		insert into booking values
+			<include refid="insertValue"/>
+	</insert>
+	
+	<!-- 예약 정보 변경 -->
+	<update id="updateBook" parameterType="booking">
+		update booking set 
+		<if test="#{user_name}!=null">
+			user_name = #{user_name}
+		</if>
+		<if test="#{user_email}!=null">
+			, user_email = #{user_email}
+		</if>
+		<if test="#{user_phone}!=null">
+			, user_phone = #{user_phone}
+		</if>
+		where no = #{no}
+	</update>
+	
+	<!-- 예약 history로 이동 -->
+	<insert id="insertBookHistory" parameterType="booking">
+		insert into booking_history values
+		<include refid="insertHistoryValue"/>	
+	</insert>
+
+	<!-- 예약 완료 -->
+	<insert id="insertBookHistoryComplete" parameterType="booking">
+		insert into booking_history values
+		<include refid="insertHistoryValue"/>	
+	</insert>
+	
+	<!-- 예약 취소 - history 추가 후 delete -->
+	<insert id="insertBookHistoryCancle" parameterType="booking">
+		insert into booking_history values
+		<include refid="insertHistoryValue"/>
+	</insert>
+	<delete id="deleteBook" parameterType="int">
+		delete from booking where no=#{no}
+	</delete>
+	
+</mapper>

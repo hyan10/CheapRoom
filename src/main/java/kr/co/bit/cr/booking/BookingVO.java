@@ -3,44 +3,35 @@ package kr.co.bit.cr.booking;
 public class BookingVO {
 
 	private Integer no;
-
     private Integer userNo;
-
     private Integer hotelNo;
-
     private Integer roomNo;
-
     //  체크인 날짜
     private String startDate;
-
     //  체크아웃 날짜
     private String endDate;
-
     //  예약 인원
     private Integer totalPerson;
-
     private Integer totalPrice;
-
     //  카드 종류
     private String cardType;
-
     private Integer cardNo;
-
     private String cardDate;
-
     //  예약 날짜
     private String regDate;
-
     //  예약 유저 이름
     private String userName;
-
     //  예약 유저 이메일
     private String userEmail;
-
     //  예약 유저 번호
     private String userPhone;
-    
-    
+    //	호텔 이름
+    private String hotelName; 
+    //	방 이름
+    private String roomName;
+    // 예약 완료 여부 (Y/N)
+    private char type;
+
 
 	public BookingVO(Integer no, Integer userNo, Integer hotelNo, Integer roomNo, String startDate, String endDate,
 			Integer totalPerson, Integer totalPrice, String cardType, Integer cardNo, String cardDate, String regDate,
@@ -181,6 +172,30 @@ public class BookingVO {
 
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
+	}
+	
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
+	public char getType() {
+		return type;
+	}
+
+	public void setType(char type) {
+		this.type = type;
 	}
 
 	@Override
