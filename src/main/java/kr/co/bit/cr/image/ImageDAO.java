@@ -20,4 +20,14 @@ public class ImageDAO {
 		
 		return cnt;
 	}
+	
+	public int updateImage(List<ImageVO> images){
+		
+		int cnt=0;
+		for(ImageVO image : images){
+			cnt = sqlSession.update("image.dao.ImageDAO.registerImage", image);
+		}
+		
+		return cnt;
+	}
 }

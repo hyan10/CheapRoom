@@ -39,7 +39,7 @@ public class DBTestMain {
 	private SqlSessionTemplate sqlSession;
 
 	@Transactional
-	@Test
+	//@Test
 	public void 호텔등록테스트() throws Exception{
 		System.out.println("호텔등록테스트");
 		ImageVO image = new ImageVO(1,1,"urltest");
@@ -77,5 +77,33 @@ public class DBTestMain {
 		
 		System.out.println(cnt);
 		System.out.println(hotel);
+	}
+	
+	//@Transactional
+	@Test
+	public void 호텔수정테스트() throws Exception{
+		System.out.println("호텔수정테스트");
+		HotelVO hotel = new HotelVO();
+		hotel.setNo(41);
+		hotel.setOwnerNo(1);
+		hotel.setCityNo(1);
+		hotel.setName("호텔1");
+		hotel.setBlind('N');
+		hotel.setTel(010000000);
+		hotel.setParking('N');
+		hotel.setBbq('N');
+		hotel.setWifi('N');
+		hotel.setSmoking('N');
+		hotel.setPool('N');
+		hotel.setDescription("블라블라");
+		hotel.setCheckin("15:00");
+		hotel.setCheckout("11:00");
+		hotel.setAddr("부평구");
+		///////////////////
+		hotel.setName("바뀐이름");
+		int cnt = 0;
+		cnt = hDao.updateHotel(hotel);
+		//룸 이미지 수정 테스트
+	
 	}
 }

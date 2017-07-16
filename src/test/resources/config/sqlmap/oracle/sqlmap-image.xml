@@ -8,4 +8,8 @@
 	<insert id="registerImage" parameterType="image">
 		insert into image (no, room_no, url) values(image_seq.nextval, #{roomNo}, #{url})
 	</insert>
+	
+	<update id="updateImage" parameterType="image">
+		update image set room_no=#{room_no}, url=#{url} where no=#{no}
+	</update>
 </mapper>

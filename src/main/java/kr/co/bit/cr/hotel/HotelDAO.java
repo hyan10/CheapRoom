@@ -17,4 +17,8 @@ public class HotelDAO {
 	public int registerHotel(HotelVO hotel){
 		return sqlSession.insert("hotel.dao.HotelDAO.registerHotel", hotel);
 	}
+	
+	public int updateHotel(HotelVO hotel){
+		return sqlSession.update("hotel.dao.HotelDAO.updateHotel",hotel);
+	}
 }

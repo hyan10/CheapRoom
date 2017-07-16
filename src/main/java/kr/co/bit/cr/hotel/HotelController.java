@@ -41,8 +41,8 @@ public class HotelController {
 	}
 	//호텔 + 방 같이 수정
 	@RequestMapping("/updateHotel.cr")
-	public void updateHotel(){
-		
+	public void updateHotel(HotelVO hotel){
+		//service.updateHotel(hotel);
 	}
 	
 }

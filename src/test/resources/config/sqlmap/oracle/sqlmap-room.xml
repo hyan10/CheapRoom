@@ -11,4 +11,9 @@
 		INSERT INTO room (no ,hotel_no, name, price, min_person, max_person, add_price, cooking, tv, ac) 
 		 VALUES (room_seq.nextval,#{hotelNo}, #{name}, #{price}, #{minPerson}, #{maxPerson}, #{addPrice}, #{cooking}, #{tv}, #{ac})
 	</insert>
+	
+	<update id="updateRoom" parameterType="room">
+		update room set hotel_no=#{hotelNo}, name=#{name}, price=#{price}, min_person=#{minPerson}, max_person=#{maxPerson}, add_price=#{addPrice}, cooking=#{cooking}, tv=#{tv}, ac#{ac}
+		 where no = #{no}
+	</update>
 </mapper>

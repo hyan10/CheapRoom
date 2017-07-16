@@ -16,4 +16,8 @@ public class RoomDAO {
 		int cnt =sqlSession.insert("room.dao.RoomDAO.registerRoom", room); 
 		return cnt;
 	}
+	
+	public int updateRoom(RoomVO room){
+		return sqlSession.update("room.dao.RoomDAO.updateRoom", room);
+	}
 }
