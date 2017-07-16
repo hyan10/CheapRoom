@@ -1,3 +1,7 @@
+--KS Test SQL
+
+select * from booking;
+select *from booking where user_no = (select no from users where email = 'admin')
 -- city Table Create SQL
 CREATE TABLE city
 (

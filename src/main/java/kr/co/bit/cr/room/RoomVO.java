@@ -29,8 +29,18 @@ public class RoomVO {
     //  에어컨 (Y/N)
     private String ac;
     
-    private List<ImageVO>
-    public Integer getNo() {
+    private List<ImageVO> images;
+    
+    
+    public List<ImageVO> getImages() {
+		return images;
+	}
+
+	public void setImages(List<ImageVO> images) {
+		this.images = images;
+	}
+
+	public Integer getNo() {
         return no;
     }
 

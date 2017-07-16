@@ -9,13 +9,17 @@
 	<title>싸다방</title>
 	<meta name="description" content="">
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<!-- CSS FILES -->
 	<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" data-name="skins">
     <link rel="stylesheet" href="css/style-fraction.css" type="text/css" charset="utf-8" />
     <link rel="stylesheet" href="css/fractionslider.css">
-
     <link rel="stylesheet" type="text/css" href="css/switcher.css" media="screen" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -25,26 +29,32 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
 <!--Start Header-->
 <header id="header" class="clearfix">
-    <h3>ㅎ</h3>
     <!-- Nav Bar -->
     <div id="nav-bar" class="clearfix">
         <div class="container">
             <div class="row">
                 <!-- Logo / Mobile Menu -->
-                <div class="col-sm-2">
-                                            <div id="logo">
-                        <h1><a href="index.html"><img src="img/logo.png" alt="League" /></a></h1>
-                    </div>
-                </div>
-
-                <!-- Navigation
+				<div class="col-sm-2">
+					<div id="logo">
+						<h1>
+							<a href="index.jsp"><img src="img/logo.png" alt="League" /></a>
+						</h1>
+					</div>
+				</div>
+		
+				<!-- Navigation
                 ================================================== -->
                 <!-- Nav menu -->
                 <jsp:include page="/jsp/userMenu.jsp"/>
                 <!-- Nav menu end -->
+                <div class="col-sm-2">
+				    <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a>
+				    	<a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그아웃</a>
+                </div>
             </div>
         </div>
     </div>
@@ -282,7 +292,93 @@
             'slideEndAnimation': 	true,
             'autoChange':           true
         });
+        $(function() {         
+            var $formLogin = $('#login-form');
+            var $formLost = $('#lost-form');
+            var $formRegister = $('#register-user-form');
+            var $divForms = $('#div-forms');
+            var $modalAnimateTime = 300;
+            var $msgAnimateTime = 150;
+            var $msgShowTime = 2000;
 
+            $("form").submit(function () {
+                switch(this.id) {
+                    case "login-form":
+                        var $lg_username=$('#login_username').val();
+                        var $lg_password=$('#login_password').val();
+                        if ($lg_username == "ERROR") {
+                            msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login error");
+                        } else {
+                            msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
+                        }
+                        return false;
+                        break;
+                    case "lost-form":
+                        var $ls_email=$('#lost_email').val();
+                        if ($ls_email == "ERROR") {
+                            msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "error", "glyphicon-remove", "Send error");
+                        } else {
+                            msgChange($('#div-lost-msg'), $('#icon-lost-msg'), $('#text-lost-msg'), "success", "glyphicon-ok", "Send OK");
+                        }
+                        return false;
+                        break;
+                    case "register-user-form":
+                        var $rg_username=$('#register_username').val();
+                        var $rg_email=$('#register_email').val();
+                        var $rg_password=$('#register_password').val();
+                        var $rg_phone=$('#register_phone').val();
+                       	alert($rg_phone + " " + $rf_username);
+                        if ($rg_username == "ERROR") {
+                            msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
+                        } else {
+                            msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
+                        }
+                        return false;
+                        break;
+                    default:
+                        return false;
+                }
+                return false;
+            });
+            
+            $('#login_register_btn').click( function () { modalAnimate($formLogin, $formRegister) });
+            $('#register_login_btn').click( function () { modalAnimate($formRegister, $formLogin); });
+            $('#login_lost_btn').click( function () { modalAnimate($formLogin, $formLost); });
+            $('#lost_login_btn').click( function () { modalAnimate($formLost, $formLogin); });
+            $('#lost_register_btn').click( function () { modalAnimate($formLost, $formRegister); });
+            $('#register_lost_btn').click( function () { modalAnimate($formRegister, $formLost); });
+            
+            function modalAnimate ($oldForm, $newForm) {
+                var $oldH = $oldForm.height();
+                var $newH = $newForm.height();
+                $divForms.css("height",$oldH);
+                $oldForm.fadeToggle($modalAnimateTime, function(){
+                    $divForms.animate({height: $newH}, $modalAnimateTime, function(){
+                        $newForm.fadeToggle($modalAnimateTime);
+                    });
+                });
+            }
+            
+            function msgFade ($msgId, $msgText) {
+                $msgId.fadeOut($msgAnimateTime, function() {
+                    $(this).text($msgText).fadeIn($msgAnimateTime);
+                });
+            }
+            
+            function msgChange($divTag, $iconTag, $textTag, $divClass, $iconClass, $msgText) {
+                var $msgOld = $divTag.text();
+                msgFade($textTag, $msgText);
+                $divTag.addClass($divClass);
+                $iconTag.removeClass("glyphicon-chevron-right");
+                $iconTag.addClass($iconClass + " " + $divClass);
+                setTimeout(function() {
+                    msgFade($textTag, $msgOld);
+                    $divTag.removeClass($divClass);
+                    $iconTag.addClass("glyphicon-chevron-right");
+                    $iconTag.removeClass($iconClass + " " + $divClass);
+          		}, $msgShowTime);
+            }
+        });
     });
     </script>
 </body>

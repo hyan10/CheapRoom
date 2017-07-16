@@ -1,6 +1,18 @@
-<div class="col-sm-10">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>    
+    <jsp:include page="/jsp/loginModal.jsp"/>
+<div class="col-sm-8">
 	<nav id="navigation" class="menu">
-		<ul id="">
+		<ul id="">				
+			<!-- BEGIN # BOOTSNIP INFO -->
+			<!-- <div class="container">
+				<div class="row">
+					<p class="text-center">
+						
+					</p>
+				</div>
+			</div> -->
+			<!-- END # BOOTSNIP INFO -->
 			<li><a href="index.html" id="current" class="border">사용자</a>
 				<ul>
 					<li><a href="index_2.html">Home 2</a></li>

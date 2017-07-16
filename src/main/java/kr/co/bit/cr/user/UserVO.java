@@ -17,9 +17,30 @@ public class UserVO {
 
     private String regDate;
     
+    public UserVO() {
+		// TODO Auto-generated constructor stub
+	}
+    public UserVO(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
     
-    
-    public UserVO(Integer no, String email, String password, String type, String name, String phone, String regDate) {
+    public UserVO(String email, String password, String type, String name, String phone) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.type = type;
+		this.name = name;
+		this.phone = phone;
+	}
+	public UserVO(String email, String password, String name, String phone) {
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+	}
+	public UserVO(Integer no, String email, String password, String type, String name, String phone, String regDate) {
 		super();
 		this.no = no;
 		this.email = email;

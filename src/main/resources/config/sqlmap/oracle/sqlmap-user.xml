@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user.dao.UserDAO">
+	
+	<!-- <sql id="selectId">
+		select no, title, writer, content, view_cnt as viewCnt,
+				to_char(reg_date, 'yyyy-mm-dd') as regDate
+		from t_board
+	</sql> -->
+
+	<select id="userLogin" parameterType="user" resultType="user">
+		select * from users where email = #{email} and password = #{password}
+	</select>
+	<select id="userInfo" parameterType="user" resultType="user">
+		select * from users where email = #{email}
+	</select>
+	<!-- user join sql -->
+	<insert id="userInsert" parameterType="user">
+		insert into users values(users_SEQ.NEXTVAL, #{email}, #{password}, #{type}, #{name}, #{phone}, sysdate)
+	</insert>
+	<select id="userBookingList" parameterType="user" resultType="booking">
+		select 
+			no, 
+			user_no as userNo, 
+			hotel_no as hotelNo, 
+			room_no as roomNo, 
+			to_char(start_date, 'yyyy-mm-dd') as startDate, 
+			to_char(end_date, 'yyyy-mm-dd') as endDate, 
+			total_person as totalPerson, 
+			total_price as totalPrice,
+			card_type as cardType, 
+			card_no as cardNo, 
+			card_date as cardDate,
+			to_char(reg_date, 'yyyy-mm-dd') as regDate, 
+			user_name as userName, 
+			user_email as userEmail, 
+			user_phone as userPhone
+		from booking where user_no = (select no from users where email = #{email})
+		
+	</select>
+	<!-- <select id="selectAllBoard" resultType="board">
+		<include refid="selectId"/>
+		order by no desc
+	</select>
+	
+	<select id="selectOneByNo" parameterType="int" resultType="board">
+		<include refid="selectId"/>
+		where no = #{no}
+	</select>
+	
+	<insert id="insertBoard" parameterType="board">
+		insert into t_board(no, title, writer, content)
+			values (seq_t_board_no.nextval, #{title}, #{writer}, #{content})
+	</insert>
+	
+	<update id="updateBoard" parameterType="board">
+		update t_board set 
+		<if test="#{title}!=null">
+			title = #{title}
+		</if>
+		<if test="#{content}!=null">
+			, content = #{content}
+		</if>
+		where no = #{no}
+	</update>
+	
+	<update id="updateViewCnt" parameterType="board">
+		update t_board
+			set view_cnt = view_cnt +1
+		where no = #{no}
+	</update> -->
+</mapper>
