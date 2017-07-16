@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.bit.cr.room.RoomVO;
 
-@Repository
 public class HotelVO {
 	private Integer no;
 
@@ -18,24 +17,24 @@ public class HotelVO {
     private String name;
 
     //  블라인드 여부 (Y/N)
-    private String blind;
+    private char blind;
 
     private Integer tel;
 
     //  (Y/N)
-    private String parking;
+    private char parking;
 
     //  (Y/N)
-    private String wifi;
+    private char wifi;
 
     //  (Y/N)
-    private String smoking;
+    private char smoking;
 
     //  (Y/N)
-    private String pool;
+    private char pool;
 
     //  (Y/N)
-    private String bbq;
+    private char bbq;
 
     private String description;
 
@@ -56,14 +55,14 @@ public class HotelVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-    
-    
 
-	public HotelVO(Integer no, Integer ownerNo, Integer cityNo, String name, String blind, Integer tel, String parking,
-			String wifi, String smoking, String pool, String bbq, String description, String checkin, String checkout,
+
+
+	public HotelVO(Integer ownerNo, Integer cityNo, String name, char blind, Integer tel, char parking,
+			char wifi, char smoking, char pool, char bbq, String description, String checkin, String checkout,
 			String addr, List<RoomVO> rooms) {
 		super();
-		this.no = no;
+
 		this.ownerNo = ownerNo;
 		this.cityNo = cityNo;
 		this.name = name;
@@ -78,155 +77,215 @@ public class HotelVO {
 		this.checkin = checkin;
 		this.checkout = checkout;
 		this.addr = addr;
-		//this.regDate = regDate;
+
 		this.rooms = rooms;
 	}
 
 
-/*
-	public HotelVO(int i, int j, int k, String string, String string2, String string3, String string4, String string5,
-			String string6, String string7, String string8, String string9, String string10, String string11,
-			String string12, List<RoomVO> rooms2) {
-		// TODO Auto-generated constructor stub
+
+	public Integer getNo() {
+		return no;
 	}
-*/
+
+
+
+	public void setNo(Integer no) {
+		this.no = no;
+	}
+
+
+
+	public Integer getOwnerNo() {
+		return ownerNo;
+	}
+
+
+
+	public void setOwnerNo(Integer ownerNo) {
+		this.ownerNo = ownerNo;
+	}
+
+
+
+	public Integer getCityNo() {
+		return cityNo;
+	}
+
+
+
+	public void setCityNo(Integer cityNo) {
+		this.cityNo = cityNo;
+	}
+
+
+
+	public String getName() {
+		return name;
+	}
+
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+
+	public char getBlind() {
+		return blind;
+	}
+
+
+
+	public void setBlind(char blind) {
+		this.blind = blind;
+	}
+
+
+
+	public Integer getTel() {
+		return tel;
+	}
+
+
+
+	public void setTel(Integer tel) {
+		this.tel = tel;
+	}
+
+
+
+	public char getParking() {
+		return parking;
+	}
+
+
+
+	public void setParking(char parking) {
+		this.parking = parking;
+	}
+
+
+
+	public char getWifi() {
+		return wifi;
+	}
+
+
+
+	public void setWifi(char wifi) {
+		this.wifi = wifi;
+	}
+
+
+
+	public char getSmoking() {
+		return smoking;
+	}
+
+
+
+	public void setSmoking(char smoking) {
+		this.smoking = smoking;
+	}
+
+
+
+	public char getPool() {
+		return pool;
+	}
+
+
+
+	public void setPool(char pool) {
+		this.pool = pool;
+	}
+
+
+
+	public char getBbq() {
+		return bbq;
+	}
+
+
+
+	public void setBbq(char bbq) {
+		this.bbq = bbq;
+	}
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
+	public String getCheckin() {
+		return checkin;
+	}
+
+
+
+	public void setCheckin(String checkin) {
+		this.checkin = checkin;
+	}
+
+
+
+	public String getCheckout() {
+		return checkout;
+	}
+
+
+
+	public void setCheckout(String checkout) {
+		this.checkout = checkout;
+	}
+
+
+
+	public String getAddr() {
+		return addr;
+	}
+
+
+
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+
+
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
 
 
 	public List<RoomVO> getRooms() {
 		return rooms;
 	}
 
+
+
 	public void setRooms(List<RoomVO> rooms) {
 		this.rooms = rooms;
 	}
 
-	public Integer getNo() {
-        return no;
-    }
 
-    public void setNo(Integer no) {
-        this.no = no;
-    }
-
-    public Integer getOwnerNo() {
-        return ownerNo;
-    }
-
-    public void setOwnerNo(Integer ownerNo) {
-        this.ownerNo = ownerNo;
-    }
-
-    public Integer getCityNo() {
-        return cityNo;
-    }
-
-    public void setCityNo(Integer cityNo) {
-        this.cityNo = cityNo;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getBlind() {
-        return blind;
-    }
-
-    public void setBlind(String blind) {
-        this.blind = blind;
-    }
-
-    public Integer getTel() {
-        return tel;
-    }
-
-    public void setTel(Integer tel) {
-        this.tel = tel;
-    }
-
-    public String getParking() {
-        return parking;
-    }
-
-    public void setParking(String parking) {
-        this.parking = parking;
-    }
-
-    public String getWifi() {
-        return wifi;
-    }
-
-    public void setWifi(String wifi) {
-        this.wifi = wifi;
-    }
-
-    public String getSmoking() {
-        return smoking;
-    }
-
-    public void setSmoking(String smoking) {
-        this.smoking = smoking;
-    }
-
-    public String getPool() {
-        return pool;
-    }
-
-    public void setPool(String pool) {
-        this.pool = pool;
-    }
-
-    public String getBbq() {
-        return bbq;
-    }
-
-    public void setBbq(String bbq) {
-        this.bbq = bbq;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getCheckin() {
-        return checkin;
-    }
-
-    public void setCheckin(String checkin) {
-        this.checkin = checkin;
-    }
-
-    public String getCheckout() {
-        return checkout;
-    }
-
-    public void setCheckout(String checkout) {
-        this.checkout = checkout;
-    }
-
-    public String getAddr() {
-        return addr;
-    }
-
-    public void setAddr(String addr) {
-        this.addr = addr;
-    }
-
-	public String getRegDate() {
-		return regDate;
-	}
-
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
-	}
 
 	@Override
 	public String toString() {
@@ -235,6 +294,7 @@ public class HotelVO {
 				+ ", pool=" + pool + ", bbq=" + bbq + ", description=" + description + ", checkin=" + checkin
 				+ ", checkout=" + checkout + ", addr=" + addr + ", regDate=" + regDate + ", rooms=" + rooms + "]";
 	}
+    
 	
     
 }

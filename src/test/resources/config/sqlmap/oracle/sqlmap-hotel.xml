@@ -4,15 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hotel.dao.HotelDAO">
 	<sql id="select">
-		select no, owner_no as ownerNo, city_no as cityNo, name, blind, tel, parking, wifi, smoking, pool, BBQ, 
+		select no, owner_no as ownerNo, city_no as cityNo, name, blind, tel, parking, wifi, smoking, pool, bbq, 
 		description, checkin, checkout, addr, to_char(reg_date,'yyyy-mm-dd') as regDate
 		from hotel
 	</sql>
 	
+	<select id="selectAll">
+		<include refid="select"/>
+		
+	</select>
+	
 	<insert id="registerHotel" parameterType="hotel">
-		INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, 
+		INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, bbq, 
 		 description, checkin, checkout, addr, reg_date) 
-		 VALUES (hotel_seq.nextval , #{ownerNo}, #{cityNo}, #{name}, #{blind}, #{blind}, #{tel}
-		  , #{parking}, #{wifi}, #{smoking}, #{pool}, #{BBQ}, #{description}, #{checkin},#{checkout},#{addr} ,sysdate);
+		 VALUES (hotel_seq.nextval , #{ownerNo}, #{cityNo}, #{name}, #{blind}, #{tel},
+		  #{parking}, #{wifi}, #{smoking}, #{pool}, #{bbq}, #{description}, #{checkin},#{checkout},#{addr} ,sysdate)
 	</insert>
 </mapper>

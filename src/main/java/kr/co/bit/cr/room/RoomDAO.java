@@ -1,6 +1,5 @@
 package kr.co.bit.cr.room;
 
-import java.util.List;
 
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,6 +11,9 @@ public class RoomDAO {
 	SqlSessionTemplate sqlSession;
 	
 	public int registerRoom(RoomVO room){
-		return sqlSession.insert("room.dao.RoomDAO.registerRoom", room);
+		System.out.println("roomDAO");
+		System.out.println(room);
+		int cnt =sqlSession.insert("room.dao.RoomDAO.registerRoom", room); 
+		return cnt;
 	}
 }

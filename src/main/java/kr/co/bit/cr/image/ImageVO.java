@@ -1,8 +1,6 @@
 package kr.co.bit.cr.image;
 
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class ImageVO {
 	private int no;
 	private int roomNo;

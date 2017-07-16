@@ -2,12 +2,12 @@ package kr.co.bit.cr.hotel;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.bit.cr.image.ImageDAO;
-import kr.co.bit.cr.image.ImageVO;
 import kr.co.bit.cr.room.RoomDAO;
 import kr.co.bit.cr.room.RoomVO;
 
@@ -20,13 +20,14 @@ public class HotelService {
 	private RoomDAO rDao;
 	@Autowired
 	private ImageDAO iDao;
+
 	
 	/**
 	 * 사업자가 호텔+방+사진 등록
 	 * @param hotel
 	 * @return
 	 */
-	@Transactional
+	
 	public int registerHotel(HotelVO hotel){
 		
 		int cnt = hDao.registerHotel(hotel);
