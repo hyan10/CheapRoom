@@ -12,8 +12,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private HttpSession session;
 	
 	@RequestMapping("/join.cr")
 	public void join(UserVO user){

@@ -29,9 +29,69 @@ public class BookingVO {
     private String hotelName; 
     //	방 이름
     private String roomName;
-    // 예약 완료 여부 (Y/N)
+    // 처리 완료 여부 (Y/N)
     private char type;
 
+    
+
+	public BookingVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	// 예약 추가용 - 입력받은 정보 디비 추가
+	public BookingVO(Integer userNo, Integer hotelNo, Integer roomNo, String startDate, String endDate,
+			Integer totalPerson, Integer totalPrice, String cardType, Integer cardNo, String cardDate, String userName,
+			String userEmail, String userPhone) {
+		super();
+		this.userNo = userNo;
+		this.hotelNo = hotelNo;
+		this.roomNo = roomNo;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.totalPerson = totalPerson;
+		this.totalPrice = totalPrice;
+		this.cardType = cardType;
+		this.cardNo = cardNo;
+		this.cardDate = cardDate;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+	}
+
+	// 예약 수정용 ver1
+		public BookingVO(Integer no, String userName,
+				String userEmail, String userPhone) {
+			super();
+			this.no = no;
+			this.userName = userName;
+			this.userEmail = userEmail;
+			this.userPhone = userPhone;
+		}
+
+	public BookingVO(Integer no, Integer userNo, Integer hotelNo, Integer roomNo, String startDate, String endDate,
+			Integer totalPerson, Integer totalPrice, String cardType, Integer cardNo, String cardDate, String regDate,
+			String userName, String userEmail, String userPhone, String hotelName, String roomName, char type) {
+		super();
+		this.no = no;
+		this.userNo = userNo;
+		this.hotelNo = hotelNo;
+		this.roomNo = roomNo;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.totalPerson = totalPerson;
+		this.totalPrice = totalPrice;
+		this.cardType = cardType;
+		this.cardNo = cardNo;
+		this.cardDate = cardDate;
+		this.regDate = regDate;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.hotelName = hotelName;
+		this.roomName = roomName;
+		this.type = type;
+	}
 
 	public BookingVO(Integer no, Integer userNo, Integer hotelNo, Integer roomNo, String startDate, String endDate,
 			Integer totalPerson, Integer totalPrice, String cardType, Integer cardNo, String cardDate, String regDate,

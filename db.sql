@@ -44,6 +44,7 @@ END;
 COMMENT ON TABLE city IS '지역'
 /
 
+select * from booking
 
 -- owner Table Create SQL
 CREATE TABLE owner
@@ -528,6 +529,8 @@ select h.name, r.name, total_person, user_name
 from booking b join hotel h on (b.hotel_no=h.no) join room r on (h.no=r.hotel_no)
 where user_no=1
 
+
+
 update room set name='rName3_1' where no=3 
 update room set name='rName4_1' where no=4
 
@@ -536,3 +539,10 @@ update room set name='rName4_1' where no=4
 select h.name, r.name
 from booking b join hotel h on (b.hotel_no=h.no) join room r on (h.no=r.hotel_no)
 where h.owner_no=3
+
+insert into booking values (booking_seq.nextval, 1, 1, 1, '2017-07-20', '2017-07-22', 3, 100000,
+								'BC', 12345678, '10/20', sysdate, '첫테스트', 'abc@abc.com', '010-1234-5678')
+								
+select * from booking
+
+update booking set user_name = 'test' where no=8

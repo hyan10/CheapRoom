@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <div class="col-sm-10">
 	<nav id="navigation" class="menu">
 		<ul id="">
@@ -9,7 +11,7 @@
 					<li><a href="index_5.html">Home 5</a></li>
 				</ul></li>
 
-			<li><a href="#">Shortcodes</a>
+			<li><a href="#">예약 정보</a>
 				<ul>
 					<li><a href="elements.html">Elements</a></li>
 					<li><a href="columns.html">Columns</a></li>

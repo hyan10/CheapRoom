@@ -2,6 +2,8 @@ package kr.co.bit.cr.room;
 
 import java.util.List;
 
+import kr.co.bit.cr.image.imageVO;
+
 public class RoomVO {
 	private Integer no;
 
@@ -29,7 +31,7 @@ public class RoomVO {
     //  에어컨 (Y/N)
     private String ac;
     
-    private List<ImageVO> images;
+    private List<imageVO> images;
     
     public Integer getNo() {
         return no;
