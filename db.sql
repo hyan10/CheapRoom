@@ -52,12 +52,14 @@ CREATE TABLE owner
     email       VARCHAR2(50)    NOT NULL, 
     password    VARCHAR2(50)    NOT NULL, 
     name        VARCHAR2(10)    NOT NULL, 
-    phone       NUMBER          NOT NULL, 
+    phone       VARCHAR2(20)    NOT NULL, 
     CRN         NUMBER          NOT NULL, 
     reg_date    DATE            NULL, 
     CONSTRAINT OWNER_PK PRIMARY KEY (no)
 )
 /
+
+alter table owner modify (phone varchar2(20))
 
 CREATE SEQUENCE owner_SEQ
 START WITH 1
@@ -572,6 +574,7 @@ INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, 
 INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 17, 'name 17', 17, 17, 17, 17, 'N', 'N', 'N');
 INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 18, 'name 18', 18, 18, 18, 18, 'N', 'N', 'N');
 INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 19, 'name 19', 19, 19, 19, 19, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 20, 'name 20', 20, 20, 20, 20, 'N', 'N', 'N');
+INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 41, '테스트', 20, 20, 20, 20, 'N', 'N', 'N');
 
 select * from hotel
+/////////////제약조건 설정

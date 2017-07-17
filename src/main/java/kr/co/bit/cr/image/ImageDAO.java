@@ -25,9 +25,13 @@ public class ImageDAO {
 		
 		int cnt=0;
 		for(ImageVO image : images){
-			cnt = sqlSession.update("image.dao.ImageDAO.registerImage", image);
+			cnt = sqlSession.update("image.dao.ImageDAO.updateImage", image);
 		}
 		
 		return cnt;
+	}
+	
+	public List<ImageVO> selectImageByRno(int rNo){
+		return sqlSession.selectList("image.dao.ImageDAO.selectImageByRno", rNo);
 	}
 }

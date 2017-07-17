@@ -2,6 +2,8 @@ package kr.co.bit.cr.room;
 
 
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,5 +21,9 @@ public class RoomDAO {
 	
 	public int updateRoom(RoomVO room){
 		return sqlSession.update("room.dao.RoomDAO.updateRoom", room);
+	}
+	
+	public List<RoomVO> selectRoomByHno(int hNo){
+		return sqlSession.selectList("room.dao.RoomDAO.selectRoomByHno",hNo);
 	}
 }

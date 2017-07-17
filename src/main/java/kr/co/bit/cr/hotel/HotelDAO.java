@@ -21,4 +21,12 @@ public class HotelDAO {
 	public int updateHotel(HotelVO hotel){
 		return sqlSession.update("hotel.dao.HotelDAO.updateHotel",hotel);
 	}
+	
+	public HotelVO selectHotelByNo(HotelVO hotel){
+		return sqlSession.selectOne("hotel.dao.HotelDAO.selectHotelByNo", hotel.getNo());
+	}
+	
+	public int deleteHotelByNo(HotelVO hotel){
+		return sqlSession.delete("hotel.dao.HotelDAO.deleteHotelByNo", hotel);
+	}
 }

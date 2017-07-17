@@ -78,32 +78,78 @@ public class DBTestMain {
 		System.out.println(cnt);
 		System.out.println(hotel);
 	}
+	//@Test
+	public void 호텔조회테스트() throws Exception{
+		System.out.println("호텔조회테스트");
+		HotelVO hotel = new HotelVO();
+		List<RoomVO> rooms = new ArrayList<RoomVO>();
+		
+		hotel.setNo(41);
+		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
+		rooms = rDao.selectRoomByHno(hotel.getNo());
+		List<ImageVO> images = new ArrayList<ImageVO>();
+		for(RoomVO room: rooms){
+			images=iDao.selectImageByRno(room.getNo());
+			room.setImages(images);
+		}
+		hotel.setRooms(rooms);
+		System.out.println(hotel);
+	}
 	
 	//@Transactional
-	@Test
+	//@Test
 	public void 호텔수정테스트() throws Exception{
 		System.out.println("호텔수정테스트");
+		
+		//호텔셋팅
 		HotelVO hotel = new HotelVO();
+		List<RoomVO> rooms = new ArrayList<RoomVO>();
 		hotel.setNo(41);
-		hotel.setOwnerNo(1);
-		hotel.setCityNo(1);
-		hotel.setName("호텔1");
-		hotel.setBlind('N');
-		hotel.setTel(010000000);
-		hotel.setParking('N');
-		hotel.setBbq('N');
-		hotel.setWifi('N');
-		hotel.setSmoking('N');
-		hotel.setPool('N');
-		hotel.setDescription("블라블라");
-		hotel.setCheckin("15:00");
-		hotel.setCheckout("11:00");
-		hotel.setAddr("부평구");
-		///////////////////
-		hotel.setName("바뀐이름");
+		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
+		rooms = rDao.selectRoomByHno(hotel.getNo());
+		List<ImageVO> images = new ArrayList<ImageVO>();
+		for(RoomVO room: rooms){
+			images=iDao.selectImageByRno(room.getNo());
+			room.setImages(images);
+		}
+		hotel.setRooms(rooms);
+		System.out.println(hotel);
+		
+		//수정
+		hotel.setName("이름바꿈");
+		hotel.getRooms().get(0).setName("이름바꾼룸");
+			
+		//db
 		int cnt = 0;
 		cnt = hDao.updateHotel(hotel);
-		//룸 이미지 수정 테스트
+		if(cnt==1){
+			List<RoomVO> rooms2 = hotel.getRooms();
+			for(RoomVO room2 : rooms2){
+				cnt = rDao.updateRoom(room2);
+				System.out.println("방등록");
+				if(cnt==1){
+					cnt = iDao.updateImage(room2.getImages());
+					System.out.println("사진등록");
+				}
+			}
+		}
+		System.out.println("수정완료");
+		rooms = new ArrayList<RoomVO>();
+		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
+		rooms = rDao.selectRoomByHno(hotel.getNo());
+		images = new ArrayList<ImageVO>();
+		for(RoomVO room: rooms){
+			images=iDao.selectImageByRno(room.getNo());
+			room.setImages(images);
+		}
+		hotel.setRooms(rooms);
+		System.out.println(hotel);
+		System.out.println(hotel.getRooms().get(0).getImages());
+		System.out.println(hotel.getRooms().get(1).getImages());
+	}
 	
+	@Test
+	public void 호텔삭제테스트() throws Exception{
+		
 	}
 }

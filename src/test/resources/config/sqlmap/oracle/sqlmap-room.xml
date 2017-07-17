@@ -7,13 +7,23 @@
 		select no ,hotel_no as hotelNo , name, price, min_person as minPerson , max_person as maxPerson, add_price as addPrice, cooking, TV, AC 
 		 from room
 	</sql>
+	
+	<select id="selectRoomByHno" parameterType="int" resultType="room">
+		<include refid="select"/>
+		 where hotel_no = #{hNo}
+	</select>
+	
 	<insert id="registerRoom" parameterType="room">
 		INSERT INTO room (no ,hotel_no, name, price, min_person, max_person, add_price, cooking, tv, ac) 
 		 VALUES (room_seq.nextval,#{hotelNo}, #{name}, #{price}, #{minPerson}, #{maxPerson}, #{addPrice}, #{cooking}, #{tv}, #{ac})
 	</insert>
 	
 	<update id="updateRoom" parameterType="room">
-		update room set hotel_no=#{hotelNo}, name=#{name}, price=#{price}, min_person=#{minPerson}, max_person=#{maxPerson}, add_price=#{addPrice}, cooking=#{cooking}, tv=#{tv}, ac#{ac}
+		update room set hotel_no=#{hotelNo}, name=#{name}, price=#{price}, min_person=#{minPerson}, max_person=#{maxPerson}, add_price=#{addPrice}, cooking=#{cooking}, tv=#{tv}, ac=#{ac}
 		 where no = #{no}
 	</update>
+	
+	<delete id="deleteRoomByNo" parameterType="room">
+		delete from room where no=#{no}
+	</delete>
 </mapper>

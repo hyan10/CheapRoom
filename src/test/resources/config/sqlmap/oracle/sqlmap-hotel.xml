@@ -14,6 +14,12 @@
 		
 	</select>
 	
+	<select id="selectHotelByNo" parameterType="int" resultType="hotel">
+		<include refid="select"/>
+		 where no=#{no}
+		
+	</select>
+	
 	<insert id="registerHotel" parameterType="hotel">
 		INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, bbq, 
 		 description, checkin, checkout, addr, reg_date) 
@@ -24,7 +30,11 @@
 	<update id="updateHotel" parameterType="hotel">
 		update hotel set owner_no=#{ownerNo}, city_no=#{cityNo}, name=#{name}, blind=#{blind}, tel=#{tel}, parking=#{parking}, wifi=#{wifi}, 
 		smoking= #{smoking}, pool=#{pool}, bbq=#{bbq}, description=#{description}, checkin=#{checkin}, checkout=#{checkout}, addr=#{addr}, reg_date=sysdate
-		where no=#{no}
+		 where no=#{no}
 	</update>
+	
+	<delete id="deleteHotelByNo" parameterType="hotel">
+		delete from hotel where no=#{no}
+	</delete>
 	
 </mapper>
