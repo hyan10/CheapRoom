@@ -21,7 +21,7 @@
 				</ul>
 			</li>
 
-			<li><a href="#">Pages</a>
+			<li><a href="${pageContext.request.contextPath}/booking/book.cr">예약하기</a>
 				<ul>
 					<li><a href="about.html">About</a>
 						<ul>

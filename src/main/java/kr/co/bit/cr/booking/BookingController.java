@@ -1,5 +1,6 @@
 package kr.co.bit.cr.booking;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,11 @@ public class BookingController {
 	
 	//예약
 	@RequestMapping("/book.cr")
-	public void book(BookingVO booking){
-		System.out.println("book");
-		int result = service.book(booking);
+	public ModelAndView book(BookingVO booking){
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("booking/booking");
+		//	int result = service.book(booking);
+		return mav;
 	}
 	//예약 수정
 	@RequestMapping("/update.cr")
@@ -37,7 +40,7 @@ public class BookingController {
 		System.out.println(list);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("bookingList",list);
-		mav.setViewName("bookingList");
+		mav.setViewName("booking/bookingList");
 		return mav;
 	}
 

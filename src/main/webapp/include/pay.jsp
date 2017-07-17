@@ -1,16 +1,15 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="robots" content="noindex, nofollow">
-
-<title>Credit Card Payment with Stripe (updated) - Bootsnipp.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-<link rel="../css/pay.css"/>
+<link rel="/css/pay.css"/>
 <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -124,7 +123,7 @@ THE SOFTWARE.
 							<div class="row">
 								<div class="col-xs-12">
 									<button class="subscribe btn btn-success btn-lg btn-block"
-										type="button">Start Subscription</button>
+										type="button">결제 요청</button>
 								</div>
 							</div>
 							<div class="row" style="display: none;">
