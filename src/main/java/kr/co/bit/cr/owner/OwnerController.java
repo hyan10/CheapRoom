@@ -12,9 +12,6 @@ public class OwnerController {
 	@Autowired
 	private OwnerService service;
 	
-	@Autowired
-	private HttpSession session;
-	
 	@RequestMapping("/join.cr")
 	public void join(OwnerVO owner){
 		

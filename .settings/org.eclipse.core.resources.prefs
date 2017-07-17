@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/adminMenu.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/userMenu.jsp=UTF-8
+encoding//src/test/java/kr/co/bit/DBTestMain.java=UTF-8
