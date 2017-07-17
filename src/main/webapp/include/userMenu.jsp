@@ -11,14 +11,15 @@
 					<li><a href="index_5.html">Home 5</a></li>
 				</ul></li>
 
-			<li><a href="#">예약 정보</a>
+			<li><a href="${pageContext.request.contextPath}/booking/bookingList.cr">예약 정보</a>
 				<ul>
 					<li><a href="elements.html">Elements</a></li>
 					<li><a href="columns.html">Columns</a></li>
 					<li><a href="typography.html">Typography</a></li>
 					<li><a href="pricing-tables.html">Pricing Tables</a></li>
 					<li><a href="icons.html">Icons</a></li>
-				</ul></li>
+				</ul>
+			</li>
 
 			<li><a href="#">Pages</a>
 				<ul>

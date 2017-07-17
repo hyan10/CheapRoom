@@ -9,6 +9,7 @@
 		from booking
 	</sql>
 	
+	<!-- 예약 조회 select 공통 쿼리 -->
 	<sql id="selectList">
 		select b.no as no, b.user_no as userNo, h.no as hotelNo, r.no as roomNo,
 				h.name as hotelName, r.name as roomName,
@@ -20,24 +21,28 @@
 		from booking b join hotel h on (b.hotel_no=h.no) join room r on (h.no=r.hotel_no)
 	</sql>
 	
+	<!-- 예약 추가/수정 시 values 부분 공통 쿼리 -->
 	<sql id="insertValue">
 		<!-- insert into booking (no, user_no, hotel_no, room_no, start_date, end_date,
 					total_person, total_price, card_type, card_no, card_date,
 					reg_date, user_name, user_email, user_phone) -->
-		(booking_SEQ.nextval, #{userNo}, #{hotelNo}, #{roomNo}, #{startDate}, #{endDate},
-		#{totalPerson},#{totalPrice},#{cardType},#{cardNo},#{cardDate},
-		#{userName},#{userEmail},#{userPhone}, sysdate)
-			)
+		(booking_SEQ.nextval, #{userNo}, #{hotelNo}, #{roomNo},
+		#{startDate}, #{endDate}, #{totalPerson},#{totalPrice},
+		#{cardType},#{cardNo},#{cardDate}, sysdate,
+		#{userName},#{userEmail},#{userPhone})
 	</sql>
 
+	<!-- 예약 history 추가 시 values 부분 공통 쿼리 -->
 	<sql id="insertHistoryValue">
 		<!-- insert into booking_history (no, user_no, hotel_no, room_no, type, start_date, end_date,
 					total_person, total_price, card_type, card_no, card_date,
 					reg_date, user_name, user_email, user_phone) -->
-		(booking_SEQ.nextval, #{userNo}, #{hotelNo}, #{roomNo}, #{type}, #{startDate}, #{endDate},
-		#{totalPerson},#{totalPrice},#{cardType},#{cardNo},#{cardDate},
-		#{userName},#{userEmail},#{userPhone}, sysdate)
+		(#{no}, #{userNo}, #{hotelNo}, #{roomNo}, #{type},
+		#{startDate}, #{endDate}, #{totalPerson},#{totalPrice},
+		#{cardType},#{cardNo},#{cardDate}, sysdate,
+		#{userName},#{userEmail},#{userPhone})
 	</sql>
+	
 	
 	<!-- 유저의 예약 현황 조회 -->
 	<select id="selectByUser" parameterType="int" resultType="booking">
@@ -59,16 +64,18 @@
 	
 	<!-- 예약 정보 변경 -->
 	<update id="updateBook" parameterType="booking">
-		update booking set 
-		<if test="#{user_name}!=null">
-			user_name = #{user_name}
-		</if>
-		<if test="#{user_email}!=null">
-			, user_email = #{user_email}
-		</if>
-		<if test="#{user_phone}!=null">
-			, user_phone = #{user_phone}
-		</if>
+		update booking
+		<set> <!-- set comma는 뒤에  -->
+			<if test="userName!=null">
+				user_name = #{userName},
+			</if>
+	 		<if test="userEmail!=null">
+				user_email = #{userEmail},
+			</if>
+			<if test="userPhone!=null">
+				user_phone = #{userPhone}
+			</if>
+		</set>
 		where no = #{no}
 	</update>
 	
@@ -89,6 +96,7 @@
 		insert into booking_history values
 		<include refid="insertHistoryValue"/>
 	</insert>
+	
 	<delete id="deleteBook" parameterType="int">
 		delete from booking where no=#{no}
 	</delete>

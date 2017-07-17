@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -8,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import kr.co.bit.cr.booking.BookingVO;
 
@@ -22,8 +24,13 @@ public class BookingTest {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	BookingVO booking;
-
 	
+	
+	public void 테스트() throws SQLException{
+		System.out.println(ds.getConnection());
+	}
+	
+	@Test
 	public void 유저예약조회() throws Exception{
 		List<BookingVO> list = sqlSessionTemplate.selectList("booking.BookingDAO.selectByUser", 1);
 		for(BookingVO vo : list){

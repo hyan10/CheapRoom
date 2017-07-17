@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
@@ -135,7 +136,7 @@
 </header>
 	<!--End Header-->
 	<section class="wrapper">
-	<jsp:include page="/jsp/userMenu.jsp"/>
+	<jsp:include page="/include/userMenu.jsp"/>
 	</section>
 	<!--start wrapper-->
 	<section class="wrapper">

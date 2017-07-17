@@ -1,8 +1,12 @@
 package kr.co.bit.cr.booking;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import kr.co.bit.cr.user.UserVO;
 
 @Repository
 public class BookingDAO {
@@ -26,5 +30,12 @@ public class BookingDAO {
 		
 		sqlSessionTemplate.insert("booking.BookingDAO.insertBookHistory", booking);
 		return sqlSessionTemplate.delete("booking.BookingDAO.deleteBook", booking.getNo());
+	}
+	
+	// 유저 예약 조회
+	public List<BookingVO> selectByUser(int userNo){
+		System.out.println(userNo);
+		System.out.println(sqlSessionTemplate);
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByUser",userNo);
 	}
 }

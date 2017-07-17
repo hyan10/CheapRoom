@@ -43,7 +43,7 @@
                 <!-- Navigation
                 ================================================== -->
                 <!-- Nav menu -->
-                <jsp:include page="/jsp/userMenu.jsp"/>
+                <jsp:include page="/include/userMenu.jsp"/>
                 <!-- Nav menu end -->
             </div>
         </div>
@@ -60,7 +60,7 @@
                     <img src="img/fraction-slider/NEW-6.png" data-in="fade" data-delay="20" data-out="fade" width="1920" height="450">       <!--1- slide background-->
                 </div>
                  <div class="col-sm-7">
-                	 <jsp:include page="/jsp/search.jsp"/>
+                	 <jsp:include page="/include/search.jsp"/>
                  </div>
             	
                 
