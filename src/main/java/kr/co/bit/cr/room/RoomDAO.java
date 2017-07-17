@@ -13,10 +13,7 @@ public class RoomDAO {
 	SqlSessionTemplate sqlSession;
 	
 	public int registerRoom(RoomVO room){
-		System.out.println("roomDAO");
-		System.out.println(room);
-		int cnt =sqlSession.insert("room.dao.RoomDAO.registerRoom", room); 
-		return cnt;
+		return sqlSession.insert("room.dao.RoomDAO.registerRoom", room); 
 	}
 	
 	public int updateRoom(RoomVO room){
@@ -25,5 +22,9 @@ public class RoomDAO {
 	
 	public List<RoomVO> selectRoomByHno(int hNo){
 		return sqlSession.selectList("room.dao.RoomDAO.selectRoomByHno",hNo);
+	}
+	
+	public int deleteRoomByNo(RoomVO room){
+		return sqlSession.delete("room.dao.RoomDAO.deleteRoomByNo", room.getNo());
 	}
 }

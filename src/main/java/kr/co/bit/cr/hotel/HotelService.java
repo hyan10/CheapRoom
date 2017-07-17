@@ -43,4 +43,23 @@ public class HotelService {
 		
 		return cnt;
 	}
+	
+	public int updateHotel(HotelVO hotel){
+		int cnt = hDao.updateHotel(hotel);
+		if(cnt==1){
+			List<RoomVO> rooms = hotel.getRooms();
+			for(RoomVO room : rooms){
+				cnt = rDao.updateRoom(room);
+				if(cnt==1){
+					cnt = iDao.updateImage(room.getImages());
+				}
+			}
+		}
+		
+		return cnt;
+	}
+	
+	public int deleteHotel(HotelVO hotel){
+		return hDao.deleteHotelByNo(hotel);
+	}
 }

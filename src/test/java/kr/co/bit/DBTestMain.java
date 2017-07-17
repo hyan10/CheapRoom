@@ -147,9 +147,15 @@ public class DBTestMain {
 		System.out.println(hotel.getRooms().get(0).getImages());
 		System.out.println(hotel.getRooms().get(1).getImages());
 	}
-	
+	@Transactional
 	@Test
 	public void 호텔삭제테스트() throws Exception{
-		
+		System.out.println("호텔삭제테스트");
+		HotelVO hotel = new HotelVO();
+		hotel.setNo(41);
+		hotel = hDao.selectHotelByNo(hotel);
+		int cnt=0;
+		cnt = hDao.deleteHotelByNo(hotel);
+		System.out.println(cnt);
 	}
 }

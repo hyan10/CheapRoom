@@ -34,4 +34,8 @@ public class ImageDAO {
 	public List<ImageVO> selectImageByRno(int rNo){
 		return sqlSession.selectList("image.dao.ImageDAO.selectImageByRno", rNo);
 	}
+	
+	public int deleteImageByNo(ImageVO image){
+		return sqlSession.delete("image.dao.ImageDAO.deleteImageByNo", image);
+	}
 }
