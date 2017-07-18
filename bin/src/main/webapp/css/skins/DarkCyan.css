@@ -1,0 +1,138 @@
+#nav-bar{ background: #225A69;}
+
+#current:after,
+.mean-container .mean-nav ul li a:hover,
+.touching.medium a.hover-zoom,
+.touching.medium a.hover-link, 
+.gDot, 
+.list_style.circle li a i, 
+.flickr-feed li .hover,
+.progress_skill .bar,
+.swipe-navi .swipe-left,
+.swipe-navi .swipe-right,
+.blogteam_pic .blog-hover .icon,
+.list_style.square li a i,
+.highlight.default,
+.blog_large .day, .blog_single .day,
+#filter li.selected a:before,
+.carousel-pagination li.active,
+.slider-read,
+.slider .new,.slider .light-pink{
+	background: #236C80 !important;
+}
+#header{background:#236C80;}
+
+.menu > ul > li ul > li:first-child > a{border-top-color:#236C80;}
+.menu > ul > li > ul:before{ border-bottom-color: #236C80;}
+.menu ul ul li a:hover.sf-with-ul:after{ border-color: #FBFBFB #FBFBFB #FBFBFB #236C80;}
+
+.fraction-slider .next:hover,
+.fraction-slider .prev:hover,
+.fraction-slider .next:hover:before,
+.fraction-slider .prev:hover:before { color:#236C80!important;  border-color:#236C80!important;}
+
+.pb_action .btn.btn-danger      { border-bottom-color:#225A69;     background:#236C80;}
+.pb_action .btn.btn-danger:hover,.btn.btn-default:hover, .btn.btn-default:focus, .btn-group:focus .btn.btn-default.dropdown-toggle
+{ border-bottom-color:#104554;     background:#10596D;}
+
+.blog_large .post_meta h2:hover a, .blog_single .post_meta h2:hover a{ color:#236C80 ;}
+.blog_medium .post_meta h2:hover a { color:#236C80; }
+.blog_medium .day{background:#236C80;}
+#site-searchform #searchsubmit{background-color:#236C80;}
+#site-searchform #s:focus{ border-color:#236C80;}
+
+.author_bio > h5{ border-bottom-color:#337B8F;}
+.author_desc .author-team_pic > img {border-color:#236C80;}
+.progress_skill:hover .bar{background:#164C5B!important;}
+.team_pic:hover img, .team_social_media:hover{border-color:#569BAE;}
+.recent-item:hover .item-description{border-bottom:2px solid #236C80; }
+
+a,
+a.read:hover, 
+.testimonial-review small,
+.list_style li a:hover,
+#breadcrumbs ul li:last-child a, #breadcrumbs ul li a,
+.menu ul li a:hover .sf-sub-indicator,
+.menu ul ul li a:hover,
+.tp-caption.large_bold_red,
+.blogMeta a:hover, .blogTitle span:hover,
+.serviceBox_3:hover i,
+.dropcap.default,
+.blogTitle > a:hover h2,
+.sidebar ul.archives_list li a:hover, .sidebar ul.arrows_list1 li a:hover i,
+.blog_large .post_meta .metaInfo > span > a:hover, .blog_single .post_meta .metaInfo > span > a:hover,
+#comment-list li .comment-container:hover a,
+#comment-list li .comment-container:hover .comment-date,
+.sidebar ul.arrows_list li a:hover, .sidebar ul.arrows_list1 li a:hover i,
+.serviceBox_2:hover i,
+.serviceBox_1:hover .icon_service i,
+.panel-heading:hover  a,
+.panel-heading:hover .accordian-icon,
+.active_acc .panel-title a, .active_acc .accordian-icon,
+.menu ul ul li a.sf-with-ul:after,
+.comments_list a,
+.blog_medium .post_meta .metaInfo > span > a:hover
+{
+  color: #236C80;
+}
+#site-search-form #s:focus{border-color:#236C80;}
+.testimonial-item blockquote {border-left: 3px solid #236C80;}
+.testimonial-review > img { border: 2px solid #236C80;}
+
+.btn.btn-default,
+.tp-caption.modern_big_redbg,
+.tp-caption.medium_bg_red,
+.dropcap_block.default,
+.btn.btn-default.dark:hover,
+.btn.btn-default.dark:focus,
+.btn-group:focus .btn.btn-default.dark.dropdown-toggle,
+.icon_lists .fa-hover a:hover,
+#site-search-form #searchsubmit,
+.tags li a:hover,
+.shares li a:hover
+{
+	background-color:#236C80;
+}
+.about_author{background:#236C80;border-left-color:#0E4655;  }
+.author_social li a{background:#0E4655;}
+
+
+.table-theme-color span.heading,.pricingTable .table-theme-color.business .heading{background:#1B5160; }
+.pricingTable.business .pricingTable-header .price-value,
+.table-theme-color .pricingTable-header span.price-value { background:#236C80 !important;}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus,
+.recent_tab_list li a:hover { color:#236C80; }
+.nav-tabs li.active, .nav-tabs li.active a, .nav-tabs li.active a:hover ,
+.panel.active_acc,.panel:hover { border-top-color:#236C80!important;}
+
+#contactForm .btn.btn-default{border-bottom-color:#165060;}
+#contactForm .btn.btn-default:hover{background:#236C80;}
+.btn.btn-default {border-bottom-color: #2A4C55;}
+.btn.btn-default:hover {background: #225A69; border-bottom-color: #1C3F48;}
+
+.control-group.focus textarea, .control-group.focus input[type="text"], .control-group.focus input[type="password"], .control-group.focus input[type="datetime"], .control-group.focus input[type="datetime-local"], .control-group.focus input[type="date"], .control-group.focus input[type="month"], .control-group.focus input[type="time"], .control-group.focus input[type="week"], .control-group.focus input[type="number"], .control-group.focus input[type="email"], .control-group.focus input[type="url"], .control-group.focus input[type="search"], .control-group.focus input[type="tel"], .control-group.focus input[type="color"], .control-group.focus .uneditable-input, textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus{
+	border-color:#236C80;
+}
+blockquote.default{ border-color:#236C80;}
+
+#filter li.selected a, #filter li a:hover,
+#filter li.selected a, #filter li a:hover { background:#236C80;}
+
+.touching.medium a.hover-zoom:hover,
+.touching.medium a.hover-link:hover{  background: #333!important;}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+    background:#236C80;border-color: #236C80;}
+
+.comment-container:hover { border-color:#236C80;}
+
+.serviceBox_2:hover i,
+.serviceBox_3:hover i,
+.serviceBox_1:hover .icon_service i  {  border-color:#236C80;}
+.service-2-new:hover i{border-color:#236C80 }
+
+.footer{background:#236C80;}
+.footer_bottom{background:#225A69;}
+.footer h4 > span{background:#236C80; }
+
