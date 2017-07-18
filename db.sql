@@ -195,8 +195,8 @@ END;
 COMMENT ON COLUMN user.type IS '일반/관리자 (U/S)'
 /
 
-insert into users values (user_SEQ.nextval, 'admin@cheaproom.com', 'admin', 'S','관리자','01099089444',sysdate)
-insert into users values (user_SEQ.nextval, 'admin', 'admin', 'S','관리자','01066897746',sysdate)
+insert into users values (user_SEQ.nextval, 'admin@cheaproom.com', 'admin', 'S','관리자','01099089444',sysdate);
+insert into users values (user_SEQ.nextval, 'admin', 'admin', 'S','관리자','01066897746',sysdate);
 update users set no=1 where no=2
 alter table users modify (phone varchar2(20))
 delete from users where no = 1
