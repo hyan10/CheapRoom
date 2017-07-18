@@ -1,5 +1,7 @@
 package kr.co.bit.cr.hotel;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,6 +24,10 @@ public class HotelDAO {
 	}
 	
 	public int deleteHotelByNo(HotelVO hotel){
-		return sqlSession.delete("hotel.dao.HotelDAO.deleteHotelByNo", hotel);
+		return sqlSession.delete("hotel.dao.HotelDAO.deleteHotelByNo", hotel.getNo());
+	}
+	
+	public List<HotelVO> selectHotelByCno(int cNo){
+		return sqlSession.selectList("hotel.dao.HotelDAO.selectHotelByCno", cNo);
 	}
 }

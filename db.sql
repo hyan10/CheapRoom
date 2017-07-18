@@ -557,6 +557,7 @@ INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoki
 ////////////////////////////////////////////////
 select * from hotel
 select * from room
+select * from image
 ////////////////////////////제약조건
 alter table review drop constraint fk_review_hotel_no_hotel_no;
 alter table review drop constraint fk_review_user_no_user_no;

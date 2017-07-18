@@ -69,4 +69,20 @@ public class HotelService {
 	public int deleteHotel(HotelVO hotel){
 		return hDao.deleteHotelByNo(hotel);
 	}
+	
+	/**
+	 * 호텔 찾기
+	 * @return
+	 */
+	public List<HotelVO> hotelList(int cityNo, String startDate, String endDate, int personNo){
+		
+		//1지역번호로 호텔이랑 방조회해서 호텔세팅
+		List<HotelVO> list = hDao.selectHotelByCno(cityNo);
+		for(HotelVO hotel : list){
+			List<RoomVO> rooms = rDao.selectRoomByHno(hotel.getNo());
+			hotel.setRooms(rooms);
+		}
+		
+		return null;
+	}
 }

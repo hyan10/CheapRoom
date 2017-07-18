@@ -37,12 +37,12 @@ public class DBTestMain {
 		System.out.println(sqlSessionTemplate);
 			
 	}
-	@Test
+	//@Test
 	public void 로그인테스트() throws SQLException{
 		UserVO user = sqlSessionTemplate.selectOne("user.dao.UserDAO.userLogin", new UserVO("admin", "admin"));
 		System.out.println(user);
 	}
-	@Test
+	//@Test
 	public void 사용자예약리스트() throws SQLException {
 		List<BookingVO> list = sqlSessionTemplate.selectList("user.dao.UserDAO.userBookingList", new UserVO("admin", "admin"));
 		System.out.println(list);

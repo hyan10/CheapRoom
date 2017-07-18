@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="owner.dao.OwnerDAO">
+
+	<insert id="insertOwner" parameterType="owner">
+		insert into owner values(owner_SEQ.NEXTVAL, #{email}, #{password}, #{name}, #{phone}, #{crn}, sysdate)
+	</insert>
+	<select id="loginOwner" parameterType="owner" resultType="owner">
+		select * from owner where email = #{email} and password = #{password}
+	</select>
+	
+</mapper>

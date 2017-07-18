@@ -49,7 +49,7 @@ public class HotelVO {
 
     private List<RoomVO> rooms;
     
-    
+    private String imgUrl;
     
     public HotelVO() {
 		super();
@@ -60,7 +60,7 @@ public class HotelVO {
 
 	public HotelVO(Integer ownerNo, Integer cityNo, String name, char blind, Integer tel, char parking,
 			char wifi, char smoking, char pool, char bbq, String description, String checkin, String checkout,
-			String addr, List<RoomVO> rooms) {
+			String addr, String imgUrl, List<RoomVO> rooms) {
 		super();
 
 		this.ownerNo = ownerNo;
@@ -77,8 +77,20 @@ public class HotelVO {
 		this.checkin = checkin;
 		this.checkout = checkout;
 		this.addr = addr;
-
+		this.imgUrl = imgUrl;
 		this.rooms = rooms;
+	}
+
+	
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 
@@ -292,9 +304,9 @@ public class HotelVO {
 		return "HotelVO [no=" + no + ", ownerNo=" + ownerNo + ", cityNo=" + cityNo + ", name=" + name + ", blind="
 				+ blind + ", tel=" + tel + ", parking=" + parking + ", wifi=" + wifi + ", smoking=" + smoking
 				+ ", pool=" + pool + ", bbq=" + bbq + ", description=" + description + ", checkin=" + checkin
-				+ ", checkout=" + checkout + ", addr=" + addr + ", regDate=" + regDate + ", rooms=" + rooms + "]";
+				+ ", checkout=" + checkout + ", addr=" + addr + ", regDate=" + regDate + ", rooms=" + rooms
+				+ ", imgUrl=" + imgUrl + "]";
 	}
-    
-	
-    
+
+
 }

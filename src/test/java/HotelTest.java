@@ -33,21 +33,21 @@ public class HotelTest {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	@Transactional
+	//@Transactional
 	//@Test
 	public void 호텔등록테스트() throws Exception{
 		System.out.println("호텔등록테스트");
-		ImageVO image = new ImageVO(1,1,"urltest");
+		ImageVO image = new ImageVO(1,15,"urltest");
 		List<ImageVO> images = new ArrayList<ImageVO>();
 		List<RoomVO> rooms = new ArrayList<RoomVO>();
 		images.add(image);
-		RoomVO room = new RoomVO(41,"룸이름", 100000, 2, 4,
+		RoomVO room = new RoomVO(15,"룸이름", 100000, 2, 4,
 				10000, 'Y', 'Y', 'Y', images);
 		rooms.add(room);
 		
 		HotelVO hotel = new HotelVO(1, 1, "호텔1", 'N', 010000000, 'N',
 				'N', 'N', 'N', 'N', "블라블라", "15:00", "10:00",
-				"부평구", rooms);
+				"부평구", "이미지",rooms);
 		System.out.println(hotel);
 		System.out.println(room);
 		System.out.println(image);;
@@ -73,13 +73,13 @@ public class HotelTest {
 		System.out.println(cnt);
 		System.out.println(hotel);
 	}
-	//@Test
+	@Test
 	public void 호텔조회테스트() throws Exception{
 		System.out.println("호텔조회테스트");
 		HotelVO hotel = new HotelVO();
 		List<RoomVO> rooms = new ArrayList<RoomVO>();
 		
-		hotel.setNo(41);
+		hotel.setNo(15);
 		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
 		rooms = rDao.selectRoomByHno(hotel.getNo());
 		List<ImageVO> images = new ArrayList<ImageVO>();
@@ -142,8 +142,8 @@ public class HotelTest {
 		System.out.println(hotel.getRooms().get(0).getImages());
 		System.out.println(hotel.getRooms().get(1).getImages());
 	}
-	@Transactional
-	@Test
+	//@Transactional
+	//@Test
 	public void 호텔삭제테스트() throws Exception{
 		System.out.println("호텔삭제테스트");
 		HotelVO hotel = new HotelVO();
