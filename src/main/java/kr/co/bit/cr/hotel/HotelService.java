@@ -24,7 +24,6 @@ public class HotelService {
 	 * @param hotel
 	 * @return
 	 */
-	
 	public int registerHotel(HotelVO hotel){
 		
 		int cnt = hDao.registerHotel(hotel);
@@ -41,6 +40,11 @@ public class HotelService {
 		return cnt;
 	}
 	
+	/**
+	 * 호텔,방,사진 같이 수정
+	 * @param hotel
+	 * @return
+	 */
 	public int updateHotel(HotelVO hotel){
 		int cnt = hDao.updateHotel(hotel);
 		if(cnt==1){
@@ -56,6 +60,12 @@ public class HotelService {
 		return cnt;
 	}
 	
+	/**
+	 * 
+	 * 호텔 삭제
+	 * @param hotel
+	 * @return
+	 */
 	public int deleteHotel(HotelVO hotel){
 		return hDao.deleteHotelByNo(hotel);
 	}

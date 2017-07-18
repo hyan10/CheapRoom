@@ -9,11 +9,6 @@ public class HotelDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 
-	/**
-	 * 호텔 등록
-	 * @param hotel
-	 * @return
-	 */
 	public int registerHotel(HotelVO hotel){
 		return sqlSession.insert("hotel.dao.HotelDAO.registerHotel", hotel);
 	}
