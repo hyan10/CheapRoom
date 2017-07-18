@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>    
-    <jsp:include page="/jsp/loginModal.jsp"/>
+    <jsp:include page="loginModal.jsp"/>
 <div class="col-sm-8">
 	<nav id="navigation" class="menu">
 		<ul id="">				
@@ -13,7 +13,7 @@
 				</div>
 			</div> -->
 			<!-- END # BOOTSNIP INFO -->
-			<li><a href="index.html" id="current" class="border">사용자</a>
+			<li><a href="index.html" id="current" class="border">My Page</a>
 				<ul>
 					<li><a href="index_2.html">Home 2</a></li>
 					<li><a href="index_3.html">Home 3</a></li>

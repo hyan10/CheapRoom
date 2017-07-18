@@ -6,6 +6,7 @@
 	<typeAliases>
 		<!-- <typeAlias type="kr.co.bit.board.vo.BoardVO" alias="board" /> -->
 		<typeAlias type="kr.co.bit.cr.user.UserVO" alias="user"/>
+		<typeAlias type="kr.co.bit.cr.owner.OwnerVO" alias="owner"/>
 		<typeAlias type="kr.co.bit.cr.booking.BookingVO" alias="booking"/>
 	</typeAliases>
 </configuration>

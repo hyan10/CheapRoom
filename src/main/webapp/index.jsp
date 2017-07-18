@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +30,11 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
+<script>
+	function changeFormAction(checkbox){
+	    document.getElementById("login-form").action = checkbox.value;
+	}
+</script>
 <body>
 <!--Start Header-->
 <header id="header" class="clearfix">
@@ -49,11 +54,37 @@
 				<!-- Navigation
                 ================================================== -->
                 <!-- Nav menu -->
-                <jsp:include page="/jsp/userMenu.jsp"/>
+                <c:choose>
+	                <c:when test="${ user.type eq 'S' }">
+		                <jsp:include page="/include/adminMenu.jsp"/>
+	                </c:when>
+					<c:otherwise>
+						<jsp:include page="/include/userMenu.jsp"/>
+					</c:otherwise>                
+                </c:choose>
+                <c:if test="${ not empty user }">
+                		[${ user.email}님 접속중]
+                </c:if>
+                <c:if test="${ not empty owner }">
+                		[${ owner.email} 사업자님 접속중]
+                </c:if>
                 <!-- Nav menu end -->
                 <div class="col-sm-2">
-				    <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a>
-				    	<a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그아웃</a>
+          		<c:choose>
+	                <c:when test="${ (empty user) and (empty owner)}">
+		                <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a>                		
+	                </c:when>
+					<c:otherwise>
+						<c:if test="${ not empty user }">
+		                		[${ user.email}님 접속중]
+							<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
+		                </c:if>
+		                <c:if test="${ not empty owner }">
+		                		[${ owner.email} 사업자님 접속중]
+							<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
+		                </c:if>
+					</c:otherwise>                
+                </c:choose>
                 </div>
             </div>
         </div>
@@ -70,7 +101,7 @@
                     <img src="img/fraction-slider/NEW-6.png" data-in="fade" data-delay="20" data-out="fade" width="1920" height="450">       <!--1- slide background-->
                 </div>
                  <div class="col-sm-7">
-                	 <jsp:include page="/jsp/search.jsp"/>
+                	 <jsp:include page="/include/search.jsp"/>
                  </div>
             	
                 
@@ -294,7 +325,7 @@
         });
         $(function() {         
             var $formLogin = $('#login-form');
-            var $formLost = $('#lost-form');
+            var $formOwnerRegister = $('#register-owner-form');
             var $formRegister = $('#register-user-form');
             var $divForms = $('#div-forms');
             var $modalAnimateTime = 300;
@@ -311,7 +342,7 @@
                         } else {
                             msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
                         }
-                        return false;
+                        return true;
                         break;
                     case "lost-form":
                         var $ls_email=$('#lost_email').val();
@@ -335,6 +366,19 @@
                         }
                         return false;
                         break;
+                    case "register-owner-form":
+                        var $rg_username=$('#register_username').val();
+                        var $rg_email=$('#register_email').val();
+                        var $rg_password=$('#register_password').val();
+                        var $rg_phone=$('#register_phone').val();
+                       	alert($rg_phone + " " + $rf_username);
+                        if ($rg_username == "ERROR") {
+                            msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
+                        } else {
+                            msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
+                        }
+                        return false;
+                        break;
                     default:
                         return false;
                 }
@@ -342,11 +386,11 @@
             });
             
             $('#login_register_btn').click( function () { modalAnimate($formLogin, $formRegister) });
+            $('#login_owner_btn').click( function () { modalAnimate($formLogin, $formOwnerRegister); });
             $('#register_login_btn').click( function () { modalAnimate($formRegister, $formLogin); });
-            $('#login_lost_btn').click( function () { modalAnimate($formLogin, $formLost); });
-            $('#lost_login_btn').click( function () { modalAnimate($formLost, $formLogin); });
-            $('#lost_register_btn').click( function () { modalAnimate($formLost, $formRegister); });
-            $('#register_lost_btn').click( function () { modalAnimate($formRegister, $formLost); });
+            $('#owner_login_btn').click( function () { modalAnimate($formOwnerRegister, $formLogin); });
+            $('#lost_register_btn').click( function () { modalAnimate($formOwnerRegister, $formRegister); });
+            $('#register_lost_btn').click( function () { modalAnimate($formRegister, $formOwnerRegister); });
             
             function modalAnimate ($oldForm, $newForm) {
                 var $oldH = $oldForm.height();

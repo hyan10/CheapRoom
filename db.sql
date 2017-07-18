@@ -2,6 +2,8 @@
 
 select * from booking;
 select *from booking where user_no = (select no from users where email = 'admin')
+select * from users
+select * from owner
 -- city Table Create SQL
 CREATE TABLE city
 (

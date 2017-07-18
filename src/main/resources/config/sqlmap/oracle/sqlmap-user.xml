@@ -18,7 +18,7 @@
 	</select>
 	<!-- user join sql -->
 	<insert id="userInsert" parameterType="user">
-		insert into users values(users_SEQ.NEXTVAL, #{email}, #{password}, #{type}, #{name}, #{phone}, sysdate)
+		insert into users values(user_SEQ.NEXTVAL, #{email}, #{password}, #{type}, #{name}, #{phone}, sysdate)
 	</insert>
 	<select id="userBookingList" parameterType="user" resultType="booking">
 		select 

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bit.cr.booking.BookingVO;
+import kr.co.bit.cr.owner.OwnerService;
+import kr.co.bit.cr.owner.OwnerVO;
 
 @Controller
 @RequestMapping("/user")
@@ -22,6 +25,8 @@ import kr.co.bit.cr.booking.BookingVO;
 public class UserController {
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private OwnerService OwnerService;
 	
 	@RequestMapping(value="/join.cr", method=RequestMethod.POST) 
 	//public String join(UserVO userVO){
@@ -33,7 +38,7 @@ public class UserController {
 		String password = (String)request.getParameter("password");
 		UserVO user = new UserVO(email, password, "U", name, phone);
 		System.out.println("user 가입정보 : " + user);
-		//userService.join(user);
+		userService.join(user);
 		return "redirect:/";
 	}
 	
@@ -41,23 +46,46 @@ public class UserController {
 //	public String loginForm(){
 //		return "/user/login.cr";
 //	}
-	
 	@RequestMapping(value="/login.cr", method=RequestMethod.POST)
-	public String login(HttpServletRequest request, Model model, HttpSession session){
-		String email = (String)request.getParameter("email");
-		String password = (String)request.getParameter("password");
-		System.out.println("email : " + email + ", password : " + password);
-		UserVO user = userService.login(new UserVO(email, password));
+	public String login(UserVO userVO, Model model, HttpSession session){
+		UserVO user = userService.login(userVO); 
 		if(user == null){
 			model.addAttribute("msg", "아이디 또는 패스워드가 잘못되었습니다.");
+			System.out.println("아이디 또는 패스워드가 잘못되었습니다.");
 			return "redirect:/";
-		} 
-		System.out.println(user);
-		model.addAttribute("loginUser", user);
+		} else {
+			System.out.println("로그인 성공");
+		}
+		model.addAttribute("user", user);
 		return "redirect:/";
 	}
+	/*@RequestMapping(value="/login.cr", method=RequestMethod.POST)
+	public String login(HttpServletRequest request, UserVO userVO, Model model, HttpSession session){
+		String loginType = request.getParameter("loginType");
+		System.out.println("로그인 타입 : "+loginType);
+		UserVO user = null;
+		OwnerVO owner = null;
+		String email = userVO.getEmail();
+		String password = userVO.getPassword();
+		if(loginType != null){
+			owner = OwnerService.login(new OwnerVO(email, password));
+			model.addAttribute("user", owner);
+		} else {
+			user = userService.login(userVO); 
+			model.addAttribute("user", user);
+		}
+		if(user == null && owner == null){
+			model.addAttribute("msg", "아이디 또는 패스워드가 잘못되었습니다.");
+			System.out.println("아이디 또는 패스워드가 잘못되었습니다.");
+		} else {
+			System.out.println("로그인 성공");
+		}
+		return "redirect:/";
+	}*/
 	@RequestMapping("/logout.cr")
-	public String logout(SessionStatus sessionStatus){
+	public String logout(HttpSession session, SessionStatus sessionStatus){
+		UserVO user = (UserVO) session.getAttribute("user");
+		System.out.println("로그아웃 정보" + user);
 		sessionStatus.setComplete();
 		return "redirect:/";
 	}

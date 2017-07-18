@@ -9,12 +9,29 @@ public class OwnerVO {
 
 	private String name;
 
-	private Integer phone;
+	private String phone;
 
 	// 사업자등록번호
-	private Integer crn;
+	private String crn;
 
 	private String regDate;
+
+	public OwnerVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public OwnerVO(String email, String password) {
+		this.email = email;
+		this.password = password;
+	}
+
+	public OwnerVO(String email, String password, String name, String phone, String crn) {
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.crn = crn;
+	}
 
 	public Integer getNo() {
 		return no;
@@ -48,19 +65,23 @@ public class OwnerVO {
 		this.name = name;
 	}
 
-	public Integer getPhone() {
+	
+
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
-	public Integer getCrn() {
+	
+
+	public String getCrn() {
 		return crn;
 	}
 
-	public void setCrn(Integer crn) {
+	public void setCrn(String crn) {
 		this.crn = crn;
 	}
 
