@@ -1,6 +1,8 @@
 package kr.co.bit.cr.hotel;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,12 +78,23 @@ public class HotelService {
 	 */
 	public List<HotelVO> hotelList(int cityNo, String startDate, String endDate, int personNo){
 		
-		//1지역번호로 호텔이랑 방조회해서 호텔세팅
+		//1.지역번호로 호텔이랑 방조회해서 호텔세팅
+		//원래 조인으로 해야댐ㅠ
 		List<HotelVO> list = hDao.selectHotelByCno(cityNo);
+		Map<Integer, Integer> roomCount = new HashMap<>();
 		for(HotelVO hotel : list){
-			List<RoomVO> rooms = rDao.selectRoomByHno(hotel.getNo());
+			int hotelNo = hotel.getNo();
+			List<RoomVO> rooms = rDao.selectRoomByHno(hotelNo);
 			hotel.setRooms(rooms);
+			roomCount.put(hotelNo, rooms.size());
 		}
+		
+		//2.호텔의 룸 카운트를세서 예약+룸 카운트가 그것보다 작으면 남는방이 있는거니까 보여준다.
+		Map<Integer, Integer> joinMap = rDao.joinRoomAndBooking();
+		
+		//반복문 돌려서 호텔과 방개수비교
+		
+		//남은 결과 조회해서 리턴
 		
 		return null;
 	}

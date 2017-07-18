@@ -26,4 +26,9 @@
 	<delete id="deleteRoomByNo" parameterType="room">
 		delete from room where no=#{no}
 	</delete>
+	
+	<select id="joinRoomAndBooking" resultType="hashmap">
+		select r.hotel_no as hotelNo, count(*) as roomCount
+		 from room as r and booking as b join r.no = b.room_no
+	</select>
 </mapper>
