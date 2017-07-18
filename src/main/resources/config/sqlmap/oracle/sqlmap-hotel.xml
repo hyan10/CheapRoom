@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hotel.dao.HotelDAO">
+	<sql id="select">
+		select no, owner_no as ownerNo, city_no as cityNo, name, blind, tel, parking, wifi, smoking, pool, bbq, 
+		description, checkin, checkout, addr, to_char(reg_date,'yyyy-mm-dd') as regDate
+		from hotel
+	</sql>
+	
+	<select id="selectAll">
+		<include refid="select"/>
+		
+	</select>
+	
+	<select id="selectHotelByNo" parameterType="int" resultType="hotel">
+		<include refid="select"/>
+		 where no=#{no}
+		
+	</select>
+	
+	<insert id="registerHotel" parameterType="hotel">
+		INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, bbq, 
+		 description, checkin, checkout, addr, reg_date) 
+		 VALUES (hotel_seq.nextval , #{ownerNo}, #{cityNo}, #{name}, #{blind}, #{tel},
+		  #{parking}, #{wifi}, #{smoking}, #{pool}, #{bbq}, #{description}, #{checkin},#{checkout},#{addr} ,sysdate)
+	</insert>
+	
+	<update id="updateHotel" parameterType="hotel">
+		update hotel set owner_no=#{ownerNo}, city_no=#{cityNo}, name=#{name}, blind=#{blind}, tel=#{tel}, parking=#{parking}, wifi=#{wifi}, 
+		smoking= #{smoking}, pool=#{pool}, bbq=#{bbq}, description=#{description}, checkin=#{checkin}, checkout=#{checkout}, addr=#{addr}, reg_date=sysdate
+		 where no=#{no}
+	</update>
+	
+	<delete id="deleteHotelByNo" parameterType="hotel">
+		delete from hotel where no=#{no}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="booking.BookingDAO">
+	
+	<sql id="selectAll">
+		select *
+		from booking
+	</sql>
+	
+	<!-- 예약 조회 select 공통 쿼리 -->
+	<sql id="selectList">
+		select b.no as no, b.user_no as userNo, h.no as hotelNo, r.no as roomNo,
+				h.name as hotelName, r.name as roomName,
+				to_char(start_date, 'yyyy-mm-dd') as startDate, to_char(end_date, 'yyyy-mm-dd') as endDate,
+				total_person as totalPerson, total_price as totalPrice,
+				card_type as cardType, card_no as cardNo, card_date as cardDate,
+				user_name as userName, user_email as userEmail, user_phone as userPhone,
+				to_char(b.reg_date, 'yyyy-mm-dd') as regDate
+		from booking b join hotel h on (b.hotel_no=h.no) join room r on (h.no=r.hotel_no)
+	</sql>
+	
+	<!-- 예약 추가/수정 시 values 부분 공통 쿼리 -->
+	<sql id="insertValue">
+		<!-- insert into booking (no, user_no, hotel_no, room_no, start_date, end_date,
+					total_person, total_price, card_type, card_no, card_date,
+					reg_date, user_name, user_email, user_phone) -->
+		(booking_SEQ.nextval, #{userNo}, #{hotelNo}, #{roomNo},
+		#{startDate}, #{endDate}, #{totalPerson},#{totalPrice},
+		#{cardType},#{cardNo},#{cardDate}, sysdate,
+		#{userName},#{userEmail},#{userPhone})
+	</sql>
+
+	<!-- 예약 history 추가 시 values 부분 공통 쿼리 -->
+	<sql id="insertHistoryValue">
+		<!-- insert into booking_history (no, user_no, hotel_no, room_no, type, start_date, end_date,
+					total_person, total_price, card_type, card_no, card_date,
+					reg_date, user_name, user_email, user_phone) -->
+		(#{no}, #{userNo}, #{hotelNo}, #{roomNo}, #{type},
+		#{startDate}, #{endDate}, #{totalPerson},#{totalPrice},
+		#{cardType},#{cardNo},#{cardDate}, sysdate,
+		#{userName},#{userEmail},#{userPhone})
+	</sql>
+	
+	
+	<!-- 유저의 예약 현황 조회 -->
+	<select id="selectByUser" parameterType="int" resultType="booking">
+		<include refid="selectList"/>
+		where user_no = #{no}
+	</select>
+
+	<!-- 사업자의 예약 현황 조회 -->
+	<select id="selectByOwner" parameterType="int" resultType="booking">
+		<include refid="selectList"/>
+		where owner_no = #{no}
+	</select>
+	
+	<!-- 예약 추가 -->
+	<insert id="insertBook" parameterType="booking">
+		insert into booking values
+			<include refid="insertValue"/>
+	</insert>
+	
+	<!-- 예약 정보 변경 -->
+	<update id="updateBook" parameterType="booking">
+		update booking
+		<set> <!-- set comma는 뒤에  -->
+			<if test="userName!=null">
+				user_name = #{userName},
+			</if>
+	 		<if test="userEmail!=null">
+				user_email = #{userEmail},
+			</if>
+			<if test="userPhone!=null">
+				user_phone = #{userPhone}
+			</if>
+		</set>
+		where no = #{no}
+	</update>
+	
+	<!-- 예약 history로 이동 -->
+	<insert id="insertBookHistory" parameterType="booking">
+		insert into booking_history values
+		<include refid="insertHistoryValue"/>	
+	</insert>
+
+	<!-- 예약 완료 -->
+	<insert id="insertBookHistoryComplete" parameterType="booking">
+		insert into booking_history values
+		<include refid="insertHistoryValue"/>	
+	</insert>
+	
+	<!-- 예약 취소 - history 추가 후 delete -->
+	<insert id="insertBookHistoryCancle" parameterType="booking">
+		insert into booking_history values
+		<include refid="insertHistoryValue"/>
+	</insert>
+	
+	<delete id="deleteBook" parameterType="int">
+		delete from booking where no=#{no}
+	</delete>
+	
+	<!-- 통계 (월별 예약 건수, 수익) -->
+<!-- 	select count(*), sum(total_price)
+	from
+	((select b.total_price as total_price
+	from booking b
+	where b.hotel_no in (select no
+						from hotel h
+						where h.owner_no=1)
+		and trunc(b.start_date, 'MM') = trunc(sysdate, 'MM'))
+	union
+	(select bh.total_price as total_price
+	from booking_history bh
+	where bh.hotel_no in (select no
+						from hotel h
+						where h.owner_no=1)
+		and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM'))) -->
+	<select id="selectChartByOwner" parameterType="int" resultType="kr.co.bit.cr.chart.ChartVO">
+		select count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson, to_char(sysdate,'MM') as month, h.name as hotelName
+		from (
+			(select b.total_price as total_price, total_person, hotel_no
+			from booking b
+			where b.hotel_no in (select no
+								from hotel h
+								where h.owner_no=#{no})
+				and trunc(b.start_date, 'MM') = trunc(sysdate, 'MM'))
+			union
+			(select bh.total_price as total_price, total_person, hotel_no
+			from booking_history bh
+			where bh.hotel_no in (select no
+								from hotel h
+								where h.owner_no=#{no})
+				and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM'))) u, hotel h
+		where u.hotel_no = h.no
+	 	group by h.name
+		
+	</select>
+	
+</mapper>
