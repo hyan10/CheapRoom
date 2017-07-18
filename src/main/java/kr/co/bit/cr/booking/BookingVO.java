@@ -3,47 +3,98 @@ package kr.co.bit.cr.booking;
 public class BookingVO {
 
 	private Integer no;
-
     private Integer userNo;
-
     private Integer hotelNo;
-
     private Integer roomNo;
-
     //  체크인 날짜
     private String startDate;
-
     //  체크아웃 날짜
     private String endDate;
-
     //  예약 인원
     private Integer totalPerson;
-
     private Integer totalPrice;
-
     //  카드 종류
     private String cardType;
-
-    private Integer cardNo;
-
+    private String cardNo;
     private String cardDate;
-
     //  예약 날짜
     private String regDate;
-
     //  예약 유저 이름
     private String userName;
-
     //  예약 유저 이메일
     private String userEmail;
-
     //  예약 유저 번호
     private String userPhone;
-    
+    //	호텔 이름
+    private String hotelName; 
+    //	방 이름
+    private String roomName;
+    // 처리 완료 여부 (Y/N)
+    private char type;
+
     
 
+	public BookingVO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	// 예약 추가용 - 입력받은 정보 디비 추가
+	public BookingVO(Integer userNo, Integer hotelNo, Integer roomNo, String startDate, String endDate,
+			Integer totalPerson, Integer totalPrice, String cardType, String cardNo, String cardDate, String userName,
+			String userEmail, String userPhone) {
+		super();
+		this.userNo = userNo;
+		this.hotelNo = hotelNo;
+		this.roomNo = roomNo;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.totalPerson = totalPerson;
+		this.totalPrice = totalPrice;
+		this.cardType = cardType;
+		this.cardNo = cardNo;
+		this.cardDate = cardDate;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+	}
+
+	// 예약 수정용 ver1
+		public BookingVO(Integer no, String userName,
+				String userEmail, String userPhone) {
+			super();
+			this.no = no;
+			this.userName = userName;
+			this.userEmail = userEmail;
+			this.userPhone = userPhone;
+		}
+
 	public BookingVO(Integer no, Integer userNo, Integer hotelNo, Integer roomNo, String startDate, String endDate,
-			Integer totalPerson, Integer totalPrice, String cardType, Integer cardNo, String cardDate, String regDate,
+			Integer totalPerson, Integer totalPrice, String cardType, String cardNo, String cardDate, String regDate,
+			String userName, String userEmail, String userPhone, String hotelName, String roomName, char type) {
+		super();
+		this.no = no;
+		this.userNo = userNo;
+		this.hotelNo = hotelNo;
+		this.roomNo = roomNo;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.totalPerson = totalPerson;
+		this.totalPrice = totalPrice;
+		this.cardType = cardType;
+		this.cardNo = cardNo;
+		this.cardDate = cardDate;
+		this.regDate = regDate;
+		this.userName = userName;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.hotelName = hotelName;
+		this.roomName = roomName;
+		this.type = type;
+	}
+
+	public BookingVO(Integer no, Integer userNo, Integer hotelNo, Integer roomNo, String startDate, String endDate,
+			Integer totalPerson, Integer totalPrice, String cardType, String cardNo, String cardDate, String regDate,
 			String userName, String userEmail, String userPhone) {
 		super();
 		this.no = no;
@@ -135,11 +186,11 @@ public class BookingVO {
 		this.cardType = cardType;
 	}
 
-	public Integer getCardNo() {
+	public String getCardNo() {
 		return cardNo;
 	}
 
-	public void setCardNo(Integer cardNo) {
+	public void setCardNo(String cardNo) {
 		this.cardNo = cardNo;
 	}
 
@@ -181,6 +232,30 @@ public class BookingVO {
 
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
+	}
+	
+	public String getHotelName() {
+		return hotelName;
+	}
+
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
+	public char getType() {
+		return type;
+	}
+
+	public void setType(char type) {
+		this.type = type;
 	}
 
 	@Override
