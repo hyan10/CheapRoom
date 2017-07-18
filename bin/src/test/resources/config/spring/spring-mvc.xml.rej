@@ -1,0 +1,9 @@
+diff a/src/test/resources/config/spring/spring-mvc.xml b/src/test/resources/config/spring/spring-mvc.xml	(rejected hunks)
+@@ -0,6 +0,7 @@
+ 		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
+ 	</mvc:view-resolvers>
+ 	
++<<<<<<< HEAD:src/test/resources/config/spring/spring-mvc.xml
+ <!-- 	<mvc:view-controller path="/file/uploadForm.do"	view-name="file/fileUploadForm"/>
+ =======
+ 	<!-- <mvc:view-controller path="/file/uploadForm.do"	view-name="file/fileUploadForm"/>

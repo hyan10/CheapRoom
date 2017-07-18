@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd" >
+    
+    
+    <!-- DB 바꿀부분 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    		destroy-method="close">
+    		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+    		<property name="url" value="jdbc:oracle:thin:@121.138.83.21:1523:xe"/>
+    		<property name="username" value="hr"/>
+    		<property name="password" value="hr"/>
+    </bean>
+    
+    <bean id="sqlSessionFactory"
+    	class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="dataSource" ref="dataSource"/>
+    	<property name="configLocation"	value="classpath:config/mybatis/sqlMapConfig.xml"/>
+    	<property name="mapperLocations" value="classpath:config/sqlmap/oracle/*.xml"/>
+   	</bean>
+   	
+   	<bean id="sqlSessionTemplate"
+   			class="org.mybatis.spring.SqlSessionTemplate">
+   		<constructor-arg ref="sqlSessionFactory"/>
+   	</bean>
+   	
+   	<!-- 트랜잭션 -->
+   	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+   		<property name="dataSource" ref="dataSource"/> <!-- DB 접근하려고 써줌 -->
+   	</bean>
+   	
+   	<tx:annotation-driven/>
+    
+	<context:component-scan base-package="kr.co.bit.cr" />
+    
+    <mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+						<value>application/json; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+
+    </mvc:annotation-driven>
+
+	<mvc:default-servlet-handler />
+	
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 최대 업로드 파일 사이즈: 10MB -->
+		<property name="maxUploadSize" value="10485760"/>	
+	</bean>
+	
+	
+	<!-- 앞에 ~/jsp/ 까지 붙이겠다. -->
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/jsp/" suffix=".jsp" />
+	</mvc:view-resolvers>
+	
+	<!-- <mvc:view-controller path="/file/uploadForm.do"	view-name="file/fileUploadForm"/>
+	<mvc:view-controller path="/include/footer.do" view-name="include/bottom"/> -->
+</beans>

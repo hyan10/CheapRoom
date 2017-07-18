@@ -12,9 +12,13 @@ public class HotelController {
 	private HotelService service;
 	
 	//호텔 + 방 같이 등록
-	@RequestMapping("/registerHotel.cr")
-	public void addHotel(HotelVO hotel){
+	@RequestMapping("/register.cr")
+	public String registerHotel(HotelVO hotel){
 		
+		if(service.registerHotel(hotel)==1){
+			return "redirect:/owner/info.cr";
+		}
+		return "hotel/register";	//실패시 메세지띄우고 입력폼유지
 	}
 	//검색 : 지역 번호, 체크인, 체크아웃 날짜, 인원수 
 	//
@@ -34,10 +38,21 @@ public class HotelController {
 		//1. 쿠키 가져와서 시작날짜 - 끝나는날짜 검색
 		//Booking Table 예약기간이랑 겹치지 않는 거 가져오기 
 	}
-	//호텔 + 방 같이 수정
+	//호텔 + 방 + 사진 같이 수정
 	@RequestMapping("/updateHotel.cr")
-	public void updateHotel(){
-		
+	public String updateHotel(HotelVO hotel){
+		if(service.updateHotel(hotel)==1){
+			return "redirect:/";
+		}
+		return "";
+	}
+	//호텔삭제
+	@RequestMapping("/deleteHotel.cr")
+	public String deleteHotel(HotelVO hotel){
+		if(service.deleteHotel(hotel)==1){
+			return "redirect:/";
+		}
+		return "";
 	}
 	
 }
