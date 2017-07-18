@@ -43,5 +43,6 @@ public class BookingController {
 		mav.setViewName("booking/bookingList");
 		return mav;
 	}
+	
 
 }

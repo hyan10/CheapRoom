@@ -9,9 +9,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import kr.co.bit.cr.booking.BookingVO;
+import kr.co.bit.cr.chart.ChartVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:config/**/*.xml" }) // ** 하위폴더 모두
@@ -78,5 +78,12 @@ public class BookingTest {
 		booking.setType('N');
 		sqlSessionTemplate.insert("booking.BookingDAO.insertBookHistory", booking);
 		System.out.println(sqlSessionTemplate.delete("booking.BookingDAO.deleteBook", booking.getNo()));
+	}
+	
+	// 사업자별 통계
+	@Test
+	public void 사업자통계() throws Exception{
+		ChartVO chart = sqlSessionTemplate.selectOne("booking.BookingDAO.selectChartByOwner", 1);
+		System.out.println(chart);
 	}
 }

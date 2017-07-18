@@ -101,4 +101,41 @@
 		delete from booking where no=#{no}
 	</delete>
 	
+	<!-- 통계 (월별 예약 건수, 수익) -->
+<!-- 	select count(*), sum(total_price)
+	from
+	((select b.total_price as total_price
+	from booking b
+	where b.hotel_no in (select no
+						from hotel h
+						where h.owner_no=1)
+		and trunc(b.start_date, 'MM') = trunc(sysdate, 'MM'))
+	union
+	(select bh.total_price as total_price
+	from booking_history bh
+	where bh.hotel_no in (select no
+						from hotel h
+						where h.owner_no=1)
+		and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM'))) -->
+	<select id="selectChartByOwner" parameterType="int" resultType="kr.co.bit.cr.chart.ChartVO">
+		select count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson, to_char(sysdate,'MM') as month, h.name as hotelName
+		from (
+			(select b.total_price as total_price, total_person, hotel_no
+			from booking b
+			where b.hotel_no in (select no
+								from hotel h
+								where h.owner_no=#{no})
+				and trunc(b.start_date, 'MM') = trunc(sysdate, 'MM'))
+			union
+			(select bh.total_price as total_price, total_person, hotel_no
+			from booking_history bh
+			where bh.hotel_no in (select no
+								from hotel h
+								where h.owner_no=#{no})
+				and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM'))) u, hotel h
+		where u.hotel_no = h.no
+	 	group by h.name
+		
+	</select>
+	
 </mapper>

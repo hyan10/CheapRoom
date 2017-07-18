@@ -29,4 +29,41 @@ insert into booking values (booking_seq.nextval, 1, 1, 1, '2017-07-20', '2017-07
 								'BC', 12345678, '10/20', sysdate, '첫테스트', 'abc@abc.com', '010-1234-5678')
 								
 
-update booking set user_name = 'test' where no=8
+update booking set user_name = 'test' where no=5
+
+
+<!-- 월별 통계 -->
+
+
+select *
+from hotel h, booking b --, booking_history bh
+where h.owner_no=1 and h.no=b.hotel_no
+
+select *
+from booking b
+where hotel_no=1
+
+select *
+from booking_history bh
+where hotel_no=1
+
+select trunc(sysdate, 'MM') from dual)
+
+select count(*), sum(total_price), sum(total_person), h.name
+from
+((select b.total_price as total_price, total_person, hotel_no
+from booking b
+where b.hotel_no in (select no
+					from hotel h
+					where h.owner_no=1)
+	and trunc(b.start_date, 'MM') = trunc(sysdate, 'MM'))
+union
+(select bh.total_price as total_price, total_person, hotel_no
+from booking_history bh
+where bh.hotel_no in (select no
+					from hotel h
+					where h.owner_no=1)
+	and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM'))) u, hotel h
+where u.hotel_no = h.no
+group by h.name
+	
