@@ -157,7 +157,7 @@ public class HotelTest {
 		System.out.println(cnt);
 	}
 //	@Transactional
-	@Test
+	//@Test
 	public void 호텔조인테스트() throws Exception{
 		System.out.println("호텔 조인 테스트");
 		Map<Integer,Integer> map;
@@ -210,5 +210,20 @@ public class HotelTest {
 	    	System.out.println(hotel);
 	    }
 	    System.out.println("테스트끝");
+	}
+	@Test
+	public void 날짜파싱테스트() throws Exception{
+		System.out.println("날짜파싱테스트");
+		String date = "2017-01-02 - 2017-03-04";
+		String startDate;
+		String endDate;
+		//date.trim();
+		String a = date.replaceAll(" ", "");
+		startDate = a.substring(0, 10);
+		endDate =  a.substring(11);
+		System.out.println(a);
+		System.out.println(startDate);
+		System.out.println(endDate);
+	
 	}
 }
