@@ -75,15 +75,27 @@ public class BookingTest {
 		booking = new BookingVO(1, 1, 1, "2017-07-20", "2017-07-22", 3, 100000,
 				"BC", "12345678", "10/20", "첫테스트", "test@gamil.com", "010-2222-1123");
 		booking.setNo(5);
-		booking.setType('N');
+		booking.setType("N");
 		sqlSessionTemplate.insert("booking.BookingDAO.insertBookHistory", booking);
 		System.out.println(sqlSessionTemplate.delete("booking.BookingDAO.deleteBook", booking.getNo()));
 	}
 	
 	// 사업자별 통계
-	@Test
 	public void 사업자통계() throws Exception{
 		ChartVO chart = sqlSessionTemplate.selectOne("booking.BookingDAO.selectChartByOwner", 1);
 		System.out.println(chart);
 	}
+	
+	
+	// 유저 지난 예약 내역, 사업자 지난 예약 내역
+	public void 지난내역() throws Exception{
+		List<BookingVO> list = sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryByUser", 1);
+		System.out.println(list);
+		
+		list = sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryByOwner", 1);
+		System.out.println(list);
+		
+	}
+	
+	
 }

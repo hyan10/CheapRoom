@@ -28,4 +28,19 @@ public class BookingService {
 		public List<BookingVO> userBookingList(int userNo) {
 			return dao.selectByUser(userNo);
 		}
+		
+		// 사업자 예약 조회
+		public List<BookingVO> ownerBookingList(int ownerNo){
+			return dao.selectByOwner(ownerNo);
+		}
+		
+		// 유저 이전 예약 내역 조회
+		public List<BookingVO> userBookingHistoryList(int userNo){
+			return dao.selectHistoryByUser(userNo);
+		}
+		
+		// 사업자 이전 예약 내역 조회
+		public List<BookingVO> ownerBookingHistoryList(int ownerNo){
+			return dao.selectHistoryByOwner(ownerNo);
+		}
 }

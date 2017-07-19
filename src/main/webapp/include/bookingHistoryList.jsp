@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="/dist/bootsnipp.min.css">
 </head>
 <body>
-	<table class="table table-striped">
+	<table class="table table-striped" style="width:80%; margin:auto">
      <thead>
         <tr class="row-name">
            <!-- <th style="width:12%">Check/UnCheck</th> -->
@@ -34,7 +34,6 @@
            <th>체크아웃날짜</th>
            <th>인원</th>
            <th>요금</th>
-           <th>Settings</th>
         </tr>
      </thead>   
      <tbody>
@@ -42,22 +41,18 @@
      <c:forEach var="booking" items="${bookingList}">
         <tr class="row-content">
            <!-- <td class="check" "> <label><input type="checkbox" value=""></label></td> -->
-           <td> <span class="label label-default"> New <i class="fa fa-thumbs-up"></i></span></td>
+           <td> <span class="label label-default">
+           <c:choose>
+	           <c:when test="${booking.type}=='N'">취소</c:when>
+	           <c:otherwise>완료<i class="fa fa-thumbs-up"></i></c:otherwise>
+           </c:choose>
+           </span></td>
            <td>${booking.hotelName}</td>
            <td>${booking.roomName}</td>
            <td>${booking.startDate}</td>
            <td>${booking.endDate}</td>
            <td>${booking.totalPerson }</td>
            <td>${booking.totalPrice }</td>
-           <td>
-              <a class="btn btn-danger edit" href="path/to/settings" aria-label="Settings">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-              </a>
-              &nbsp 
-              <a class="btn btn-info edit" href="path/to/settings" aria-label="Settings">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              </a> 
-           </td>
         </tr>
      </c:forEach>
      </tbody>

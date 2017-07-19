@@ -34,15 +34,42 @@ public class BookingController {
 	}
 	
 	// 유저 예약 조회
-	@RequestMapping("/bookingList.cr")
+/*	@RequestMapping("/bookingList.cr")
 	public ModelAndView userBookingList(){
 		List<BookingVO> list = service.userBookingList(1);
 		System.out.println(list);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("bookingList",list);
-		mav.setViewName("booking/bookingList");
+		mav.setViewName("struct");
 		return mav;
-	}
+	}*/
 	
 
+	@RequestMapping("/test.cr")
+	public ModelAndView test(){
+		
+		// bookingList
+		List<BookingVO> bookingList = service.userBookingList(1);
+		System.out.println(bookingList);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bookingList",bookingList);
+		mav.setViewName("user/bookingList");
+
+		
+		return mav;
+	}
+
+	@RequestMapping("/testHistory.cr")
+	public ModelAndView test1(){
+		
+		// bookingHistoryList
+		List<BookingVO> bookingList = service.userBookingHistoryList(1);
+		System.out.println(bookingList);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bookingList",bookingList);
+		mav.setViewName("user/bookingHistoryList");
+		
+		
+		return mav;
+	}
 }

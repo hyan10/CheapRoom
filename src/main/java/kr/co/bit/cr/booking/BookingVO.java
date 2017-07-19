@@ -30,7 +30,7 @@ public class BookingVO {
     //	방 이름
     private String roomName;
     // 처리 완료 여부 (Y/N)
-    private char type;
+    private String type;
 
     
 
@@ -71,7 +71,7 @@ public class BookingVO {
 
 	public BookingVO(Integer no, Integer userNo, Integer hotelNo, Integer roomNo, String startDate, String endDate,
 			Integer totalPerson, Integer totalPrice, String cardType, String cardNo, String cardDate, String regDate,
-			String userName, String userEmail, String userPhone, String hotelName, String roomName, char type) {
+			String userName, String userEmail, String userPhone, String hotelName, String roomName, String type) {
 		super();
 		this.no = no;
 		this.userNo = userNo;
@@ -250,11 +250,11 @@ public class BookingVO {
 		this.roomName = roomName;
 	}
 
-	public char getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(char type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

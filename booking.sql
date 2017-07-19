@@ -66,4 +66,14 @@ where bh.hotel_no in (select no
 	and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM'))) u, hotel h
 where u.hotel_no = h.no
 group by h.name
-	
+
+
+select b.no as no, b.type as type, b.user_no as userNo, h.no as hotelNo, r.no as roomNo,
+		h.name as hotelName, r.name as roomName,
+		to_char(start_date, 'yyyy-mm-dd') as startDate, to_char(end_date, 'yyyy-mm-dd') as endDate,
+		total_person as totalPerson, total_price as totalPrice,
+		card_type as cardType, card_no as cardNo, card_date as cardDate,
+		user_name as userName, user_email as userEmail, user_phone as userPhone,
+		to_char(b.reg_date, 'yyyy-mm-dd') as regDate
+from booking_history b join hotel h on (b.hotel_no=h.no) join room r on (h.no=r.hotel_no)
+where user_no=1

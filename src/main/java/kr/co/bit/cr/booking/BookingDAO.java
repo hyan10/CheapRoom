@@ -38,4 +38,22 @@ public class BookingDAO {
 		System.out.println(sqlSessionTemplate);
 		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByUser",userNo);
 	}
+
+	// 사업자 예약 조회
+	public List<BookingVO> selectByOwner(int ownerNo) {
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByOwner", ownerNo);
+	}
+
+	// 유저 지난 예약 내역 조회
+	public List<BookingVO> selectHistoryByUser(int userNo) {
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryByUser", userNo);
+	}
+	
+	// 사업자 지난 예약 내역 조회
+	public List<BookingVO> selectHistoryByOwner(int ownerNo) {
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryByOwner", ownerNo);
+	}
+	
+	
+	
 }
