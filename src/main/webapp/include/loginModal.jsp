@@ -25,7 +25,9 @@
 						</div>
 						<input id="email" name="email" class="form-control" type="text" placeholder="이메일" required> 
 						<input id="password" name="password" class="form-control" type="password" placeholder="비밀번호" required>
-						<label>사업자 로그인 <input name="loginType" onclick="changeFormAction(this)" type="checkbox" value="${ pageContext.request.contextPath }/owner/login.cr"/></label>
+						<div class="checkbox">
+						<label><input name="loginType" onclick="changeFormAction(this)" type="checkbox" value="${ pageContext.request.contextPath }/owner/login.cr"/>사업자 로그인 </label>
+						</div>
 						<!-- <div class="checkbox">
 							<label> <input type="checkbox"> 아이디 저장
 							</label>

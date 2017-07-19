@@ -39,7 +39,7 @@ public class OwnerController {
 		return "redirect:/";
 	}
 	@RequestMapping("/login.cr")
-	public String login(OwnerVO ownerVO, Model model){
+	public String login(OwnerVO ownerVO, Model model, HttpSession session){
 		OwnerVO owner = ownerService.login(ownerVO);
 		if(owner == null){			
 			model.addAttribute("msg", "아이디 또는 패스워드가 잘못되었습니다.");
@@ -48,15 +48,20 @@ public class OwnerController {
 		} else {
 			System.out.println(owner + " 사업자 로그인 성공");
 		}
-		model.addAttribute("owner", owner);
-		return "redirect:/";
+		session.setAttribute("loginUser", owner);
+		///model.addAttribute("loginUser", owner);
+		return "redirect:/owner/ownerPage.cr";
 	}
-
+	@RequestMapping("/ownerPage.cr")
+	public String url(){
+		return "ownerPage";
+	}
 	@RequestMapping("/logout.cr")
 	public String logout(HttpSession session, SessionStatus sessionStatus){
-		OwnerVO owner = (OwnerVO) session.getAttribute("owner");
+		OwnerVO owner = (OwnerVO) session.getAttribute("loginUser");
 		System.out.println("로그아웃 정보" + owner);
-		sessionStatus.setComplete();
+		session.invalidate();
+		//sessionStatus.setComplete();
 		return "redirect:/";
 	}
 	@RequestMapping("/info.cr")
@@ -65,7 +70,6 @@ public class OwnerController {
 	}
 	@RequestMapping("/bookingList.cr")
 	public void ownerBookingList(){
-		
 	}
 	@RequestMapping("/bookingHistory.cr")
 	public void ownerBookingHistory(){
