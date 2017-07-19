@@ -1,6 +1,8 @@
 package kr.co.bit.cr.hotel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import kr.co.bit.cr.image.ImageDAO;
 import kr.co.bit.cr.room.RoomDAO;
 import kr.co.bit.cr.room.RoomVO;
+import kr.co.bit.cr.search.SearchVO;
 
 @Service
 public class HotelService {
@@ -76,30 +79,36 @@ public class HotelService {
 	 * 호텔 찾기
 	 * @return
 	 */
-	public List<HotelVO> hotelList(int cityNo, String startDate, String endDate, int personNo){
+	public List<HotelVO> hotelList(SearchVO search){
 		
 		//1.지역번호로 호텔이랑 방조회해서 호텔세팅
 		//원래 조인으로 해야댐ㅠ
-		List<HotelVO> list = hDao.selectHotelByCno(cityNo);
+		List<HotelVO> list = hDao.selectHotelByCno(search.getCityNo());
+		Map<Integer, HotelVO> fList = new HashMap<>();
 		Map<Integer, Integer> roomCount = new HashMap<>();
 		for(HotelVO hotel : list){
 			int hotelNo = hotel.getNo();
 			List<RoomVO> rooms = rDao.selectRoomByHno(hotelNo);
 			hotel.setRooms(rooms);
 			roomCount.put(hotelNo, rooms.size());
+			fList.put(hotelNo, hotel);
 		}
 		
 		//2.호텔의 룸 카운트를세서 예약+룸 카운트가 그것보다 작으면 남는방이 있는거니까 보여준다.
-		Map<Integer, Integer> joinMap = hDao.joinHotelAndBooking();
-		
-		//반복문 돌려서 호텔과 방개수비교
-		//select h.no, count(*) from hotel h join booking b on h.no=b.hotel_no 
-		//where (start_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) or 
-		//(end_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) group by h.no order by 1;
-		//return Map<int,int>
-		
+		Map<Integer, Integer> joinMap = hDao.joinHotelAndBooking(search);
+		List<HotelVO> resultList = new ArrayList<>();
+		Iterator<Integer> iterator = joinMap.keySet().iterator();
+	    while (iterator.hasNext()) {
+	    	int hotelNo = (Integer) iterator.next();
+	    	if(roomCount.get(hotelNo)!=null && joinMap.get(hotelNo)!=null){
+	    		if(roomCount.get(hotelNo)>joinMap.get(hotelNo)){
+	    			HotelVO h = fList.get(hotelNo);
+	    			resultList.add(h);
+	    		}
+	    	}
+	    }
+	    
 		//남은 결과 조회해서 리턴
-		
-		return null;
+		return resultList;
 	}
 }

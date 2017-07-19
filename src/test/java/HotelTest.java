@@ -12,7 +12,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.bit.cr.hotel.HotelDAO;
 import kr.co.bit.cr.hotel.HotelVO;
@@ -20,6 +19,7 @@ import kr.co.bit.cr.image.ImageDAO;
 import kr.co.bit.cr.image.ImageVO;
 import kr.co.bit.cr.room.RoomDAO;
 import kr.co.bit.cr.room.RoomVO;
+import kr.co.bit.cr.search.SearchVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:config/**/*.xml"})
@@ -160,29 +160,36 @@ public class HotelTest {
 	@Test
 	public void 호텔조인테스트() throws Exception{
 		System.out.println("호텔 조인 테스트");
-		Map<Integer,Integer> map; 
-		map = hDao.joinHotelAndBooking();
+		Map<Integer,Integer> map;
+		SearchVO search = new SearchVO();
+		search.setStartDate("2017-07-18");
+		search.setEndDate("2017-07-19");
+		search.setCityNo(1);
+		map = hDao.joinHotelAndBooking(search);
 		Iterator<Integer> iterator = map.keySet().iterator();
 	    while (iterator.hasNext()) {
 	    	int hotelNo = (Integer) iterator.next();
 	        System.out.print("hotelNo="+hotelNo);
 	        System.out.println(" value="+map.get(hotelNo));
 	    }
-	    
+	  
 	    System.out.println("호텔 방개수");
-	    List<HotelVO> list = hDao.selectHotelByCno(1);
+	    List<HotelVO> list = hDao.selectHotelByCno(search.getCityNo());
+	    Map<Integer, HotelVO> fList = new HashMap<>();
 		Map<Integer, Integer> roomCount = new HashMap<>();
 		for(HotelVO hotel : list){
 			int hotelNo = hotel.getNo();
 			List<RoomVO> rooms = rDao.selectRoomByHno(hotelNo);
 			hotel.setRooms(rooms);
 			roomCount.put(hotelNo, rooms.size());
+			fList.put(hotelNo, hotel);
 			System.out.println(hotel);
 		}
 		
 		//map=조인해서 가져온 맵, roomCount=도시번호로 조회한 호텔 룸카운트
 		//하나의 키셋을 가져와
 		//그거에 밸류와 다른 맵의 밸류를 비교
+		List<HotelVO> resultList = new ArrayList<>();
 		Iterator<Integer> iterator2 = map.keySet().iterator();
 	    while (iterator2.hasNext()) {
 	    	int hotelNo = (Integer) iterator2.next();
@@ -192,8 +199,15 @@ public class HotelTest {
 	    		if(roomCount.get(hotelNo)>map.get(hotelNo)){
 	    			System.out.println("보여줘");
 	    			System.out.println(hotelNo);
+	    			HotelVO h = fList.get(hotelNo);
+	    			System.out.println(h);
+	    			resultList.add(h);
+	    			
 	    		}
 	    	}
+	    }
+	    for(HotelVO hotel : resultList){
+	    	System.out.println(hotel);
 	    }
 	    System.out.println("테스트끝");
 	}

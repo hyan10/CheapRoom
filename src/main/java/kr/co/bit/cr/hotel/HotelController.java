@@ -7,9 +7,12 @@ import javax.servlet.http.Cookie;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import kr.co.bit.cr.search.SearchVO;
 
 @Controller
 @RequestMapping("/hotel")
@@ -29,18 +32,26 @@ public class HotelController {
 	//검색 : 지역 번호, 체크인, 체크아웃 날짜, 인원수 
 	//
 	@RequestMapping("/hotelList.cr")
-	public void hotelList(@CookieValue(value="city_no", required=false)Cookie cityNo, 
-						  @CookieValue(value="start_date",required=false)Cookie startDate,
-						  @CookieValue(value="end_date",required=false)Cookie endDate,
-						  @CookieValue(value="person_no",required=false)Cookie personNo){
+	public String hotelList(@CookieValue(value="city_no", required=true)Cookie cityNo, 
+						    @CookieValue(value="start_date",required=true)Cookie startDate,
+						    @CookieValue(value="end_date",required=true)Cookie endDate,
+						    @CookieValue(value="person_no",required=true)Cookie personNo,
+						    Model model){
 		//1. 쿠키에 input form 날라온 데이터 저장해주기
 		//2. 지역 번호로 호텔 검색하는데, 사람 인원수를 보여줘야하니까-> 호텔 방 조인해서 가능한 방이 한개 이상있으면 호텔 보여줘
 		//지역번호로 호텔조회함/ 호텔리스트에서 상세페이지 들어가면 룸이랑 부킹 확인해서 예약가능한 방 보여줌
 		
 		//지역 번호로 호텔 검색
 		List<HotelVO> list = new ArrayList<>();
-		list = service.hotelList(Integer.parseInt(cityNo.getValue()), startDate.getValue(), endDate.getValue(), Integer.parseInt(personNo.getValue()));
-		
+		SearchVO search = new SearchVO();
+		search.setCityNo(Integer.parseInt(cityNo.getValue()));
+		search.setStartDate(startDate.getValue());
+		search.setEndDate(endDate.getValue());
+		search.setPersonNo(Integer.parseInt(personNo.getValue()));
+		list = service.hotelList(search);
+		model.addAttribute("hotelList", list);
+
+		return "hotelList";
 	}
 		
 	@RequestMapping("/roomList.cr")

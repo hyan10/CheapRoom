@@ -12,6 +12,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.bit.cr.search.SearchVO;
+
 @Repository
 public class HotelDAO {
 	@Autowired
@@ -37,10 +39,10 @@ public class HotelDAO {
 		return sqlSession.selectList("hotel.dao.HotelDAO.selectHotelByCno", cNo);
 	}
 	
-	public Map<Integer, Integer> joinHotelAndBooking(){
+	public Map<Integer, Integer> joinHotelAndBooking(SearchVO search){
 		List<Map<String,Integer>> list = new ArrayList<>();
 		Map<Integer,Integer> resultMap = new HashMap<>();
-		list = sqlSession.selectList("hotel.dao.HotelDAO.joinHotelAndBooking");
+		list = sqlSession.selectList("hotel.dao.HotelDAO.joinHotelAndBooking",search);
 		System.out.println("list size: "+list.size());
 		for(Map<String,Integer> map : list){
 			//key hotelNo value count  roomCount = map.get(hotelNo)

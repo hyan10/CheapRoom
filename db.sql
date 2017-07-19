@@ -557,7 +557,8 @@ INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoki
 ////////////////////////////////////////////////
 select * from hotel where city_no=1
 select * from room
-select h.no, count(*) from hotel h join booking b on h.no=b.hotel_no where (start_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) or (end_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) group by h.no order by 1;
+select h.no, count(*) from hotel h join booking b on h.no=b.hotel_no where (start_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) or (end_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) and h.no=1 group by h.no order by 1;
+select h.no as hotelNo , count(*) as roomCount from hotel h join booking b on h.no=b.hotel_no where h.no=1 group by h.no
 select * from hotel h join booking b on h.no=b.hotel_no 
 group by h.no h rder by 1
 select * from image
