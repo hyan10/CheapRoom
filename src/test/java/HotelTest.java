@@ -1,5 +1,8 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -73,7 +76,7 @@ public class HotelTest {
 		System.out.println(cnt);
 		System.out.println(hotel);
 	}
-	@Test
+	//@Test
 	public void 호텔조회테스트() throws Exception{
 		System.out.println("호텔조회테스트");
 		HotelVO hotel = new HotelVO();
@@ -152,5 +155,46 @@ public class HotelTest {
 		int cnt=0;
 		cnt = hDao.deleteHotelByNo(hotel);
 		System.out.println(cnt);
+	}
+//	@Transactional
+	@Test
+	public void 호텔조인테스트() throws Exception{
+		System.out.println("호텔 조인 테스트");
+		Map<Integer,Integer> map; 
+		map = hDao.joinHotelAndBooking();
+		Iterator<Integer> iterator = map.keySet().iterator();
+	    while (iterator.hasNext()) {
+	    	int hotelNo = (Integer) iterator.next();
+	        System.out.print("hotelNo="+hotelNo);
+	        System.out.println(" value="+map.get(hotelNo));
+	    }
+	    
+	    System.out.println("호텔 방개수");
+	    List<HotelVO> list = hDao.selectHotelByCno(1);
+		Map<Integer, Integer> roomCount = new HashMap<>();
+		for(HotelVO hotel : list){
+			int hotelNo = hotel.getNo();
+			List<RoomVO> rooms = rDao.selectRoomByHno(hotelNo);
+			hotel.setRooms(rooms);
+			roomCount.put(hotelNo, rooms.size());
+			System.out.println(hotel);
+		}
+		
+		//map=조인해서 가져온 맵, roomCount=도시번호로 조회한 호텔 룸카운트
+		//하나의 키셋을 가져와
+		//그거에 밸류와 다른 맵의 밸류를 비교
+		Iterator<Integer> iterator2 = map.keySet().iterator();
+	    while (iterator2.hasNext()) {
+	    	int hotelNo = (Integer) iterator2.next();
+	    	if(roomCount.get(hotelNo)!=null && map.get(hotelNo)!=null){
+	    		System.out.println(roomCount.get(hotelNo));
+	    		System.out.println(map.get(hotelNo));
+	    		if(roomCount.get(hotelNo)>map.get(hotelNo)){
+	    			System.out.println("보여줘");
+	    			System.out.println(hotelNo);
+	    		}
+	    	}
+	    }
+	    System.out.println("테스트끝");
 	}
 }

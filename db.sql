@@ -555,9 +555,13 @@ INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoki
 INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 19, 19, 'name 19', 'N', 19, 'N', 'N', 'N', 'N', 'N', 'description 19', 'checkin 19', 'checkout 19', 'addr 19', sysdate);
 INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 20, 20, 'name 20', 'N', 20, 'N', 'N', 'N', 'N', 'N', 'description 20', 'checkin 20', 'checkout 20', 'addr 20', sysdate);
 ////////////////////////////////////////////////
-select * from hotel
+select * from hotel where city_no=1
 select * from room
+select h.no, count(*) from hotel h join booking b on h.no=b.hotel_no where (start_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) or (end_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) group by h.no order by 1;
+select * from hotel h join booking b on h.no=b.hotel_no 
+group by h.no h rder by 1
 select * from image
+select * from booking
 alter table hotel add(imgUrl varchar2(50))
 ////////////////////////////제약조건
 alter table review drop constraint fk_review_hotel_no_hotel_no;
@@ -572,3 +576,5 @@ alter table chart add constraint fk_chart_hotel_no_hotel_no foreign key(hotel_no
 alter table room add constraint fk_room_hotel_no_hotel_no foreign key(hotel_no) references hotel(no) on delete cascade; 
 alter table hotel add constraint fk_hotel_owner_no_owner_no foreign key(owner_no) references owner(no) on delete cascade; 
 alter table image add constraint fk_image_room_no_room_no foreign key(room_no) references room(no) on delete cascade; 
+select * from owner
+alter table owner add (type char(1) default 'O')

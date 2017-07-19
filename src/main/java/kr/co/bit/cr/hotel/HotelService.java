@@ -90,9 +90,13 @@ public class HotelService {
 		}
 		
 		//2.호텔의 룸 카운트를세서 예약+룸 카운트가 그것보다 작으면 남는방이 있는거니까 보여준다.
-		Map<Integer, Integer> joinMap = rDao.joinRoomAndBooking();
+		Map<Integer, Integer> joinMap = hDao.joinHotelAndBooking();
 		
 		//반복문 돌려서 호텔과 방개수비교
+		//select h.no, count(*) from hotel h join booking b on h.no=b.hotel_no 
+		//where (start_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) or 
+		//(end_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) group by h.no order by 1;
+		//return Map<int,int>
 		
 		//남은 결과 조회해서 리턴
 		
