@@ -5,7 +5,7 @@
 <mapper namespace="hotel.dao.HotelDAO">
 	<sql id="select">
 		select no, owner_no as ownerNo, city_no as cityNo, name, blind, tel, parking, wifi, smoking, pool, bbq, 
-		description, checkin, checkout, addr, to_char(reg_date,'yyyy-mm-dd') as regDate
+		description, checkin, checkout, addr, to_char(reg_date,'yyyy-mm-dd') as regDate, imgurl
 		from hotel
 	</sql>
 	
@@ -20,16 +20,29 @@
 		
 	</select>
 	
+	<select id="selectHotelByCno" parameterType="int" resultType="hotel">
+		<include refid="select"/>
+		 where city_no=#{no}
+		
+	</select>
+	
+	<select id="joinHotelAndBooking" parameterType="search" resultType="hashmap">
+		select h.no as hotelNo, count(*) as roomCount from hotel h join booking b on h.no=b.hotel_no 
+		where (start_date between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) or 
+		 (end_date between to_date('2017-07-18',#{startDate}) and to_date(#{endDate},'yyyy-mm-dd')) group by h.no order by 1
+
+	</select>
+		
 	<insert id="registerHotel" parameterType="hotel">
 		INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, bbq, 
-		 description, checkin, checkout, addr, reg_date) 
+		 description, checkin, checkout, addr, reg_date), imgurl 
 		 VALUES (hotel_seq.nextval , #{ownerNo}, #{cityNo}, #{name}, #{blind}, #{tel},
-		  #{parking}, #{wifi}, #{smoking}, #{pool}, #{bbq}, #{description}, #{checkin},#{checkout},#{addr} ,sysdate)
+		  #{parking}, #{wifi}, #{smoking}, #{pool}, #{bbq}, #{description}, #{checkin},#{checkout},#{addr} ,sysdate,#{imgurl})
 	</insert>
 	
 	<update id="updateHotel" parameterType="hotel">
 		update hotel set owner_no=#{ownerNo}, city_no=#{cityNo}, name=#{name}, blind=#{blind}, tel=#{tel}, parking=#{parking}, wifi=#{wifi}, 
-		smoking= #{smoking}, pool=#{pool}, bbq=#{bbq}, description=#{description}, checkin=#{checkin}, checkout=#{checkout}, addr=#{addr}, reg_date=sysdate
+		smoking= #{smoking}, pool=#{pool}, bbq=#{bbq}, description=#{description}, checkin=#{checkin}, checkout=#{checkout}, addr=#{addr}, reg_date=sysdate,#{imgurl}
 		 where no=#{no}
 	</update>
 	

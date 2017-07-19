@@ -111,4 +111,15 @@ public class HotelService {
 		//남은 결과 조회해서 리턴
 		return resultList;
 	}
+	
+	/**
+	 * 선택한 호텔+날짜로 호텔+룸 리턴
+	 * @param no
+	 * @param search
+	 * @return
+	 */
+	public HotelVO roomList(int no, SearchVO search){
+		
+		return null;
+	}
 }
