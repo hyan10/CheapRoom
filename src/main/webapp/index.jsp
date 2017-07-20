@@ -267,13 +267,13 @@
             $("form").submit(function () {
                 switch(this.id) {
                     case "login-form":
-                        var $lg_username=$('#login_username').val();
+                        /* var $lg_username=$('#login_username').val();
                         var $lg_password=$('#login_password').val();
                         if ($lg_username == "ERROR") {
                             msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "error", "glyphicon-remove", "Login error");
                         } else {
                             msgChange($('#div-login-msg'), $('#icon-login-msg'), $('#text-login-msg'), "success", "glyphicon-ok", "Login OK");
-                        }
+                        } */
                         return true;
                         break;
                     case "lost-form":
@@ -291,11 +291,11 @@
                         var $rg_password=$('#register_password').val();
                         var $rg_phone=$('#register_phone').val();
                        	alert($rg_phone + " " + $rf_username);
-                        if ($rg_username == "ERROR") {
+                        /* if ($rg_username == "ERROR") {
                             msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
                         } else {
                             msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
-                        }
+                        } */
                         return false;
                         break;
                     case "register-owner-form":
@@ -304,11 +304,11 @@
                         var $rg_password=$('#register_password').val();
                         var $rg_phone=$('#register_phone').val();
                        	alert($rg_phone + " " + $rf_username);
-                        if ($rg_username == "ERROR") {
+                        /* if ($rg_username == "ERROR") {
                             msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "error", "glyphicon-remove", "Register error");
                         } else {
                             msgChange($('#div-register-msg'), $('#icon-register-msg'), $('#text-register-msg'), "success", "glyphicon-ok", "Register OK");
-                        }
+                        } */
                         return false;
                         break;
                     default:

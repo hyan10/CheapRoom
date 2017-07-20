@@ -64,6 +64,14 @@ public class OwnerController {
 		//sessionStatus.setComplete();
 		return "redirect:/";
 	}
+	@RequestMapping("/enrollHotel.cr")
+	public String ownerEnrollHotel(){
+		return "registerHotel";
+	}
+	@RequestMapping("/hotelRegister.cr")
+	public String registerRoomView(){
+		return "registerRoom";
+	}
 	@RequestMapping("/info.cr")
 	public void ownerInfo(){
 		

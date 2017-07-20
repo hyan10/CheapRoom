@@ -50,7 +50,16 @@ public class UserVO {
 		this.phone = phone;
 		this.regDate = regDate;
 	}
-
+	
+	public UserVO(Integer no, String email, String type, String name, String phone, String regDate) {
+		super();
+		this.no = no;
+		this.email = email;
+		this.type = type;
+		this.name = name;
+		this.phone = phone;
+		this.regDate = regDate;
+	}
 	public Integer getNo() {
         return no;
     }

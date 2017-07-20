@@ -1,14 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>  
 <div class="col-sm-10">
 	<nav id="navigation" class="menu">
 		<ul id="">
 			<li><a href="ownerPage.jsp" id="current" class="border">내 사업정보</a>
 			</li>
 
-			<li><a href="#">예약</a>
-				
-			</li>
-
-			<li><a href="#">숙소 등록</a>
+			<li><a href="${ pageContext.request.contextPath }/owner/enrollHotel.cr">숙소 등록</a>
 				
 			</li>
 

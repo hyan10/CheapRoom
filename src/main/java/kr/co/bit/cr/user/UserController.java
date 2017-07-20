@@ -59,7 +59,8 @@ public class UserController {
 		} else {
 			System.out.println("로그인 성공 : " + user);
 		}
-		model.addAttribute("loginUser", user);
+//		model.addAttribute("loginUser", user);
+		session.setAttribute("loginUser", user);
 		return "search";
 	}
 	/*@RequestMapping(value="/login.cr", method=RequestMethod.POST)
@@ -86,10 +87,10 @@ public class UserController {
 		return "redirect:/";
 	}*/
 	@RequestMapping("/logout.cr")
-	public String logout(HttpSession session, SessionStatus sessionStatus){
-		UserVO user = (UserVO) session.getAttribute("user");
+	public String logout(HttpSession session){
+		UserVO user = (UserVO) session.getAttribute("loginUser");
 		System.out.println("로그아웃 정보" + user);
-		sessionStatus.setComplete();
+		session.invalidate();
 		return "redirect:/";
 	}
 	@RequestMapping("/info.cr")
@@ -100,7 +101,7 @@ public class UserController {
 		user = userService.info(user);
 		session.setAttribute("userInfo", user);
 		
-		return "myPage.jsp";
+		return "myPage";
 	}
 	@RequestMapping("/bookingList.cr")
 	public ModelAndView userBookingList(HttpSession session){
