@@ -3,20 +3,22 @@ package kr.co.bit.cr.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
 
 @Controller
@@ -26,16 +28,31 @@ public class HotelController {
 	private HotelService service;
 	
 	//호텔 + 방 같이 등록
-	@RequestMapping(value="/register.cr", method=RequestMethod.POST)
-	public String registerHotel(HotelVO hotel){
-		
+	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.GET)
+	public String registerHotelForm(){
+
+		return "hotelRegisterForm";	//실패시 메세지띄우고 입력폼유지
+	}
+	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.POST)
+	public String registerHotelForm(@ModelAttribute("hotel")HotelVO hotel){
+		System.out.println(hotel);
+		return "roomRegisterForm";
+	}
+
+	@RequestMapping(value="/roomRegister.cr", method=RequestMethod.POST)
+	public String registerRoomForm(List<RoomVO> rooms, HttpServletRequest request, MultipartHttpServletRequest mpsq){
+		for(RoomVO room : rooms){
+			System.out.println(room);
+		}
+		HotelVO hotel = (HotelVO)request.getAttribute("hotel");
+		System.out.println(hotel);
+		hotel.setRooms(rooms);
 		if(service.registerHotel(hotel)==1){
 			return "redirect:/owner/info.cr";
 		}
-		return "hotel/register";	//실패시 메세지띄우고 입력폼유지
+		return "redirect:/";
 	}
-	//검색 : 지역 번호, 체크인, 체크아웃 날짜, 인원수 
-	//
+	
 	@RequestMapping(value="/hotelList.cr", method=RequestMethod.GET)
 	public String hotelList(@ModelAttribute("search")SearchVO search, 
 							@RequestParam("dateRange")String daterange, Model model,
