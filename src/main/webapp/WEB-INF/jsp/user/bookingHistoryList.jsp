@@ -74,9 +74,10 @@
 </header>
 	<!--End Header-->
 	
-
-	<jsp:include page="/include/bookingHistoryList.jsp"/>
-
+	<section style="height:700px; margin-top:50px">
+		<jsp:include page="/include/bookingHistoryList.jsp"/>
+	</section>
+	
 	<!--start footer-->
 	<footer class="footer">
 		<jsp:include page="/include/footer.jsp"/>

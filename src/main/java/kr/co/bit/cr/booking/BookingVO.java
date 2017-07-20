@@ -39,6 +39,21 @@ public class BookingVO {
 	}
 	
 	
+	// 예약 방 정보 받아오기용	
+	public BookingVO(Integer hotelNo, Integer roomNo, String startDate, String endDate, Integer totalPerson,
+			Integer totalPrice, String hotelName, String roomName) {
+		super();
+		this.hotelNo = hotelNo;
+		this.roomNo = roomNo;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.totalPerson = totalPerson;
+		this.totalPrice = totalPrice;
+		this.hotelName = hotelName;
+		this.roomName = roomName;
+	}
+	
+	
 	// 예약 추가용 - 입력받은 정보 디비 추가
 	public BookingVO(Integer userNo, Integer hotelNo, Integer roomNo, String startDate, String endDate,
 			Integer totalPerson, Integer totalPrice, String cardType, String cardNo, String cardDate, String userName,

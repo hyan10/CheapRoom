@@ -53,6 +53,11 @@ public class BookingDAO {
 	public List<BookingVO> selectHistoryByOwner(int ownerNo) {
 		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryByOwner", ownerNo);
 	}
+
+	// 예약번호로 예약 내역 조회
+	public BookingVO selectByNo(int bookingNo) {
+		return sqlSessionTemplate.selectOne("booking.BookingDAO.selectBookByNo", bookingNo);
+	}
 	
 	
 	

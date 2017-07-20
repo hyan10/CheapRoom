@@ -43,4 +43,7 @@ public class BookingService {
 		public List<BookingVO> ownerBookingHistoryList(int ownerNo){
 			return dao.selectHistoryByOwner(ownerNo);
 		}
+		public BookingVO detailBook(int bookingNo) {
+			return dao.selectByNo(bookingNo);
+		}
 }

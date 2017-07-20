@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>예약</title>
+<title>예약 수정</title>
 <meta name="description" content="">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
@@ -88,7 +88,7 @@
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
 					<label for="userName">예약자 성명</label>
-						<input type="text" class="form-control" name="userName"
+						<input type="text" class="form-control" name="userName" value="${booking.userName}"
 							placeholder="예약자 성명" required autofocus />
 				</div>
 			</div>
@@ -98,7 +98,7 @@
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
 					<label for="userEmail">예약자 이메일</label>
-						<input type="text" class="form-control" name="userEmail"
+						<input type="text" class="form-control" name="userEmail" value="${booking.userEmail}"
 						placeholder="email@cheaproom.com" required />
 				</div>
 			</div>
@@ -108,7 +108,7 @@
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
 					<label for="userPhone">예약자 연락처</label>
-					<input type="text" class="form-control" name="userPhone" />
+					<input type="text" class="form-control" name="userPhone" value="${booking.userPhone}" />
 				</div>
 			</div>
 		</div>
@@ -174,15 +174,87 @@
 		
 		<!-- 결제 창 -->
 		<div style="margin:auto;">
-			<jsp:include page="/include/pay.jsp" />
+			<div class="container">
+				<div class="row">
+					<!-- You can make it whatever width you want. I'm making it full width
+		             on <= small devices and 4/12 page width on >= medium devices -->
+					<div class="col-xs-12 col-md-4">
+		
+						<!-- CREDIT CARD FORM STARTS HERE -->
+						<div class="panel panel-default credit-card-box">
+							<div class="panel-heading display-table">
+								<div class="row display-tr">
+									<!-- <h3 class="panel-title display-td">Payment Details</h3> -->
+									<div class="display-td">
+										<img class="img-responsive pull-right"
+											src="http://i76.imgup.net/accepted_c22e0.png">
+									</div>
+								</div>
+							</div>
+							<div class="panel-body">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group">
+												<label for="cardNumber">CARD NUMBER</label>
+												<div class="input-group">
+													<input type="tel" class="form-control" name="cardNumber"
+														placeholder="Valid Card Number" autocomplete="cc-number" readonly="readonly"
+														required autofocus value="${booking.cardNo }"/>
+													<span class="input-group-addon"><i
+														class="fa fa-credit-card"></i></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-7 col-md-7">
+											<div class="form-group">
+												<label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span
+													class="visible-xs-inline">EXP</span> DATE</label> <input type="tel"
+													class="form-control" name="cardExpiry" placeholder="MM / YY"  readonly="readonly"
+													autocomplete="cc-exp" required value="${booking.cardDate }"/>
+											</div>
+										</div>
+										<div class="col-xs-5 col-md-5 pull-right">
+											<div class="form-group">
+												<label for="cardCVC">Card Type</label> <input type="text"
+													class="form-control" name="cardType" readonly="readonly"
+													autocomplete="cc-csc" required value="${booking.cardType }"/>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<button disabled="disabled" class="subscribe btn btn-success btn-lg btn-block"
+												type="button">결제 완료</button>
+										</div>
+									</div>
+									<div class="row" style="display: none;">
+										<div class="col-xs-12">
+											<p class="payment-errors"></p>
+										</div>
+									</div>
+							</div>
+						</div>
+						<!-- CREDIT CARD FORM ENDS HERE -->
+		
+		
+					</div>
+		
+				</div>
+			</div>
 		</div>
 		
-		<!-- 예약 완료 버튼 -->
+		<!-- 수정 버튼 -->
 		<div class="row">
-			<div class="col-xs-3 col-md-3" style="float:right; margin-right:30px" >
+			<span class="col-xs-2 col-md-2" style="float:right; margin-right:10px" >
+				<button class="subscribe btn btn-success btn-lg btn-block" onclick="goBack()"
+					type="button">취소</button>
+			</span>
+			<span class="col-xs-2 col-md-2" style="float:right; margin-right:10px" >
 				<button class="subscribe btn btn-success btn-lg btn-block"
-					type="submit">예약완료</button>
-			</div>
+					type="submit">수정</button>
+			</span>
 		</div>
 		
 		</form>
@@ -266,6 +338,10 @@
 			if(checkUserForm()){
 				console.log('true');
 			}
+		}
+		
+		function goBack(){
+			location.href = "${pageContext.request.contextPath}/booking/test.cr";
 		}
 	</script>
 </body>

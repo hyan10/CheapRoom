@@ -34,7 +34,7 @@
            <th>체크아웃날짜</th>
            <th>인원</th>
            <th>요금</th>
-           <th>Settings</th>
+           <th>취소/수정</th>
         </tr>
      </thead>   
      <tbody>
@@ -50,11 +50,11 @@
            <td>${booking.totalPerson }</td>
            <td>${booking.totalPrice }</td>
            <td>
-              <a class="btn btn-danger edit" href="path/to/settings" aria-label="Settings">
+              <a class="btn btn-danger edit" href="${pageContext.request.contextPath}/booking/cancle.cr" aria-label="Settings">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </a>
               &nbsp 
-              <a class="btn btn-info edit" href="path/to/settings" aria-label="Settings">
+              <a class="btn btn-info edit" href="${pageContext.request.contextPath}/booking/update.cr?bookingNo=${booking.no}" aria-label="Settings">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               </a> 
            </td>
@@ -62,5 +62,7 @@
      </c:forEach>
      </tbody>
   </table>
+  
+  <a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=1"><input type="button" value="예약하기"/></a>
 </body>
 </html>
