@@ -36,6 +36,8 @@ public class RoomVO {
     //사진 리스트
     private List<ImageVO> images;
     
+    //roomvo list
+    private List<RoomVO> roomList;
     
     public RoomVO() {
 		super();
@@ -60,6 +62,20 @@ public class RoomVO {
 		this.ac = ac;
 		this.booking = booking;
 		this.images = images;
+	}
+
+
+
+
+	public List<RoomVO> getRoomList() {
+		return roomList;
+	}
+
+
+
+
+	public void setRoomList(List<RoomVO> roomList) {
+		this.roomList = roomList;
 	}
 
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -190,13 +190,13 @@ function addForm(){
         			</button>
 			</div>
  			<hr>
-			<form role="form" name="addRoomForm" action="${pageContext.request.contextPath}/hotel/roomRegister.cr" method="post">
+			<form role="form" name="roomList" action="${pageContext.request.contextPath}/hotel/roomRegister.cr" method="post">
 				<div class="addedFormDiv">
 				<div class="form-group">
 					<div class="row">
 						<label for="roomName" class="col-md-2"> 객실 이름 </label>
 						<div class="col-md-5">
-							<input type="text" class="form-control" name="name" placeholder="객실 이름 입력">
+							<input type="text" class="form-control" name="roomList[0].name" placeholder="객실 이름 입력">
 						</div>
 					</div>
 				</div>
@@ -204,7 +204,7 @@ function addForm(){
 					<div class="row">
 						<label for="roomPrice" class="col-md-2"> 객실 가격 </label>
 						<div class="col-md-5">
-							<input type="text" class="form-control" name="price" placeholder="객실 가격 입력">
+							<input type="number" class="form-control" name="roomList[0].price" placeholder="객실 가격 입력">
 						</div>
 					</div>
 				</div>
@@ -212,11 +212,11 @@ function addForm(){
 					<div class="row">
 						<label for="roomPrice" class="col-md-2"> 객실 최소인원 </label>
 						<div class="col-md-2">
-							<input type="text" class="form-control" name="minPerson" placeholder="객실 최소인원 입력">
+							<input type="number" class="form-control" name="roomList[0].minPerson" placeholder="객실 최소인원 입력">
 						</div>
 						<label for="roomPrice" class="col-md-2"> 객실 최대인원 </label>
 						<div class="col-md-2">
-							<input type="text" class="form-control" name="maxPerson" placeholder="객실 최대인원 입력">
+							<input type="number" class="form-control" name="roomList[0].maxPerson" placeholder="객실 최대인원 입력">
 						</div>
 					</div>
 				</div>
@@ -225,19 +225,19 @@ function addForm(){
 						<label for="emailaddress" class="col-md-2"> 추가인원 요금
 						</label>
 						<div class="col-md-2">
-							<input type="text" class="form-control" id="addPersonPrice" placeholder="추가인원 요금 입력">
+							<input type="number" class="form-control" id="roomList[0].addPrice" placeholder="추가인원 요금 입력">
 							<p class="help-block">1인당 추가 요금 입력</p>
 						</div>
 						<label for="phonenumber" class="col-md-2"> 객실 옵션
 						</label>
 						<div class="checkbox col-md-6">
-							<label class="checkbox-inline"><input type="checkbox" name="cooking">취사</label>
-							<label class="checkbox-inline"><input type="checkbox" name="tv">TV</label>
-							<label class="checkbox-inline"><input type="checkbox" name="ac">에어컨</label>
+							<label class="checkbox-inline"><input type="checkbox" name="roomList[0].cooking" value='Y'>취사</label>
+							<label class="checkbox-inline"><input type="checkbox" name="roomList[0].tv" value='Y'>TV</label>
+							<label class="checkbox-inline"><input type="checkbox" name="roomList[0].ac" value='Y'>에어컨</label>
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
+			<!-- 	<div class="form-group">
 					<div class="row">
 						<label for="uploadimage" class="col-lg-2"> 객실 사진첨부 </label>
 						<div class="col-md-10">
@@ -245,13 +245,13 @@ function addForm(){
 							<p class="help-block">(업로드 가능한 포맷 jpeg, jpg, gif, png)</p>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			
 				<div class="form-group">
 					<div class="row">
 						<label for="roomName" class="col-md-2"> 객실 이름 </label>
 						<div class="col-md-5">
-							<input type="text" class="form-control" name="name" placeholder="객실 이름 입력">
+							<input type="text" class="form-control" name="roomList[1].name" placeholder="객실 이름 입력">
 						</div>
 					</div>
 				</div>
@@ -259,7 +259,7 @@ function addForm(){
 					<div class="row">
 						<label for="roomPrice" class="col-md-2"> 객실 가격 </label>
 						<div class="col-md-5">
-							<input type="text" class="form-control" name="price" placeholder="객실 가격 입력">
+							<input type="number" class="form-control" name="roomList[1].price" placeholder="객실 가격 입력">
 						</div>
 					</div>
 				</div>
@@ -267,11 +267,11 @@ function addForm(){
 					<div class="row">
 						<label for="roomPrice" class="col-md-2"> 객실 최소인원 </label>
 						<div class="col-md-2">
-							<input type="text" class="form-control" name="minPerson" placeholder="객실 최소인원 입력">
+							<input type="number" class="form-control" name="roomList[1].minPerson" placeholder="객실 최소인원 입력">
 						</div>
 						<label for="roomPrice" class="col-md-2"> 객실 최대인원 </label>
 						<div class="col-md-2">
-							<input type="text" class="form-control" name="maxPerson" placeholder="객실 최대인원 입력">
+							<input type="number" class="form-control" name="roomList[1].maxPerson" placeholder="객실 최대인원 입력">
 						</div>
 					</div>
 				</div>
@@ -280,19 +280,19 @@ function addForm(){
 						<label for="emailaddress" class="col-md-2"> 추가인원 요금
 						</label>
 						<div class="col-md-2">
-							<input type="text" class="form-control" id="addPersonPrice" placeholder="추가인원 요금 입력">
+							<input type="number" class="form-control" id="roomList[1].addPrice" placeholder="추가인원 요금 입력">
 							<p class="help-block">1인당 추가 요금 입력</p>
 						</div>
 						<label for="phonenumber" class="col-md-2"> 객실 옵션
 						</label>
 						<div class="checkbox col-md-6">
-							<label class="checkbox-inline"><input type="checkbox" name="cooking">취사</label>
-							<label class="checkbox-inline"><input type="checkbox" name="tv">TV</label>
-							<label class="checkbox-inline"><input type="checkbox" name="ac">에어컨</label>
+							<label class="checkbox-inline"><input type="checkbox" name="roomList[1].cooking" value='Y'>취사</label>
+							<label class="checkbox-inline"><input type="checkbox" name="roomList[1].tv" value='Y'>TV</label>
+							<label class="checkbox-inline"><input type="checkbox" name="roomList[1].ac" value='Y'>에어컨</label>
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
+			<!-- 	<div class="form-group">
 					<div class="row">
 						<label for="uploadimage" class="col-lg-2"> 객실 사진첨부 </label>
 						<div class="col-md-10">
@@ -300,7 +300,7 @@ function addForm(){
 							<p class="help-block">(업로드 가능한 포맷 jpeg, jpg, gif, png)</p>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 			</div>
 				<div class="row">

@@ -3,10 +3,9 @@ package kr.co.bit.cr.hotel;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.bit.cr.owner.OwnerVO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
 
@@ -26,28 +25,62 @@ import kr.co.bit.cr.search.SearchVO;
 public class HotelController {
 	@Autowired
 	private HotelService service;
-	
+
 	//호텔 + 방 같이 등록
 	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.GET)
 	public String registerHotelForm(){
-
-		return "hotelRegisterForm";	//실패시 메세지띄우고 입력폼유지
+		System.out.println("호텔등록폼");
+		return "registerHotel";	//실패시 메세지띄우고 입력폼유지
 	}
 	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.POST)
-	public String registerHotelForm(@ModelAttribute("hotel")HotelVO hotel){
+	public String registerHotel(@ModelAttribute("hotel")HotelVO hotel,HttpSession session){
+		if(hotel.getBbq()!='Y'){
+			hotel.setBbq('N');
+		}
+		if(hotel.getParking()!='Y'){
+			hotel.setParking('N');
+		}
+		if(hotel.getPool()!='Y'){
+			hotel.setPool('N');
+		}
+		if(hotel.getSmoking()!='Y'){
+			hotel.setSmoking('N');
+		}
+		if(hotel.getWifi()!='Y'){
+			hotel.setWifi('N');
+		}
+		OwnerVO owner = (OwnerVO)session.getAttribute("loginUser");
+		hotel.setOwnerNo(owner.getNo());
 		System.out.println(hotel);
-		return "roomRegisterForm";
+		session.setAttribute("hotel", hotel);
+		return "registerRoom";
 	}
 
 	@RequestMapping(value="/roomRegister.cr", method=RequestMethod.POST)
-	public String registerRoomForm(List<RoomVO> rooms, HttpServletRequest request, MultipartHttpServletRequest mpsq){
-		for(RoomVO room : rooms){
-			System.out.println(room);
+	public String registerRoom(RoomVO room, HttpSession session){
+		List<RoomVO> list = room.getRoomList();
+		for(RoomVO r: list){
+			if(r.getCooking()!='Y'){
+				r.setCooking('N');
+			}
+			if(r.getTv()!='Y'){
+				r.setTv('N');
+			}
+			if(r.getAc()!='Y'){
+				r.setAc('N');
+			}
+			System.out.println(r);
+			
 		}
-		HotelVO hotel = (HotelVO)request.getAttribute("hotel");
+		
+		HotelVO hotel = (HotelVO)session.getAttribute("hotel");
 		System.out.println(hotel);
-		hotel.setRooms(rooms);
-		if(service.registerHotel(hotel)==1){
+		hotel.setRooms(list);
+		System.out.println("-----");
+		System.out.println(hotel);
+		int result = service.registerHotel(hotel);
+		session.removeAttribute("hotel");
+		if(result==1){
 			return "redirect:/owner/info.cr";
 		}
 		return "redirect:/";

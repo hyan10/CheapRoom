@@ -6,7 +6,7 @@
 			<li><a href="ownerPage.jsp" id="current" class="border">내 사업정보</a>
 			</li>
 
-			<li><a href="${ pageContext.request.contextPath }/owner/enrollHotel.cr">숙소 등록</a>
+			<li><a href="${ pageContext.request.contextPath }/hotel/hotelRegister.cr">숙소 등록</a>
 				
 			</li>
 

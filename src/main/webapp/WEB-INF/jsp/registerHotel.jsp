@@ -106,8 +106,7 @@
 				<h2>호텔 등록</h2>
 				<hr>
 			</div>
- 
-			<form role="form" action="${pageContext.request.contextPath}/owner/hotelRegister.cr" method="post">
+			<form role="form" action="${pageContext.request.contextPath}/hotel/hotelRegister.cr" method="post">
 					<div class="form-group">
 						<div class="row">
 							<label for="firstname" class="col-md-2"> 호텔 이름 </label>
@@ -146,34 +145,23 @@
 						</div>
 					</div>
 				</div>
-					
-				<div class="form-group">
-					<div class="row">
-						<label for="emailaddress" class="col-md-2"> 이메일 주소
-						</label>
-						<div class="col-md-7">
-							<input type="email" class="form-control" id="emailaddress"
-								placeholder="Enter email address">
-							<p class="help-block">@ 포함하여 입력</p>
-						</div>
-					</div>
-				</div>
+		
 				<div class="form-group">
 					<div class="row">
 						<label for="phonenumber" class="col-md-2"> 연락처
 						</label>
 						<div class="col-md-3">
-							<input type="tel" class="form-control" id=tel placeholder="전화번호 입력">
+							<input type="tel" class="form-control" name=tel placeholder="전화번호 입력">
 							<p class="help-block">- 제외한 숫자만 입력</p>
 						</div>
 						<label for="phonenumber" class="col-md-2"> 부대시설
 						</label>
 						<div class="checkbox col-md-6">
-							<label class="checkbox-inline"><input type="checkbox" name="parking">주차 시설</label>
-							<label class="checkbox-inline"><input type="checkbox" name="wifi">Wi-Fi</label>
-							<label class="checkbox-inline"><input type="checkbox" name="smoking">흡연구역</label>
-							<label class="checkbox-inline"><input type="checkbox" name="pool">수영장</label>
-							<label class="checkbox-inline"><input type="checkbox" name="BBQ">BBQ 시설</label>
+							<label class="checkbox-inline"><input type="checkbox" name="parking" value='Y'>주차 시설</label>
+							<label class="checkbox-inline"><input type="checkbox" name="wifi" value='Y'>Wi-Fi</label>
+							<label class="checkbox-inline"><input type="checkbox" name="smoking" value='Y'>흡연구역</label>
+							<label class="checkbox-inline"><input type="checkbox" name="pool" value='Y'>수영장</label>
+							<label class="checkbox-inline"><input type="checkbox" name="bbq" value='Y'>BBQ 시설</label>
 						</div>
 					</div>
 				</div>
