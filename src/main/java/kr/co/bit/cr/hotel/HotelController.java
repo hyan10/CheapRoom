@@ -38,7 +38,7 @@ public class HotelController {
 	//
 	@RequestMapping(value="/hotelList.cr", method=RequestMethod.GET)
 	public String hotelList(@ModelAttribute("search")SearchVO search, 
-							@RequestParam("daterange")String daterange, Model model,
+							@RequestParam("dateRange")String daterange, Model model,
 							HttpServletResponse response){
 		//1. 쿠키에 input form 날라온 데이터 저장해주기
 		//2. 지역 번호로 호텔 검색하는데, 사람 인원수를 보여줘야하니까-> 호텔 방 조인해서 가능한 방이 한개 이상있으면 호텔 보여줘
@@ -72,19 +72,17 @@ public class HotelController {
 	}
 		
 	@RequestMapping(value="/roomList.cr", method=RequestMethod.GET)
-	public String roomList(@RequestParam("hotelNo") int no,@RequestParam("roomNo")List<Integer> roomNo,
+	public String roomList(@RequestParam("hotelNo") int no,
 						 @CookieValue(value="startDate",required=true)Cookie startDate,
 						 @CookieValue(value="endDate",required=true)Cookie endDate,
 						 Model model){
 		//1. 쿠키 가져와서 시작날짜 - 끝나는날짜 검색
 		//Booking Table 예약기간이랑 겹치지 않는 거 가져오기 
 		HotelVO hotel = new HotelVO();
-		//hotel.setNo(no);
-		//hotel.setRooms(rooms);
 		SearchVO search = new SearchVO();
 		search.setStartDate(startDate.getValue());
 		search.setEndDate(endDate.getValue());
-		hotel = service.roomList(no, roomNo, search);
+		hotel = service.roomList(no, search);
 		model.addAttribute("hotel",hotel);
 		return "roomList";
 		

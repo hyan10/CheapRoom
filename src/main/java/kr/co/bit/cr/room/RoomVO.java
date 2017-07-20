@@ -31,9 +31,10 @@ public class RoomVO {
     //  에어컨 (Y/N)
     private char ac;
     
+    //예약여부(Y/N)
+    private char booking;
     //사진 리스트
     private List<ImageVO> images;
-    
     
     
     public RoomVO() {
@@ -43,9 +44,11 @@ public class RoomVO {
 
 
 
-	public RoomVO(Integer hotelNo, String name, Integer price, Integer minPerson, Integer maxPerson,
-			Integer addPrice, char cooking, char tv, char ac, List<ImageVO> images) {
+	
+	public RoomVO(Integer no, Integer hotelNo, String name, Integer price, Integer minPerson, Integer maxPerson,
+			Integer addPrice, char cooking, char tv, char ac, char booking, List<ImageVO> images) {
 		super();
+		this.no = no;
 		this.hotelNo = hotelNo;
 		this.name = name;
 		this.price = price;
@@ -55,10 +58,20 @@ public class RoomVO {
 		this.cooking = cooking;
 		this.tv = tv;
 		this.ac = ac;
+		this.booking = booking;
 		this.images = images;
 	}
 
 
+
+
+	public char getBooking() {
+		return booking;
+	}
+
+	public void setBooking(char booking) {
+		this.booking = booking;
+	}
 
 	public Integer getNo() {
 		return no;
@@ -192,14 +205,12 @@ public class RoomVO {
 
 
 
+
 	@Override
 	public String toString() {
 		return "RoomVO [no=" + no + ", hotelNo=" + hotelNo + ", name=" + name + ", price=" + price + ", minPerson="
 				+ minPerson + ", maxPerson=" + maxPerson + ", addPrice=" + addPrice + ", cooking=" + cooking + ", tv="
-				+ tv + ", ac=" + ac + ", images=" + images + "]";
+				+ tv + ", ac=" + ac + ", booking=" + booking + ", images=" + images + "]";
 	}
-    
-	
-    
-    
+
 }

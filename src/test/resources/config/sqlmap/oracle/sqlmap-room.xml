@@ -27,8 +27,10 @@
 		delete from room where no=#{no}
 	</delete>
 	
-	<select id="joinRoomAndBooking" resultType="hashmap">
-		select r.hotel_no as hotelNo, count(*) as roomCount
-		 from room as r and booking as b join r.no = b.room_no
+	<select id="joinRoomAndBooking" parameterType="search" resultType="room">
+		select r.no ,r.hotel_no as hotelNo , r.name, r.price, r.min_person as minPerson , r.max_person as maxPerson, r.add_price as addPrice, r.cooking, r.TV, r.AC 
+		from room r join booking b on r.no=b.room_no where (r.hotel_no=#{hotelNo})
+		and (trunc(b.start_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) or 
+		(trunc(b.end_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) and r.hotel_no=#{hotelNo}
 	</select>
 </mapper>

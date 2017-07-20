@@ -5,17 +5,30 @@ public class SearchVO {
 	private String startDate;
 	private String endDate;
 	private int personNo;
+	private int hotelNo;
+	
 	public SearchVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public SearchVO(int cityNo, String startDate, String endDate, int personNo) {
+	
+	public SearchVO(int cityNo, String startDate, String endDate, int personNo, int hotelNo) {
 		super();
 		this.cityNo = cityNo;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.personNo = personNo;
+		this.hotelNo = hotelNo;
 	}
+
+	public int getHotelNo() {
+		return hotelNo;
+	}
+
+	public void setHotelNo(int hotelNo) {
+		this.hotelNo = hotelNo;
+	}
+
 	public int getCityNo() {
 		return cityNo;
 	}

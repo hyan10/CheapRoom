@@ -44,8 +44,8 @@ public class HotelTest {
 		List<ImageVO> images = new ArrayList<ImageVO>();
 		List<RoomVO> rooms = new ArrayList<RoomVO>();
 		images.add(image);
-		RoomVO room = new RoomVO(15,"룸이름", 100000, 2, 4,
-				10000, 'Y', 'Y', 'Y', images);
+		RoomVO room = new RoomVO(1,15,"룸이름", 100000, 2, 4,
+				10000, 'Y', 'Y', 'Y', 'N',images);
 		rooms.add(room);
 		
 		HotelVO hotel = new HotelVO(1, 1, "호텔1", 'N', 010000000, 'N',
@@ -157,7 +157,7 @@ public class HotelTest {
 		System.out.println(cnt);
 	}
 //	@Transactional
-	//@Test
+//	@Test
 	public void 호텔조인테스트() throws Exception{
 		System.out.println("호텔 조인 테스트");
 		Map<Integer,Integer> map;
@@ -211,7 +211,7 @@ public class HotelTest {
 	    }
 	    System.out.println("테스트끝");
 	}
-	@Test
+//	@Test
 	public void 날짜파싱테스트() throws Exception{
 		System.out.println("날짜파싱테스트");
 		String date = "2017-01-02 - 2017-03-04";
@@ -224,6 +224,53 @@ public class HotelTest {
 		System.out.println(a);
 		System.out.println(startDate);
 		System.out.println(endDate);
-	
+
+	}
+	@Test
+	public void 룸조회테스트() throws Exception{
+		HotelVO hotel = new HotelVO();
+		int no = 1;
+		hotel.setNo(no);
+		hotel = hDao.selectHotelByNo(hotel);
+		SearchVO search = new SearchVO();
+		search.setHotelNo(no);
+		search.setStartDate("2017-07-17");
+		search.setEndDate("2017-07-18");
+		//호텔에 룸+이미지 세팅하고 roomNo있는건 예약불가 나머지는 예약가능
+		//룸이랑부킹이랑 조인해서 예약가능한방 리스트가져와서 타입 세팅하고 호텔에다가 넣기
+		List<RoomVO> totalRooms = rDao.selectRoomByHno(no);
+//		for(RoomVO room : totalRooms){
+//			List<ImageVO> images = iDao.selectImageByRno(room.getNo());
+//			room.setImages(images);
+//		}		
+		
+		//조인   return 예약된 방리스트
+		List<RoomVO> bookingRooms = rDao.joinRoomAndBooking(search);
+		
+		System.out.println("방출력");
+		for(RoomVO r1 : totalRooms){
+			System.out.println("total");
+			System.out.println(r1);
+		}
+		System.out.println("===========");
+		for(RoomVO r2 : bookingRooms){
+			System.out.println("booking");
+			System.out.println(r2);
+		}
+
+		
+		for(RoomVO room1 : totalRooms){
+			for(RoomVO room2 : bookingRooms){
+				if(room2.getNo()==room1.getNo()){
+					room1.setBooking('N');
+				}else{
+				room1.setBooking('Y');
+				}
+			}
+		}
+		
+		hotel.setRooms(totalRooms);
+		System.out.println("결과");
+		System.out.println(hotel);
 	}
 }

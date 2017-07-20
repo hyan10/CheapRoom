@@ -1,5 +1,6 @@
 package kr.co.bit.cr.hotel;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.bit.cr.image.ImageDAO;
+import kr.co.bit.cr.image.ImageVO;
 import kr.co.bit.cr.room.RoomDAO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
@@ -118,16 +120,33 @@ public class HotelService {
 	 * @param search
 	 * @return
 	 */
-	public HotelVO roomList(int no, List<Integer> roomNo, SearchVO search){
+	public HotelVO roomList(int no, SearchVO search){
 		//예약가능한 룸리스트를 가져와서 hotelVo에 set해서 리턴해야댐
 		HotelVO hotel = new HotelVO();
 		hotel.setNo(no);
 		hotel = hDao.selectHotelByNo(hotel);
 		//호텔에 룸+이미지 세팅하고 roomNo있는건 예약불가 나머지는 예약가능
-		//룸이랑부킹이랑 조인해서 예약가능한방 리스트가져와서 호텔에다가 세팅
+		//룸이랑부킹이랑 조인해서 예약가능한방 리스트가져와서 타입 세팅하고 호텔에다가 넣기
+		List<RoomVO> totalRooms = rDao.selectRoomByHno(no);
+		for(RoomVO room : totalRooms){
+			List<ImageVO> images = iDao.selectImageByRno(room.getNo());
+			room.setImages(images);
+		}		
 		
+		//조인   return 예약된 방리스트
+		List<RoomVO> bookingRooms = rDao.joinRoomAndBooking(search);
+
+		for(RoomVO room1 : totalRooms){
+			for(RoomVO room2 : bookingRooms){
+				if(room2.getNo()==room1.getNo()){
+					room1.setBooking('N');
+				}else{
+				room1.setBooking('Y');
+				}
+			}
+		}
 		
-		
+		hotel.setRooms(totalRooms);
 		return hotel;
 	}
 }
