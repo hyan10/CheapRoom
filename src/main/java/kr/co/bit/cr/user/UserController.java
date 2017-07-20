@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bit.cr.booking.BookingService;
 import kr.co.bit.cr.booking.BookingVO;
 import kr.co.bit.cr.owner.OwnerService;
 import kr.co.bit.cr.owner.OwnerVO;
@@ -26,7 +27,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private OwnerService OwnerService;
+	private OwnerService ownerService;
+	@Autowired
+	private BookingService bookingService;
 	
 	@RequestMapping(value="/join.cr", method=RequestMethod.POST) 
 	//public String join(UserVO userVO){
@@ -54,10 +57,11 @@ public class UserController {
 			System.out.println("아이디 또는 패스워드가 잘못되었습니다.");
 			return "redirect:/";
 		} else {
-			System.out.println("로그인 성공");
+			System.out.println("로그인 성공 : " + user);
 		}
-		model.addAttribute("user", user);
-		return "redirect:/";
+//		model.addAttribute("loginUser", user);
+		session.setAttribute("loginUser", user);
+		return "search";
 	}
 	/*@RequestMapping(value="/login.cr", method=RequestMethod.POST)
 	public String login(HttpServletRequest request, UserVO userVO, Model model, HttpSession session){
@@ -83,10 +87,10 @@ public class UserController {
 		return "redirect:/";
 	}*/
 	@RequestMapping("/logout.cr")
-	public String logout(HttpSession session, SessionStatus sessionStatus){
-		UserVO user = (UserVO) session.getAttribute("user");
+	public String logout(HttpSession session){
+		UserVO user = (UserVO) session.getAttribute("loginUser");
 		System.out.println("로그아웃 정보" + user);
-		sessionStatus.setComplete();
+		session.invalidate();
 		return "redirect:/";
 	}
 	@RequestMapping("/info.cr")
@@ -97,15 +101,17 @@ public class UserController {
 		user = userService.info(user);
 		session.setAttribute("userInfo", user);
 		
-		return "myPage.jsp";
+		return "myPage";
 	}
 	@RequestMapping("/bookingList.cr")
 	public ModelAndView userBookingList(HttpSession session){
+/*		//부킹 서비스로 부르기
 		UserVO user = (UserVO) session.getAttribute("loginUser");
-		List<BookingVO> bookingList = userService.bookingList(user);
-		ModelAndView mav = new ModelAndView("/user/bookingList");
+		List<BookingVO> bookingList = bookingService.userBookingList(userNo);
+		ModelAndView mav = new ModelAndView("/user/bookingList"); //예약 현황 페이
 		mav.addObject("bookingList", bookingList);
-		return mav;
+		return mav;*/
+		return null;
 	}
 	@RequestMapping("/bookingHistory.cr")
 	public void userBookingHistory(){
