@@ -2,6 +2,8 @@ package kr.co.bit.cr.hotel;
 
 import java.util.List;
 
+import javax.validation.constraints.AssertTrue;
+
 import org.springframework.stereotype.Repository;
 
 import kr.co.bit.cr.room.RoomVO;

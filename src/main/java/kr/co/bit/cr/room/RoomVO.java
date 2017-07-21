@@ -2,6 +2,8 @@ package kr.co.bit.cr.room;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.co.bit.cr.image.ImageVO;
 
 public class RoomVO {
@@ -31,10 +33,17 @@ public class RoomVO {
     //  에어컨 (Y/N)
     private char ac;
     
+    //예약여부(Y/N)
+    private char booking;
     //사진 리스트
     private List<ImageVO> images;
     
+    //roomvo list
+    private List<RoomVO> roomList;
     
+    private MultipartFile image;
+    
+    private List<MultipartFile> imageList;
     
     public RoomVO() {
 		super();
@@ -43,9 +52,11 @@ public class RoomVO {
 
 
 
-	public RoomVO(Integer hotelNo, String name, Integer price, Integer minPerson, Integer maxPerson,
-			Integer addPrice, char cooking, char tv, char ac, List<ImageVO> images) {
+	
+	public RoomVO(Integer no, Integer hotelNo, String name, Integer price, Integer minPerson, Integer maxPerson,
+			Integer addPrice, char cooking, char tv, char ac, char booking, List<ImageVO> images) {
 		super();
+		this.no = no;
 		this.hotelNo = hotelNo;
 		this.name = name;
 		this.price = price;
@@ -55,10 +66,55 @@ public class RoomVO {
 		this.cooking = cooking;
 		this.tv = tv;
 		this.ac = ac;
+		this.booking = booking;
 		this.images = images;
 	}
 
+	
+	public MultipartFile getImage() {
+		return image;
+	}
 
+
+
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+
+
+
+	public List<MultipartFile> getImageList() {
+		return imageList;
+	}
+
+
+
+
+	public void setImageList(List<MultipartFile> imageList) {
+		this.imageList = imageList;
+	}
+
+
+	public List<RoomVO> getRoomList() {
+		return roomList;
+	}
+
+	public void setRoomList(List<RoomVO> roomList) {
+		this.roomList = roomList;
+	}
+
+
+
+
+	public char getBooking() {
+		return booking;
+	}
+
+	public void setBooking(char booking) {
+		this.booking = booking;
+	}
 
 	public Integer getNo() {
 		return no;
@@ -192,14 +248,17 @@ public class RoomVO {
 
 
 
+
 	@Override
 	public String toString() {
 		return "RoomVO [no=" + no + ", hotelNo=" + hotelNo + ", name=" + name + ", price=" + price + ", minPerson="
 				+ minPerson + ", maxPerson=" + maxPerson + ", addPrice=" + addPrice + ", cooking=" + cooking + ", tv="
-				+ tv + ", ac=" + ac + ", images=" + images + "]";
+				+ tv + ", ac=" + ac + ", booking=" + booking + ", images=" + images + ", roomList=" + roomList
+				+ ", imageList=" + imageList + "]";
 	}
-    
+
+
 	
-    
-    
+	
+
 }

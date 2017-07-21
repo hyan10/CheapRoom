@@ -1,10 +1,15 @@
 package kr.co.bit.cr.image;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class ImageVO {
 	private int no;
 	private int roomNo;
 	private String url;
 	
+	private List<MultipartFile> images;
 	
 	
 	public ImageVO() {
@@ -17,6 +22,15 @@ public class ImageVO {
 		this.no = no;
 		this.roomNo = roomNo;
 		this.url = url;
+	}
+
+	
+	public List<MultipartFile> getImages() {
+		return images;
+	}
+
+	public void setImages(List<MultipartFile> images) {
+		this.images = images;
 	}
 
 	public int getNo() {

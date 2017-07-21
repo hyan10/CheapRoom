@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.bit.cr.search.SearchVO;
+
 @Repository
 public class RoomDAO {
 	@Autowired
@@ -26,5 +28,20 @@ public class RoomDAO {
 	
 	public int deleteRoomByNo(RoomVO room){
 		return sqlSession.delete("room.dao.RoomDAO.deleteRoomByNo", room.getNo());
+	}
+	
+	public List<RoomVO> joinRoomAndBooking(SearchVO search){
+		//sqlSession.selectMap("room.dao.RoomDAO.joinRoomAndBooking", "r.hotel_no", "roomCount");
+		//return sqlSession.select("room.dao.RoomDAI.joinRoomAndBooking");
+		//map으로 조인결과를 받음.각 호텔의 예약된 방의 개수
+		return sqlSession.selectList("room.dao.RoomDAO.joinRoomAndBooking", search);
+	}
+	
+	public int selectRoomSeq(){
+		return sqlSession.selectOne("room.dao.RoomDAO.selectRoomSeq");
+	}
+	
+	public RoomVO selectRoomByNo(int no){
+		return sqlSession.selectOne("room.dao.RoomDAO.selectRoomByNo",no);
 	}
 }

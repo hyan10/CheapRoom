@@ -16,6 +16,8 @@ public class OwnerVO {
 
 	private String regDate;
 
+	private String type;
+		
 	public OwnerVO() {
 		// TODO Auto-generated constructor stub
 	}
@@ -33,12 +35,37 @@ public class OwnerVO {
 		this.crn = crn;
 	}
 
+	
+	
+	public OwnerVO(Integer no, String email, String password, String name, String phone, String crn, String regDate,
+			String type) {
+		super();
+		this.no = no;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.phone = phone;
+		this.crn = crn;
+		this.regDate = regDate;
+		this.type = type;
+	}
+
 	public Integer getNo() {
 		return no;
 	}
 
 	public void setNo(Integer no) {
 		this.no = no;
+	}
+
+	
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getEmail() {
@@ -95,8 +122,25 @@ public class OwnerVO {
 
 	@Override
 	public String toString() {
-		return "OwnerVO [no=" + no + ", email=" + email + ", password=" + password + ", name=" + name + ", phone="
-				+ phone + ", crn=" + crn + ", regDate=" + regDate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("OwnerVO [no=");
+		builder.append(no);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", phone=");
+		builder.append(phone);
+		builder.append(", crn=");
+		builder.append(crn);
+		builder.append(", regDate=");
+		builder.append(regDate);
+		builder.append(", type=");
+		builder.append(type);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	

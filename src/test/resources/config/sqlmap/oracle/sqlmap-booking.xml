@@ -21,6 +21,7 @@
 		from booking b join hotel h on (b.hotel_no=h.no) join room r on (h.no=r.hotel_no)
 	</sql>
 
+
 	<!-- 지난 예약 조회 select 공통 쿼리 -->
 	<sql id="selectHistoryList">
 		select b.no as no, b.type as type, b.user_no as userNo, h.no as hotelNo, r.no as roomNo,
@@ -59,7 +60,7 @@
 	<!-- 유저의 예약 현황 조회 -->
 	<select id="selectByUser" parameterType="int" resultType="booking">
 		<include refid="selectList"/>
-		<!-- where user_no = #{no} -->
+		where user_no = #{no}
 	</select>
 
 	<!-- 사업자의 예약 현황 조회 -->

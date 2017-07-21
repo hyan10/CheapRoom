@@ -31,28 +31,28 @@ Optional theme
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  -->
 
-	<div class="well-searchbox">
-		<form class="form-horizontal" role="form">
-			
+	<div class="well-searchbox" style="float: left;">
+		<form class="form-horizontal" role="form" method="get" action="${ pageContext.request.contextPath }/hotel/hotelList.cr">
 			<div class="form-group">
 				<label class="col-md-4 control-label">지역</label>
 				<div class="col-md-8">
-					<select class="form-control" placeholder="City">
-						<option value="">서울특별시</option>
-						<option value="">인천광역시</option>
-						<option value="">경기도</option>
-						<option value="">충청북도</option>
-						<option value="">충청남도</option>
-						<option value="">강원도</option>
-						<option value="">전라북도</option>
-						<option value="">전라남도</option>
-						<option value="">경상남도</option>
-						<option value="">경상북도</option>
-						<option value="">대전광역시</option>
-						<option value="">대구광역시</option>
-						<option value="">울산광역시</option>
-						<option value="">광주광역시</option>
-						<option value="">제주특별자치도</option>
+					<select class="form-control" name="city_no" placeholder="여행지역 선택">
+						<option value="1">서울특별시</option>
+						<option value="2">인천광역시</option>
+						<option value="3">경기도</option>
+						<option value="4">충청북도</option>
+						<option value="5">충청남도</option>
+						<option value="6">강원도</option>
+						<option value="7">전라북도</option>
+						<option value="8">전라남도</option>
+						<option value="9">경상북도</option>
+						<option value="10">경상남도</option>
+						<option value="11">대전광역시</option>
+						<option value="12">대구광역시</option>
+						<option value="13">울산광역시</option>
+						<option value="14">부산광역시</option>
+						<option value="15">광주광역시</option>
+						<option value="16">제주도</option>
 					</select>
 				</div>
 			</div>
@@ -70,29 +70,13 @@ Optional theme
 			<div class="form-group">
 				<label class="col-md-4 control-label">인원 선택</label>
 				<div class="col-md-8">
-					<input type="text" class="form-control" placeholder="인원 선택">
+					<input type="number" name="personNo" class="form-control" placeholder="인원 선택">
 				</div>
 			</div>
-			<!-- <div class="form-group">
-				<label class="col-md-4 control-label">인원 선택</label>
-				<div class="col-md-8">
-					<select class="form-control" placeholder="Category">
-						<option value="">인원 선택</option>
-						<option value="">1</option>
-						<option value="">2</option>
-						<option value="">3</option>
-						<option value="">4</option>
-						<option value="">5</option>
-						<option value="">6</option>
-						<option value="">7</option>
-						<option value="">8</option>
-						<option value="">9</option>
-						<option value="">10</option>
-					</select>
-				</div>
-			</div> -->
 			<div class="col-sm-offset-4 col-sm-5">
-				<button type="submit" class="btn btn-success">검색</button>
+				<button class="btn btn-info" type="submit">검색</button>
+				<%-- <a href="${ pageContext.request.contextPath }/hotel/.cr">검색</a> --%>
+				
 			</div>
 		</form>
 	</div>
