@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>예약</title>
+<title>예약 확인</title>
 <meta name="description" content="">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
@@ -26,8 +26,7 @@
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" rel="stylesheet" id="bootstrap-css"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
    <!--[if lt IE 9]>
@@ -37,170 +36,6 @@
     
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
-
-
-<!-- pay Vendor libraries -->
-<meta name="robots" content="noindex, nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<!-- <script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script> -->
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
-<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<link rel="/css/pay.css"/>
-
-<!-- If you're using Stripe for payments -->
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-<script type="text/javascript">
-        window.alert = function(){};
-        var defaultCSS = document.getElementById('bootstrap-css');
-        function changeCSS(css){
-            if(css) $('head > link').filter(':first').replaceWith('<link rel="stylesheet" href="'+ css +'" type="text/css" />'); 
-            else $('head > link').filter(':first').replaceWith(defaultCSS); 
-        }
-        $( document ).ready(function() {
-          var iframe_height = parseInt($('html').height()); 
-          window.parent.postMessage( iframe_height, 'https://bootsnipp.com');
-        });
-</script>
-
-<script type="text/javascript">
-
-var $form = $('#payment-form');
-$form.find('.subscribe').on('click', payWithStripe);
-/* If you're using Stripe for payments */
-function payWithStripe() {
-	
-	
-	var cardNo = $form.find('[name=cardNumber]').val().replace(/\s/g,'');
-	var cvc = $form.find('[name=cardCVC]').val();
-	var expiry = $form.find('[name=cardExpiry]').payment('cardExpiryVal');
-	
-	console.log(cardNo);
-	console.log(cvc);
-	console.log(expiry);
-	
-	alert(cardNo);
-   // e.preventDefault();
-    
-    /* Abort if invalid form data */
-     if (!validator.form()) {
-    	alert("입력이 잘못되었습니다. 다시 시도해주세요.");
-        return;
-    } 
-    /* Visual feedback */
-    /* $form.find('.subscribe').html('Validating <i class="fa fa-spinner fa-pulse"></i>').prop('disabled', true);
-    var PublishableKey = 'pk_test_6pRNASCoBOKtIshFeQd4XMUh'; // Replace with your API publishable key
-    Stripe.setPublishableKey(PublishableKey); */
-     
-    /* Create token */
-/*      var expiry = $form.find('[name=cardExpiry]').payment('cardExpiryVal');
-    var ccData = {
-        number: $form.find('[name=cardNumber]').val().replace(/\s/g,''),
-        cvc: $form.find('[name=cardCVC]').val(),
-        exp_month: expiry.month, 
-        exp_year: expiry.year
-    };
-     
-    
-      Stripe.card.createToken(ccData, function stripeResponseHandler(status, response) {
-        if (response.error) {
-            // Visual feedback
-            $form.find('.subscribe').html('Try again').prop('disabled', false);
-            // Show Stripe errors on the form 
-            $form.find('.payment-errors').text(response.error.message);
-            $form.find('.payment-errors').closest('.row').show();
-        } else {
-            // Visual feedback 
-            $form.find('.subscribe').html('Processing <i class="fa fa-spinner fa-pulse"></i>');
-            // Hide Stripe errors on the form
-            $form.find('.payment-errors').closest('.row').hide();
-            $form.find('.payment-errors').text("");
-            // response contains id and card, which contains additional card details            
-            console.log(response.id);
-            console.log(response.card);
-            var token = response.id;
-            // AJAX - you would send 'token' to your server here.
-            $.post('/account/stripe_card_token', {
-                    token: token
-                })
-                // Assign handlers immediately after making the request,
-                .done(function(data, textStatus, jqXHR) {
-                    $form.find('.subscribe').html('Payment successful <i class="fa fa-check"></i>');
-                })
-                .fail(function(jqXHR, textStatus, errorThrown) {
-                    $form.find('.subscribe').html('There was a problem').removeClass('success').addClass('error');
-                    // Show Stripe errors on the form
-                    $form.find('.payment-errors').text('Try refreshing the page and trying again.');
-                    $form.find('.payment-errors').closest('.row').show();
-                });
-        } 
-    }); */
-}
-	/* Fancy restrictive input formatting via jQuery.payment library*/
-	$('input[name=cardNumber]').payment('formatCardNumber');
-	$('input[name=cardCVC]').payment('formatCardCVC');
-	$('input[name=cardExpiry').payment('formatCardExpiry');
-	/* Form validation using Stripe client-side validation helpers */
-	/*  jQuery.validator.addMethod("cardNumber", function(value, element) {
-	    return this.optional(element) || Stripe.card.validateCardNumber(value);
-	}, "Please specify a valid credit card number."); */
-	/* jQuery.validator.addMethod("cardExpiry", function(value, element) {    
-	    // Parsing month/year uses jQuery.payment library
-	    value = $.payment.cardExpiryVal(value);
-	    return this.optional(element) || Stripe.card.validateExpiry(value.month, value.year);
-	}, "Invalid expiration date.");
-	jQuery.validator.addMethod("cardCVC", function(value, element) {
-	    return this.optional(element) || Stripe.card.validateCVC(value);
-	}, "Invalid CVC."); */
-	/* validator = $form.validate({
-	    rules: {
-	        cardNumber: {
-	            required: true,
-	            cardNumber: true            
-	        },
-	        cardExpiry: {
-	            required: true,
-	            cardExpiry: true
-	        },
-	        cardCVC: {
-	            required: true,
-	            cardCVC: true
-	        }
-	    },
-	    highlight: function(element) {
-	        $(element).closest('.form-control').removeClass('success').addClass('error');
-	    },
-	    unhighlight: function(element) {
-	        $(element).closest('.form-control').removeClass('error').addClass('success');
-	    },
-	    errorPlacement: function(error, element) {
-	        $(element).closest('.form-group').append(error);
-	    }
-	}); */
-	paymentFormReady = function() {
-	    if ($form.find('[name=cardNumber]').hasClass("success") &&
-	        $form.find('[name=cardExpiry]').hasClass("success") &&
-	        $form.find('[name=cardCVC]').val().length > 1) {
-	        return true;
-	    } else {
-	        return false;
-	    }
-	}
-	// $form.find('.subscribe').prop('disabled', true);
-	var readyInterval = setInterval(function() {
-	    if (paymentFormReady()) {
-	        $form.find('.subscribe').prop('disabled', false);
-	        clearInterval(readyInterval);
-	    }
-	}, 250); 
-	
-	
-</script>
-<!-- pay end -->
-
 </head>
 <body>
 
@@ -236,8 +71,7 @@ function payWithStripe() {
 	    </div> <!-- end nav-bar -->
 	    <!-- End Nav Bar -->
 	</header>
-		<!--End Header-->
-		
+		<!--End Header-->\
 		
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -245,7 +79,7 @@ function payWithStripe() {
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<h2>예약 진행</h2>
+						<h2>숙소 검색</h2>
 						<nav id="breadcrumbs">
 							<ul>
 								<li>You are here:</li>
@@ -257,7 +91,7 @@ function payWithStripe() {
 					</div>
 				</div>
 			</div>
-		</section>  <!-- end header -->
+		</section>  <!-- end wrapper -->
 
 
 	<!-- Start content -->
@@ -265,7 +99,7 @@ function payWithStripe() {
 	
 	
 	<form name="bookingForm" role="form" id="payment-form" method="POST"
-		action="${pageContext.request.contextPath}/booking/book.cr" onclick="checkForm()">
+		action="${pageContext.request.contextPath}/booking/update.cr" onclick="checkForm()">
 	<div class="dividerHeading">
 		<h4><span>[회원정보]</span></h4>
 	</div>
@@ -275,9 +109,9 @@ function payWithStripe() {
 		<div class="row">
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
-					<label for="userName"><i class="fa fa-user"></i> 예약자 성명</label>
-						<input type="text" class="form-control" name="userName"
-							placeholder="예약자 성명" required autofocus />
+					<label for="userName"><i class="fa fa-user"></i>예약자 성명</label>
+						<input type="text" class="form-control" name="userName" value="${booking.userName}"
+							readonly="readonly" placeholder="예약자 성명" />
 				</div>
 			</div>
 		</div>
@@ -285,9 +119,9 @@ function payWithStripe() {
 		<div class="row">
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
-					<label for="userEmail"><i class="fa fa-envelope"></i> 예약자 이메일</label>
-						<input type="text" class="form-control" name="userEmail"
-						placeholder="email@cheaproom.com" required />
+					<label for="userEmail"><i class="fa fa-envelope"></i>예약자 이메일</label>
+						<input type="text" class="form-control" name="userEmail" value="${booking.userEmail}"
+						readonly="readonly" placeholder="email@cheaproom.com"/>
 				</div>
 			</div>
 		</div>
@@ -295,8 +129,8 @@ function payWithStripe() {
 		<div class="row">
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
-					<label for="userPhone"><i class="fa fa-phone"></i> 예약자 연락처</label>
-					<input type="text" class="form-control" name="userPhone" />
+					<label for="userPhone"><i class="fa fa-phone"></i>예약자 연락처</label>
+					<input type="text" class="form-control" name="userPhone" value="${booking.userPhone}" readonly="readonly" />
 				</div>
 			</div>
 		</div>
@@ -336,13 +170,6 @@ function payWithStripe() {
 		    <%--  </c:forEach> --%>
 		     </tbody>
 		  </table>
-		  	<input type="hidden" name="hotelNo" value="${booking.hotelNo}"/>
-		  	<input type="hidden" name="roomNo" value="${booking.roomNo}"/>
-		  	<input type="hidden" name="startDate" value="${booking.startDate}"/>
-		  	<input type="hidden" name="endDate" value="${booking.endDate}"/>
-		  	<input type="hidden" name="totalPerson" value="${booking.totalPerson}"/>
-		  	<input type="hidden" name="totalPrice" value="${booking.totalPrice}"/>
-		  	
 		 </section>
 		
 		<div class="row" style="display: none;">
@@ -358,7 +185,7 @@ function payWithStripe() {
 		<br/>
 		
 		<!-- 총 결제 금액 -->
-		<table class="table table-striped" style="width:34%; margin-bottom:30px; margin-left:15px">
+		<table class="table table-striped" style="width:30%; margin-bottom:30px; margin-left:15px">
 	     <thead>
 	        <tr class="row-name">
 	           <th>총 결제 금액</th>
@@ -373,15 +200,83 @@ function payWithStripe() {
 		
 		<!-- 결제 창 -->
 		<div style="margin:auto;">
-			<jsp:include page="/include/pay.jsp" />
+			<div class="container">
+				<div class="row">
+					<!-- You can make it whatever width you want. I'm making it full width
+		             on <= small devices and 4/12 page width on >= medium devices -->
+					<div class="col-xs-12 col-md-4">
+		
+						<!-- CREDIT CARD FORM STARTS HERE -->
+						<div class="panel panel-default credit-card-box">
+							<div class="panel-heading display-table">
+								<div class="row display-tr">
+									<!-- <h3 class="panel-title display-td">Payment Details</h3> -->
+									<div class="display-td">
+										<img class="img-responsive pull-right"
+											src="http://i76.imgup.net/accepted_c22e0.png">
+									</div>
+								</div>
+							</div>
+							<div class="panel-body">
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="form-group">
+												<label for="cardNumber">CARD NUMBER</label>
+												<div class="input-group">
+													<input type="tel" class="form-control" name="cardNumber"
+														placeholder="Valid Card Number" autocomplete="cc-number" readonly="readonly"
+														required autofocus value="${booking.cardNo }"/>
+													<span class="input-group-addon"><i
+														class="fa fa-credit-card"></i></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-7 col-md-7">
+											<div class="form-group">
+												<label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span
+													class="visible-xs-inline">EXP</span> DATE</label> <input type="tel"
+													class="form-control" name="cardExpiry" placeholder="MM / YY"  readonly="readonly"
+													autocomplete="cc-exp" required value="${booking.cardDate }"/>
+											</div>
+										</div>
+										<div class="col-xs-5 col-md-5 pull-right">
+											<div class="form-group">
+												<label for="cardCVC">Card Type</label> <input type="text"
+													class="form-control" name="cardType" readonly="readonly"
+													autocomplete="cc-csc" required value="${booking.cardType }"/>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<button disabled="disabled" class="subscribe btn btn-success btn-lg btn-block"
+												type="button">결제 완료</button>
+										</div>
+									</div>
+									<div class="row" style="display: none;">
+										<div class="col-xs-12">
+											<p class="payment-errors"></p>
+										</div>
+									</div>
+							</div>
+						</div>
+						<!-- CREDIT CARD FORM ENDS HERE -->
+		
+		
+					</div>
+		
+				</div>
+			</div>
 		</div>
 		
-		<!-- 예약 완료 버튼 -->
+		<!-- 확인 버튼 -->
 		<div class="row">
-			<div class="col-xs-3 col-md-3" style="float:right; margin-right:30px" >
-				<button class="subscribe btn btn-success btn-lg btn-block"
-					type="submit">예약완료</button>
-			</div>
+			<span class="col-xs-2 col-md-2" style="float:right; margin-right:10px" >
+				<button class="subscribe btn btn-success btn-lg btn-block" onclick="goBack()"
+					type="button">확인</button>
+			</span>
 		</div>
 		
 		</form>
@@ -437,34 +332,23 @@ function payWithStripe() {
 
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	
-	<script>
-		function checkUserForm(){
-			var result = false;
-			var name = document.bookingForm.userName.value;
-			var email = document.bookingForm.userEmail.value;
-			var phone = document.bookingForm.userPhone.value;
+	<script>		
+		function goBack(){
 			
-			if(name==""){
-				alert("예약자 성명을 입력해주세요.");
-			}else{
-				if(email==""){
-					alert("예약자 이메일을 입력해주세요.");
-				}else {
-					if(phone=""){
-						alert("예약자 연락처를 입력해주세요.");
-					}else {  // 정상적인 입력
-						result = true;
-					}
-				}
-			}
+			var folder = 'booking';   //////////////// 고쳐야대
 			
-			return result;		
-		}
-		
-		function checkForm(){
-			if(checkUserForm()){
-				console.log('true');
+			switch("${loginUser.type}"){
+			case 'U':
+				folder = 'user';
+				break;
+			case 'S':
+				folder = 's';
+				break;
+			case 'O' :
+				folder = 'owner';
+				break;
 			}
+			location.href = "${pageContext.request.contextPath}/"+folder+"/${url}";
 		}
 	</script>
 </body>

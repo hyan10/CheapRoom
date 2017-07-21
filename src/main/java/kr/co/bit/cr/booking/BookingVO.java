@@ -23,7 +23,7 @@ public class BookingVO {
     private String userName;
     //  예약 유저 이메일
     private String userEmail;
-    //  예약 유저 번호
+    //  예약 유저 전화번호
     private String userPhone;
     //	호텔 이름
     private String hotelName; 

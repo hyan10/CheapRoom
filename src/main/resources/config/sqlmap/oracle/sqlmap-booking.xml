@@ -74,6 +74,12 @@
 		where b.no = #{no}
 	</select>
 	
+	<!-- 예약번호로 지난 예약 정보 조회 -->
+	<select id="selectBookHistoryByNo" parameterType="int" resultType="booking">
+		<include refid="selectHistoryList"/>
+		where b.no = #{no}
+	</select>
+	
 	<!-- 예약 추가 -->
 	<insert id="insertBook" parameterType="booking">
 		insert into booking values

@@ -74,6 +74,26 @@
 </header>
 	<!--End Header-->
 	
+		<!--start wrapper-->
+	<section class="wrapper">
+		<section class="page_head">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<h2>지난 예약 내역</h2>
+						<nav id="breadcrumbs">
+							<ul>
+								<li>You are here:</li>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="index.html">Blog</a></li>
+								<li>Blog Medium Images</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</section>  <!-- end wrapper -->
+	
 	<section style="height:700px; margin-top:50px">
 		<jsp:include page="/include/bookingHistoryList.jsp"/>
 	</section>

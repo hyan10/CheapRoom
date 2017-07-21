@@ -34,6 +34,7 @@
            <th>체크아웃날짜</th>
            <th>인원</th>
            <th>요금</th>
+           <th></th>
         </tr>
      </thead>   
      <tbody>
@@ -53,6 +54,7 @@
            <td>${booking.endDate}</td>
            <td>${booking.totalPerson }</td>
            <td>${booking.totalPrice }</td>
+           <td><button class="label label-default" onclick="javascript:location.href='${pageContext.request.contextPath}/booking/historyDetail.cr?bookingNo=${booking.no}'">내역 보기</button></td>
         </tr>
      </c:forEach>
      </tbody>

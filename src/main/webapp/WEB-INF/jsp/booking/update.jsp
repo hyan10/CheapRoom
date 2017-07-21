@@ -79,15 +79,17 @@
 	
 	
 	<form name="bookingForm" role="form" id="payment-form" method="POST"
-		action="${pageContext.request.contextPath}/booking/book.cr" onclick="checkForm()">
-	<h3>[회원정보]</h3>
+		action="${pageContext.request.contextPath}/booking/update.cr" onclick="checkForm()">
+	<div class="dividerHeading">
+		<h4><span>[회원정보]</span></h4>
+	</div>
 	<br/>
 	
 		<section style="margin-left:30px; margin-bottom:30px">
 		<div class="row">
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
-					<label for="userName">예약자 성명</label>
+					<label for="userName"><i class="fa fa-user"></i>예약자 성명</label>
 						<input type="text" class="form-control" name="userName" value="${booking.userName}"
 							placeholder="예약자 성명" required autofocus />
 				</div>
@@ -97,7 +99,7 @@
 		<div class="row">
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
-					<label for="userEmail">예약자 이메일</label>
+					<label for="userEmail"><i class="fa fa-envelope"></i>예약자 이메일</label>
 						<input type="text" class="form-control" name="userEmail" value="${booking.userEmail}"
 						placeholder="email@cheaproom.com" required />
 				</div>
@@ -107,7 +109,7 @@
 		<div class="row">
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
-					<label for="userPhone">예약자 연락처</label>
+					<label for="userPhone"><i class="fa fa-phone"></i>예약자 연락처</label>
 					<input type="text" class="form-control" name="userPhone" value="${booking.userPhone}" />
 				</div>
 			</div>
@@ -115,7 +117,9 @@
 		
 		</section>
 		
-		<h3>[예약정보]</h3>
+		<div class="dividerHeading">
+			<h4><span>[예약정보]</span></h4>
+		</div>
 		<br/>
 		
 		<section style="margin-bottom:50px">
@@ -146,6 +150,14 @@
 		    <%--  </c:forEach> --%>
 		     </tbody>
 		  </table>
+		  	<!-- 기존 정보 보내주기 -->
+	  		<input type="hidden" name="no" value="${booking.no}"/>
+	  		<input type="hidden" name="hotelName" value="${booking.hotelName}"/>
+	        <input type="hidden" name="roomName" value="${booking.roomName}"/>
+	        <input type="hidden" name="startDate" value="${booking.startDate}"/>
+	        <input type="hidden" name="endDate" value="${booking.endDate}"/>
+	        <input type="hidden" name="totalPerson" value="${booking.totalPerson}"/>
+	        <input type="hidden" name="totalPrice" value="${booking.totalPrice}"/>
 		 </section>
 		
 		<div class="row" style="display: none;">
@@ -155,11 +167,13 @@
 		</div>
 	<!-- </form> -->
 	
-		<h3>[결제정보]</h3>
+		<div class="dividerHeading">
+			<h4><span>[결제정보]</span></h4>
+		</div>
 		<br/>
 		
 		<!-- 총 결제 금액 -->
-		<table class="table table-striped" style="width:34%; margin-bottom:30px; margin-left:15px">
+		<table class="table table-striped" style="width:30%; margin-bottom:30px; margin-left:15px">
 	     <thead>
 	        <tr class="row-name">
 	           <th>총 결제 금액</th>
@@ -245,7 +259,8 @@
 			</div>
 		</div>
 		
-		<!-- 수정 버튼 -->
+		<!-- 수정/취소 버튼 -->
+		<!-- 위치 거꾸로임ㅋㅋㅋ -->
 		<div class="row">
 			<span class="col-xs-2 col-md-2" style="float:right; margin-right:10px" >
 				<button class="subscribe btn btn-success btn-lg btn-block" onclick="goBack()"

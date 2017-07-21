@@ -7,7 +7,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>싸다방</title>
+	<title>예약 현황</title>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Optional theme -->
@@ -74,7 +74,27 @@
 </header>
 	<!--End Header-->
 	
-	<section style="height:700px; margin-top:50px">
+		<!--start wrapper-->
+	<section class="wrapper">
+		<section class="page_head">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<h2>예약 현황</h2>
+						<nav id="breadcrumbs">
+							<ul>
+								<li>You are here:</li>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="index.html">Blog</a></li>
+								<li>Blog Medium Images</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</section>  <!-- end wrapper -->
+	
+	<section class="content" style="height:700px; margin-top:50px">
 		<jsp:include page="/include/bookingList.jsp"/>
 	</section>
 	
@@ -127,5 +147,13 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/swipe.js"></script>
 
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	
+	<script>
+		window.onload = function(){
+			if('${param.msg}'!=''){
+				alert('${param.msg}');
+			}
+		}
+	</script>
 </body>
 </html>

@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,13 +18,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bit.cr.hotel.HotelVO;
 import kr.co.bit.cr.room.RoomVO;
+import kr.co.bit.cr.user.UserVO;
 
 @Controller
 @RequestMapping("/booking")
 public class BookingController {
 	@Autowired
 	BookingService service;
-	
+
+	@Autowired
+	HttpSession session;
 	
 
 	// 예약폼
@@ -35,18 +36,18 @@ public class BookingController {
 								@CookieValue(value="startDate", required=false) Cookie startDate,
 								@CookieValue(value="endDate",required=false)Cookie endDate,
 								@CookieValue(value="personNo",required=false)Cookie personNo) {
-*/	public ModelAndView book(HotelVO hotel, @RequestParam("roomNo") int roomNo){
+*/	public ModelAndView book(@RequestParam("roomNo") int roomNo){
 		ModelAndView mav = new ModelAndView();
 		
 		//////////////////////////// 테스트 호텔, 룸 데이터
 		roomNo = 1;
-		hotel = new HotelVO();
+		HotelVO hotel = new HotelVO();
 		hotel.setNo(1);
 		hotel.setName("테스트호텔");
 		
 		List<RoomVO> rooms = new ArrayList<>();
 		RoomVO r = new RoomVO();
-		r.setNo(1);
+		r.setNo(roomNo);
 		r.setName("테스트방");
 		r.setPrice(30000);
 		r.setMinPerson(2);
@@ -117,15 +118,24 @@ public class BookingController {
 	public ModelAndView book(BookingVO booking) {
 		ModelAndView mav = new ModelAndView();
 		
+		UserVO loginUser = (UserVO)session.getAttribute("loginUser");
+		//booking.setUserNo(loginUser.getNo());
+		booking.setUserNo(3);
+		
+		System.out.println(booking);
+		
 		int result = service.book(booking);
 		
 		// 예약 성공
 		if (result == 1) {
-			mav.setViewName("redirect:/ booking/test.cr");  // user/booking.cr
+		//	mav.setViewName("redirect:/booking/test.cr");  // user/booking.cr
+			mav.addObject("msg", "예약이 완료되었습니다.");
+			mav.addObject("url", "/user/bookingList.cr");
 		} else { // 예약 실패
-			mav.setViewName("");
 			mav.addObject("msg", "예약 실패\n다시 시도해주세요.");
+			mav.addObject("url","/roomList.cr?hotelNo="+booking.getHotelNo());
 		}
+		mav.setViewName("process/alertProcess");
 		
 		return mav;
 	}
@@ -134,7 +144,7 @@ public class BookingController {
 	@RequestMapping(value="/update.cr", method=RequestMethod.GET)
 	public ModelAndView updateBook(@RequestParam("bookingNo") int bookingNo){
 		ModelAndView mav = new ModelAndView();
-		BookingVO booking = service.detailBook(bookingNo);
+		BookingVO booking = service.detailBooking(bookingNo);
 		mav.addObject("booking",booking);
 		mav.setViewName("booking/update");  // booking/update
 		return mav;
@@ -143,32 +153,37 @@ public class BookingController {
 	// 예약 수정
 	@RequestMapping(value="/update.cr", method=RequestMethod.POST)
 	public ModelAndView updateBook(BookingVO booking) {
+		
+		System.out.println(booking);
+		
 		int result = service.updateBook(booking);
-
-		ModelAndView mav = new ModelAndView();
-
+		
+		ModelAndView mav = new ModelAndView("/process/alertProcess");
+		mav.addObject("url","/booking/test.cr");
+		
 		// 수정 성공
 		if (result == 1) {
-			mav.setViewName("redirect:/ booking/test.cr");
+			mav.addObject("msg", "수정이 완료되었습니다.");
 		} else { // 수정 실패
-			mav.setViewName("");
-			mav.addObject("msg", "취소 처리 실패\n다시 시도해주세요.");
+			mav.addObject("msg", "수정 실패\n다시 시도해주세요.");
 		}
 
 		return mav;
 	}
+	
 
 	// 예약 취소
 	@RequestMapping("/cancle.cr")
 	public ModelAndView cancleBook(BookingVO booking) {
 		int result = service.cancleBook(booking);
-		ModelAndView mav = new ModelAndView();
 
+		ModelAndView mav = new ModelAndView("/process/alertProcess");
+		mav.addObject("url","/booking/test.cr");
+		
 		// 취소 성공
 		if (result == 1) {
-			mav.setViewName("redirect:/ booking/test.cr");
+			mav.addObject("msg", "취소가 완료되었습니다.");			
 		} else { // 취소 실패
-			mav.setViewName("");
 			mav.addObject("msg", "취소 처리 실패\n다시 시도해주세요.");
 		}
 
@@ -176,13 +191,31 @@ public class BookingController {
 	}
 	
 	
-	// 예약번호로 조회
+	// 예약 현황 예약번호로 조회
 	@RequestMapping("/detail.cr")
-	public ModelAndView selectBookingDetail(@RequestParam("bookingNo") int bookingNo){
+	public ModelAndView selectBookingDetail(@RequestParam("bookingNo") int bookingNo,
+											HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		BookingVO booking = service.detailBook(bookingNo);
+		BookingVO booking = service.detailBooking(bookingNo);
 		mav.addObject("booking",booking);
-		mav.setViewName("redirect:/ booking/update.cr");
+		// detail page에서 돌아갈 url (예약리스트)
+		mav.addObject("url","bookingList.cr");
+//		mav.addObject("url","test.cr");
+		mav.setViewName("booking/detail");
+		return mav;
+	}
+	
+	// 지난 예약 예약번호로 조회
+	@RequestMapping("/historyDetail.cr")
+	public ModelAndView selectBookingHistoryDetail(@RequestParam("bookingNo") int bookingNo,
+													HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		BookingVO booking = service.detailBookingHistory(bookingNo);
+		mav.addObject("booking",booking);
+		// detail page에서 돌아갈 url (지난 예약 리스트)
+		mav.addObject("url","bookingHistoryList.cr");
+//		mav.addObject("url","testHistory.cr");
+		mav.setViewName("booking/detail");
 		return mav;
 	}
 	
@@ -220,5 +253,10 @@ public class BookingController {
 		mav.setViewName("user/bookingHistoryList");
 
 		return mav;
+	}
+	
+	@RequestMapping("/testHotel.cr")
+	public String test2(){
+		return "hotelList";
 	}
 }

@@ -77,3 +77,5 @@ select b.no as no, b.user_no as userNo, h.no as hotelNo, r.no as roomNo,
 		to_char(b.reg_date, 'yyyy-mm-dd') as regDate
 from booking b join hotel h on (b.hotel_no=h.no) join room r on (b.room_no=r.no)
 where user_no=1
+
+alter table hotel modify (name varchar2(50))

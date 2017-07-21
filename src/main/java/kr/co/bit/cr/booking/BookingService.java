@@ -43,7 +43,14 @@ public class BookingService {
 		public List<BookingVO> ownerBookingHistoryList(int ownerNo){
 			return dao.selectHistoryByOwner(ownerNo);
 		}
-		public BookingVO detailBook(int bookingNo) {
+
+		// 예약 정보 조회
+		public BookingVO detailBooking(int bookingNo) {
 			return dao.selectByNo(bookingNo);
+		}
+		
+		// 이전 예약 정보 조회
+		public BookingVO detailBookingHistory(int bookingNo) {
+			return dao.selectHistoryByNo(bookingNo);
 		}
 }

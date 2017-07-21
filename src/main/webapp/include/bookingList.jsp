@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>예약 확인</title>
 <link rel="stylesheet" type="text/css" href="/css/list.css"/>
 <link rel="shortcut icon" href="//d2d3qesrx8xj6s.cloudfront.net/favicon.ico" type="image/x-icon">
 <link rel="icon" href="//d2d3qesrx8xj6s.cloudfront.net/favicon.ico" type="image/x-icon">
@@ -23,7 +22,7 @@
 <link rel="stylesheet" href="/dist/bootsnipp.min.css">
 </head>
 <body>
-	<table class="table table-striped" style="width:80%; margin:auto">
+	<table class="table table-striped sub_content" style="width:80%; margin:auto">
      <thead>
         <tr class="row-name">
            <!-- <th style="width:12%">Check/UnCheck</th> -->
@@ -35,6 +34,7 @@
            <th>인원</th>
            <th>요금</th>
            <th>취소/수정</th>
+           <th></th>
         </tr>
      </thead>   
      <tbody>
@@ -58,6 +58,7 @@
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               </a> 
            </td>
+           <td><button class="label label-default" onclick="javascript:location.href='${pageContext.request.contextPath}/booking/detail.cr?bookingNo=${booking.no}'">내역 보기</button></td>
         </tr>
      </c:forEach>
      </tbody>
