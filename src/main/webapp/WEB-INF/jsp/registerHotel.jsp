@@ -179,7 +179,8 @@
 				</div>
 				<div class="form-group">
 					<div class="row">
-						
+						<label for="description" class="col-md-2"> 호텔 소개 </label>
+						<textarea class="form-control col-md-3" name="description" rows="5"></textarea>
 					</div>
 				</div>
 

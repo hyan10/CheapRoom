@@ -31,7 +31,7 @@ Optional theme
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  -->
 
-	<div class="well-searchbox">
+	<div class="well-searchbox" style="float: right;">
 		<form class="form-horizontal" role="form" method="get" action="${ pageContext.request.contextPath }/hotel/hotelList.cr">
 			<div class="form-group">
 				<label class="col-md-4 control-label">지역</label>
@@ -70,7 +70,7 @@ Optional theme
 			<div class="form-group">
 				<label class="col-md-4 control-label">인원 선택</label>
 				<div class="col-md-8">
-					<input type="text" name="person_no" class="form-control" placeholder="인원 선택">
+					<input type="number" name="person_no" class="form-control" placeholder="인원 선택">
 				</div>
 			</div>
 			<!-- <div class="form-group">

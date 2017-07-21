@@ -109,14 +109,13 @@
 
 				<c:if test="${ loginUser.type eq 'U' }">
 					<jsp:include page="/include/userMenu.jsp" />
-               		[${ loginUser.email} 사업자님 접속중]
+               		[${ loginUser.email}님 접속중]
 				<a href="${ pageContext.request.contextPath }/user/logout.cr"
 						class="btn btn-primary btn-lg" role="button">로그아웃</a>
 				</c:if>
 
 			</div>
 		</div>
-	</div>
 	</div>
 	<!-- End Nav Bar --> </header>
 	<!--End Header-->
@@ -187,7 +186,6 @@
 				</div>
 			</div>
 		</div>
-
 		<img
 			src="${ pageContext.request.contextPath }/img/fraction-slider/base-1.png"
 			width="1920" height="450">
