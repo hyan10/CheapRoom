@@ -31,7 +31,7 @@ Optional theme
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  -->
 
-	<div class="well-searchbox" style="float: right;">
+	<div class="well-searchbox" style="float: left;">
 		<form class="form-horizontal" role="form" method="get" action="${ pageContext.request.contextPath }/hotel/hotelList.cr">
 			<div class="form-group">
 				<label class="col-md-4 control-label">지역</label>
@@ -70,29 +70,13 @@ Optional theme
 			<div class="form-group">
 				<label class="col-md-4 control-label">인원 선택</label>
 				<div class="col-md-8">
-					<input type="number" name="person_no" class="form-control" placeholder="인원 선택">
+					<input type="number" name="personNo" class="form-control" placeholder="인원 선택">
 				</div>
 			</div>
-			<!-- <div class="form-group">
-				<label class="col-md-4 control-label">인원 선택</label>
-				<div class="col-md-8">
-					<select class="form-control" placeholder="Category">
-						<option value="">인원 선택</option>
-						<option value="">1</option>
-						<option value="">2</option>
-						<option value="">3</option>
-						<option value="">4</option>
-						<option value="">5</option>
-						<option value="">6</option>
-						<option value="">7</option>
-						<option value="">8</option>
-						<option value="">9</option>
-						<option value="">10</option>
-					</select>
-				</div>
-			</div> -->
 			<div class="col-sm-offset-4 col-sm-5">
-				<button type="submit" class="btn btn-success">검색</button>
+				<button class="btn btn-info" type="submit">검색</button>
+				<%-- <a href="${ pageContext.request.contextPath }/hotel/.cr">검색</a> --%>
+				
 			</div>
 		</form>
 	</div>

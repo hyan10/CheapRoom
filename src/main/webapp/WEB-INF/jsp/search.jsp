@@ -113,6 +113,7 @@
         <div class="slider-wrapper">       	
               <!-- <div class="col-sm-10">
               </div> -->
+              
            	 <div class="col-md-6">
            	 	<jsp:include page="/include/searchForm.jsp"/>
            	 </div>

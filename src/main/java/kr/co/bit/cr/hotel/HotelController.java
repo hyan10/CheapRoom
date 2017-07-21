@@ -87,6 +87,7 @@ public class HotelController {
 		}
 		return "redirect:/";
 	}
+
 	
 	@RequestMapping(value="/hotelList.cr", method=RequestMethod.GET)
 	public String hotelList(@ModelAttribute("search")SearchVO search, 
@@ -122,20 +123,23 @@ public class HotelController {
 
 		return "hotelList";
 	}
-		
+	@RequestMapping(value="/showRoomList.cr")
+	public String showList(){
+		return "roomList";
+	}
 	@RequestMapping(value="/roomList.cr", method=RequestMethod.GET)
-	public String roomList(@RequestParam("hotelNo") int no,
+	public String roomList(@RequestParam("hotelNo") int no, @RequestParam("hotelNo") String datarange, 
 						 @CookieValue(value="startDate",required=true)Cookie startDate,
 						 @CookieValue(value="endDate",required=true)Cookie endDate,
 						 Model model){
 		//1. 쿠키 가져와서 시작날짜 - 끝나는날짜 검색
 		//Booking Table 예약기간이랑 겹치지 않는 거 가져오기 
-		HotelVO hotel = new HotelVO();
-		SearchVO search = new SearchVO();
-		search.setStartDate(startDate.getValue());
-		search.setEndDate(endDate.getValue());
-		hotel = service.roomList(no, search);
-		model.addAttribute("hotel",hotel);
+//		HotelVO hotel = new HotelVO();
+//		SearchVO search = new SearchVO();
+//		search.setStartDate(startDate.getValue());
+//		search.setEndDate(endDate.getValue());
+//		hotel = service.roomList(no, search);
+//		model.addAttribute("hotel",hotel);
 		return "roomList";
 		
 	}

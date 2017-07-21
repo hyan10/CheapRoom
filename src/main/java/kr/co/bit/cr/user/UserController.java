@@ -105,17 +105,25 @@ public class UserController {
 	}
 	@RequestMapping("/bookingList.cr")
 	public ModelAndView userBookingList(HttpSession session){
+		UserVO user = (UserVO) session.getAttribute("loginUser");
+		List<BookingVO> bookingList = bookingService.userBookingList(user.getNo());
+		ModelAndView mav = new ModelAndView("/user/bookingList"); //예약 현황 페이
+		mav.addObject("bookingList", bookingList);
+		return mav;
 /*		//부킹 서비스로 부르기
 		UserVO user = (UserVO) session.getAttribute("loginUser");
 		List<BookingVO> bookingList = bookingService.userBookingList(userNo);
 		ModelAndView mav = new ModelAndView("/user/bookingList"); //예약 현황 페이
 		mav.addObject("bookingList", bookingList);
 		return mav;*/
-		return null;
 	}
-	@RequestMapping("/bookingHistory.cr")
-	public void userBookingHistory(){
-		//세선 받아오기
+	@RequestMapping("/bookingHistoryList.cr")
+	public ModelAndView userBookingHistory(HttpSession session){
+		UserVO user = (UserVO) session.getAttribute("loginUser");
+		List<BookingVO> bookingHistoryList = bookingService.userBookingList(user.getNo());
+		ModelAndView mav = new ModelAndView("/user/bookingHistoryList"); //예약 현황 페이
+		mav.addObject("bookingHistoryList", bookingHistoryList);
+		return mav;
 	}
 	@RequestMapping("/review.cr")
 	public void userReview(){
