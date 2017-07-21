@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.bit.cr.hotel.HotelController;
 import kr.co.bit.cr.hotel.HotelDAO;
 import kr.co.bit.cr.hotel.HotelVO;
 import kr.co.bit.cr.image.ImageDAO;
@@ -211,22 +212,24 @@ public class HotelTest {
 	    }
 	    System.out.println("테스트끝");
 	}
-//	@Test
+	@Test
 	public void 날짜파싱테스트() throws Exception{
 		System.out.println("날짜파싱테스트");
-		String date = "2017-01-02 - 2017-03-04";
-		String startDate;
-		String endDate;
-		//date.trim();
-		String a = date.replaceAll(" ", "");
-		startDate = a.substring(0, 10);
-		endDate =  a.substring(11);
-		System.out.println(a);
-		System.out.println(startDate);
-		System.out.println(endDate);
+//		String date = "2017-01-02 - 2017-03-04";
+//		String startDate;
+//		String endDate;
+//		//date.trim();
+//		String a = date.replaceAll(" ", "");
+//		startDate = a.substring(0, 10);
+//		endDate =  a.substring(11);
+//		System.out.println(a);
+//		System.out.println(startDate);
+//		System.out.println(endDate);
+		String filePath = HotelController.class.getResource("/static/images/uploads/").getPath();
+		System.out.println(filePath);
 
 	}
-	@Test
+//	@Test
 	public void 룸조회테스트() throws Exception{
 		HotelVO hotel = new HotelVO();
 		int no = 1;

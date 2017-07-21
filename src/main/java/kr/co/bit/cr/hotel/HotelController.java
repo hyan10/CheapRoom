@@ -1,8 +1,12 @@
 package kr.co.bit.cr.hotel;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.bit.cr.owner.OwnerVO;
 import kr.co.bit.cr.room.RoomVO;
@@ -33,7 +38,7 @@ public class HotelController {
 		return "registerHotel";	//실패시 메세지띄우고 입력폼유지
 	}
 	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.POST)
-	public String registerHotel(@ModelAttribute("hotel")HotelVO hotel,HttpSession session){
+	public String registerHotel(@ModelAttribute("hotel")HotelVO hotel,HttpSession session, @RequestParam("imgurl")MultipartFile uploadFile){
 		if(hotel.getBbq()!='Y'){
 			hotel.setBbq('N');
 		}
@@ -49,12 +54,53 @@ public class HotelController {
 		if(hotel.getWifi()!='Y'){
 			hotel.setWifi('N');
 		}
+		
+//		MultipartFile file = mpsq.getFile("imgurl");
+//		if(!file.isEmpty()){
+//
+//			File file1 = new File("upload\\hotel\\"+file.getOriginalFilename());
+//			System.out.println(file1);
+//			try {
+//				file.transferTo(file1);
+//			} catch (IllegalStateException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		}
+		System.out.println("이미지업로드");
+		System.out.println(uploadFile);
+		
+		String filePath = session.getServletContext().getRealPath("/upload/hotel/");
+		String fileName = uploadFile.getOriginalFilename();
+		if (!uploadFile.isEmpty()) { 
+	
+			try { 
+				byte[] bytes = uploadFile.getBytes(); 
+				BufferedOutputStream stream = 
+						new BufferedOutputStream(new FileOutputStream(new File(filePath+fileName))); 
+				stream.write(bytes); 
+				stream.close(); 
+				System.out.println("Creating file: " + filePath); 
+				System.out.println("You successfully uploaded " + fileName); 
+			} catch (Exception e) { 
+				e.printStackTrace();
+			} 
+		} else { 
+			System.out.println("You failed to upload " + uploadFile.getOriginalFilename() + " because the file was empty."); 
+		} 
+		
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginUser");
 		hotel.setOwnerNo(owner.getNo());
 		hotel.setNo(service.selectSeq());
+		hotel.setImgUrl(fileName);
 		System.out.println(hotel);
 		session.setAttribute("hotel", hotel);
 		return "registerRoom";
+	
 	}
 
 	@RequestMapping(value="/roomRegister.cr", method=RequestMethod.POST)
