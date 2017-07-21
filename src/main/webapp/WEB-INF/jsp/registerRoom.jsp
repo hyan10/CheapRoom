@@ -117,12 +117,12 @@ function addForm(){
 		+ "<div class='row'>"
 		+ "<label for='uploadimage' class='col-lg-2'> 객실 사진첨부 </label>"
 		+ "<div class='col-md-10'>"
-		+ "<input type='file' name='imgurl' id='imgurl' multiple>"
+		+ "<input type='file' name='roomList["+count+"].imageList' id='imageList' multiple>"
 		+ "<p class='help-block'>(업로드 가능한 포맷 jpeg, jpg, gif, png)</p>"
 		+ "</div>"
 		+ "</div>"
 		+ "</div>";
-		
+	
     var addedDiv = document.createElement("div"); // 폼 생성
     addedDiv.id = "added_"+count; // 폼 Div에 ID 부여 (삭제를 위해)
     addedDiv.innerHTML  = str; // 폼 Div안에 HTML삽입
@@ -176,7 +176,7 @@ function addForm(){
         			<span class="glyphicon glyphicon-plus"></span> 객실 추가
        			</button>
 		</div>
-		<form role="form" name="roomList" action="${pageContext.request.contextPath}/hotel/roomRegister.cr" method="post">
+		<form role="form" name="roomList" action="${pageContext.request.contextPath}/hotel/roomRegister.cr" method="post" enctype="multipart/form-data">
 		<hr style="border: solid 1px;">
 		<div id="addedFormDiv">
 			<div class="form-group">
@@ -227,7 +227,7 @@ function addForm(){
 				<div class="row">
 					<label for="uploadimage" class="col-lg-2"> 객실 사진첨부 </label>
 					<div class="col-md-10">
-						<!-- <input type="file" name="imgurl" id="imgurl" multiple> -->
+						<input type="file" name="roomList[0].imageList" id="imageList" multiple>
 						<p class="help-block">(업로드 가능한 포맷 jpeg, jpg, gif, png)</p>
 					</div>
 				</div>

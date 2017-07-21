@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import kr.co.bit.cr.hotel.HotelController;
 import kr.co.bit.cr.hotel.HotelDAO;
 import kr.co.bit.cr.hotel.HotelVO;
 import kr.co.bit.cr.image.ImageDAO;
@@ -83,7 +84,7 @@ public class HotelTest {
 		List<RoomVO> rooms = new ArrayList<RoomVO>();
 		
 		hotel.setNo(15);
-		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
+		hotel = hDao.selectHotelByNo(hotel.getNo());		//41 47,44
 		rooms = rDao.selectRoomByHno(hotel.getNo());
 		List<ImageVO> images = new ArrayList<ImageVO>();
 		for(RoomVO room: rooms){
@@ -103,7 +104,7 @@ public class HotelTest {
 		HotelVO hotel = new HotelVO();
 		List<RoomVO> rooms = new ArrayList<RoomVO>();
 		hotel.setNo(41);
-		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
+		hotel = hDao.selectHotelByNo(hotel.getNo());		//41 47,44
 		rooms = rDao.selectRoomByHno(hotel.getNo());
 		List<ImageVO> images = new ArrayList<ImageVO>();
 		for(RoomVO room: rooms){
@@ -133,7 +134,7 @@ public class HotelTest {
 		}
 		System.out.println("수정완료");
 		rooms = new ArrayList<RoomVO>();
-		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
+		hotel = hDao.selectHotelByNo(hotel.getNo());		//41 47,44
 		rooms = rDao.selectRoomByHno(hotel.getNo());
 		images = new ArrayList<ImageVO>();
 		for(RoomVO room: rooms){
@@ -151,7 +152,7 @@ public class HotelTest {
 		System.out.println("호텔삭제테스트");
 		HotelVO hotel = new HotelVO();
 		hotel.setNo(41);
-		hotel = hDao.selectHotelByNo(hotel);
+		hotel = hDao.selectHotelByNo(hotel.getNo());
 		int cnt=0;
 		cnt = hDao.deleteHotelByNo(hotel);
 		System.out.println(cnt);
@@ -211,27 +212,29 @@ public class HotelTest {
 	    }
 	    System.out.println("테스트끝");
 	}
-//	@Test
+	@Test
 	public void 날짜파싱테스트() throws Exception{
 		System.out.println("날짜파싱테스트");
-		String date = "2017-01-02 - 2017-03-04";
-		String startDate;
-		String endDate;
-		//date.trim();
-		String a = date.replaceAll(" ", "");
-		startDate = a.substring(0, 10);
-		endDate =  a.substring(11);
-		System.out.println(a);
-		System.out.println(startDate);
-		System.out.println(endDate);
+//		String date = "2017-01-02 - 2017-03-04";
+//		String startDate;
+//		String endDate;
+//		//date.trim();
+//		String a = date.replaceAll(" ", "");
+//		startDate = a.substring(0, 10);
+//		endDate =  a.substring(11);
+//		System.out.println(a);
+//		System.out.println(startDate);
+//		System.out.println(endDate);
+		String filePath = HotelController.class.getResource("/static/images/uploads/").getPath();
+		System.out.println(filePath);
 
 	}
-	@Test
+//	@Test
 	public void 룸조회테스트() throws Exception{
 		HotelVO hotel = new HotelVO();
 		int no = 1;
 		hotel.setNo(no);
-		hotel = hDao.selectHotelByNo(hotel);
+		hotel = hDao.selectHotelByNo(hotel.getNo());
 		SearchVO search = new SearchVO();
 		search.setHotelNo(no);
 		search.setStartDate("2017-07-17");

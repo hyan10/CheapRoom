@@ -27,8 +27,8 @@ public class HotelDAO {
 		return sqlSession.update("hotel.dao.HotelDAO.updateHotel",hotel);
 	}
 	
-	public HotelVO selectHotelByNo(HotelVO hotel){
-		return sqlSession.selectOne("hotel.dao.HotelDAO.selectHotelByNo", hotel.getNo());
+	public HotelVO selectHotelByNo(int no){
+		return sqlSession.selectOne("hotel.dao.HotelDAO.selectHotelByNo", no);
 	}
 	
 	public int deleteHotelByNo(HotelVO hotel){
@@ -39,8 +39,8 @@ public class HotelDAO {
 		return sqlSession.selectList("hotel.dao.HotelDAO.selectHotelByCno", cNo);
 	}
 	
-	public int selectSeq(){
-		return sqlSession.selectOne("hotel.dao.HotelDAO.selectSeq");
+	public int selectHotelSeq(){
+		return sqlSession.selectOne("hotel.dao.HotelDAO.selectHotelSeq");
 	}
 	
 	public Map<Integer, Integer> joinHotelAndBooking(SearchVO search){

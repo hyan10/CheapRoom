@@ -1,5 +1,8 @@
 package kr.co.bit.cr.hotel;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.bit.cr.image.ImageVO;
 import kr.co.bit.cr.owner.OwnerVO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
@@ -30,10 +35,10 @@ public class HotelController {
 	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.GET)
 	public String registerHotelForm(){
 		System.out.println("호텔등록폼");
-		return "registerHotel";	//실패시 메세지띄우고 입력폼유지
+		return "registerHotel";
 	}
 	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.POST)
-	public String registerHotel(@ModelAttribute("hotel")HotelVO hotel,HttpSession session){
+	public String registerHotel(@ModelAttribute("hotel")HotelVO hotel,HttpSession session, @RequestParam("imgurl")MultipartFile uploadFile){
 		if(hotel.getBbq()!='Y'){
 			hotel.setBbq('N');
 		}
@@ -49,18 +54,44 @@ public class HotelController {
 		if(hotel.getWifi()!='Y'){
 			hotel.setWifi('N');
 		}
+		
+		System.out.println("이미지업로드");
+		System.out.println(uploadFile);
+		
+		String filePath = session.getServletContext().getRealPath("/upload/hotel/");
+		String fileName = uploadFile.getOriginalFilename();
+		if (!uploadFile.isEmpty()) { 
+	
+			try { 
+				byte[] bytes = uploadFile.getBytes(); 
+				BufferedOutputStream stream = 
+						new BufferedOutputStream(new FileOutputStream(new File(filePath+fileName))); 
+				stream.write(bytes); 
+				stream.close(); 
+				System.out.println("Creating file: " + filePath); 
+				System.out.println("You successfully uploaded " + fileName); 
+			} catch (Exception e) { 
+				e.printStackTrace();
+			} 
+		} else { 
+			System.out.println("You failed to upload " + uploadFile.getOriginalFilename() + " because the file was empty."); 
+		} 
+		
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginUser");
 		hotel.setOwnerNo(owner.getNo());
-		hotel.setNo(service.selectSeq());
+		hotel.setNo(service.selectHotelSeq());
+		hotel.setImgUrl(fileName);
 		System.out.println(hotel);
 		session.setAttribute("hotel", hotel);
 		return "registerRoom";
+	
 	}
 
 	@RequestMapping(value="/roomRegister.cr", method=RequestMethod.POST)
 	public String registerRoom(RoomVO room, HttpSession session){
 		HotelVO hotel = (HotelVO)session.getAttribute("hotel");
 		List<RoomVO> list = room.getRoomList();
+		
 		for(RoomVO r: list){
 			if(r.getCooking()!='Y'){
 				r.setCooking('N');
@@ -71,12 +102,42 @@ public class HotelController {
 			if(r.getAc()!='Y'){
 				r.setAc('N');
 			}
-			System.out.println(r);
 			r.setHotelNo(hotel.getNo());
+			r.setNo(service.selectRoomSeq());
+			//r.setImages(images);
+			//이미지리스트에 룸번호 세팅
+			//이미지 리스트 업로드
+			List<MultipartFile> files = r.getImageList();
+			List<ImageVO> imgList = new ArrayList<>();
+			for(MultipartFile f : files){
+				ImageVO img = new ImageVO();
+				String filePath = session.getServletContext().getRealPath("/upload/room/");
+				String fileName = f.getOriginalFilename();
+				if (!f.isEmpty()){ 
+					try { 
+						byte[] bytes = f.getBytes(); 
+						BufferedOutputStream stream = 
+								new BufferedOutputStream(new FileOutputStream(new File(filePath+fileName))); 
+						stream.write(bytes); 
+						stream.close(); 
+						System.out.println("Creating file: " + filePath); 
+						System.out.println("You successfully uploaded " + fileName); 
+					} catch (Exception e) { 
+						e.printStackTrace();
+					} 
+				} else { 
+					System.out.println("You failed to upload " + f.getOriginalFilename() + " because the file was empty."); 
+				} 
+				img.setUrl(fileName);
+				img.setRoomNo(r.getNo());
+				imgList.add(img);
+			}
+			r.setImages(imgList);
 			
 		}
-		
+
 		System.out.println(hotel);
+
 		hotel.setRooms(list);
 		System.out.println("-----");
 		System.out.println(hotel);

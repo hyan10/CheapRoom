@@ -2,6 +2,8 @@ package kr.co.bit.cr.room;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.co.bit.cr.image.ImageVO;
 
 public class RoomVO {
@@ -39,6 +41,10 @@ public class RoomVO {
     //roomvo list
     private List<RoomVO> roomList;
     
+    private MultipartFile image;
+    
+    private List<MultipartFile> imageList;
+    
     public RoomVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -64,15 +70,36 @@ public class RoomVO {
 		this.images = images;
 	}
 
+	
+	public MultipartFile getImage() {
+		return image;
+	}
 
+
+
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
+	}
+
+
+
+
+	public List<MultipartFile> getImageList() {
+		return imageList;
+	}
+
+
+
+
+	public void setImageList(List<MultipartFile> imageList) {
+		this.imageList = imageList;
+	}
 
 
 	public List<RoomVO> getRoomList() {
 		return roomList;
 	}
-
-
-
 
 	public void setRoomList(List<RoomVO> roomList) {
 		this.roomList = roomList;
@@ -226,7 +253,12 @@ public class RoomVO {
 	public String toString() {
 		return "RoomVO [no=" + no + ", hotelNo=" + hotelNo + ", name=" + name + ", price=" + price + ", minPerson="
 				+ minPerson + ", maxPerson=" + maxPerson + ", addPrice=" + addPrice + ", cooking=" + cooking + ", tv="
-				+ tv + ", ac=" + ac + ", booking=" + booking + ", images=" + images + "]";
+				+ tv + ", ac=" + ac + ", booking=" + booking + ", images=" + images + ", roomList=" + roomList
+				+ ", imageList=" + imageList + "]";
 	}
+
+
+	
+	
 
 }

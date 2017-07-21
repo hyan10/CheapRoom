@@ -106,7 +106,7 @@
 				<h2>호텔 등록</h2>
 				<hr>
 			</div>
-			<form role="form" action="${pageContext.request.contextPath}/hotel/hotelRegister.cr" method="post">
+			<form role="form" action="${pageContext.request.contextPath}/hotel/hotelRegister.cr" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="row">
 							<label for="firstname" class="col-md-2"> 호텔 이름 </label>
