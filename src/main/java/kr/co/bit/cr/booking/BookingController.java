@@ -2,20 +2,22 @@ package kr.co.bit.cr.booking;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bit.cr.hotel.HotelService;
 import kr.co.bit.cr.hotel.HotelVO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.user.UserVO;
@@ -25,6 +27,9 @@ import kr.co.bit.cr.user.UserVO;
 public class BookingController {
 	@Autowired
 	BookingService service;
+	
+	@Autowired
+	HotelService  hotelService;
 
 	@Autowired
 	HttpSession session;
@@ -32,15 +37,15 @@ public class BookingController {
 
 	// 예약폼
 	@RequestMapping(value="/book.cr", method=RequestMethod.GET)
-/*	public ModelAndView book(HotelVO hotel, @RequestParam("roomNo") int roomNo,
+	public ModelAndView book(@RequestParam("roomNo") int roomNo,
 								@CookieValue(value="startDate", required=false) Cookie startDate,
 								@CookieValue(value="endDate",required=false)Cookie endDate,
 								@CookieValue(value="personNo",required=false)Cookie personNo) {
-*/	public ModelAndView book(@RequestParam("roomNo") int roomNo){
+//	public ModelAndView book(@RequestParam("roomNo") int roomNo){
 		ModelAndView mav = new ModelAndView();
 		
 		//////////////////////////// 테스트 호텔, 룸 데이터
-		roomNo = 1;
+		/*roomNo = 1;
 		HotelVO hotel = new HotelVO();
 		hotel.setNo(1);
 		hotel.setName("테스트호텔");
@@ -53,26 +58,28 @@ public class BookingController {
 		r.setMinPerson(2);
 		r.setAddPrice(10000);
 		rooms.add(r);
-		hotel.setRooms(rooms);
+		hotel.setRooms(rooms);*/
 		//////////////////////////// 테스트 호텔, 룸 데이터 끝
 		
+		HotelVO hotel = hotelService.selectHotelByRno(roomNo);
+		
 		// 예약하려는 방 찾기
-		List<RoomVO> roomList = hotel.getRooms();
-		RoomVO room = null;
-		for(RoomVO vo : roomList){
+	//	List<RoomVO> roomList = hotel.getRooms();
+		RoomVO room = hotel.getRooms().get(0);
+		/*for(RoomVO vo : roomList){
 			if(vo.getNo()==roomNo){
 				room = vo;
 				break;
 			}
-		}
+		}*/
 		
 		// 날짜 계산
-//		String start = startDate.getValue();
-//		String end = endDate.getValue();
+		String start = startDate.getValue();
+		String end = endDate.getValue();
 
 		////////////////////////////////////////////// 테스트 날짜 데이터
-		String start = "2017-05-30";
-		String end = "2017-06-02";
+//		String start = "2017-05-30";
+//		String end = "2017-06-02";
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date sd, ed;
@@ -91,7 +98,7 @@ public class BookingController {
 		}
 		
 		// 인원 수 추가 계산
-		int totalPerson = 4; // personNo.getValue();
+		int totalPerson = Integer.parseInt(personNo.getValue()); // 4;
 		int addPersonNo = totalPerson - room.getMinPerson();
 		
 		// 총 가격 (1박가격*일수 + 1인추가요금*추가인원)
