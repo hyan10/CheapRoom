@@ -1,8 +1,9 @@
 package kr.co.bit.cr.hotel;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.bit.cr.image.ImageVO;
 import kr.co.bit.cr.owner.OwnerVO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
@@ -54,47 +55,31 @@ public class HotelController {
 			hotel.setWifi('N');
 		}
 		
-//		MultipartFile file = mpsq.getFile("imgurl");
-//		if(!file.isEmpty()){
-//
-//			File file1 = new File("upload\\hotel\\"+file.getOriginalFilename());
-//			System.out.println(file1);
-//			try {
-//				file.transferTo(file1);
-//			} catch (IllegalStateException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//
-//		}
 		System.out.println("이미지업로드");
 		System.out.println(uploadFile);
 		
 		String filePath = session.getServletContext().getRealPath("/upload/hotel/");
 		String fileName = uploadFile.getOriginalFilename();
-//		if (!uploadFile.isEmpty()) { 
-//	
-//			try { 
-//				byte[] bytes = uploadFile.getBytes(); 
-//				BufferedOutputStream stream = 
-//						new BufferedOutputStream(new FileOutputStream(new File(filePath+fileName))); 
-//				stream.write(bytes); 
-//				stream.close(); 
-//				System.out.println("Creating file: " + filePath); 
-//				System.out.println("You successfully uploaded " + fileName); 
-//			} catch (Exception e) { 
-//				e.printStackTrace();
-//			} 
-//		} else { 
-//			System.out.println("You failed to upload " + uploadFile.getOriginalFilename() + " because the file was empty."); 
-//		} 
+		if (!uploadFile.isEmpty()) { 
+	
+			try { 
+				byte[] bytes = uploadFile.getBytes(); 
+				BufferedOutputStream stream = 
+						new BufferedOutputStream(new FileOutputStream(new File(filePath+fileName))); 
+				stream.write(bytes); 
+				stream.close(); 
+				System.out.println("Creating file: " + filePath); 
+				System.out.println("You successfully uploaded " + fileName); 
+			} catch (Exception e) { 
+				e.printStackTrace();
+			} 
+		} else { 
+			System.out.println("You failed to upload " + uploadFile.getOriginalFilename() + " because the file was empty."); 
+		} 
 		
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginUser");
 		hotel.setOwnerNo(owner.getNo());
-		//hotel.setNo(service.selectSeq());
+		hotel.setNo(service.selectHotelSeq());
 		hotel.setImgUrl(fileName);
 		System.out.println(hotel);
 		session.setAttribute("hotel", hotel);
@@ -117,13 +102,37 @@ public class HotelController {
 			if(r.getAc()!='Y'){
 				r.setAc('N');
 			}
-			System.out.println(r);
 			r.setHotelNo(hotel.getNo());
+			r.setNo(service.selectRoomSeq());
+			//r.setImages(images);
+			//이미지리스트에 룸번호 세팅
 			//이미지 리스트 업로드
-			
-//			for(MultipartFile f : images){
-//				System.out.println(f);
-//			}
+			List<MultipartFile> files = r.getImageList();
+			List<ImageVO> imgList = new ArrayList<>();
+			for(MultipartFile f : files){
+				ImageVO img = new ImageVO();
+				String filePath = session.getServletContext().getRealPath("/upload/room/");
+				String fileName = f.getOriginalFilename();
+				if (!f.isEmpty()){ 
+					try { 
+						byte[] bytes = f.getBytes(); 
+						BufferedOutputStream stream = 
+								new BufferedOutputStream(new FileOutputStream(new File(filePath+fileName))); 
+						stream.write(bytes); 
+						stream.close(); 
+						System.out.println("Creating file: " + filePath); 
+						System.out.println("You successfully uploaded " + fileName); 
+					} catch (Exception e) { 
+						e.printStackTrace();
+					} 
+				} else { 
+					System.out.println("You failed to upload " + f.getOriginalFilename() + " because the file was empty."); 
+				} 
+				img.setUrl(fileName);
+				img.setRoomNo(r.getNo());
+				imgList.add(img);
+			}
+			r.setImages(imgList);
 			
 		}
 
@@ -132,11 +141,11 @@ public class HotelController {
 		hotel.setRooms(list);
 		System.out.println("-----");
 		System.out.println(hotel);
-		//int result = service.registerHotel(hotel);
+		int result = service.registerHotel(hotel);
 		session.removeAttribute("hotel");
-//		if(result==1){
-//			return "redirect:/owner/info.cr";
-//		}
+		if(result==1){
+			return "redirect:/owner/info.cr";
+		}
 		return "redirect:/";
 	}
 	

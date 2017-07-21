@@ -33,7 +33,7 @@
 
 	</select>
 	
-	<select id="selectSeq" resultType="int">
+	<select id="selectHotelSeq" resultType="int">
 		SELECT hotel_seq.nextval FROM DUAL   
 	</select>
 			

@@ -33,15 +33,15 @@ public class HotelService {
 	 */
 	@Transactional
 	public int registerHotel(HotelVO hotel){
-		
+		//이미지에 룸번호가 없음
 		int cnt = hDao.registerHotel(hotel);
 		if(cnt==1){
 			List<RoomVO> rooms = hotel.getRooms();
 			for(RoomVO room : rooms){
 				cnt = rDao.registerRoom(room);
-//				if(cnt==1){
-//					cnt = iDao.registerImage(room.getImages());
-//				}
+				if(cnt==1){
+					cnt = iDao.registerImage(room.getImages());
+				}
 			}
 		}
 		
@@ -126,7 +126,7 @@ public class HotelService {
 		//예약가능한 룸리스트를 가져와서 hotelVo에 set해서 리턴해야댐
 		HotelVO hotel = new HotelVO();
 		hotel.setNo(no);
-		hotel = hDao.selectHotelByNo(hotel);
+		hotel = hDao.selectHotelByNo(no);
 		//호텔에 룸+이미지 세팅하고 roomNo있는건 예약불가 나머지는 예약가능
 		//룸이랑부킹이랑 조인해서 예약가능한방 리스트가져와서 타입 세팅하고 호텔에다가 넣기
 		List<RoomVO> totalRooms = rDao.selectRoomByHno(no);
@@ -152,7 +152,20 @@ public class HotelService {
 		return hotel;
 	}
 	
-	public int selectSeq(){
-		return hDao.selectSeq();
+	public int selectHotelSeq(){
+		return hDao.selectHotelSeq();
+	}
+	
+	public int selectRoomSeq(){
+		return rDao.selectRoomSeq();
+	}
+	
+	public HotelVO selectHotelByRno(int rNo){
+		List<RoomVO> rooms = new ArrayList<>();
+		RoomVO room = rDao.selectRoomByNo(rNo);
+		rooms.add(room);
+		HotelVO hotel = hDao.selectHotelByNo(room.getHotelNo());
+		hotel.setRooms(rooms);
+		return hotel;
 	}
 }

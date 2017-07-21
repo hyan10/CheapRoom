@@ -36,4 +36,12 @@ public class RoomDAO {
 		//map으로 조인결과를 받음.각 호텔의 예약된 방의 개수
 		return sqlSession.selectList("room.dao.RoomDAO.joinRoomAndBooking", search);
 	}
+	
+	public int selectRoomSeq(){
+		return sqlSession.selectOne("room.dao.RoomDAO.selectRoomSeq");
+	}
+	
+	public RoomVO selectRoomByNo(int no){
+		return sqlSession.selectOne("room.dao.RoomDAO.selectRoomByNo",no);
+	}
 }

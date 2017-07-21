@@ -84,7 +84,7 @@ public class HotelTest {
 		List<RoomVO> rooms = new ArrayList<RoomVO>();
 		
 		hotel.setNo(15);
-		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
+		hotel = hDao.selectHotelByNo(hotel.getNo());		//41 47,44
 		rooms = rDao.selectRoomByHno(hotel.getNo());
 		List<ImageVO> images = new ArrayList<ImageVO>();
 		for(RoomVO room: rooms){
@@ -104,7 +104,7 @@ public class HotelTest {
 		HotelVO hotel = new HotelVO();
 		List<RoomVO> rooms = new ArrayList<RoomVO>();
 		hotel.setNo(41);
-		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
+		hotel = hDao.selectHotelByNo(hotel.getNo());		//41 47,44
 		rooms = rDao.selectRoomByHno(hotel.getNo());
 		List<ImageVO> images = new ArrayList<ImageVO>();
 		for(RoomVO room: rooms){
@@ -134,7 +134,7 @@ public class HotelTest {
 		}
 		System.out.println("수정완료");
 		rooms = new ArrayList<RoomVO>();
-		hotel = hDao.selectHotelByNo(hotel);		//41 47,44
+		hotel = hDao.selectHotelByNo(hotel.getNo());		//41 47,44
 		rooms = rDao.selectRoomByHno(hotel.getNo());
 		images = new ArrayList<ImageVO>();
 		for(RoomVO room: rooms){
@@ -152,7 +152,7 @@ public class HotelTest {
 		System.out.println("호텔삭제테스트");
 		HotelVO hotel = new HotelVO();
 		hotel.setNo(41);
-		hotel = hDao.selectHotelByNo(hotel);
+		hotel = hDao.selectHotelByNo(hotel.getNo());
 		int cnt=0;
 		cnt = hDao.deleteHotelByNo(hotel);
 		System.out.println(cnt);
@@ -234,7 +234,7 @@ public class HotelTest {
 		HotelVO hotel = new HotelVO();
 		int no = 1;
 		hotel.setNo(no);
-		hotel = hDao.selectHotelByNo(hotel);
+		hotel = hDao.selectHotelByNo(hotel.getNo());
 		SearchVO search = new SearchVO();
 		search.setHotelNo(no);
 		search.setStartDate("2017-07-17");
