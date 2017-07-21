@@ -51,6 +51,7 @@ public class HotelController {
 		}
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginUser");
 		hotel.setOwnerNo(owner.getNo());
+		hotel.setNo(service.selectSeq());
 		System.out.println(hotel);
 		session.setAttribute("hotel", hotel);
 		return "registerRoom";
@@ -58,6 +59,7 @@ public class HotelController {
 
 	@RequestMapping(value="/roomRegister.cr", method=RequestMethod.POST)
 	public String registerRoom(RoomVO room, HttpSession session){
+		HotelVO hotel = (HotelVO)session.getAttribute("hotel");
 		List<RoomVO> list = room.getRoomList();
 		for(RoomVO r: list){
 			if(r.getCooking()!='Y'){
@@ -70,10 +72,10 @@ public class HotelController {
 				r.setAc('N');
 			}
 			System.out.println(r);
+			r.setHotelNo(hotel.getNo());
 			
 		}
 		
-		HotelVO hotel = (HotelVO)session.getAttribute("hotel");
 		System.out.println(hotel);
 		hotel.setRooms(list);
 		System.out.println("-----");

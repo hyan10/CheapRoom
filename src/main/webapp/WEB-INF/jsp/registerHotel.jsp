@@ -167,9 +167,19 @@
 				</div>
 				<div class="form-group">
 					<div class="row">
-						
+						<label for="description" class="col-md-2"> 체크인 시간 </label>
+						<input type="text" class="form-control" name="checkin" placeholder="체크인 시간 입력">
+						<label for="description" class="col-md-2"> 체크아웃 시간 </label>
+						<input type="text" class="form-control" name="checkout" placeholder="체크아웃 시간 입력">
 					</div>
 				</div>
+				<div class="form-group">
+					<div class="row">
+						<label for="description" class="col-md-2"> 호텔 소개 </label>
+						<textarea class="form-control col-md-3" name="description" rows="5"></textarea>
+					</div>
+				</div>
+				
 
 				<div class="form-group">
 					<div class="row">

@@ -39,6 +39,10 @@ public class HotelDAO {
 		return sqlSession.selectList("hotel.dao.HotelDAO.selectHotelByCno", cNo);
 	}
 	
+	public int selectSeq(){
+		return sqlSession.selectOne("hotel.dao.HotelDAO.selectSeq");
+	}
+	
 	public Map<Integer, Integer> joinHotelAndBooking(SearchVO search){
 		List<Map<String,Integer>> list = new ArrayList<>();
 		Map<Integer,Integer> resultMap = new HashMap<>();

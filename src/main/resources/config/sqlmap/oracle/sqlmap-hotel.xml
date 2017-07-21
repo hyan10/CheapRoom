@@ -32,12 +32,16 @@
 		 (trunc(end_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) group by h.no order by 1
 
 	</select>
-		
+	
+	<select id="selectSeq" resultType="int">
+		SELECT hotel_seq.nextval FROM DUAL   
+	</select>
+			
 	<insert id="registerHotel" parameterType="hotel">
 		INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, bbq, 
-		 description, checkin, checkout, addr, reg_date), imgurl 
-		 VALUES (hotel_seq.nextval , #{ownerNo}, #{cityNo}, #{name}, #{blind}, #{tel},
-		  #{parking}, #{wifi}, #{smoking}, #{pool}, #{bbq}, #{description}, #{checkin},#{checkout},#{addr} ,sysdate,#{imgurl})
+		 description, checkin, checkout, addr, reg_date) 
+		 VALUES (#{no} , #{ownerNo}, #{cityNo}, #{name}, #{blind}, #{tel},
+		  #{parking}, #{wifi}, #{smoking}, #{pool}, #{bbq}, #{description}, #{checkin},#{checkout},#{addr} ,sysdate)
 	</insert>
 	
 	<update id="updateHotel" parameterType="hotel">

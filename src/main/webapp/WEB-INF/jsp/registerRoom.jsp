@@ -62,18 +62,18 @@
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
-</head>
-<script>
-var count = 0;
+<script type="text/javascript">
+var count = 1;
+
 function addForm(){
-    var addedFormDiv = document.getElementById("addRoomForm");
+    var addedFormDiv = document.getElementById("addedFormDiv");
    
     var str = "";
-    str+="<div class='form-group'>"
+    str+="<hr style='border: solid 1px;'><div class='form-group'>"
 		+ "<div class='row'>"
 		+ "<label for='roomName' class='col-md-2'> 객실 이름 </label>"
 		+ "<div class='col-md-5'>"
-		+ "<input type='text' class='form-control' name='name' placeholder='객실 이름 입력'>"
+		+ "<input type='text' class='form-control' name='roomList["+ count +"].name' placeholder='객실 이름 입력'>"
 		+ "</div>"
 		+ "</div>"
 		+ "</div>"
@@ -81,7 +81,7 @@ function addForm(){
 		+ "<div class='row'>"
 		+ "<label for='roomPrice' class='col-md-2'> 객실 가격 </label>"
 		+ "<div class='col-md-5'>"
-		+ "<input type='text' class='form-control' name='price' placeholder='객실 가격 입력'>"
+		+ "<input tyoe='number' class='form-control' name='roomList[" + count +"].price' placeholder='객실 가격 입력'>"
 		+ "</div>"
 		+ "</div>"
 		+ "</div>"
@@ -89,11 +89,11 @@ function addForm(){
 		+ "<div class='row'>"
 		+ "<label for='roomPrice' class='col-md-2'> 객실 최소인원 </label>"
 		+ "<div class='col-md-2'>"
-		+ "<input type='text' class='form-control' name='minPerson' placeholder='객실 최소인원 입력'>"
+		+ "<input tyoe='number' class='form-control' name='roomList[" + count +"].minPerson' placeholder='객실 최소인원 입력'>"
 		+ "</div>"
 		+ "<label for='roomPrice' class='col-md-2'> 객실 최대인원 </label>"
 		+ "<div class='col-md-2'>"
-		+ "<input type='text' class='form-control' name='maxPerson' placeholder='객실 최대인원 입력'>"
+		+ "<input tyoe='number' class='form-control' name='roomList[" + count +"].maxPerson' placeholder='객실 최대인원 입력'>"
 		+ "</div>"
 		+ "</div>"
 		+ "</div>"
@@ -102,15 +102,14 @@ function addForm(){
 		+ "<label for='emailaddress' class='col-md-2'> 추가인원 요금"
 		+ "</label>"
 		+ "<div class='col-md-2'>"
-		+ "<input type='text' class='form-control' id='addPersonPrice' placeholder='추가인원 요금 입력'>"
-		+ "<p class='help-block'>1인당 추가 요금 입력</p>"
+		+ "<input tyoe='number' class='form-control' name='roomList[" + count +"].addPrice' placeholder='추가인원 요금 입력'>"
 		+ "</div>"
 		+ "<label for='phonenumber' class='col-md-2'> 객실 옵션"
 		+ "</label>"
 		+ "<div class='checkbox col-md-6'>"
-		+ "<label class='checkbox-inline'><input type='checkbox' name='cooking'>취사</label>"
-		+ "<label class='checkbox-inline'><input type='checkbox' name='tv'>TV</label>"
-		+ "<label class='checkbox-inline'><input type='checkbox' name='ac'>에어컨</label>"
+		+ "<label class='checkbox-inline'><input type='checkbox' name='roomList[" + count +"].cooking' value='Y'>취사</label>"
+		+ "<label class='checkbox-inline'><input type='checkbox' name='roomList[" + count +"].tv' value='Y'>TV</label>"
+		+ "<label class='checkbox-inline'><input type='checkbox' name='roomList[" + count +"].ac' value='Y'>에어컨</label>"
 		+ "</div>"
 		+ "</div>"
 		+ "</div>"
@@ -122,14 +121,8 @@ function addForm(){
 		+ "<p class='help-block'>(업로드 가능한 포맷 jpeg, jpg, gif, png)</p>"
 		+ "</div>"
 		+ "</div>"
-		+ "</div>"
-		+ "<div class='row'>"
-		+ "<div class='col-md-2'></div>"
-		+ "<div class='col-md-10'>"
-		+ "<button type='submit' class='btn btn-info btn-lg'>객실 등록</button>"
-		+ "</div>"
 		+ "</div>";
-    
+		
     var addedDiv = document.createElement("div"); // 폼 생성
     addedDiv.id = "added_"+count; // 폼 Div에 ID 부여 (삭제를 위해)
     addedDiv.innerHTML  = str; // 폼 Div안에 HTML삽입
@@ -141,6 +134,7 @@ function addForm(){
 }
 
 </script>
+</head>
 <body>
 	<!--Start Header-->
 	<header id="header" class="clearfix"> <!-- Nav Bar -->
@@ -158,10 +152,6 @@ function addForm(){
 					</div>
 				</div>
 
-				<!-- Navigation
-                ================================================== -->
-				<!-- Nav menu -->
-
 				<c:if test="${ loginUser.type eq 'O' }">
 					<jsp:include page="/include/ownerMenu.jsp" />
                		[${ loginUser.email} 사업자님 접속중]
@@ -172,147 +162,85 @@ function addForm(){
 			</div>
 		</div>
 	</div>
-	<!-- End Nav Bar --> </header>
-	<!--End Header-->
-	<!--Start Slider-->
-	<!-- <div class="slider-wrapper"> -->
+	</header>
+	<div class="container" style="margin: 10px;">
+		<div class="row">
+			<div class="col-md-2">
+				<h2>호텔 방 등록</h2>
+			</div><br/>
+			<div class="col-md-6">
+			</div>
+
 		
-		<div class="container" style="margin: 10px;">
-			<div class="row">
-				<div class="col-md-2">
-					<h2>호텔 방 등록</h2>
-				</div><br/>
-				<div class="col-md-6">
-				</div>
-			
-				<button type="button" name="addRoomForm" class="btn btn-success btn-lg" onclick="addForm()">
-         			<span class="glyphicon glyphicon-plus"></span> 객실 추가
-        			</button>
-			</div>
- 			<hr>
-			<form role="form" name="roomList" action="${pageContext.request.contextPath}/hotel/roomRegister.cr" method="post">
-				<div class="addedFormDiv">
-				<div class="form-group">
-					<div class="row">
-						<label for="roomName" class="col-md-2"> 객실 이름 </label>
-						<div class="col-md-5">
-							<input type="text" class="form-control" name="roomList[0].name" placeholder="객실 이름 입력">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<label for="roomPrice" class="col-md-2"> 객실 가격 </label>
-						<div class="col-md-5">
-							<input type="number" class="form-control" name="roomList[0].price" placeholder="객실 가격 입력">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<label for="roomPrice" class="col-md-2"> 객실 최소인원 </label>
-						<div class="col-md-2">
-							<input type="number" class="form-control" name="roomList[0].minPerson" placeholder="객실 최소인원 입력">
-						</div>
-						<label for="roomPrice" class="col-md-2"> 객실 최대인원 </label>
-						<div class="col-md-2">
-							<input type="number" class="form-control" name="roomList[0].maxPerson" placeholder="객실 최대인원 입력">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<label for="emailaddress" class="col-md-2"> 추가인원 요금
-						</label>
-						<div class="col-md-2">
-							<input type="number" class="form-control" id="roomList[0].addPrice" placeholder="추가인원 요금 입력">
-							<p class="help-block">1인당 추가 요금 입력</p>
-						</div>
-						<label for="phonenumber" class="col-md-2"> 객실 옵션
-						</label>
-						<div class="checkbox col-md-6">
-							<label class="checkbox-inline"><input type="checkbox" name="roomList[0].cooking" value='Y'>취사</label>
-							<label class="checkbox-inline"><input type="checkbox" name="roomList[0].tv" value='Y'>TV</label>
-							<label class="checkbox-inline"><input type="checkbox" name="roomList[0].ac" value='Y'>에어컨</label>
-						</div>
-					</div>
-				</div>
-			<!-- 	<div class="form-group">
-					<div class="row">
-						<label for="uploadimage" class="col-lg-2"> 객실 사진첨부 </label>
-						<div class="col-md-10">
-							<input type="file" name="imgurl" id="imgurl" multiple>
-							<p class="help-block">(업로드 가능한 포맷 jpeg, jpg, gif, png)</p>
-						</div>
-					</div>
-				</div> -->
-			
-				<div class="form-group">
-					<div class="row">
-						<label for="roomName" class="col-md-2"> 객실 이름 </label>
-						<div class="col-md-5">
-							<input type="text" class="form-control" name="roomList[1].name" placeholder="객실 이름 입력">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<label for="roomPrice" class="col-md-2"> 객실 가격 </label>
-						<div class="col-md-5">
-							<input type="number" class="form-control" name="roomList[1].price" placeholder="객실 가격 입력">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<label for="roomPrice" class="col-md-2"> 객실 최소인원 </label>
-						<div class="col-md-2">
-							<input type="number" class="form-control" name="roomList[1].minPerson" placeholder="객실 최소인원 입력">
-						</div>
-						<label for="roomPrice" class="col-md-2"> 객실 최대인원 </label>
-						<div class="col-md-2">
-							<input type="number" class="form-control" name="roomList[1].maxPerson" placeholder="객실 최대인원 입력">
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="row">
-						<label for="emailaddress" class="col-md-2"> 추가인원 요금
-						</label>
-						<div class="col-md-2">
-							<input type="number" class="form-control" id="roomList[1].addPrice" placeholder="추가인원 요금 입력">
-							<p class="help-block">1인당 추가 요금 입력</p>
-						</div>
-						<label for="phonenumber" class="col-md-2"> 객실 옵션
-						</label>
-						<div class="checkbox col-md-6">
-							<label class="checkbox-inline"><input type="checkbox" name="roomList[1].cooking" value='Y'>취사</label>
-							<label class="checkbox-inline"><input type="checkbox" name="roomList[1].tv" value='Y'>TV</label>
-							<label class="checkbox-inline"><input type="checkbox" name="roomList[1].ac" value='Y'>에어컨</label>
-						</div>
-					</div>
-				</div>
-			<!-- 	<div class="form-group">
-					<div class="row">
-						<label for="uploadimage" class="col-lg-2"> 객실 사진첨부 </label>
-						<div class="col-md-10">
-							<input type="file" name="imgurl" id="imgurl" multiple>
-							<p class="help-block">(업로드 가능한 포맷 jpeg, jpg, gif, png)</p>
-						</div>
-					</div>
-				</div> -->
-
-			</div>
-				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-10">
-						<button type="submit" class="btn btn-info btn-lg">객실 등록</button>
-					</div>
-				</div>
-			</form>
+			<button type="button" name="addRoomForm" class="btn btn-success btn-lg" onclick="addForm()">
+        			<span class="glyphicon glyphicon-plus"></span> 객실 추가
+       			</button>
 		</div>
-		<%-- <img src="${pageContext.request.contextPath}/img/fraction-slider/base-1.png" width="1920" height="450"> --%>
-	<!-- </div> -->
-
+		<form role="form" name="roomList" action="${pageContext.request.contextPath}/hotel/roomRegister.cr" method="post">
+		<hr style="border: solid 1px;">
+		<div id="addedFormDiv">
+			<div class="form-group">
+				<div class="row">
+					<label for="roomName" class="col-md-2"> 객실 이름 </label>
+					<div class="col-md-5">
+						<input type="text" class="form-control" name="roomList[0].name" placeholder="객실 이름 입력">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<label for="roomPrice" class="col-md-2"> 객실 가격 </label>
+					<div class="col-md-5">
+						<input type="number" class="form-control" name="roomList[0].price" placeholder="객실 가격 입력">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<label for="roomPrice" class="col-md-2"> 객실 최소인원 </label>
+					<div class="col-md-2">
+						<input type="number" class="form-control" name="roomList[0].minPerson" placeholder="객실 최소인원 입력">
+					</div>
+					<label for="roomPrice" class="col-md-2"> 객실 최대인원 </label>
+					<div class="col-md-2">
+						<input type="number" class="form-control" name="roomList[0].maxPerson" placeholder="객실 최대인원 입력">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="row">
+					<label for="emailaddress" class="col-md-2"> 추가인원 요금
+					</label>
+					<div class="col-md-2">
+						<input type="number" class="form-control" name="roomList[0].addPrice" placeholder="추가인원 요금 입력">
+					</div>
+					<label for="phonenumber" class="col-md-2"> 객실 옵션
+					</label>
+					<div class="checkbox col-md-6">
+						<label class="checkbox-inline"><input type="checkbox" name="roomList[0].cooking" value='Y'>취사</label>
+						<label class="checkbox-inline"><input type="checkbox" name="roomList[0].tv" value='Y'>TV</label>
+						<label class="checkbox-inline"><input type="checkbox" name="roomList[0].ac" value='Y'>에어컨</label>
+					</div>
+				</div>
+			</div>
+ 			<div class="form-group">
+				<div class="row">
+					<label for="uploadimage" class="col-lg-2"> 객실 사진첨부 </label>
+					<div class="col-md-10">
+						<!-- <input type="file" name="imgurl" id="imgurl" multiple> -->
+						<p class="help-block">(업로드 가능한 포맷 jpeg, jpg, gif, png)</p>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="row">
+				<hr style="border: solid 1px;">
+				<div class="col-md-8"></div>
+				<div class="col-md-4">
+					<button type="submit" class="btn btn-info btn-lg">객실 등록</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

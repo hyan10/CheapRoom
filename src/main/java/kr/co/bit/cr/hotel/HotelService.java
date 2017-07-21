@@ -1,6 +1,5 @@
 package kr.co.bit.cr.hotel;
 
-import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.bit.cr.image.ImageDAO;
 import kr.co.bit.cr.image.ImageVO;
@@ -31,6 +31,7 @@ public class HotelService {
 	 * @param hotel
 	 * @return
 	 */
+	@Transactional
 	public int registerHotel(HotelVO hotel){
 		
 		int cnt = hDao.registerHotel(hotel);
@@ -38,9 +39,9 @@ public class HotelService {
 			List<RoomVO> rooms = hotel.getRooms();
 			for(RoomVO room : rooms){
 				cnt = rDao.registerRoom(room);
-				if(cnt==1){
-					cnt = iDao.registerImage(room.getImages());
-				}
+//				if(cnt==1){
+//					cnt = iDao.registerImage(room.getImages());
+//				}
 			}
 		}
 		
@@ -52,6 +53,7 @@ public class HotelService {
 	 * @param hotel
 	 * @return
 	 */
+	@Transactional
 	public int updateHotel(HotelVO hotel){
 		int cnt = hDao.updateHotel(hotel);
 		if(cnt==1){
@@ -148,5 +150,9 @@ public class HotelService {
 		
 		hotel.setRooms(totalRooms);
 		return hotel;
+	}
+	
+	public int selectSeq(){
+		return hDao.selectSeq();
 	}
 }
