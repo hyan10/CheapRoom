@@ -181,6 +181,8 @@ public class HotelController {
 		search.setPersonNo(Integer.parseInt(personNo.getValue()));
 		list = service.hotelList(search);
 		model.addAttribute("hotelList", list);
+		
+		System.out.println(list);
 
 		return "hotelList";
 	}
@@ -195,12 +197,12 @@ public class HotelController {
 						 Model model){
 		//1. 쿠키 가져와서 시작날짜 - 끝나는날짜 검색
 		//Booking Table 예약기간이랑 겹치지 않는 거 가져오기 
-//		HotelVO hotel = new HotelVO();
-//		SearchVO search = new SearchVO();
-//		search.setStartDate(startDate.getValue());
-//		search.setEndDate(endDate.getValue());
-//		hotel = service.roomList(no, search);
-//		model.addAttribute("hotel",hotel);
+		HotelVO hotel = new HotelVO();
+		SearchVO search = new SearchVO();
+		search.setStartDate(startDate.getValue());
+		search.setEndDate(endDate.getValue());
+		hotel = service.roomList(no, search);
+		model.addAttribute("roomList",hotel.getRooms());
 		return "roomList";
 		
 	}

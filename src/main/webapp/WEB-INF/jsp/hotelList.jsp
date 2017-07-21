@@ -136,7 +136,7 @@
 						<div class="sidebar">
 							<!-- 검색창 -->
 							<div style="margin-bottom:30px">
-								<jsp:include page="/include/search.jsp"/>
+								<jsp:include page="/include/searchForm.jsp"/>
 							</div>
 							
 							<!-- category -->

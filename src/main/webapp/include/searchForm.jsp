@@ -36,7 +36,7 @@ Optional theme
 			<div class="form-group">
 				<label class="col-md-4 control-label">지역</label>
 				<div class="col-md-8">
-					<select class="form-control" name="city_no" placeholder="여행지역 선택">
+					<select class="form-control" name="cityNo" placeholder="여행지역 선택">
 						<option value="1">서울특별시</option>
 						<option value="2">인천광역시</option>
 						<option value="3">경기도</option>
@@ -60,7 +60,7 @@ Optional theme
 				<label class="col-md-4 control-label">예약날짜 선택</label>
 				<div class='col-md-8'>
 					<div class='input-group date'>
-						<input name="daterange" value="검색 날짜 선택" type='text' class="form-control" /> <span
+						<input name="dateRange" value="검색 날짜 선택" type='text' class="form-control" /> <span
 							class="input-group-addon"> <span
 							class="glyphicon glyphicon-calendar"></span>
 						</span>
@@ -74,8 +74,8 @@ Optional theme
 				</div>
 			</div>
 			<div class="col-sm-offset-4 col-sm-5">
-				<button class="btn btn-info" type="submit">검색</button>
-				<%-- <a href="${ pageContext.request.contextPath }/hotel/.cr">검색</a> --%>
+				<input class="btn btn-info" type="submit" value="검색"/>
+				<%-- <a href="${ pageContext.request.contextPath }/hotel/hotelList.cr">검색</a> --%>
 				
 			</div>
 		</form>

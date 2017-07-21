@@ -206,11 +206,17 @@
 							<td>${room.name}<br>(${room.cooking }, ${room.tv }, ${room.ac }</td>
 							<td>${room.price}</td>
 							<td>${room.minPerson} / ${room.maxPerson}</td>
-							<td>${room.addprice }</td>
-							<td><a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=${ room.no }">
-								<button type="submit" class="btn btn-info">
-								예약하기<i class="fa fa-check spaceLeft"></i>
-								</button></a>
+							<td>${room.addPrice }</td>
+							<td>
+							<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+								<%-- <c:set var="bookig" value="${room.booking}"/>
+								<c:if test="${booking}=='N' || ${booking}=='Y'"> --%>
+									<a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=${ room.no }">
+									<button type="submit" class="btn btn-info">
+									예약하기<i class="fa fa-check spaceLeft"></i>
+									</button></a>
+								<%-- </c:if> --%>
+							<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 							</td>
 						</tr>
 					</c:forEach>

@@ -32,7 +32,7 @@
 							<div align="right">
 								<h3>1박요금: <font color="red">${hotel.rooms[0].price}</font></h3>
 								<br/>
-								<a class="btn btn-small btn-default" href="{pageContext.request.contextPath}/hotel/roomList.cr?hotelNo={${hotel.no}}">객실 보기</a>
+								<a class="btn btn-small btn-default" href="${pageContext.request.contextPath}/hotel/roomList.cr?hotelNo=${hotel.no}">객실 보기</a>
 							</div>
 						</div> <!-- 내용 끝 -->
 							

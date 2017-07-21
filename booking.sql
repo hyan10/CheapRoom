@@ -79,3 +79,5 @@ from booking b join hotel h on (b.hotel_no=h.no) join room r on (b.room_no=r.no)
 where user_no=1
 
 alter table hotel modify (name varchar2(50))
+
+select * from hotel where no=3
