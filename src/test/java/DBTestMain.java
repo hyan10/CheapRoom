@@ -1,10 +1,10 @@
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.co.bit.cr.booking.BookingVO;
+import kr.co.bit.cr.owner.OwnerVO;
 import kr.co.bit.cr.user.UserVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,7 +30,7 @@ public class DBTestMain {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	@Test
+//	@Test
 	public void DB연결테스트() throws SQLException{
 		System.out.println(ds);
 		Connection conn = ds.getConnection();
@@ -71,5 +72,10 @@ public class DBTestMain {
 		board.setContent("ddd");
 		sqlSessionTemplate.insert("board.dao.BoardDAO.insertBoard", board);
 	}*/
+	@Test
+	public void 오너정보테스트() throws Exception{
+		List<OwnerVO> ownerList = new ArrayList<>();
+		ownerList = sqlSessionTemplate.selectList("owner.dao.OwnerDAO.selectOwnerByType", "N");
+	}
 
 }
