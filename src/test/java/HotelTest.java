@@ -46,11 +46,11 @@ public class HotelTest {
 		List<RoomVO> rooms = new ArrayList<RoomVO>();
 		images.add(image);
 		RoomVO room = new RoomVO(1,15,"룸이름", 100000, 2, 4,
-				10000, 'Y', 'Y', 'Y', 'N',images);
+				10000, "Y", "Y", "Y", "N",images);
 		rooms.add(room);
 		
-		HotelVO hotel = new HotelVO(1, 1, "호텔1", 'N', 010000000, 'N',
-				'N', 'N', 'N', 'N', "블라블라", "15:00", "10:00",
+		HotelVO hotel = new HotelVO(1, 1, "호텔1", "N", 010000000, "N",
+				"N", "N", "N", "N", "블라블라", "15:00", "10:00",
 				"부평구", "이미지",rooms);
 		System.out.println(hotel);
 		System.out.println(room);
@@ -265,9 +265,9 @@ public class HotelTest {
 		for(RoomVO room1 : totalRooms){
 			for(RoomVO room2 : bookingRooms){
 				if(room2.getNo()==room1.getNo()){
-					room1.setBooking('N');
+					room1.setBooking("N");
 				}else{
-				room1.setBooking('Y');
+				room1.setBooking("Y");
 				}
 			}
 		}

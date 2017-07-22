@@ -12,7 +12,7 @@
 						<!-- 이미지 -->
 						<figure class="post_img">
 							<a href="#">
-								<img src="${hotel.imgUrl}" alt="blog post">
+								<img src="${pageContext.request.contextPath}/upload/hotel/${hotel.imgUrl}" alt="blog post">
 							</a>
 						</figure>
 						

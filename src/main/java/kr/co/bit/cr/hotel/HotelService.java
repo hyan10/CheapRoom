@@ -111,7 +111,7 @@ public class HotelService {
 	    		}
 	    	}
 	    }
-	    
+
 		//남은 결과 조회해서 리턴
 		return resultList;
 	}

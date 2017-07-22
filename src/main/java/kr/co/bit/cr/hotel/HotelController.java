@@ -180,16 +180,14 @@ public class HotelController {
 		search.setCityNo(Integer.parseInt(cityNo.getValue()));
 		search.setPersonNo(Integer.parseInt(personNo.getValue()));
 		list = service.hotelList(search);
+		
 		model.addAttribute("hotelList", list);
 		
 		System.out.println(list);
 
 		return "hotelList";
 	}
-	@RequestMapping(value="/showRoomList.cr")
-	public String showList(){
-		return "roomList";
-	}
+
 	@RequestMapping(value="/roomList.cr", method=RequestMethod.GET)
 	public String roomList(@RequestParam("hotelNo") int no, @RequestParam("hotelNo") String datarange, 
 						 @CookieValue(value="startDate",required=true)Cookie startDate,
@@ -202,10 +200,12 @@ public class HotelController {
 		search.setStartDate(startDate.getValue());
 		search.setEndDate(endDate.getValue());
 		hotel = service.roomList(no, search);
+		
 		model.addAttribute("roomList",hotel.getRooms());
 		return "roomList";
 		
 	}
+	
 	//호텔 + 방 + 사진 같이 수정
 	@RequestMapping("/updateHotel.cr")
 	public String updateHotel(HotelVO hotel){
