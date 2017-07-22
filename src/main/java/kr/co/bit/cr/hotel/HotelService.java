@@ -141,9 +141,9 @@ public class HotelService {
 		for(RoomVO room1 : totalRooms){
 			for(RoomVO room2 : bookingRooms){
 				if(room2.getNo()==room1.getNo()){
-					room1.setBooking('N');
+					room1.setBooking("N");
 				}else{
-				room1.setBooking('Y');
+				room1.setBooking("Y");
 				}
 			}
 		}

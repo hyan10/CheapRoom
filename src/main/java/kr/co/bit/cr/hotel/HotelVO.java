@@ -19,24 +19,24 @@ public class HotelVO {
     private String name;
 
     //  블라인드 여부 (Y/N)
-    private char blind;
+    private String blind;
 
     private Integer tel;
 
     //  (Y/N)
-    private char parking;
+    private String parking;
 
     //  (Y/N)
-    private char wifi;
+    private String wifi;
 
     //  (Y/N)
-    private char smoking;
+    private String smoking;
 
     //  (Y/N)
-    private char pool;
+    private String pool;
 
     //  (Y/N)
-    private char bbq;
+    private String bbq;
 
     private String description;
 
@@ -60,8 +60,8 @@ public class HotelVO {
 
 
 
-	public HotelVO(Integer ownerNo, Integer cityNo, String name, char blind, Integer tel, char parking,
-			char wifi, char smoking, char pool, char bbq, String description, String checkin, String checkout,
+	public HotelVO(Integer ownerNo, Integer cityNo, String name, String blind, Integer tel, String parking,
+			String wifi, String smoking, String pool, String bbq, String description, String checkin, String checkout,
 			String addr, String imgUrl, List<RoomVO> rooms) {
 		super();
 
@@ -145,13 +145,13 @@ public class HotelVO {
 
 
 
-	public char getBlind() {
+	public String getBlind() {
 		return blind;
 	}
 
 
 
-	public void setBlind(char blind) {
+	public void setBlind(String blind) {
 		this.blind = blind;
 	}
 
@@ -169,61 +169,61 @@ public class HotelVO {
 
 
 
-	public char getParking() {
+	public String getParking() {
 		return parking;
 	}
 
 
 
-	public void setParking(char parking) {
+	public void setParking(String parking) {
 		this.parking = parking;
 	}
 
 
 
-	public char getWifi() {
+	public String getWifi() {
 		return wifi;
 	}
 
 
 
-	public void setWifi(char wifi) {
+	public void setWifi(String wifi) {
 		this.wifi = wifi;
 	}
 
 
 
-	public char getSmoking() {
+	public String getSmoking() {
 		return smoking;
 	}
 
 
 
-	public void setSmoking(char smoking) {
+	public void setSmoking(String smoking) {
 		this.smoking = smoking;
 	}
 
 
 
-	public char getPool() {
+	public String getPool() {
 		return pool;
 	}
 
 
 
-	public void setPool(char pool) {
+	public void setPool(String pool) {
 		this.pool = pool;
 	}
 
 
 
-	public char getBbq() {
+	public String getBbq() {
 		return bbq;
 	}
 
 
 
-	public void setBbq(char bbq) {
+	public void setBbq(String bbq) {
 		this.bbq = bbq;
 	}
 

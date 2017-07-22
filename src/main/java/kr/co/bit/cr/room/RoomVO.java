@@ -25,16 +25,16 @@ public class RoomVO {
     private Integer addPrice;
 
     //  취사 (Y/N)
-    private char cooking;
+    private String cooking;
 
     //  티비 (Y/N)
-    private char tv;
+    private String tv;
 
     //  에어컨 (Y/N)
-    private char ac;
+    private String ac;
     
     //예약여부(Y/N)
-    private char booking;
+    private String booking;
     //사진 리스트
     private List<ImageVO> images;
     
@@ -54,7 +54,7 @@ public class RoomVO {
 
 	
 	public RoomVO(Integer no, Integer hotelNo, String name, Integer price, Integer minPerson, Integer maxPerson,
-			Integer addPrice, char cooking, char tv, char ac, char booking, List<ImageVO> images) {
+			Integer addPrice, String cooking, String tv, String ac, String booking, List<ImageVO> images) {
 		super();
 		this.no = no;
 		this.hotelNo = hotelNo;
@@ -108,11 +108,11 @@ public class RoomVO {
 
 
 
-	public char getBooking() {
+	public String getBooking() {
 		return booking;
 	}
 
-	public void setBooking(char booking) {
+	public void setBooking(String booking) {
 		this.booking = booking;
 	}
 
@@ -200,37 +200,37 @@ public class RoomVO {
 
 
 
-	public char getCooking() {
+	public String getCooking() {
 		return cooking;
 	}
 
 
 
-	public void setCooking(char cooking) {
+	public void setCooking(String cooking) {
 		this.cooking = cooking;
 	}
 
 
 
-	public char getTv() {
+	public String getTv() {
 		return tv;
 	}
 
 
 
-	public void setTv(char tv) {
+	public void setTv(String tv) {
 		this.tv = tv;
 	}
 
 
 
-	public char getAc() {
+	public String getAc() {
 		return ac;
 	}
 
 
 
-	public void setAc(char ac) {
+	public void setAc(String ac) {
 		this.ac = ac;
 	}
 

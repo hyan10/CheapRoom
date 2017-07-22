@@ -39,20 +39,20 @@ public class HotelController {
 	}
 	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.POST)
 	public String registerHotel(@ModelAttribute("hotel")HotelVO hotel,HttpSession session, @RequestParam("imgurl")MultipartFile uploadFile){
-		if(hotel.getBbq()!='Y'){
-			hotel.setBbq('N');
+		if(hotel.getBbq()!="Y"){
+			hotel.setBbq("N");
 		}
-		if(hotel.getParking()!='Y'){
-			hotel.setParking('N');
+		if(hotel.getParking()!="Y"){
+			hotel.setParking("N");
 		}
-		if(hotel.getPool()!='Y'){
-			hotel.setPool('N');
+		if(hotel.getPool()!="Y"){
+			hotel.setPool("N");
 		}
-		if(hotel.getSmoking()!='Y'){
-			hotel.setSmoking('N');
+		if(hotel.getSmoking()!="Y"){
+			hotel.setSmoking("N");
 		}
-		if(hotel.getWifi()!='Y'){
-			hotel.setWifi('N');
+		if(hotel.getWifi()!="Y"){
+			hotel.setWifi("N");
 		}
 		
 		System.out.println("이미지업로드");
@@ -93,14 +93,14 @@ public class HotelController {
 		List<RoomVO> list = room.getRoomList();
 		
 		for(RoomVO r: list){
-			if(r.getCooking()!='Y'){
-				r.setCooking('N');
+			if(r.getCooking()!="Y"){
+				r.setCooking("N");
 			}
-			if(r.getTv()!='Y'){
-				r.setTv('N');
+			if(r.getTv()!="Y"){
+				r.setTv("N");
 			}
-			if(r.getAc()!='Y'){
-				r.setAc('N');
+			if(r.getAc()!="Y"){
+				r.setAc("N");
 			}
 			r.setHotelNo(hotel.getNo());
 			r.setNo(service.selectRoomSeq());
