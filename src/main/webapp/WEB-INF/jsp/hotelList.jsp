@@ -41,7 +41,7 @@
 	<script type="text/javascript">
 		var j = jQuery.noConflict();
 		j(function(){
-		    j('input[name="daterange"]').daterangepicker({
+		    j('input[name="dateRange"]').daterangepicker({
 		    		locale: {
 			    		format : 'YYYY-MM-DD',
 			    		cancelLabel : '취소',
@@ -49,9 +49,9 @@
 			    }			    
 		    }, 
 		    function(start, end, label) {
-			    alert("예약 날짜 : " + start.format('YYYY-MM-DD') + '에서 ' + end.format('YYYY-MM-DD') + '까지 예약하시겠습니까?');
+			  //  alert("예약 날짜 : " + start.format('YYYY-MM-DD') + '에서 ' + end.format('YYYY-MM-DD') + '까지 예약하시겠습니까?');
 			});
-		    j('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+		    j('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
 				$(this).val('');
 			});
 		});

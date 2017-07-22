@@ -154,7 +154,7 @@
 						from hotel h
 						where h.owner_no=1)
 		and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM'))) -->
-	<select id="selectChartByOwner" parameterType="int" resultType="kr.co.bit.cr.chart.ChartVO">
+	<select id="selectChartByOwnerNo" parameterType="int" resultType="chart">
 		select count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson, to_char(sysdate,'MM') as month, h.name as hotelName
 		from (
 			(select b.total_price as total_price, total_person, hotel_no

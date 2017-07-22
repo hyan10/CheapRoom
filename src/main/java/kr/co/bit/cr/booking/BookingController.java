@@ -11,12 +11,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bit.cr.chart.ChartService;
+import kr.co.bit.cr.chart.ChartVO;
 import kr.co.bit.cr.hotel.HotelService;
 import kr.co.bit.cr.hotel.HotelVO;
 import kr.co.bit.cr.room.RoomVO;
@@ -33,6 +36,10 @@ public class BookingController {
 
 	@Autowired
 	HttpSession session;
+	
+	////// owner로 이동
+	@Autowired
+	ChartService chartService;
 	
 
 	// 예약폼
@@ -265,5 +272,14 @@ public class BookingController {
 	@RequestMapping("/testHotel.cr")
 	public String test2(){
 		return "hotelList";
+	}
+	
+	@RequestMapping("/testChart.cr")
+	public String test3(Model model){
+		// List<ChartVO> chartList = chartService.chartThisMonthByOwnerNo(1);
+		// List<ChartVO> chartList = chartService.chartThisMonth();
+		 List<ChartVO> chartList = chartService.chartLastMonth("07");
+		model.addAttribute("chartList", chartList);
+		return "owner/chart";
 	}
 }

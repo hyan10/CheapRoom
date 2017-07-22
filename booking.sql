@@ -33,8 +33,6 @@ update booking set user_name = 'test' where no=5
 
 
 <!-- 월별 통계 -->
-
-
 select *
 from hotel h, booking b --, booking_history bh
 where h.owner_no=1 and h.no=b.hotel_no
@@ -67,6 +65,17 @@ where bh.hotel_no in (select no
 where u.hotel_no = h.no
 group by h.name
 
+select h.no as hotelNo, h.city_no as cityNo, count(*), sum(total_price), sum(total_person), h.name
+from
+(select bh.total_price as total_price, total_person, hotel_no
+from booking_history bh
+where bh.hotel_no in (select no
+					from hotel h
+					where h.owner_no=1)
+	and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM')) u, hotel h
+where u.hotel_no = h.no
+group by h.name, h.no, h.city_no
+
 
 select b.no as no, b.user_no as userNo, h.no as hotelNo, r.no as roomNo,
 		h.name as hotelName, r.name as roomName,
@@ -81,3 +90,18 @@ where user_no=1
 alter table hotel modify (name varchar2(50))
 
 select * from hotel where no=3
+
+<!-- 통계 테스트 -->
+select * from booking where hotel_no in (1,20,21)
+select * from booking_history where hotel_no in (1,20,21)
+select * from hotel where owner_no=1
+
+select h.no as hotelNo, h.name as hotelName, h.city_no as cityNo,
+				count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson,
+				to_char(sysdate,'MM') as month
+from hotel h, (select bh.total_price as total_price, total_person, hotel_no
+		from booking_history bh) u
+where u.hotel_no = h.no
+group by h.no, h.name, h.city_no
+
+select 1 from dual where to_char(sysdate,'MM')='07'
