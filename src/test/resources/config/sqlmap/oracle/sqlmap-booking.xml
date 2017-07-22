@@ -18,9 +18,8 @@
 				card_type as cardType, card_no as cardNo, card_date as cardDate,
 				user_name as userName, user_email as userEmail, user_phone as userPhone,
 				to_char(b.reg_date, 'yyyy-mm-dd') as regDate
-		from booking b join hotel h on (b.hotel_no=h.no) join room r on (h.no=r.hotel_no)
+		from booking b join hotel h on (b.hotel_no=h.no) join room r on (b.room_no=r.no)
 	</sql>
-
 
 	<!-- 지난 예약 조회 select 공통 쿼리 -->
 	<sql id="selectHistoryList">
@@ -31,7 +30,7 @@
 				card_type as cardType, card_no as cardNo, card_date as cardDate,
 				user_name as userName, user_email as userEmail, user_phone as userPhone,
 				to_char(b.reg_date, 'yyyy-mm-dd') as regDate
-		from booking_history b join hotel h on (b.hotel_no=h.no) join room r on (h.no=r.hotel_no)
+		from booking_history b join hotel h on (b.hotel_no=h.no) join room r on (b.room_no=r.no)
 	</sql>
 	
 	<!-- 예약 추가/수정 시 values 부분 공통 쿼리 -->
@@ -67,6 +66,18 @@
 	<select id="selectByOwner" parameterType="int" resultType="booking">
 		<include refid="selectList"/>
 		where owner_no = #{no}
+	</select>
+	
+	<!-- 예약번호로 예약 정보 조회 -->
+	<select id="selectBookByNo" parameterType="int" resultType="booking">
+		<include refid="selectList"/>
+		where b.no = #{no}
+	</select>
+	
+	<!-- 예약번호로 지난 예약 정보 조회 -->
+	<select id="selectBookHistoryByNo" parameterType="int" resultType="booking">
+		<include refid="selectHistoryList"/>
+		where b.no = #{no}
 	</select>
 	
 	<!-- 예약 추가 -->

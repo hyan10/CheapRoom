@@ -142,6 +142,7 @@ public class HotelService {
 			for(RoomVO room2 : bookingRooms){
 				if(room2.getNo()==room1.getNo()){
 					room1.setBooking("N");
+					break;
 				}else{
 				room1.setBooking("Y");
 				}

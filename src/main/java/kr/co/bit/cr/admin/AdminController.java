@@ -47,7 +47,7 @@ public class AdminController {
 	//승인
 	@RequestMapping(value="/admission.cr", method=RequestMethod.GET)
 	public String Admission(@RequestParam("ownerNo")int ownerNo, Model model){
-		int cnt = ownerService.updateOnwerType(ownerNo);
+		int cnt = ownerService.updateOwnerType(ownerNo);
 		String msg = "";
 		if(cnt==1){
 			msg="사업자 승인 완료";
@@ -58,4 +58,9 @@ public class AdminController {
 		return "admin/admission";
 	}
 	
+	@RequestMapping(value="/admission.cr", method=RequestMethod.DELETE)
+	public String Admission(@RequestParam("ownerNo")int ownerNo){
+		System.out.println("delete");
+		return "admin/amission";
+	}
 }

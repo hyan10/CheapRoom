@@ -18,10 +18,10 @@ public class OwnerService {
 	}
 	
 	public List<OwnerVO> selectOwnerByType(String type){
-		return dao.selectOnwerByType(type);
+		return dao.selectOwnerByType(type);
 	}
 	
-	public int updateOnwerType(int ownerNo){
-		return dao.updateOnwerType(ownerNo);
+	public int updateOwnerType(int ownerNo){
+		return dao.updateOwnerType(ownerNo);
 	}
 }

@@ -225,9 +225,34 @@ public class HotelTest {
 //		System.out.println(a);
 //		System.out.println(startDate);
 //		System.out.println(endDate);
-		String filePath = HotelController.class.getResource("/static/images/uploads/").getPath();
-		System.out.println(filePath);
-
+//		String filePath = HotelController.class.getResource("/static/images/uploads/").getPath();
+//		System.out.println(filePath);
+		ImageVO image = new ImageVO();
+		image.setNo(1);
+		ImageVO image2 = new ImageVO();
+		image.setNo(2);
+		ImageVO image3 = new ImageVO();
+		image.setNo(3);
+		List<ImageVO> list1 = new ArrayList<>();
+		list1.add(image);
+		list1.add(image2);
+		list1.add(image3);
+		ImageVO image4 = new ImageVO();
+		image.setNo(4);
+		ImageVO image5 = new ImageVO();
+		image.setNo(5);
+		ImageVO image6 = new ImageVO();
+		image.setNo(6);
+		List<ImageVO> list2 = new ArrayList<>();
+		list2.add(image4);
+		list2.add(image5);
+		list2.add(image6);
+		for(ImageVO i1 : list1){
+			System.out.println("in");
+			for(ImageVO i2 : list2){
+				System.out.println("inin");
+			}
+		}
 	}
 //	@Test
 	public void 룸조회테스트() throws Exception{

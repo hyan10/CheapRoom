@@ -5,7 +5,7 @@
 <mapper namespace="owner.dao.OwnerDAO">
 
 	<insert id="insertOwner" parameterType="owner">
-		insert into owner values(owner_SEQ.NEXTVAL, #{email}, #{password}, #{name}, #{phone}, #{crn}, sysdate)
+		insert into owner(no, email, password, name, phone, crn, reg_date) values(owner_SEQ.NEXTVAL, #{email}, #{password}, #{name}, #{phone}, #{crn}, sysdate)
 	</insert>
 	<select id="loginOwner" parameterType="owner" resultType="owner">
 		select * from owner where email = #{email} and password = #{password}
@@ -15,4 +15,7 @@
 		select * from owner where type=#{type}
 	</select>
 	
+	<update id="updateOnwerType" parameterType="int">
+		update owner set type='O' where no=#{ownerNo}
+	</update>
 </mapper>

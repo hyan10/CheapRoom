@@ -11,11 +11,11 @@
 		select * from owner where email = #{email} and password = #{password}
 	</select>
 	
-	<select id="selectOnwerByType" parameterType="String" resultType="owner">
+	<select id="selectOwnerByType" parameterType="String" resultType="owner">
 		select * from owner where type=#{type}
 	</select>
 	
-	<update id="updateOnwerType" parameterType="int">
+	<update id="updateOwnerType" parameterType="int">
 		update owner set type='O' where no=#{ownerNo}
 	</update>
 </mapper>

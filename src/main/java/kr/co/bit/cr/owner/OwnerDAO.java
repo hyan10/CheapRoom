@@ -18,11 +18,11 @@ public class OwnerDAO {
 		return sqlSessionTemplate.selectOne("owner.dao.OwnerDAO.loginOwner", ownerVO);
 	}
 	
-	public List<OwnerVO> selectOnwerByType(String type){
-		return sqlSessionTemplate.selectList("owner.dao.OwnerDAO.selectOnwerByType",type);
+	public List<OwnerVO> selectOwnerByType(String type){
+		return sqlSessionTemplate.selectList("owner.dao.OwnerDAO.selectOwnerByType",type);
 	}
 	
-	public int updateOnwerType(int ownerNo){
-		return sqlSessionTemplate.update("owner.dao.OwnerDAO.updateOnwerType", ownerNo);
+	public int updateOwnerType(int ownerNo){
+		return sqlSessionTemplate.update("owner.dao.OwnerDAO.updateOwnerType", ownerNo);
 	}
 }
