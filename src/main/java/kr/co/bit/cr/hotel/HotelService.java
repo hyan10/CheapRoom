@@ -137,10 +137,13 @@ public class HotelService {
 		
 		//조인   return 예약된 방리스트
 		List<RoomVO> bookingRooms = rDao.joinRoomAndBooking(search);
-
+		System.out.println("들어와1");
 		for(RoomVO room1 : totalRooms){
+			System.out.println("들어와2");
 			for(RoomVO room2 : bookingRooms){
+				System.out.println("들어와3");
 				if(room2.getNo()==room1.getNo()){
+					
 					room1.setBooking("N");
 				}else{
 				room1.setBooking("Y");

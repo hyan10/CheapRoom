@@ -203,6 +203,7 @@ public class HotelController {
 		search.setEndDate(endDate.getValue());
 		hotel = service.roomList(no, search);
 		model.addAttribute("roomList",hotel.getRooms());
+		System.out.println(hotel);
 		return "roomList";
 		
 	}

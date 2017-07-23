@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,12 +33,12 @@ Optional theme
  -->
 
 	<div class="well-searchbox" style="float: left;">
-		<form class="form-horizontal" role="form" method="get" action="${ pageContext.request.contextPath }/hotel/hotelList.cr">
+		<form class="form-horizontal" role="form" method="get" onsubmit="return checkDateForm()" action="${ pageContext.request.contextPath }/hotel/hotelList.cr">
 			<div class="form-group">
 				<label class="col-md-4 control-label">지역</label>
 				<div class="col-md-8">
-					<select class="form-control" name="cityNo" placeholder="여행지역 선택">
-						<option value="1">서울특별시</option>
+					<select id="selectBox" class="form-control" name="cityNo">
+						<option value="1" selected="selected">서울특별시</option>
 						<option value="2">인천광역시</option>
 						<option value="3">경기도</option>
 						<option value="4">충청북도</option>
@@ -60,21 +61,21 @@ Optional theme
 				<label class="col-md-4 control-label">예약날짜 선택</label>
 				<div class='col-md-8'>
 					<div class='input-group date'>
-						<input name="dateRange" value="검색 날짜 선택" type='text' class="form-control" /> <span
-							class="input-group-addon"> <span
-							class="glyphicon glyphicon-calendar"></span>
-						</span>
+								<input name="dateRange" value="" type='text' class="form-control" /> 
+								<span class="input-group-addon"> 
+								<span class="glyphicon glyphicon-calendar"></span>
+								</span>
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-md-4 control-label">인원 선택</label>
 				<div class="col-md-8">
-					<input type="number" name="personNo" class="form-control" placeholder="인원 선택">
+					<input type="number" id="personNo" name="personNo" class="form-control" value="2" placeholder="인원 선택">
 				</div>
 			</div>
 			<div class="col-sm-offset-4 col-sm-5">
-				<input class="btn btn-info" type="submit" value="검색"/>
+				<input type="submit" class="btn btn-info"  value="검색"/>
 				<%-- <a href="${ pageContext.request.contextPath }/hotel/hotelList.cr">검색</a> --%>
 				
 			</div>

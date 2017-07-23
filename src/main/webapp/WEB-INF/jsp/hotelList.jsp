@@ -1,109 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--[if IE 8 ]><html class="ie ie8" class="no-js" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <!--<![endif]-->
+<html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>호텔 검색</title>
+	<title>싸다방</title>
 	<meta name="description" content="">
-	
-	<!-- search -->
-	<%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/search.css" /> --%>
+		<%-- <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/search.css" /> --%>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- CSS FILES -->
+	<link rel="stylesheet" type="text/css" href="${ pageContext.request.contextPath }/css/vendor/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="${ pageContext.request.contextPath }/css/style.css">
+    <link rel="stylesheet" type="text/css" href="${ pageContext.request.contextPath }/css/style.css" media="screen" data-name="skins">
+    <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/style-fraction.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/fractionslider.css">
+    <link rel="stylesheet" type="text/css" href="${ pageContext.request.contextPath }/css/switcher.css" media="screen" />
+	
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-	<!-- CSS FILES -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/vendor/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style-fraction.css" type="text/css" charset="utf-8" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fractionslider.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/switcher.css" media="screen" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    <!-- Include Date Range Picker -->
+     
+	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+	<!-- Include Date Range Picker -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-	
-	<script type="text/javascript">
-		var j = jQuery.noConflict();
-		j(function(){
-		    j('input[name="daterange"]').daterangepicker({
-		    		locale: {
-			    		format : 'YYYY-MM-DD',
-			    		cancelLabel : '취소',
-			    		applyLabel : '확인'
-			    }			    
-		    }, 
-		    function(start, end, label) {
-			    alert("예약 날짜 : " + start.format('YYYY-MM-DD') + '에서 ' + end.format('YYYY-MM-DD') + '까지 예약하시겠습니까?');
-			});
-		    j('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
-				$(this).val('');
-			});
-		});
-		function changeFormAction(checkbox){
-		    document.getElementById("login-form").action = checkbox.value;
-		}
-	</script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="${ pageContext.request.contextPath }/js/searchDate.js"></script>
     
 </head>
 <body>
-	<!--Start Header-->
-    <header id="header">
-        <div id="top-bar">
-            <div class="container">
-                <div class="row">
-                <div class="top-info hidden-xs col-sm-7 ">
-                    <span><i class="fa fa-phone"></i>phone: (123) 456-7890</span>
-                    <span><i class="fa fa-envelope"></i>Email: mail@example.com</span>
+	<header id="header" class="clearfix">
+    <!-- Nav Bar -->
+    <div id="nav-bar" class="clearfix">
+        <div class="container">
+            <div class="row">
+                <!-- Logo / Mobile Menu -->
+				<div class="col-sm-2">
+					<div id="logo">
+						<h1>
+							<a href="${ pageContext.request.contextPath }"><img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
+						</h1>
+					</div>
+				</div>
+		
+				<!-- Navigation
+                ================================================== -->
+                <!-- Nav menu -->
+                <jsp:include page="/include/loginModal.jsp"/>
+                
+                <c:choose>
+	                <c:when test="${ empty loginUser}">
+		                <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a>                		
+	                </c:when>
+					<c:otherwise>
+						<c:if test="${ loginUser.type eq 'U' }">
+							<jsp:include page="/include/userMenu.jsp"/>
+			                		[${ loginUser.email}님 접속중]
+								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
+		                </c:if>
+						<c:if test="${ loginUser.type eq 'S' }">
+						<jsp:include page="/include/adminMenu.jsp"/>
+		                		[${ loginUser.email} 관리자님 접속중]
+							<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
+		                </c:if>
+		                <c:if test="${ loginUser.type eq 'O' }">
+		               		   <jsp:include page="/include/ownerMenu.jsp"/>
+		                		[${ loginUser.email} 사업자님 접속중]
+							<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
+		                </c:if>
+					</c:otherwise>                
+                </c:choose>
                 </div>
-                <div class="top-info col-sm-5">
-                    <ul class="clearfix">
-                        <li><a href="" class="my-tweet"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="" class="my-facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="" class="my-skype"><i class="fa fa-skype"></i></a></li>
-                        <li><a href="" class="my-pint"><i class="fa fa-pinterest"></i></a></li>
-                        <li><a href="" class="my-rss"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="" class="my-google"><i class="fa fa-google-plus"></i></a></li>
-                    </ul>
-                </div>
-            </div>
             </div>
         </div>
-        <!-- Nav Bar -->
-        <div id="nav-bar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-2 col-md-2 col-lg-2">
-                        <div id="logo">
-                            <h1><a href="index.html"><img src="${pageContext.request.contextPath}/img/logo.png" alt="League" /></a></h1>
-                        </div>
-                    </div>
-                    <!-- Navigation
-                    ================================================== -->
-                    <div class="col-lg-10 col-md-10 clearfix">
-                        <jsp:include page="/include/userMenu.jsp" />
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Nav Bar -->
-    </header>
-	<!--End Header-->
+    </div>
+    <!-- End Nav Bar -->
+</header>
 	
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -304,7 +287,7 @@
 	
 	
 	
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/vendor/jquery-1.10.2.min.js"></script>
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/vendor/jquery-1.10.2.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/vendor/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery.easing.1.3.js"></script>
 	<script src="${pageContext.request.contextPath}/js/retina-1.1.0.min.js"></script>
@@ -325,7 +308,7 @@
 
 
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-	
+ --%>	
 	<!-- Start Style Switcher -->
 	<div class="switcher"></div>
 	<!-- End Style Switcher -->
