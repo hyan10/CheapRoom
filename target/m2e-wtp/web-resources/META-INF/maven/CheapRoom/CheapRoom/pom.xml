@@ -122,6 +122,18 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.4.1.Final</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20170516</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-s3</artifactId>
+		    <version>1.11.166</version>
+		</dependency>
+				
 
 	</dependencies>
 	
@@ -132,5 +144,6 @@
 				<url>http://maven.jahia.org/maven2</url>
 			</repository>
 		</repositories>
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
   
 </project>
