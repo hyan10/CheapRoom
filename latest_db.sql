@@ -484,14 +484,14 @@ COMMENT ON TABLE blind_list IS '신고내역'
 -- chart Table Create SQL
 CREATE TABLE chart
 (
-    hotel_no        NUMBER       NOT NULL, 
+	owner_no		NUMBER	  NOT NULL,
+    hotel_no        NUMBER    NOT NULL, 
     year            NUMBER    NOT NULL, 
     month           NUMBER    NOT NULL, 
     city_no         NUMBER    NOT NULL, 
     count           NUMBER    NOT NULL, 
     profit          NUMBER    NOT NULL, 
-    total_person    NUMBER    NOT NULL, 
-    CONSTRAINT CHART_PK PRIMARY KEY (hotel_no)
+    total_person    NUMBER    NOT NULL
 )
 /
 
@@ -524,4 +524,13 @@ COMMENT ON COLUMN chart.profit IS '수익'
 ALTER TABLE chart
     ADD CONSTRAINT FK_chart_city_no_city_no FOREIGN KEY (city_no)
         REFERENCES city (no)
+/
+ALTER TABLE chart
+    ADD CONSTRAINT FK_chart_hotel_no_hotel_no FOREIGN KEY (hotel_no)
+        REFERENCES hotel (no)
+/
+
+ALTER TABLE chart
+    ADD CONSTRAINT FK_chart_owner_no_owner_no FOREIGN KEY (owner_no)
+        REFERENCES owner (no)
 /

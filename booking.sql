@@ -105,3 +105,36 @@ where u.hotel_no = h.no
 group by h.no, h.name, h.city_no
 
 select 1 from dual where to_char(sysdate,'MM')='07'
+
+ALTER TABLE chart
+    ADD CONSTRAINT FK_chart_owner_no_owner_no FOREIGN KEY (owner_no)
+        REFERENCES owner (no)
+        
+select to_char(to_date(7,'mm'),'mm') from dual
+select to_date(4,'mm') from dual
+
+select h.no as hotelNo, h.name as hotelName, h.city_no as cityNo,
+	count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson,
+	to_char(sysdate,'MM') as month
+from hotel h, (select bh.total_price as total_price, total_person, hotel_no
+			from booking_history bh
+			where bh.hotel_no in (select no
+						from hotel h
+						where h.owner_no=1)
+			and to_char(bh.start_date, 'MM') = to_char(to_date(7,'mm'),'mm')) u
+where u.hotel_no = h.no
+group by h.name, h.no, h.city_no
+
+
+select h.no as hotelNo, h.name as hotelName, h.city_no as cityNo,
+	count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson,
+	to_char(sysdate,'MM') as month
+
+
+INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, owner_no) VALUES (1, 2017, 6, 1, 5, 250000, 10, 1);
+INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, owner_no) VALUES (1, 2017, 5, 1, 3, 150000, 7, 1);
+INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, owner_no) VALUES (1, 2017, 4, 1, 3, 140000, 6, 1);
+INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, owner_no) VALUES (1, 2017, 3, 1, 1, 50000, 2, 1);
+
+select h.name, c.month, c.count, c.profit, c.total_person
+from chart c join hotel h on c.hotel_no=h.no

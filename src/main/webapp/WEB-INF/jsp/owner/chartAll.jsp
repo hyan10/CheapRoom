@@ -91,8 +91,7 @@
 		<!-- 통계 영역 -->
 		<section class="content portfolio_single">
 			<div class="container">
-
-				<!-- 월 선택 -->	
+				
 				<form name="monthForm" action="${pageContext.request.contextPath}/booking/testChart.cr" method="get">
 					<div class="col-md-8">		
 						월 선택: <select class="form-control col-lg-3" name="month">
@@ -113,7 +112,7 @@
 					<div class="widget_title dividerHeading">
 					<!-- ${chartList[0].year} -->
 					<!-- ${param.year} -->
-						<h4><span><b>2017년 ${month}월 호텔 별 통계 리스트</b></span></h4>
+						<h4><span><b>2017년 통계 리스트</b></span></h4>
 					</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut reiciendise voluptat maiores alias aut et perferendis doloribus asperiores ut labore.</p>
 						<p> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -127,7 +126,7 @@
 							<!-- 통계 자료 내용 -->						
 							<div class="project_details">
 								<div class="widget_title">
-									<h4><span><b>${chart.hotelName}</b></span></h4>
+									<h4><span><b>${chart.month}월</b></span></h4>
 								</div>
 								<ul class="details">
 									<li><span>총 예약 건수 :</span>${chart.count}</li>

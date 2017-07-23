@@ -1,6 +1,7 @@
 package kr.co.bit.cr.chart;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,18 @@ public class ChartService {
 	}
 	
 	// 관리자의 n월 통계
-	public List<ChartVO> chartLastMonth(String month){
+	public List<ChartVO> chartLastMonth(int month){
 		return dao.chartLastMonth(month);
+	}
+
+	// 사업자의 n월 통계
+	public List<ChartVO> chartLastMonthByOwnerNo(Map<String, Integer> map) {
+		return dao.chartLastMonthByOwnerNo(map);
+	}
+	
+	// 월별 통계
+	public List<ChartVO> chartAllByOwnerNo(int ownerNo){
+		return dao.chartAllByOwnerNo(ownerNo);
 	}
 	
 }

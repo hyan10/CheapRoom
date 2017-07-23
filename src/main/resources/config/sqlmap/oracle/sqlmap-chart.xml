@@ -70,28 +70,34 @@
 	</select>
 	
 	<!-- n월 관리자용 통계 -->
-	<select id="selectChartLastMonth" parameterType="String" resultType="chart">
+	<select id="selectChartLastMonth" parameterType="int" resultType="chart">
 		<include refid="selectVO_lastdate"/>
 		from hotel h, (<include refid="selectInFrom"/>
 						where bh.hotel_no in (select no
 												from hotel h)
-						and to_char(bh.start_date, 'MM') = #{month}) u
+						and to_char(bh.start_date, 'MM') = to_char(to_date(#{month},'mm'),'mm')) u
 		where u.hotel_no = h.no
 	 	<include refid="groupBy"/>	
 	</select>
 
 	<!-- 사업자의 n월 통계 -->
-	<select id="selectChartLastMonthByOwnerNo" parameterType="int" resultType="chart">
+	<select id="selectChartLastMonthByOwnerNo" parameterType="hashMap" resultType="chart">
 		<include refid="selectVO_lastdate"/>
 		from hotel h, (<include refid="selectInFrom"/>
 						where bh.hotel_no in (select no
 											from hotel h
 											where h.owner_no=#{no})
-						<!-- and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM') -->) u
+						and to_char(bh.start_date, 'MM') = to_char(to_date(#{month},'mm'),'mm')) u
 		where u.hotel_no = h.no
-	 	<include refid="groupBy"/>		
+	 	<include refid="groupBy"/>
 	</select>
 	
 	
+	<!-- 사업자의 월 별 통계 -->
+	<select id="selectChartAllByOwnerNo" parameterType="int" resultType="chart">
+		select h.name, c.month, c.count, c.profit, c.total_person
+		from chart c join hotel h on c.hotel_no=h.no
+		where h.owner_no=#{no}
+	</select>
 	
 </mapper>
