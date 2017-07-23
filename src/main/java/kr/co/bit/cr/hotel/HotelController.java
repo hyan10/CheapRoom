@@ -20,17 +20,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.bit.cr.favorite.FavoriteService;
 import kr.co.bit.cr.image.ImageVO;
 import kr.co.bit.cr.owner.OwnerVO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
+import kr.co.bit.cr.user.UserVO;
 
 @Controller
 @RequestMapping("/hotel")
 public class HotelController {
 	@Autowired
 	private HotelService service;
-
+	
 	//호텔 + 방 같이 등록
 	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.GET)
 	public String registerHotelForm(){
@@ -153,7 +155,8 @@ public class HotelController {
 	@RequestMapping(value="/hotelList.cr", method=RequestMethod.GET)
 	public String hotelList(@ModelAttribute("search")SearchVO search, 
 							@RequestParam("dateRange")String daterange, Model model,
-							HttpServletResponse response){
+							HttpServletResponse response,
+							HttpSession session){
 		//1. 쿠키에 input form 날라온 데이터 저장해주기
 		//2. 지역 번호로 호텔 검색하는데, 사람 인원수를 보여줘야하니까-> 호텔 방 조인해서 가능한 방이 한개 이상있으면 호텔 보여줘
 		//지역번호로 호텔조회함/ 호텔리스트에서 상세페이지 들어가면 룸이랑 부킹 확인해서 예약가능한 방 보여줌
@@ -181,10 +184,14 @@ public class HotelController {
 		search.setPersonNo(Integer.parseInt(personNo.getValue()));
 		list = service.hotelList(search);
 		
-		model.addAttribute("hotelList", list);
 		
 		System.out.println(list);
-
+		///////////
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		list = service.favoriteList(list, user);
+		System.out.println("favorite추가");
+		System.out.println(list);
+		model.addAttribute("hotelList", list);
 		return "hotelList";
 	}
 

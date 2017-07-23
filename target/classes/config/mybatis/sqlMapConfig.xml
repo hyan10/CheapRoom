@@ -12,5 +12,6 @@
 		<typeAlias type="kr.co.bit.cr.room.RoomVO" alias="room" />
 		<typeAlias type="kr.co.bit.cr.image.ImageVO" alias="image" />
 		<typeAlias type="kr.co.bit.cr.search.SearchVO" alias="search" />
+		<typeAlias type="kr.co.bit.cr.favorite.FavoriteVO" alias="favorite" />
 	</typeAliases>
 </configuration>

@@ -9,14 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bit.cr.booking.BookingService;
 import kr.co.bit.cr.booking.BookingVO;
+import kr.co.bit.cr.favorite.FavoriteService;
+import kr.co.bit.cr.favorite.FavoriteVO;
 import kr.co.bit.cr.owner.OwnerService;
 import kr.co.bit.cr.owner.OwnerVO;
 
@@ -30,6 +34,8 @@ public class UserController {
 	private OwnerService ownerService;
 	@Autowired
 	private BookingService bookingService;
+	@Autowired
+	private FavoriteService favoriteService;
 	
 	@RequestMapping(value="/join.cr", method=RequestMethod.POST) 
 	//public String join(UserVO userVO){
@@ -135,6 +141,18 @@ public class UserController {
 	@RequestMapping("/blind.cr")
 	public void userBlind(){
 		//세선 받아오기
+	}
+	@RequestMapping(value="/favorite.cr",method=RequestMethod.GET)
+	public String Favorite(HttpSession session, @ModelAttribute("favorite")FavoriteVO favorite){
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		favorite.setUserNo(user.getNo());
+		String msg = favoriteService.Favorite(favorite);
+		System.out.println(favorite);
+		if(msg!=null){
+			return msg;
+		}
+		msg="error";
+		return msg;
 	}
 	  
 }

@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.bit.cr.favorite.FavoriteDAO;
+import kr.co.bit.cr.favorite.FavoriteVO;
 import kr.co.bit.cr.image.ImageDAO;
 import kr.co.bit.cr.image.ImageVO;
 import kr.co.bit.cr.room.RoomDAO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
+import kr.co.bit.cr.user.UserVO;
 
 @Service
 public class HotelService {
@@ -24,6 +27,8 @@ public class HotelService {
 	private RoomDAO rDao;
 	@Autowired
 	private ImageDAO iDao;
+	@Autowired
+	private FavoriteDAO fDao;
 
 	
 	/**
@@ -169,4 +174,33 @@ public class HotelService {
 		hotel.setRooms(rooms);
 		return hotel;
 	}
+	
+	public List<HotelVO> favoriteList(List<HotelVO> list, UserVO user) {
+		//호텔리스트의 번호들을 리스트로 가져옴
+		// 유저넘버 in 호텔번호 from favorite해서 favorite List를 가져옴
+		// favorite리스트의 번호가 호텔리스트에포함되어잇으면 y 아니면 n
+		List<Integer> noList = new ArrayList<>();
+		Map<String, Object> map = new HashMap<>();
+		map.put("no", user.getNo());
+		for(HotelVO hotel : list){
+			noList.add(hotel.getNo());
+		}
+		map.put("list", noList);
+		List<FavoriteVO> favorite =fDao.favoriteList(map);
+		//비교해서 셋 호텔넘버만 리스트로 받자
+		//
+		for(HotelVO hotel : list){
+			hotel.setFavorite("N");
+			for(FavoriteVO f: favorite){
+				if(hotel.getNo()==f.getHotelNo()){
+					hotel.setFavorite("Y");
+					break;
+				}
+			}
+		}
+		return list;
+		
+		
+	}
+
 }

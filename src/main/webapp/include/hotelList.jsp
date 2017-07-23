@@ -38,20 +38,10 @@
 							
 						<!-- 찜하기 -->
 						<div class="post_date">
-							<c:choose>
-								<c:when test="false">
-									<a href="#">
-										<span class="day"><i class="fa fa-heart"></i></span>
-										<span class="month">취소</span>
-									</a>
-								</c:when>
-								<c:otherwise>
-									<a href="#">
+									<a href="${pageContext.request.contextPath}/user/favorite.cr?hotelNo=${hotel.no }">
 										<span class="day"><i class="fa fa-heart-o"></i></span>
 										<span class="month">찜</span>
 									</a>
-								</c:otherwise>
-							</c:choose>
 						</div> <!-- 찜하기 끝 -->
 					</article>
 				</c:forEach>
