@@ -24,4 +24,8 @@ public class OwnerService {
 	public int updateOwnerType(int ownerNo){
 		return dao.updateOwnerType(ownerNo);
 	}
+	
+	public int deleteOwnerByNo(int ownerNo){
+		return dao.deleteOwnerByNo(ownerNo);
+	}
 }

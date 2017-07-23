@@ -18,4 +18,8 @@
 	<update id="updateOwnerType" parameterType="int">
 		update owner set type='O' where no=#{ownerNo}
 	</update>
+	
+	<delete id="deleteOwnerByNo" parameterType="int">
+		delete from owner where no=#{no}
+	</delete>
 </mapper>

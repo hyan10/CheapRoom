@@ -62,7 +62,7 @@ public class UserController {
 //		model.addAttribute("loginUser", user);
 		session.setAttribute("loginUser", user);
 		if(user.getType().equals("S")){
-			return "admin/admission";
+			return "redirect:/admin/admissionList.cr";
 		}
 		return "search";
 	}

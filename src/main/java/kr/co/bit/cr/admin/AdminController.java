@@ -55,12 +55,14 @@ public class AdminController {
 			msg="사업자 승인 실패";
 		}
 		model.addAttribute("msg", msg);
-		return "admin/admission";
+		return "redirect:/admin/admissionList.cr";
 	}
 	
-	@RequestMapping(value="/admission.cr", method=RequestMethod.DELETE)
-	public String Admission(@RequestParam("ownerNo")int ownerNo){
+	@RequestMapping(value="/rejection.cr", method=RequestMethod.GET)
+	public String rejection(@RequestParam("ownerNo")int ownerNo){
 		System.out.println("delete");
-		return "admin/amission";
+		int cnt = ownerService.deleteOwnerByNo(ownerNo);
+
+		return "redirect:/admin/admissionList.cr";
 	}
 }

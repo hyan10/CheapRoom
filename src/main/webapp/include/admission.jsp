@@ -31,7 +31,7 @@
            <th>이메일</th>
            <th>phone</th>
            <th>가입날</th>
-           <td>사업자등록번호</th>
+           <th>사업자등록번호</th>
            <th>승인/거부</th>
            <th></th>
         </tr>
@@ -50,12 +50,12 @@
               <a class="btn btn-info edit" href="${pageContext.request.contextPath}/admin/admission.cr?ownerNo=${owner.no}" aria-label="Settings">
                 <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
               </a> 
-         <%--      <a class="btn btn-danger edit" href="${pageContext.request.contextPath}/admin/admission.cr" aria-label="Settings">
+              <a class="btn btn-danger edit" href="${pageContext.request.contextPath}/admin/rejection.cr?ownerNo=${owner.no}" aria-label="Settings">
                 <i class="fa fa-times" aria-hidden="true"></i>
-              </a> --%>
-              <form:form method="delete" action="${pageContext.request.contextPath}/admin/admission.cr?ownerNo=${owner.no }">
+              </a>
+<%--               <form:form method="delete" action="${pageContext.request.contextPath}/admin/admission.cr?ownerNo=${owner.no }">
      			<p class="submit"><input type="submit" value="a"/></p>
-			  </form:form>
+			  </form:form> --%>
               &nbsp 
            </td>
         </tr>

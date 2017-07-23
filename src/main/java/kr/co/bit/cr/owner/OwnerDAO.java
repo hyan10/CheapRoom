@@ -25,4 +25,8 @@ public class OwnerDAO {
 	public int updateOwnerType(int ownerNo){
 		return sqlSessionTemplate.update("owner.dao.OwnerDAO.updateOwnerType", ownerNo);
 	}
+	
+	public int deleteOwnerByNo(int ownerNo){
+		return sqlSessionTemplate.delete("owner.dao.OwnerDAO.deleteOwnerByNo",ownerNo);
+	}
 }
