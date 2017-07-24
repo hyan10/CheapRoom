@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,6 +20,8 @@ import kr.co.bit.cr.booking.BookingService;
 import kr.co.bit.cr.booking.BookingVO;
 import kr.co.bit.cr.owner.OwnerService;
 import kr.co.bit.cr.owner.OwnerVO;
+import kr.co.bit.cr.review.ReviewService;
+import kr.co.bit.cr.review.ReviewVO;
 
 @Controller
 @RequestMapping("/user")
@@ -30,6 +33,8 @@ public class UserController {
 	private OwnerService ownerService;
 	@Autowired
 	private BookingService bookingService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping(value="/join.cr", method=RequestMethod.POST) 
 	//public String join(UserVO userVO){
@@ -128,9 +133,22 @@ public class UserController {
 		mav.addObject("bookingHistoryList", bookingHistoryList);
 		return mav;
 	}
-	@RequestMapping("/review.cr")
-	public void userReview(){
-		//세선 받아오기
+	/*
+	 * user : 내 후기 
+	 */
+	@RequestMapping(value="/registerReview.cr", method=RequestMethod.POST)
+	public String registerReview(@RequestParam("hotelNo") String hotelNo, @RequestParam("userNo") String userNo, ReviewVO reviewVO){
+		reviewService.registerReview(reviewVO);
+		return "redirect:/user/bookingHistoryList.cr";
+	}
+	
+	@RequestMapping("/reviewList.cr")
+	public ModelAndView userReview(HttpSession session){
+		UserVO user = (UserVO) session.getAttribute("loginUser");
+		List<ReviewVO> reviewList = reviewService.userReviewList(user.getNo());
+		ModelAndView mav = new ModelAndView("/user/reviewList");
+		mav.addObject("reviewList", reviewList);
+		return mav;
 	}
 	@RequestMapping("/blind.cr")
 	public void userBlind(){

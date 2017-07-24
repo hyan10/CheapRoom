@@ -87,38 +87,7 @@
 </head>
 
 <body>
-	<!--Start Header-->
-	<header id="header" class="clearfix"> <!-- Nav Bar -->
-	<div id="nav-bar" class="clearfix">
-		<div class="container">
-			<div class="row">
-				<!-- Logo / Mobile Menu -->
-				<div class="col-sm-2">
-					<div id="logo">
-						<h1>
-							<a href="${ pageContext.request.contextPath }"><img
-								src="${ pageContext.request.contextPath }/img/logo.png"
-								alt="League" /></a>
-						</h1>
-					</div>
-				</div>
-
-				<!-- Navigation
-                ================================================== -->
-				<!-- Nav menu -->
-
-				<c:if test="${ loginUser.type eq 'U' }">
-					<jsp:include page="/include/userMenu.jsp" />
-               		[${ loginUser.email}님 접속중]
-				<a href="${ pageContext.request.contextPath }/user/logout.cr"
-						class="btn btn-primary btn-lg" role="button">로그아웃</a>
-				</c:if>
-
-			</div>
-		</div>
-	</div>
-	<!-- End Nav Bar --> </header>
-	<!--End Header-->
+	<jsp:include page="/include/header.jsp" />
 	<!--Start Slider-->
 	<div class="slider-wrapper">
 		<div class="container">

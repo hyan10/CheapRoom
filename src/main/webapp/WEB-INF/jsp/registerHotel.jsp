@@ -95,7 +95,6 @@
 			</div>
 		</div>
 	</div>
-	</div>
 	<!-- End Nav Bar --> </header>
 	<!--End Header-->
 	<!--Start Slider-->

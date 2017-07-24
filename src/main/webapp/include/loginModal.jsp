@@ -6,8 +6,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header" align="center">
-				<img class="img-circle" id="img_logo" src="img/cheapRoom_logo.png"
-					width="30%" height="30%">
+				<img class="img-circle" id="img_logo" src="${ pageContext.request.contextPath }/img/cheapRoom_logo.png" width="30%" height="30%">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
