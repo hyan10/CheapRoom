@@ -33,7 +33,7 @@ Optional theme
  -->
 
 	<div class="well-searchbox" style="float: left;">
-		<form class="form-horizontal" role="form" method="get" onsubmit="return checkDateForm()" action="${ pageContext.request.contextPath }/hotel/hotelList.cr">
+		<form class="form-horizontal" role="form" method="get" onsubmit="return checkDateForm();" action="${ pageContext.request.contextPath }/hotel/hotelList.cr">
 			<div class="form-group">
 				<label class="col-md-4 control-label">지역</label>
 				<div class="col-md-8">

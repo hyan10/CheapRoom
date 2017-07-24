@@ -40,6 +40,5 @@
 	    j('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
 			$(this).val('');
 		});
-	    //j('input[name="dateRange"]').daterangepicker().setDateRange('2017-07-21', '2017-07-23');
 	});
 })(jQuery);
