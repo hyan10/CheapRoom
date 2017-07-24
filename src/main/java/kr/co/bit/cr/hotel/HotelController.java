@@ -257,6 +257,7 @@ public class HotelController {
 		System.out.println(list);
 		//owner user 체크
 		UserVO user = (UserVO)session.getAttribute("loginUser");
+		System.out.println("favorite들어가기전");
 		list = service.favoriteList(list, user);
 		System.out.println("favorite추가");
 		System.out.println(list);

@@ -30,7 +30,7 @@
 	</select>
 	
 	<select id="joinHotelAndBooking" parameterType="search" resultType="hashmap">
-		select h.no as hotelNo, count(*) as roomCount from hotel h join booking b on h.no=b.hotel_no 
+		select h.no as hotelNo, count(*) as roomCount from hotel h left outer join booking b on h.no=b.hotel_no 
 		where (trunc(start_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) or 
 		 (trunc(end_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) group by h.no order by 1
 

@@ -93,6 +93,10 @@ public class HotelService {
 		//1.지역번호로 호텔이랑 방조회해서 호텔세팅
 		//원래 조인으로 해야댐ㅠ
 		List<HotelVO> list = hDao.selectHotelByCno(search.getCityNo());
+		System.out.println("도시번호로 조회");
+		for(HotelVO t1 : list){
+			System.out.println(t1);
+		}
 		Map<Integer, HotelVO> fList = new HashMap<>();
 		Map<Integer, Integer> roomCount = new HashMap<>();
 		for(HotelVO hotel : list){
@@ -100,6 +104,8 @@ public class HotelService {
 			List<RoomVO> rooms = rDao.selectRoomByHno(hotelNo);
 			hotel.setRooms(rooms);
 			roomCount.put(hotelNo, rooms.size());
+			System.out.println("====");
+			System.out.println(hotelNo+":"+rooms.size());
 			fList.put(hotelNo, hotel);
 		}
 		
@@ -108,16 +114,25 @@ public class HotelService {
 		List<HotelVO> resultList = new ArrayList<>();
 		Iterator<Integer> iterator = joinMap.keySet().iterator();
 	    while (iterator.hasNext()) {
+	    	System.out.println("while문안");
 	    	int hotelNo = (Integer) iterator.next();
 	    	if(roomCount.get(hotelNo)!=null && joinMap.get(hotelNo)!=null){
+	    		System.out.println("if들어가기전");
+	    		System.out.println(roomCount.get(hotelNo));
+	    		System.out.println(joinMap.get(hotelNo));
 	    		if(roomCount.get(hotelNo)>joinMap.get(hotelNo)){
+	    			System.out.println("조인비교");
+	    			System.out.println(roomCount.get(hotelNo)+" : "+joinMap.get(hotelNo));
 	    			HotelVO h = fList.get(hotelNo);
+	    			System.out.println("hotel : "+h);
 	    			resultList.add(h);
 	    		}
 	    	}
 	    }
 
 		//남은 결과 조회해서 리턴
+	    System.out.println("최종");
+	    System.out.println(resultList);
 		return resultList;
 	}
 	
@@ -191,8 +206,11 @@ public class HotelService {
 		Map<String, Object> map = new HashMap<>();
 		map.put("no", user.getNo());
 		for(HotelVO hotel : list){
+			System.out.println("=====");
+			System.out.println(hotel.getNo());
 			noList.add(hotel.getNo());
 		}
+		
 		map.put("list", noList);
 		
 		List<FavoriteVO> favorite = new ArrayList<>();
