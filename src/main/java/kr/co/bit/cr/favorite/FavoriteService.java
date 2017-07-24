@@ -36,5 +36,14 @@ public class FavoriteService {
 		return msg;
 	}
 
+	public List<HotelVO> bookmarkList(Integer no) {
+		return dao.bookmarkList(no);
+		
+	}
+
+	public int Cancel(FavoriteVO favoriteVO) {
+		return dao.deleteFavorite(favoriteVO);
+	}
+
 
 }

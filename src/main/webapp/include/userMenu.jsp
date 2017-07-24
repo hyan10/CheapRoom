@@ -62,6 +62,9 @@
 						</ul></li>
 				</ul> -->
 			</li>
+				<li><a href="${pageContext.request.contextPath }/user/favoriteList.cr">찜목록</a>
+
+			</li>
 
 			<!-- <li><a href="#">Blog</a>
 				<ul>
