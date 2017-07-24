@@ -20,10 +20,10 @@
 						<div class="post_content">
 							<div class="post_meta">
 								<h2>
-									<a href="{pageContext.request.contextPath}/hotel/roomList.cr?hotelNo={${hotel.no}}""> ${hotel.name}</a>
+									<a href="{pageContext.request.contextPath}/hotel/roomList.cr?hotelNo={${hotel.no}}"> ${hotel.name}</a>
 								</h2>
 								<div class="metaInfo">
-									<span><i class="fa fa-user"></i><a href="#">${hotel.addr}</a> </span>
+									<span><i class="fa fa-map-marker"></i><a href="#">${hotel.addr}</a> </span>
 								</div>
 							</div>
 							<p>${hotel.description}</p>

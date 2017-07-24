@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chart.ChartDAO">
+
+	<!-- 이번달 통계 select문 -->
+	<sql id="selectVO_sysdate">
+		select h.no as hotelNo, h.name as hotelName, h.city_no as cityNo,
+				count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson,
+				to_char(sysdate, 'yyyy') as year, to_char(sysdate,'MM') as month
+	</sql>
+
+	<!-- n월 통계 select문 -->
+	<sql id="selectVO_lastdate">
+		select h.no as hotelNo, h.name as hotelName, h.city_no as cityNo,
+				count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson,
+				to_char(sysdate, 'yyyy') as year, #{month} as month
+	</sql>
+	
+	<!-- 공통 from절 내의 select문 -->
+	<sql id="selectInFrom">
+		select bh.total_price as total_price, total_person, hotel_no
+		from booking_history bh
+	</sql>
+	
+	<!-- 공통 groupBy 절 -->
+	<sql id="groupBy">
+		group by h.no, h.name, h.city_no
+	</sql>
+
+	<!-- 이번 달 사업자 통계 (월별 예약 건수, 수익) -->
+<!-- 	select count(*), sum(total_price)
+	from
+	((select b.total_price as total_price
+	from booking b
+	where b.hotel_no in (select no
+						from hotel h
+						where h.owner_no=1)
+		and trunc(b.start_date, 'MM') = trunc(sysdate, 'MM'))
+	union
+	(select bh.total_price as total_price
+	from booking_history bh
+	where bh.hotel_no in (select no
+						from hotel h
+						where h.owner_no=1)
+		and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM'))) -->
+
+	<select id="selectChartThisMonthByOwnerNo" parameterType="int" resultType="chart">
+		<include refid="selectVO_sysdate"/>
+		from hotel h, ( <include refid="selectInFrom"/>
+						where bh.hotel_no in (select no
+										from hotel h
+										where h.owner_no=#{no})
+						and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM')) u
+		where u.hotel_no = h.no
+	 	<include refid="groupBy"/>
+		
+	</select>
+	
+	<!-- 이번 달 관리자용 통계 -->
+	<select id="selectChartThisMonth" resultType="chart">
+		<include refid="selectVO_sysdate"/>
+		from hotel h, (<include refid="selectInFrom"/>
+						where bh.hotel_no in (select no
+									from hotel h)
+						and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM')) u
+		where u.hotel_no = h.no
+	 	<include refid="groupBy"/>	
+	</select>
+	
+	<!-- n월 관리자용 통계 -->
+	<select id="selectChartLastMonth" parameterType="int" resultType="chart">
+		<include refid="selectVO_lastdate"/>
+		from hotel h, (<include refid="selectInFrom"/>
+						where bh.hotel_no in (select no
+												from hotel h)
+						and to_char(bh.start_date, 'MM') = to_char(to_date(#{month},'mm'),'mm')) u
+		where u.hotel_no = h.no
+	 	<include refid="groupBy"/>	
+	</select>
+
+	<!-- 사업자의 n월 통계 -->
+	<select id="selectChartLastMonthByOwnerNo" parameterType="hashMap" resultType="chart">
+		<include refid="selectVO_lastdate"/>
+		from hotel h, (<include refid="selectInFrom"/>
+						where bh.hotel_no in (select no
+											from hotel h
+											where h.owner_no=#{no})
+						and to_char(bh.start_date, 'MM') = to_char(to_date(#{month},'mm'),'mm')) u
+		where u.hotel_no = h.no
+	 	<include refid="groupBy"/>
+	</select>
+	
+	
+	<!-- 사업자의 월 별 통계 -->
+	<select id="selectChartAllByOwnerNo" parameterType="int" resultType="chart">
+		select h.name, c.month, c.count, c.profit, c.total_person
+		from chart c join hotel h on c.hotel_no=h.no
+		where h.owner_no=#{no}
+	</select>
+	
+</mapper>

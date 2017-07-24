@@ -3,7 +3,9 @@ package kr.co.bit.cr.booking;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,14 +13,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bit.cr.chart.ChartService;
+import kr.co.bit.cr.chart.ChartVO;
 import kr.co.bit.cr.hotel.HotelService;
 import kr.co.bit.cr.hotel.HotelVO;
+import kr.co.bit.cr.owner.OwnerVO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.user.UserVO;
 
@@ -33,6 +39,10 @@ public class BookingController {
 
 	@Autowired
 	HttpSession session;
+	
+	////// owner로 이동
+	@Autowired
+	ChartService chartService;
 	
 
 	// 예약폼
@@ -266,4 +276,34 @@ public class BookingController {
 	public String test2(){
 		return "hotelList";
 	}
+	
+	@RequestMapping("/testChart.cr")
+	public String test3(Model model, HttpServletRequest request){
+		// List<ChartVO> chartList = chartService.chartThisMonthByOwnerNo(1);
+		// List<ChartVO> chartList = chartService.chartThisMonth();
+		
+		// 현재 월이 최대 월
+		int maxMonth = new Date().getMonth()+1;
+		int month = request.getParameter("month")!=null?Integer.parseInt(request.getParameter("month")):maxMonth;
+		request.setAttribute("month", month);
+		request.setAttribute("maxMonth", maxMonth);
+		System.out.println(month);
+//		 List<ChartVO> chartList = chartService.chartLastMonth(month);
+		
+		Map<String,Integer> map = new HashMap<>();
+		int ownerNo = 1;
+		OwnerVO owner = (OwnerVO)session.getAttribute("loginUser");
+		if(owner!=null){
+			ownerNo = owner.getNo();
+		}
+		map.put("no", ownerNo); 
+		map.put("month", month);
+		System.out.println(map);
+		//List<ChartVO> chartList = chartService.chartLastMonthByOwnerNo(map);
+
+		 List<ChartVO> chartList = chartService.chartAllByOwnerNo(ownerNo);
+		model.addAttribute("chartList", chartList);
+		return "owner/chartAll";
+	}
+	
 }

@@ -37,6 +37,29 @@
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<script type="text/javascript" src="${ pageContext.request.contextPath }/js/searchDate.js"></script>
+
+	
+	<script type="text/javascript">
+		var j = jQuery.noConflict();
+		j(function(){
+		    j('input[name="dateRange"]').daterangepicker({
+		    		locale: {
+			    		format : 'YYYY-MM-DD',
+			    		cancelLabel : '취소',
+			    		applyLabel : '확인'
+			    }			    
+		    }, 
+		    function(start, end, label) {
+			  //  alert("예약 날짜 : " + start.format('YYYY-MM-DD') + '에서 ' + end.format('YYYY-MM-DD') + '까지 예약하시겠습니까?');
+			});
+		    j('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
+				$(this).val('');
+			});
+		});
+		function changeFormAction(checkbox){
+		    document.getElementById("login-form").action = checkbox.value;
+		}
+	</script>
     
 </head>
 <body>
