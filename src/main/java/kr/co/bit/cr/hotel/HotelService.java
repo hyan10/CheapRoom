@@ -10,11 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.bit.cr.favorite.FavoriteDAO;
+import kr.co.bit.cr.favorite.FavoriteVO;
 import kr.co.bit.cr.image.ImageDAO;
 import kr.co.bit.cr.image.ImageVO;
 import kr.co.bit.cr.room.RoomDAO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
+import kr.co.bit.cr.user.UserVO;
 
 @Service
 public class HotelService {
@@ -24,6 +27,8 @@ public class HotelService {
 	private RoomDAO rDao;
 	@Autowired
 	private ImageDAO iDao;
+	@Autowired
+	private FavoriteDAO fDao;
 
 	
 	/**
@@ -33,7 +38,7 @@ public class HotelService {
 	 */
 	@Transactional
 	public int registerHotel(HotelVO hotel){
-		//이미지에 룸번호가 없음
+		hotel.setBlind("N");
 		int cnt = hDao.registerHotel(hotel);
 		if(cnt==1){
 			List<RoomVO> rooms = hotel.getRooms();
@@ -137,20 +142,25 @@ public class HotelService {
 		
 		//조인   return 예약된 방리스트
 		List<RoomVO> bookingRooms = rDao.joinRoomAndBooking(search);
-		System.out.println("들어와1");
-		for(RoomVO room1 : totalRooms){
-			System.out.println("들어와2");
-			for(RoomVO room2 : bookingRooms){
-				System.out.println("들어와3");
-				if(room2.getNo()==room1.getNo()){
-					
-					room1.setBooking("N");
-					break;
-				}else{
-				room1.setBooking("Y");
+
+		if(bookingRooms!=null){
+			for(RoomVO room1 : totalRooms){
+				for(RoomVO room2 : bookingRooms){
+					if(room2.getNo()==room1.getNo()){
+						room1.setBooking("N");
+						break;
+					}else{
+					room1.setBooking("Y");
+					}
+
 				}
+			}	
+		}else{
+			for(RoomVO room1 : totalRooms){
+				room1.setBooking("Y");
 			}
 		}
+	
 		
 		hotel.setRooms(totalRooms);
 		return hotel;
@@ -172,4 +182,42 @@ public class HotelService {
 		hotel.setRooms(rooms);
 		return hotel;
 	}
+	
+	public List<HotelVO> favoriteList(List<HotelVO> list, UserVO user) {
+		//호텔리스트의 번호들을 리스트로 가져옴
+		// 유저넘버 in 호텔번호 from favorite해서 favorite List를 가져옴
+		// favorite리스트의 번호가 호텔리스트에포함되어잇으면 y 아니면 n
+		List<Integer> noList = new ArrayList<>();
+		Map<String, Object> map = new HashMap<>();
+		map.put("no", user.getNo());
+		for(HotelVO hotel : list){
+			noList.add(hotel.getNo());
+		}
+		map.put("list", noList);
+		
+		List<FavoriteVO> favorite = new ArrayList<>();
+		System.out.println(favorite);
+		favorite = fDao.favoriteList(map);
+		System.out.println(favorite);
+		//비교해서 셋 호텔넘버만 리스트로 받자
+		for(HotelVO hotel : list){
+			hotel.setFavorite("N");
+			System.out.println("=======");
+			for(FavoriteVO f: favorite){
+				if((f!=null) && (hotel.getNo()==f.getHotelNo())){
+					System.out.println(f.getHotelNo());
+					hotel.setFavorite("Y");
+					break;
+				}
+				
+			}
+		}
+		
+		return list;
+	}
+	
+	public List<String> selectHotelNameByOno(int ownerNo){
+		return hDao.selectHotelNameByOno(ownerNo);
+	}
+
 }

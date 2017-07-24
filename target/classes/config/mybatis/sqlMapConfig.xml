@@ -14,5 +14,6 @@
 		<typeAlias type="kr.co.bit.cr.search.SearchVO" alias="search" />
 		<typeAlias type="kr.co.bit.cr.chart.ChartVO" alias="chart" />
 		<typeAlias type="kr.co.bit.cr.review.ReviewVO" alias="review" />
+		<typeAlias type="kr.co.bit.cr.favorite.FavoriteVO" alias="favorite" />
 	</typeAliases>
 </configuration>

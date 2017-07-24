@@ -53,6 +53,9 @@ public class HotelVO {
     
     private String imgUrl;
     
+    //찜 여부
+    private String favorite;
+    
     public HotelVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -84,6 +87,18 @@ public class HotelVO {
 	}
 
 	
+
+	public String getFavorite() {
+		return favorite;
+	}
+
+
+
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
+
+
 
 	public String getImgUrl() {
 		return imgUrl;
@@ -307,8 +322,10 @@ public class HotelVO {
 				+ blind + ", tel=" + tel + ", parking=" + parking + ", wifi=" + wifi + ", smoking=" + smoking
 				+ ", pool=" + pool + ", bbq=" + bbq + ", description=" + description + ", checkin=" + checkin
 				+ ", checkout=" + checkout + ", addr=" + addr + ", regDate=" + regDate + ", rooms=" + rooms
-				+ ", imgUrl=" + imgUrl + "]";
+				+ ", imgUrl=" + imgUrl + ", favorite=" + favorite + "]";
 	}
+	
+	
 
 
 }

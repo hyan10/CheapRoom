@@ -23,7 +23,10 @@
 	<select id="selectHotelByCno" parameterType="int" resultType="hotel">
 		<include refid="select"/>
 		 where city_no=#{no}
-		
+	</select>
+	
+	<select id="selectHotelNameByOno" parameterType="int" resultType="String">
+		select name from hotel where owner_no=#{no}
 	</select>
 	
 	<select id="joinHotelAndBooking" parameterType="search" resultType="hashmap">

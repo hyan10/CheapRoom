@@ -71,4 +71,8 @@ public class HotelDAO {
 		}
 		return resultMap;
 	}
+	
+	public List<String> selectHotelNameByOno(int ownerNo){
+		return sqlSession.selectList("hotel.dao.HotelDAO.selectHotelNameByOno",ownerNo);
+	}
 }

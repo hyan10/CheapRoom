@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="favorite.FavoriteDAO">
+
+	<sql id="select">
+		select no, owner_no as ownerNo, city_no as cityNo, name, blind, tel, parking, wifi, smoking, pool, bbq, 
+		description, checkin, checkout, addr, to_char(reg_date,'yyyy-mm-dd') as regDate, imgurl
+		from hotel
+	</sql>
+	
+	<select id="selectFavorite" parameterType="favorite" resultType="int">
+		select count(*) from favorite where user_no=#{userNo} and hotel_no=#{hotelNo}
+	</select>
+
+	<insert id="insertFavorite" parameterType="favorite">
+		insert into favorite(user_no, hotel_no) values(#{userNo},#{hotelNo})
+	</insert>
+	
+	<update id="deleteFavorite" parameterType="favorite">
+		delete from favorite where user_no=#{userNo} and hotel_no=#{hotelNo}
+	</update>
+	
+	<select id="selectFavoriteList" parameterType="hashmap" resultType="favorite">
+		select user_no as userNo, hotel_no as hotelNo from favorite where user_no=#{no} and hotel_no in(
+		 <foreach collection="list" item="item" index="index" separator=",">
+		 	#{item}
+		 </foreach>
+		 )
+	</select>
+	
+	<select id="bookmarkList" parameterType="int" resultType="hotel">
+		<include refid="select"/>
+		 where no in (
+   			 select hotel_no from favorite where user_no=#{no})
+	</select>
+
+	
+</mapper>

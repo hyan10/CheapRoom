@@ -1,27 +1,34 @@
 ﻿package kr.co.bit.cr.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.bit.cr.booking.BookingService;
 import kr.co.bit.cr.booking.BookingVO;
+import kr.co.bit.cr.favorite.FavoriteService;
+import kr.co.bit.cr.favorite.FavoriteVO;
+import kr.co.bit.cr.hotel.HotelVO;
 import kr.co.bit.cr.owner.OwnerService;
+
 import kr.co.bit.cr.owner.OwnerVO;
 import kr.co.bit.cr.review.ReviewService;
 import kr.co.bit.cr.review.ReviewVO;
+
 
 @Controller
 @RequestMapping("/user")
@@ -35,6 +42,9 @@ public class UserController {
 	private BookingService bookingService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private FavoriteService favoriteService;
+
 	
 	@RequestMapping(value="/join.cr", method=RequestMethod.POST) 
 	//public String join(UserVO userVO){
@@ -153,6 +163,48 @@ public class UserController {
 	@RequestMapping("/blind.cr")
 	public void userBlind(){
 		//세선 받아오기
+	}
+	@RequestMapping(value="/favorite.cr",method=RequestMethod.GET)
+	@ResponseBody
+	public String Favorite(HttpSession session, @RequestParam("hotelNo")int hotelNo){
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		FavoriteVO favorite = new FavoriteVO();
+		favorite.setUserNo(user.getNo());
+		favorite.setHotelNo(hotelNo);
+		System.out.println(favorite);
+		String msg = favoriteService.Favorite(favorite);
+		System.out.println(favorite);
+		if(msg==null){
+			msg="error";
+		}
+		//return "redirect:/hotel/hotelList.cr?msg="+msg;
+		//호텔 셋 favorite
+		System.out.println(msg);
+		
+		return msg;
+	}
+	
+	@RequestMapping(value="/favoriteList.cr",method=RequestMethod.GET)
+	public String FavoriteList(HttpSession session, Model model){
+		
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		List<HotelVO> hotel = new ArrayList<>();
+		hotel = favoriteService.bookmarkList(user.getNo());
+		System.out.println(hotel);
+		model.addAttribute("hotelList",hotel);
+		return "favoriteList";
+	}
+	
+	@RequestMapping(value="/cancel.cr",method=RequestMethod.GET)
+	public String Cancel(HttpSession session, @RequestParam("hotelNo")int hotelNo){
+		System.out.println("csdjlfasjf;sfdksfjsdlkfjals;j;lskdfjlsdkafjlkdsfjdls;jlk");
+		FavoriteVO favorite = new FavoriteVO();
+		UserVO user = (UserVO)session.getAttribute("loginUser");
+		favorite.setUserNo(user.getNo());
+		favorite.setHotelNo(hotelNo);
+		int cnt = favoriteService.Cancel(favorite);
+		
+		return "redirect:/user/favoriteList.cr";
 	}
 	  
 }

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
 			<div class="blog_medium">
 			
@@ -12,7 +11,7 @@
 						<!-- 이미지 -->
 						<figure class="post_img">
 							<a href="#">
-								<img src="${pageContext.request.contextPath}/upload/hotel/${hotel.imgUrl}" alt="blog post">
+								<img src="https://s3.ap-northeast-2.amazonaws.com/cheaproom/upload/hotel/${hotel.imgUrl}" alt="blog post">
 							</a>
 						</figure>
 						
@@ -20,7 +19,7 @@
 						<div class="post_content">
 							<div class="post_meta">
 								<h2>
-									<a href="{pageContext.request.contextPath}/hotel/roomList.cr?hotelNo={${hotel.no}}"> ${hotel.name}</a>
+									<a href="${pageContext.request.contextPath}/hotel/roomList.cr?hotelNo=${hotel.no}"> ${hotel.name}</a>
 								</h2>
 								<div class="metaInfo">
 									<span><i class="fa fa-map-marker"></i><a href="#">${hotel.addr}</a> </span>
@@ -37,21 +36,50 @@
 						</div> <!-- 내용 끝 -->
 							
 						<!-- 찜하기 -->
-						<div class="post_date">
-							<c:choose>
-								<c:when test="false">
-									<a href="#">
-										<span class="day"><i class="fa fa-heart"></i></span>
-										<span class="month">취소</span>
-									</a>
-								</c:when>
-								<c:otherwise>
-									<a href="#">
-										<span class="day"><i class="fa fa-heart-o"></i></span>
-										<span class="month">찜</span>
-									</a>
-								</c:otherwise>
-							</c:choose>
+						<div class="post_date" >
+						<c:choose>
+							<c:when test="${hotel.favorite == 'Y' }">
+								<a>
+									<span class="day"><i id="favorite" class="fa fa-heart"></i></span>
+								</a>
+							</c:when>
+							<c:when test="${hotel.favorite == 'N' }">
+								<a>
+									<span class="day"><i id="favorite" class="fa fa-heart-o"></i></span>
+								</a>
+							</c:when>
+							<c:otherwise>
+							
+							</c:otherwise>
+						</c:choose>
+
+							<%-- 		<a href="${pageContext.request.contextPath}/user/favorite.cr?hotelNo=${hotel.no }"> --%>
+				<!-- 			<a>
+									<span class="day"><i id="favorite" class="fa fa-heart-o"></i></span>
+							</a> -->
+									<!-- </a> -->
+									<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+									<script>
+									    $('.day').click(function(){
+									        $.ajax({
+									            url:"${pageContext.request.contextPath}/user/favorite.cr",
+									            type:'GET',
+									            data:{hotelNo: ${hotel.no}
+									            },
+									            success:function(data){
+									            	console.log(data);
+									                if(data == 'N'){
+									                	alert('찜취소');
+										                $("#favorite").attr('class','fa fa-heart-o');
+									                }else{
+									                	alert('찜');
+									                	$("#favorite").attr('class','fa fa-heart');
+									                }
+									                
+									            }
+									        });
+									    });
+									</script>
 						</div> <!-- 찜하기 끝 -->
 					</article>
 				</c:forEach>
