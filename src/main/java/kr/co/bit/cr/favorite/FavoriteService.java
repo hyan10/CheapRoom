@@ -21,14 +21,14 @@ public class FavoriteService {
 		String msg="";
 		if(cnt==0){
 			if(dao.insertFavorite(favorite)==1){
-				msg="찜";
+				msg="Y";
 			}else{
 				msg=null;
 			}
 			
 		}else{
 			if(dao.deleteFavorite(favorite)==1){
-				msg="찜취소";
+				msg="N";
 			}else{
 				msg=null;
 			}

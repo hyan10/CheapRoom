@@ -17,7 +17,7 @@
 	</update>
 	
 	<select id="selectFavoriteList" parameterType="hashmap" resultType="favorite">
-		select * from favorite where user_no=#{no} and hotel_no in(
+		select user_no as userNo, hotel_no as hotelNo from favorite where user_no=#{no} and hotel_no in(
 		 <foreach collection="list" item="item" index="index" separator=",">
 		 	#{item}
 		 </foreach>

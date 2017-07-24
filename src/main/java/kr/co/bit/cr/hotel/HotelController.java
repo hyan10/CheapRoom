@@ -57,19 +57,19 @@ public class HotelController {
 	}
 	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.POST)
 	public String registerHotel(@ModelAttribute("hotel")HotelVO hotel,HttpSession session, @RequestParam("imgurl")MultipartFile uploadFile){
-		if(!hotel.getBbq().equals("Y")){
+		if(hotel.getBbq()==null){
 			hotel.setBbq("N");
 		}
-		if(!hotel.getParking().equals("Y")){
+		if(hotel.getParking()==null){
 			hotel.setParking("N");
 		}
-		if(!hotel.getPool().equals("Y")){
+		if(hotel.getPool()==null){
 			hotel.setPool("N");
 		}
-		if(!hotel.getSmoking().equals("Y")){
+		if(hotel.getSmoking()==null){
 			hotel.setSmoking("N");
 		}
-		if(!hotel.getWifi().equals("Y")){
+		if(hotel.getWifi()==null){
 			hotel.setWifi("N");
 		}
 		
@@ -136,13 +136,13 @@ public class HotelController {
 		List<RoomVO> list = room.getRoomList();
 
 		for(RoomVO r: list){
-			if(!r.getCooking().equals("Y")){
+			if(r.getCooking()==null){
 				r.setCooking("N");
 			}
-			if(!r.getTv().equals("Y")){
+			if(r.getTv()==null){
 				r.setTv("N");
 			}
-			if(!r.getAc().equals("Y")){
+			if(r.getAc()==null){
 				r.setAc("N");
 			}
 			r.setHotelNo(hotel.getNo());

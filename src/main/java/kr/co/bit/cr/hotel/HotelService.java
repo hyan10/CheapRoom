@@ -142,17 +142,23 @@ public class HotelService {
 		
 		//조인   return 예약된 방리스트
 		List<RoomVO> bookingRooms = rDao.joinRoomAndBooking(search);
-
-		for(RoomVO room1 : totalRooms){
-			for(RoomVO room2 : bookingRooms){
-				if(room2.getNo()==room1.getNo()){
-					room1.setBooking("N");
-					break;
-				}else{
-				room1.setBooking("Y");
+		if(bookingRooms!=null){
+			for(RoomVO room1 : totalRooms){
+				for(RoomVO room2 : bookingRooms){
+					if(room2.getNo()==room1.getNo()){
+						room1.setBooking("N");
+						break;
+					}else{
+					room1.setBooking("Y");
+					}
 				}
+			}	
+		}else{
+			for(RoomVO room1 : totalRooms){
+				room1.setBooking("Y");
 			}
 		}
+	
 		
 		hotel.setRooms(totalRooms);
 		return hotel;
@@ -186,21 +192,30 @@ public class HotelService {
 			noList.add(hotel.getNo());
 		}
 		map.put("list", noList);
-		List<FavoriteVO> favorite =fDao.favoriteList(map);
+		
+		List<FavoriteVO> favorite = new ArrayList<>();
+		System.out.println(favorite);
+		favorite = fDao.favoriteList(map);
+		System.out.println(favorite);
 		//비교해서 셋 호텔넘버만 리스트로 받자
-		//
-//		for(HotelVO hotel : list){
-//			hotel.setFavorite("N");
-//			for(FavoriteVO f: favorite){
-//				if(hotel.getNo()==f.getHotelNo()){
-//					hotel.setFavorite("Y");
-//					break;
-//				}
-//			}
-//		}
+		for(HotelVO hotel : list){
+			hotel.setFavorite("N");
+			System.out.println("=======");
+			for(FavoriteVO f: favorite){
+				if((f!=null) && (hotel.getNo()==f.getHotelNo())){
+					System.out.println(f.getHotelNo());
+					hotel.setFavorite("Y");
+					break;
+				}
+				
+			}
+		}
+		
 		return list;
-		
-		
+	}
+	
+	public List<String> selectHotelNameByOno(int ownerNo){
+		return hDao.selectHotelNameByOno(ownerNo);
 	}
 
 }
