@@ -12,7 +12,7 @@
 						<!-- 이미지 -->
 						<figure class="post_img">
 							<a href="#">
-								<img src="${pageContext.request.contextPath}/upload/hotel/${hotel.imgUrl}" alt="blog post">
+								<img src="https://s3.ap-northeast-2.amazonaws.com/cheaproom/upload/hotel/${hotel.imgUrl}" alt="blog post">
 							</a>
 						</figure>
 						
@@ -20,7 +20,7 @@
 						<div class="post_content">
 							<div class="post_meta">
 								<h2>
-									<a href="{pageContext.request.contextPath}/hotel/roomList.cr?hotelNo={${hotel.no}}""> ${hotel.name}</a>
+									<a href="${pageContext.request.contextPath}/hotel/roomList.cr?hotelNo=${hotel.no}"> ${hotel.name}</a>
 								</h2>
 								<div class="metaInfo">
 									<span><i class="fa fa-user"></i><a href="#">${hotel.addr}</a> </span>

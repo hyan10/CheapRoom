@@ -31,23 +31,23 @@ import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 
-import kr.co.bir.cr.util.Util;
 import kr.co.bit.cr.image.ImageVO;
 import kr.co.bit.cr.owner.OwnerVO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
 import kr.co.bit.cr.user.UserVO;
+import kr.co.bit.cr.util.Util;
 
 @Controller
 @RequestMapping("/hotel")
 public class HotelController {
 	@Autowired
 	private HotelService service;
-//	String AWS_BUCKETNAME = "your_bucketname";
-//    String AWS_ACCESS_KEY = "your_AWS_ACCESS_KEY";
-//    String AWS_SECRET_KEY = "your_ AWS_SECRET_KEY";
-//    String file_path = "test/;"; // 폴더명
-//    String file_name = "test.txt"; // 파일명 
+	
+	//aws s3 접근정보
+	private final String AWS_ACCESS_KEY = Util.jsonParse("AWS_ACCESS_KEY");
+	private final String AWS_SECRET_KEY = Util.jsonParse("AWS_SECRET_KEY");
+	private final String AWS_BUCKETNAME = "cheaproom";
 	
 	//호텔 + 방 같이 등록
 	@RequestMapping(value="/hotelRegister.cr", method=RequestMethod.GET)
@@ -74,18 +74,13 @@ public class HotelController {
 		}
 		
 		System.out.println("이미지업로드");
-		//arn:aws:s3:::cheaproom
-		String AWS_BUCKETNAME = "cheaproom";
-		String AWS_ACCESS_KEY = Util.jsonParse("AWS_ACCESS_KEY");
-		String AWS_SECRET_KEY = Util.jsonParse("AWS_SECRET_KEY");
-		
 		
         BasicAWSCredentials creds = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY); 
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_NORTHEAST_2).withCredentials(new AWSStaticCredentialsProvider(creds)).build();
         String fileName = uploadFile.getOriginalFilename();
         File file=null;
 		try {
-			file = multipartToFile(uploadFile);
+			file = Util.multipartToFile(uploadFile);
 		} catch (IllegalStateException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -99,14 +94,14 @@ public class HotelController {
         System.out.println("Uploadinf OK");
         // 파일 다운로드 다운로드 경로와 파일이름 동시 필요. 
 //        System.out.println("Downloading an object");
-//        S3Object object = s3Client.getObject(new GetObjectRequest(AWS_BUCKETNAME, "/upload/hotel/"+fileName));
+//        S3Object object = s3Client.getObject(new GetObjectRequest(AWS_BUCKETNAME, "upload/hotel/"+fileName));
 //        System.out.println("Content-Type: "  + object.getObjectMetadata().getContentType());
        // displayTextInputStream(object.getObjectContent());
         
         
         
 		System.out.println(uploadFile);
-//		
+		
 //		String filePath = session.getServletContext().getRealPath("/upload/hotel/");
 //		if (!uploadFile.isEmpty()) { 
 //	
@@ -139,7 +134,7 @@ public class HotelController {
 	public String registerRoom(RoomVO room, HttpSession session){
 		HotelVO hotel = (HotelVO)session.getAttribute("hotel");
 		List<RoomVO> list = room.getRoomList();
-		
+
 		for(RoomVO r: list){
 			if(!r.getCooking().equals("Y")){
 				r.setCooking("N");
@@ -157,29 +152,57 @@ public class HotelController {
 			//이미지 리스트 업로드
 			List<MultipartFile> files = r.getImageList();
 			List<ImageVO> imgList = new ArrayList<>();
-			for(MultipartFile f : files){
+			
+			for(MultipartFile uploadFile : files){
 				ImageVO img = new ImageVO();
-				String filePath = session.getServletContext().getRealPath("/upload/room/");
-				String fileName = f.getOriginalFilename();
-				if (!f.isEmpty()){ 
-					try { 
-						byte[] bytes = f.getBytes(); 
-						BufferedOutputStream stream = 
-								new BufferedOutputStream(new FileOutputStream(new File(filePath+fileName))); 
-						stream.write(bytes); 
-						stream.close(); 
-						System.out.println("Creating file: " + filePath); 
-						System.out.println("You successfully uploaded " + fileName); 
-					} catch (Exception e) { 
-						e.printStackTrace();
-					} 
-				} else { 
-					System.out.println("You failed to upload " + f.getOriginalFilename() + " because the file was empty."); 
-				} 
+				BasicAWSCredentials creds = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY); 
+				AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.AP_NORTHEAST_2).withCredentials(new AWSStaticCredentialsProvider(creds)).build();
+				String fileName = uploadFile.getOriginalFilename();
+				File file=null;
+				try {
+					file = Util.multipartToFile(uploadFile);
+				} catch (IllegalStateException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				PutObjectRequest putObjectRequest = new PutObjectRequest(AWS_BUCKETNAME, "upload/room/"+fileName, file);
+				putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead); // URL 접근시 권한 읽을수 있도록 설정.
+				s3Client.putObject(putObjectRequest);
+				System.out.println("Uploadinf OK");
+				
 				img.setUrl(fileName);
 				img.setRoomNo(r.getNo());
 				imgList.add(img);
 			}
+			
+//		        
+//			for(MultipartFile f : files){
+//				ImageVO img = new ImageVO();
+//				String filePath = session.getServletContext().getRealPath("/upload/room/");
+//				String fileName = f.getOriginalFilename();
+//				if (!f.isEmpty()){ 
+//					try { 
+//						byte[] bytes = f.getBytes(); 
+//						BufferedOutputStream stream = 
+//								new BufferedOutputStream(new FileOutputStream(new File(filePath+fileName))); 
+//						stream.write(bytes); 
+//						stream.close(); 
+//						System.out.println("Creating file: " + filePath); 
+//						System.out.println("You successfully uploaded " + fileName); 
+//					} catch (Exception e) { 
+//						e.printStackTrace();
+//					} 
+//				} else { 
+//					System.out.println("You failed to upload " + f.getOriginalFilename() + " because the file was empty."); 
+//				} 
+//				img.setUrl(fileName);
+//				img.setRoomNo(r.getNo());
+//				imgList.add(img);
+//			}
+			
 			r.setImages(imgList);
 			
 		}
@@ -232,7 +255,7 @@ public class HotelController {
 		
 		
 		System.out.println(list);
-		///////////
+		//owner user 체크
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		list = service.favoriteList(list, user);
 		System.out.println("favorite추가");
@@ -275,10 +298,5 @@ public class HotelController {
 		}
 		return "";
 	}
-	public File multipartToFile(MultipartFile multipart) throws IllegalStateException, IOException 
-	{
-	    File convFile = new File( multipart.getOriginalFilename());
-	    multipart.transferTo(convFile);
-	    return convFile;
-	}
+
 }

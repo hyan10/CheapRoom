@@ -38,7 +38,7 @@ public class HotelService {
 	 */
 	@Transactional
 	public int registerHotel(HotelVO hotel){
-		//이미지에 룸번호가 없음
+		hotel.setBlind("N");
 		int cnt = hDao.registerHotel(hotel);
 		if(cnt==1){
 			List<RoomVO> rooms = hotel.getRooms();
@@ -189,15 +189,15 @@ public class HotelService {
 		List<FavoriteVO> favorite =fDao.favoriteList(map);
 		//비교해서 셋 호텔넘버만 리스트로 받자
 		//
-		for(HotelVO hotel : list){
-			hotel.setFavorite("N");
-			for(FavoriteVO f: favorite){
-				if(hotel.getNo()==f.getHotelNo()){
-					hotel.setFavorite("Y");
-					break;
-				}
-			}
-		}
+//		for(HotelVO hotel : list){
+//			hotel.setFavorite("N");
+//			for(FavoriteVO f: favorite){
+//				if(hotel.getNo()==f.getHotelNo()){
+//					hotel.setFavorite("Y");
+//					break;
+//				}
+//			}
+//		}
 		return list;
 		
 		

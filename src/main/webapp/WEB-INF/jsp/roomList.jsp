@@ -191,7 +191,7 @@
 												<c:forEach var="image" items="${room.images}" varStatus="status">
 												<div class="active item" data-slide-number="${status.index}">
 													<!-- <img src="http://placehold.it/630x320&amp;text=one" class="img-responsive"> -->
-													<img src="${image.url}" class="img-responsive">													
+													<img src="https://s3.ap-northeast-2.amazonaws.com/cheaproom/upload/room/${image.url}" class="img-responsive" width="100%" height="100%">													
 												</div>
 												</c:forEach>
 											</div>
