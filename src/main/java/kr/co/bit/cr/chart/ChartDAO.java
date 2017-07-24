@@ -30,12 +30,19 @@ public class ChartDAO {
 		return sqlSessionTemplate.selectList("chart.ChartDAO.selectChartLastMonth", month);
 	}
 
+	// 사업자의 n월 통계
 	public List<ChartVO> chartLastMonthByOwnerNo(Map<String, Integer> map) {
 		return sqlSessionTemplate.selectList("chart.ChartDAO.selectChartLastMonthByOwnerNo", map);
 	}
 
+	// 사업자의 전체 통계
 	public List<ChartVO> chartAllByOwnerNo(int ownerNo) {
 		return sqlSessionTemplate.selectList("chart.ChartDAO.selectChartAllByOwnerNo",ownerNo);
+	}
+
+	// 관리자의 전체 통계
+	public List<ChartVO> chartAll() {
+		return sqlSessionTemplate.selectList("chart.ChartDAO.selectChartAll");
 	}
 
 }

@@ -88,8 +88,8 @@ public class ChartVO {
 
 	@Override
 	public String toString() {
-		return "ChartVO [hotelNo=" + hotelNo + ", year=" + year + ", month=" + month + ", cityNo=" + cityNo + ", count="
-				+ count + ", profit=" + profit + ", totalPerson=" + totalPerson + ", hotelName=" + hotelName + "]";
+		return "{hotelNo:" + hotelNo + ", year:" + year + ", month:" + month + ", cityNo:" + cityNo + ", count:"
+				+ count + ", profit:" + profit + ", totalPerson:" + totalPerson + ", hotelName:\"" + hotelName + "\"}";
 	}
 	
 }

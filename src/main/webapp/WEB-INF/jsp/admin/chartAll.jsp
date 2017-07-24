@@ -48,7 +48,7 @@ window.onload = function () {
 	var barDataPoints=[];
 	var lineDataPoints_count=[];
 	var lineDataPoints_person=[];
-	var hotelName = data[0].hotelName; 
+
 	
 	console.log(data);
 	console.log(data.length);
@@ -69,7 +69,7 @@ window.onload = function () {
     var barChart = new CanvasJS.Chart("barChartContainer",
     {
       title:{
-        text: hotelName+"의 수익"  
+        text: "월별 수익"  
       },
       animationEnabled: true,
      /*  axisY: {
@@ -98,7 +98,7 @@ window.onload = function () {
     var lineChart = new CanvasJS.Chart("lineChartContainer",
     		{
     			title:{
-    				text: hotelName+"의 예약 건수, 방문객 수"
+    				text: "월 별 예약 건수, 방문객 수"
     				/* ,fontSize: 30 */
     			},
                             animationEnabled: true,
@@ -177,10 +177,10 @@ window.onload = function () {
 	                ================================================== -->
 	                <!-- Nav menu -->
 	                
-	                <c:if test="${ loginUser.type eq 'O' }">
-	              		   <jsp:include page="/include/ownerMenu.jsp"/>
-	               		[${ loginUser.email} 사업자님 접속중]
-						<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
+	                <c:if test="${ loginUser.type eq 'S' }">
+	              		   <jsp:include page="/include/adminMenu.jsp"/>
+	               		[${ loginUser.email} 관리자님 접속중]
+						<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
 	               </c:if>
 	               
 	            </div> <!-- end row -->

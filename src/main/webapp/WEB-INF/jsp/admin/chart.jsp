@@ -55,10 +55,10 @@
                 ================================================== -->
                 <!-- Nav menu -->
                 
-                <c:if test="${ loginUser.type eq 'O' }">
-              		   <jsp:include page="/include/ownerMenu.jsp"/>
-               		[${ loginUser.email} 사업자님 접속중]
-					<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
+                <c:if test="${ loginUser.type eq 'S' }">
+              		   <jsp:include page="/include/adminMenu.jsp"/>
+               		[${ loginUser.email} 관리자님 접속중]
+					<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
                </c:if>
                
             </div> <!-- end row -->
@@ -93,7 +93,7 @@
 			<div class="container">
 
 				<!-- 월 선택 -->	
-				<form name="monthForm" action="${pageContext.request.contextPath}/owner/chart.cr" method="get">
+				<form name="monthForm" action="${pageContext.request.contextPath}/admin/chart.cr" method="get">
 					<div style="width:100%; margin-bottom:50px">		
 						월 선택: <select class="form-control" name="month" style="display:inline-block !important; width:20% !important">
 							<c:forEach var="i" begin="1" end="${maxMonth}">

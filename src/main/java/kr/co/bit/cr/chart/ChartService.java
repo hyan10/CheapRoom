@@ -38,5 +38,10 @@ public class ChartService {
 	public List<ChartVO> chartAllByOwnerNo(int ownerNo){
 		return dao.chartAllByOwnerNo(ownerNo);
 	}
+
+	// 전체 통계
+	public List<ChartVO> chartAll() {
+		return dao.chartAll();
+	}
 	
 }

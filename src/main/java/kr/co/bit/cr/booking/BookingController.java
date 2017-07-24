@@ -2,6 +2,7 @@ package kr.co.bit.cr.booking;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -287,7 +288,7 @@ public class BookingController {
 		int month = request.getParameter("month")!=null?Integer.parseInt(request.getParameter("month")):maxMonth;
 		request.setAttribute("month", month);
 		request.setAttribute("maxMonth", maxMonth);
-		System.out.println(month);
+//		System.out.println(month);
 //		 List<ChartVO> chartList = chartService.chartLastMonth(month);
 		
 		Map<String,Integer> map = new HashMap<>();
@@ -296,14 +297,14 @@ public class BookingController {
 		if(owner!=null){
 			ownerNo = owner.getNo();
 		}
-		map.put("no", ownerNo); 
+		map.put("no", ownerNo);
 		map.put("month", month);
-		System.out.println(map);
-		//List<ChartVO> chartList = chartService.chartLastMonthByOwnerNo(map);
+//		System.out.println(map);
+		List<ChartVO> chartList = chartService.chartLastMonthByOwnerNo(map);
 
-		 List<ChartVO> chartList = chartService.chartAllByOwnerNo(ownerNo);
+//		 List<ChartVO> chartList = chartService.chartAllByOwnerNo(ownerNo);
+		 // System.out.println(chartList);
 		model.addAttribute("chartList", chartList);
-		return "owner/chartAll";
-	}
-	
+		return "owner/chart";
+	}	
 }

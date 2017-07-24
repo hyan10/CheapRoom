@@ -1,6 +1,7 @@
 package kr.co.bit.cr.booking;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,32 +37,46 @@ public class BookingDAO {
 	public List<BookingVO> selectByUser(int userNo){
 		System.out.println(userNo);
 		System.out.println(sqlSessionTemplate);
-		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByUser",userNo);
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByUserNo",userNo);
 	}
 
 	// 사업자 예약 조회
 	public List<BookingVO> selectByOwner(int ownerNo) {
-		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByOwner", ownerNo);
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByOwnerNo", ownerNo);
 	}
 
 	// 유저 지난 예약 내역 조회
 	public List<BookingVO> selectHistoryByUser(int userNo) {
-		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryByUser", userNo);
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryByUserNo", userNo);
 	}
 	
 	// 사업자 지난 예약 내역 조회
 	public List<BookingVO> selectHistoryByOwner(int ownerNo) {
-		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryByOwner", ownerNo);
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryByOwnerNo", ownerNo);
 	}
 
 	// 예약번호로 예약 정보 조회
 	public BookingVO selectByNo(int bookingNo) {
-		return sqlSessionTemplate.selectOne("booking.BookingDAO.selectBookByNo", bookingNo);
+		return sqlSessionTemplate.selectOne("booking.BookingDAO.selectByNo", bookingNo);
 	}
 
 	// 예약번호로 지난 예약 정보 조회
 	public BookingVO selectHistoryByNo(int bookingNo) {
-		return sqlSessionTemplate.selectOne("booking.BookingDAO.selectBookHistoryByNo", bookingNo);
+		return sqlSessionTemplate.selectOne("booking.BookingDAO.selectHistoryByNo", bookingNo);
+	}
+
+	public List<BookingVO> selectHistoryByOwner(Map<String, Integer> map) {
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryLastMonthByOwnerNo", map);
+	}
+
+	// 전체 예약 조회
+	public List<BookingVO> selectAll() {
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectAll");
+	}
+
+	// n월 전체 예약 조회
+	public List<BookingVO> selectHistoryAll(int month) {
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryAll", month);
 	}
 	
 	

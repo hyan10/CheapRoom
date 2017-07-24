@@ -135,6 +135,57 @@ INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, 
 INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, owner_no) VALUES (1, 2017, 5, 1, 3, 150000, 7, 1);
 INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, owner_no) VALUES (1, 2017, 4, 1, 3, 140000, 6, 1);
 INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, owner_no) VALUES (1, 2017, 3, 1, 1, 50000, 2, 1);
+INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, owner_no) VALUES (2, 2017, 6, 1, 1, 80000, 3, 2);
+INSERT INTO chart (hotel_no, year, month, city_no, count, profit, total_person, owner_no) VALUES (2, 2017, 5, 1, 3, 120000, 5, 2);
 
-select h.name, c.month, c.count, c.profit, c.total_person
+select h.name as hotelName, c.month, sum(c.count) as count, sum(c.profit) as profit, sum(c.total_person) as totalPerson
 from chart c join hotel h on c.hotel_no=h.no
+where c.owner_no=1
+group by h.name, c.month
+order by hotelName, month
+
+select h.no as hotelNo, h.city_no as cityNo, h.name as hotelName,
+				c.year, c.month,
+				sum(c.count) as count, sum(c.profit) as profit, sum(c.total_person) as totalPerson
+		from chart c join hotel h on c.hotel_no=h.no
+		where c.owner_no=1 and c.month=6
+		group by h.no, h.city_no, h.name, c.year, c.month
+order by hotelName, month
+
+
+		select h.no as hotelNo, h.city_no as cityNo, h.name as hotelName,
+				c.year, c.month,
+				sum(c.count) as count, sum(c.profit) as profit, sum(c.total_person) as totalPerson
+		from chart c join hotel h on c.hotel_no=h.no
+		group by h.no, h.city_no, h.name, c.year, c.month
+		order by hotelName, month
+		
+		select * from chart
+		
+<!-- 호텔별 전체 통계 -->
+select h.name as hotelName, count, profit, totalPerson
+from (select hotel_no as hotelNo,
+			count(*) as count, sum(profit) as profit, sum(total_person) as totalPerson
+		from chart group by hotel_no) c join hotel h on (c.hotelNo=h.no)
+		
+		
+select month, count(*) as count, sum(profit) as profit, sum(total_person) as totalPerson
+from chart group by month	
+		
+select h.no as hotelNo, h.name as hotelName, h.city_no as cityNo,
+				count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson,
+				to_char(sysdate, 'yyyy') as year, to_char(sysdate,'MM') as month
+from hotel h, (select bh.total_price as total_price, total_person, hotel_no
+		from booking_history bh
+		where bh.hotel_no in (select no
+									from hotel h)
+						and to_char(bh.start_date, 'MM') = to_char(to_date(6,'MM'),'MM')) u
+		where u.hotel_no = h.no
+		group by h.no, h.name, h.city_no
+		
+		
+		select h.name as hotelName, count, profit, totalPerson
+		from (select hotel_no as hotelNo, count(*) as count,
+				 	sum(profit) as profit, sum(total_person) as totalPerson
+				from chart where month=6 group by hotel_no) c join hotel h on (c.hotelNo=h.no)
+		order by c.month

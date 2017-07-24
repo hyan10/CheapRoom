@@ -1,6 +1,11 @@
 package kr.co.bit.cr.admin;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.bit.cr.booking.BookingService;
+import kr.co.bit.cr.booking.BookingVO;
 import kr.co.bit.cr.chart.ChartService;
 import kr.co.bit.cr.chart.ChartVO;
 import kr.co.bit.cr.owner.OwnerService;
@@ -22,17 +29,12 @@ public class AdminController {
 	private ChartService chartService;
 	@Autowired
 	private OwnerService ownerService;
+	@Autowired
+	private BookingService bookingService;
 	
-	@RequestMapping(value="/chart.cr", method=RequestMethod.GET)
-	public ModelAndView Chart(){
-		
-		ModelAndView mav = new ModelAndView();
-//		ChartVO chart = chartService.chartThisMonth();
-//		
-//		mav.addObject("chart",chart);
-//		mav.setViewName("admin/chart");
-		return mav;
-	}
+	@Autowired
+	private HttpSession session;
+
 	
 	//승인대기중인리스트
 	@RequestMapping(value="/admissionList.cr", method=RequestMethod.GET)
@@ -64,5 +66,73 @@ public class AdminController {
 		int cnt = ownerService.deleteOwnerByNo(ownerNo);
 
 		return "redirect:/admin/admissionList.cr";
+	}
+	
+	/**
+	 * admin의 기본 통계
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/chart.cr")
+	public ModelAndView ownerChart(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		List<ChartVO> chartList = new ArrayList<>();
+		List<BookingVO> bookingList = new ArrayList<>();
+	
+		// 1. 날짜 계산 & 저장
+		// 현재 월이 최대 월
+		int maxMonth = new Date().getMonth()+1;
+		int month = request.getParameter("month")!=null?Integer.parseInt(request.getParameter("month")):maxMonth;
+		request.setAttribute("month", month);
+		request.setAttribute("maxMonth", maxMonth);
+		
+		// 이번 달 통계
+		/*if(maxMonth == month){
+			chartList = chartService.chartThisMonth();
+			bookingList = bookingService.bookingHistoryList(month);
+		}else {
+			// n월의 통계
+*/			chartList = chartService.chartLastMonth(month);
+			bookingList = bookingService.bookingHistoryList(month);
+		/*}*/
+		
+		if(chartList.isEmpty()){
+			chartList = new ArrayList<>();
+			ChartVO chart = new ChartVO();
+			chart.setHotelName("");
+			chart.setCount(0);
+			chart.setProfit(0);
+			chart.setTotalPerson(0);
+			chartList.add(chart);
+		}
+		
+		if(bookingList.isEmpty()){
+			bookingList = new ArrayList<>();
+		}
+		
+		System.out.println(chartList);
+		
+		mav.addObject("bookingList",bookingList);
+		mav.addObject("chartList",chartList);
+		mav.setViewName("admin/chart");
+		
+		return mav;
+	}
+	
+	/**
+	 * admin의 전체 통계
+	 * @return
+	 */
+	@RequestMapping("/chartAll.cr")
+	public ModelAndView ownerChartAll(){
+		ModelAndView mav = new ModelAndView();
+		List<ChartVO> chartList = new ArrayList<>();
+		
+		chartList = chartService.chartAll();
+		
+		mav.addObject("chartList",chartList);
+		mav.setViewName("admin/chartAll");
+		
+		return mav;
 	}
 }

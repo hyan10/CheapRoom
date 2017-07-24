@@ -57,25 +57,25 @@
 	
 	
 	<!-- 유저의 예약 현황 조회 -->
-	<select id="selectByUser" parameterType="int" resultType="booking">
+	<select id="selectByUserNo" parameterType="int" resultType="booking">
 		<include refid="selectList"/>
 		where user_no = #{no}
 	</select>
 
 	<!-- 사업자의 예약 현황 조회 -->
-	<select id="selectByOwner" parameterType="int" resultType="booking">
+	<select id="selectByOwnerNo" parameterType="int" resultType="booking">
 		<include refid="selectList"/>
 		where owner_no = #{no}
 	</select>
 	
 	<!-- 예약번호로 예약 정보 조회 -->
-	<select id="selectBookByNo" parameterType="int" resultType="booking">
+	<select id="selectByNo" parameterType="int" resultType="booking">
 		<include refid="selectList"/>
 		where b.no = #{no}
 	</select>
 	
 	<!-- 예약번호로 지난 예약 정보 조회 -->
-	<select id="selectBookHistoryByNo" parameterType="int" resultType="booking">
+	<select id="selectHistoryByNo" parameterType="int" resultType="booking">
 		<include refid="selectHistoryList"/>
 		where b.no = #{no}
 	</select>
@@ -126,13 +126,13 @@
 	</delete>
 	
 	<!-- 유저의 지난 예약 내역 조회 -->
-	<select id="selectHistoryByUser" parameterType="int" resultType="booking">
+	<select id="selectHistoryByUserNo" parameterType="int" resultType="booking">
 		<include refid="selectHistoryList"/>
 		where user_no = #{no}
 	</select>
 
-	<!-- 사업자의 지난 예약 내역 조회 -->
-	<select id="selectHistoryByOwner" parameterType="int" resultType="booking">
+	<!-- 사업자의 지난 예약 내역 전체 조회 -->
+	<select id="selectHistoryByOwnerNo" parameterType="int" resultType="booking">
 		<include refid="selectHistoryList"/>
 		where owner_no = #{no}
 	</select>
@@ -173,6 +173,23 @@
 		where u.hotel_no = h.no
 	 	group by h.name
 		
+	</select>
+	
+	<!-- 사업자의 n월 예약 조회 -->
+	<select id="selectHistoryLastMonthByOwnerNo" parameterType="hashMap" resultType="chart">
+		<include refid="selectHistoryList"/>
+		where owner_no = #{no} and to_char(b.start_date, 'MM') = to_char(to_date(#{month},'mm'),'mm')
+	</select>
+	
+	<!-- 현재 진행중인 예약 전체 리스트 -->
+	<select id="selectAll" resultType="booking">
+		<include refid="selectList"/>
+	</select>
+	
+	<!-- n월 예약 전체 리스트 -->
+	<select id="selectHistoryAll" parameterType="int" resultType="booking">
+		<include refid="selectHistoryList"/>
+		where to_char(b.start_date, 'MM') = to_char(to_date(#{month},'mm'),'mm')
 	</select>
 	
 </mapper>
