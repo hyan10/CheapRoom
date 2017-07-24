@@ -48,14 +48,7 @@
 		    document.getElementById("login-form").action = checkbox.value;
 		    alert('changed action url');
 		}
-		function checkDateForm(){
-			alert('예약 인원수를 입력해주세요.' + $('input[name="personNo"]').val() + '?');
-			if($('input[name="personNo"]').val() == ""){
-				alert('예약 인원수를 입력해주세요.');
-				return false;
-			}
-			return true;
-		}
+		
 	</script>
 </head>
 
@@ -214,7 +207,7 @@
 	</section>
 
 
-	<!-- <script type="text/javascript" src="js/vendor/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/vendor/jquery-1.10.2.min.js"></script>
 	<script src="js/vendor/bootstrap.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>
 	<script src="js/retina-1.1.0.min.js"></script>
@@ -234,11 +227,12 @@
 
 	<script src="js/main.js"></script>
 
-	Start Style Switcher
+	<!-- Start Style Switcher
 	<div class="switcher"></div> -->
 	<!-- End Style Switcher -->
     <script type="text/javascript"> /*-- Fraction Slider Parameters --*/
     $(window).load(function(){
+    	
         $('.slider').fractionSlider({
             'fullWidth': 			true,
             'controls': 			true,

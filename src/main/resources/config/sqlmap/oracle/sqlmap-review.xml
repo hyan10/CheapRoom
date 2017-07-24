@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review.dao.ReviewDAO">
+	<select id="selectReviewByUno" parameterType="int" resultType="review">
+		<!-- select * from review where user_no = #{ userNo } -->
+		select h.name as hotelName, to_char('r.reg_date', 'YYYY-MM-DD') as regDate,
+			   cleanliness, comfort, location, facilities, staff 
+		from review r, hotel h
+		where r.hotel_no = h.no 
+		and r.user_no = #{ userNo }
+	</select>
+	
+	<insert id="registerReview" parameterType="review">
+		insert into review values(review_seq.nextval, #{ hotelNo }, #{ userNo }, #{ cleanliness },
+							      #{ comfort }, #{ location }, #{ facilities }, #{ staff }, sysdate)
+	</insert>
+</mapper>
