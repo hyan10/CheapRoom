@@ -24,7 +24,7 @@
 				</ul> -->
 			</li>
 
-			<li><a href="#">예약 보기</a>
+			<li><a href="${ pageContext.request.contextPath}/user/bookingList.cr">예약 보기</a>
 				<!-- <ul>
 					<li><a href="elements.html">Elements</a></li>
 					<li><a href="columns.html">Columns</a></li>
@@ -34,7 +34,7 @@
 				</ul> -->
 			</li>
 
-			<li><a href="#">지난 예약보기</a>
+			<li><a href="${ pageContext.request.contextPath}/user/bookingHistoryList.cr">지난 예약보기</a>
 				<!-- <ul>
 					<li><a href="about.html">About</a>
 						<ul>

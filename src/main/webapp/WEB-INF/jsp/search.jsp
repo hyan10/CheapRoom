@@ -33,29 +33,45 @@
 	<!-- Include Date Range Picker -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-	
-	
-	<script type="text/javascript">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="${ pageContext.request.contextPath }/js/searchDate.js"></script>
+	<!-- <script type="text/javascript">
 		var j = jQuery.noConflict();
+		var cookieStartDate = '${ cookie.startDate.value }';
+		var cookieEndDate = '${ cookie.endDate.value }';
+		var cookieCityNo = '${ cookie.cityNo.value }';
+		//$("#selectBox option:eq(2)").attr("selected", "selected");
+		
+		if(cookieStartDate == "" && cookieEndDate == ""){
+			cookieStartDate = new Date();
+			cookieEndDate = new Date();
+		} 
 		j(function(){
-		    j('input[name="daterange"]').daterangepicker({
+			if(cookieCityNo != ""){
+				alert("cityNo : "+cookieCityNo);
+				$("#selectBox option:eq(cookieCityNo)").attr("selected", "selected");
+			}
+		    j('input[name="dateRange"]').daterangepicker({
 		    		locale: {
 			    		format : 'YYYY-MM-DD',
 			    		cancelLabel : '취소',
 			    		applyLabel : '확인'
-			    }			    
+			    },	
+		   		startDate: new Date(), endDate: new Date()
 		    }, 
 		    function(start, end, label) {
-			    alert("예약 날짜 : " + start.format('YYYY-MM-DD') + '에서 ' + end.format('YYYY-MM-DD') + '까지 예약하시겠습니까?');
-			});
-		    j('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+			    /* alert("예약 날짜 : " + start.format('YYYY-MM-DD') + '에서 ' + end.format('YYYY-MM-DD') + '까지 예약하시겠습니까?'); */
+			})
+		    j('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
 				$(this).val('');
 			});
+		    //j('input[name="dateRange"]').daterangepicker().setDateRange('2017-07-21', '2017-07-23');
 		});
 		function changeFormAction(checkbox){
 		    document.getElementById("login-form").action = checkbox.value;
+		    //alert('changed action url');
 		}
-	</script>
+	</script> -->
 		    
 </head>
 

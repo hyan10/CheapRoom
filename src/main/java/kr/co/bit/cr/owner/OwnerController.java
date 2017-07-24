@@ -42,7 +42,7 @@ public class OwnerController {
 	public String login(OwnerVO ownerVO, Model model, HttpSession session){
 		OwnerVO owner = ownerService.login(ownerVO);
 		if(owner == null){			
-			model.addAttribute("msg", "아이디 또는 패스워드가 잘못되었습니다.");
+			model.addAttribute("msg", "사업자 아이디 또는 패스워드가 잘못되었습니다.");
 			System.out.println("사업자 로그인 실패");
 			return "redirect:/";
 		} else {

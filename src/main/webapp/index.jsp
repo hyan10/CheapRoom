@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="css/fractionslider.css">
     <link rel="stylesheet" type="text/css" href="css/switcher.css" media="screen" />
 	
-	
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -41,30 +40,23 @@
 	<!-- Include Date Range Picker -->
 	<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-	
-	<script type="text/javascript">
-		var j = jQuery.noConflict();
-		j(function(){
-		    j('input[name="daterange"]').daterangepicker({
-		    		locale: {
-			    		format : 'YYYY-MM-DD',
-			    		cancelLabel : '취소',
-			    		applyLabel : '확인'
-			    }			    
-		    }, 
-		    function(start, end, label) {
-			    alert("예약 날짜 : " + start.format('YYYY-MM-DD') + '에서 ' + end.format('YYYY-MM-DD') + '까지 예약하시겠습니까?');
-			});
-		    j('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
-				$(this).val('');
-			});
-		});
+
+	<script type="text/javascript" src="${ pageContext.request.contextPath }/js/searchDate.js"></script>	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script>
 		function changeFormAction(checkbox){
 		    document.getElementById("login-form").action = checkbox.value;
-		    //alert('changed action url');
+		    alert('changed action url');
+		}
+		function checkDateForm(){
+			alert('예약 인원수를 입력해주세요.' + $('input[name="personNo"]').val() + '?');
+			if($('input[name="personNo"]').val() == ""){
+				alert('예약 인원수를 입력해주세요.');
+				return false;
+			}
+			return true;
 		}
 	</script>
-		    
 </head>
 
 <body>
@@ -87,21 +79,24 @@
                 ================================================== -->
                 <!-- Nav menu -->
                 <jsp:include page="/include/loginModal.jsp"/>
-                <div class="col-sm-2">
-          		<c:choose>
+                
+                <c:choose>
 	                <c:when test="${ empty loginUser}">
 		                <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a>                		
 	                </c:when>
 					<c:otherwise>
 						<c:if test="${ loginUser.type eq 'U' }">
+							<jsp:include page="/include/userMenu.jsp"/>
 			                		[${ loginUser.email}님 접속중]
 								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
 		                </c:if>
 						<c:if test="${ loginUser.type eq 'S' }">
+						<jsp:include page="/include/adminMenu.jsp"/>
 		                		[${ loginUser.email} 관리자님 접속중]
 							<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
 		                </c:if>
 		                <c:if test="${ loginUser.type eq 'O' }">
+		               		   <jsp:include page="/include/ownerMenu.jsp"/>
 		                		[${ loginUser.email} 사업자님 접속중]
 							<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
 		                </c:if>
@@ -110,7 +105,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <!-- End Nav Bar -->
 </header>
 	<!--End Header-->
@@ -220,12 +214,12 @@
 	</section>
 
 
-	<script type="text/javascript" src="js/vendor/jquery-1.10.2.min.js"></script>
+	<!-- <script type="text/javascript" src="js/vendor/jquery-1.10.2.min.js"></script>
 	<script src="js/vendor/bootstrap.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>
 	<script src="js/retina-1.1.0.min.js"></script>
-	<script type="text/javascript" src="js/jquery.cookie.js"></script> <!-- jQuery cookie -->
-	<script type="text/javascript" src="js/styleswitch.js"></script> <!-- Style Colors Switcher -->
+	<script type="text/javascript" src="js/jquery.cookie.js"></script> jQuery cookie
+	<script type="text/javascript" src="js/styleswitch.js"></script> Style Colors Switcher
     <script src="js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
 
     <script src="js/jquery.superfish.js"></script>
@@ -240,8 +234,8 @@
 
 	<script src="js/main.js"></script>
 
-	<!-- Start Style Switcher -->
-	<div class="switcher"></div>
+	Start Style Switcher
+	<div class="switcher"></div> -->
 	<!-- End Style Switcher -->
     <script type="text/javascript"> /*-- Fraction Slider Parameters --*/
     $(window).load(function(){

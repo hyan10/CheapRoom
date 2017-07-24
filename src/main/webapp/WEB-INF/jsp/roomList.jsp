@@ -61,30 +61,15 @@
 	src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/js/searchDate.js"></script>
+    
+<style type="text/css">
+.table th, .table td {
+    text-align: center;
+}
+</style>
 <script type="text/javascript">
-	var j = jQuery.noConflict();
-	j(function() {
-		j('input[name="daterange"]').daterangepicker(
-				{
-					locale : {
-						format : 'YYYY-MM-DD',
-						cancelLabel : '취소',
-						applyLabel : '확인'
-					}
-				},
-				function(start, end, label) {
-					alert("예약 날짜 : " + start.format('YYYY-MM-DD') + '에서 '
-							+ end.format('YYYY-MM-DD') + '까지 예약하시겠습니까?');
-				});
-		j('input[name="daterange"]').on('cancel.daterangepicker',
-				function(ev, picker) {
-					$(this).val('');
-				});
-	});
-	function changeFormAction(checkbox) {
-		document.getElementById("login-form").action = checkbox.value;
-	}
 	$(document).ready(function() {		
 		$('#myCarousel').carousel({
 			interval : 500
@@ -164,7 +149,7 @@
 				<jsp:include page="/include/searchForm.jsp"/>
 			</div>
 			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-			<table class="table table-striped">
+			<table class="table table-striped" ="center">
 				<thead>
 					<tr class="row-name">
 						<!-- <th style="width:12%">Check/UnCheck</th> -->
@@ -173,6 +158,7 @@
 						<th>가격</th>
 						<th>최소 / 최대 인원</th>
 						<th>추가 요금</th>
+						<th>예약 여부</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -180,8 +166,6 @@
 					<c:forEach var="room" items="${roomList}">
 						<tr class="row-content">
 							<!-- <td class="check" "> <label><input type="checkbox" value=""></label></td> -->
-							<td><span class="label label-default"> New <i
-									class="fa fa-thumbs-up"></i></span></td>
 							<td>
 								<div class="col-md-7" id="slider">
 									<div class="col-md-7" id="carousel-bounding-box">
@@ -203,19 +187,37 @@
 									</div>
 								</div>
 							</td>
-							<td>${room.name}<br>(${room.cooking }, ${room.tv }, ${room.ac }</td>
+							<td>
+							${room.name}<br>
+							(	
+								<c:if test="${ room.cooking eq 'N' && room.tv eq 'N' && room.ac eq 'N'}">
+									옵션 없음
+								</c:if>
+								<c:if test="${ room.cooking eq 'Y'}">
+									취사
+								</c:if>
+								<c:if test="${ room.tv eq 'Y'}">
+									TV
+								</c:if>
+								<c:if test="${ room.ac eq 'Y'}">
+									에어컨
+								</c:if>
+							)
+							</td>
 							<td>${room.price}</td>
 							<td>${room.minPerson} / ${room.maxPerson}</td>
 							<td>${room.addPrice }</td>
 							<td>
 							<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-								<%-- <c:set var="bookig" value="${room.booking}"/>
-								<c:if test="${booking}=='N' || ${booking}=='Y'"> --%>
+								<%-- <c:set var="bookig" value="${room.booking}"/>--%>
+								<c:if test="${room.booking}=='Y'"> 
 									<a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=${ room.no }">
 									<button type="submit" class="btn btn-info">
 									예약하기<i class="fa fa-check spaceLeft"></i>
 									</button></a>
-								<%-- </c:if> --%>
+								</c:if>
+								<c:if test="${room.booking}=='N'">예약 불가 
+								</c:if>
 							<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 							</td>
 						</tr>

@@ -202,6 +202,7 @@ public class HotelController {
 		hotel = service.roomList(no, search);
 		
 		model.addAttribute("roomList",hotel.getRooms());
+		System.out.println(hotel);
 		return "roomList";
 		
 	}
