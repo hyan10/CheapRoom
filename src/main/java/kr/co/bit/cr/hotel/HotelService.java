@@ -95,7 +95,6 @@ public class HotelService {
 		List<HotelVO> list = hDao.selectHotelByCno(search.getCityNo());
 		System.out.println("도시번호로 조회");
 		for(HotelVO t1 : list){
-			System.out.println(t1);
 		}
 		Map<Integer, HotelVO> fList = new HashMap<>();
 		Map<Integer, Integer> roomCount = new HashMap<>();
@@ -104,13 +103,15 @@ public class HotelService {
 			List<RoomVO> rooms = rDao.selectRoomByHno(hotelNo);
 			hotel.setRooms(rooms);
 			roomCount.put(hotelNo, rooms.size());
-			System.out.println("====");
-			System.out.println(hotelNo+":"+rooms.size());
 			fList.put(hotelNo, hotel);
 		}
 		
 		//2.호텔의 룸 카운트를세서 예약+룸 카운트가 그것보다 작으면 남는방이 있는거니까 보여준다.
 		Map<Integer, Integer> joinMap = hDao.joinHotelAndBooking(search);
+		System.out.println(joinMap);
+		if(joinMap.isEmpty()){
+			return list;
+		}
 		List<HotelVO> resultList = new ArrayList<>();
 		Iterator<Integer> iterator = joinMap.keySet().iterator();
 	    while (iterator.hasNext()) {
@@ -122,7 +123,6 @@ public class HotelService {
 	    		System.out.println(joinMap.get(hotelNo));
 	    		if(roomCount.get(hotelNo)>joinMap.get(hotelNo)){
 	    			System.out.println("조인비교");
-	    			System.out.println(roomCount.get(hotelNo)+" : "+joinMap.get(hotelNo));
 	    			HotelVO h = fList.get(hotelNo);
 	    			System.out.println("hotel : "+h);
 	    			resultList.add(h);
@@ -131,8 +131,10 @@ public class HotelService {
 	    }
 
 		//남은 결과 조회해서 리턴
-	    System.out.println("최종");
 	    System.out.println(resultList);
+	    if(resultList.isEmpty()){
+	    	return list;
+	    }
 		return resultList;
 	}
 	
