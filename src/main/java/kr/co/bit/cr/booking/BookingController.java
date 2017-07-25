@@ -2,20 +2,17 @@ package kr.co.bit.cr.booking;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -197,6 +194,7 @@ public class BookingController {
 	// 예약 취소
 	@RequestMapping(value="/cancle.cr", method=RequestMethod.GET)
 	public ModelAndView cancleBook(@RequestParam("bookingNo") int bookingNo) {
+		
 		int result = service.cancleBook(bookingNo);
 
 		ModelAndView mav = new ModelAndView("/process/alertProcess");
@@ -206,6 +204,7 @@ public class BookingController {
 		if (result == 1) {
 			mav.addObject("msg", "취소가 완료되었습니다.");			
 		} else { // 취소 실패
+			System.out.println("cancle error result: "+result);
 			mav.addObject("msg", "취소 처리 실패\n다시 시도해주세요.");
 		}
 

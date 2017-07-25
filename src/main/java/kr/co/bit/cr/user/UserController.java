@@ -139,9 +139,10 @@ public class UserController {
 	@RequestMapping("/bookingHistoryList.cr")
 	public ModelAndView userBookingHistory(HttpSession session){
 		UserVO user = (UserVO) session.getAttribute("loginUser");
-		List<BookingVO> bookingHistoryList = bookingService.userBookingList(user.getNo());
+		List<BookingVO> bookingList = bookingService.userBookingHistoryList(user.getNo());
+		System.out.println(bookingList);
 		ModelAndView mav = new ModelAndView("/user/bookingHistoryList"); //예약 현황 페이
-		mav.addObject("bookingHistoryList", bookingHistoryList);
+		mav.addObject("bookingList", bookingList);
 		return mav;
 	}
 	/*

@@ -49,12 +49,12 @@
 			<c:forEach var="review" items="${reviewList}">
 				<tr class="row-content">
 					<td>${review.hotelName}</td>
-					<td>${review.regDate}</td>
 					<td>청결도 - ${review.cleanliness}<br/>
 					편안함 - ${review.comfort}<br/>
 					호텔 접근성 - ${review.location}<br/>
 					부대시설 - ${review.facilities}<br/>
 					친절도 - ${review.staff}</td>
+					<td>${review.regDate}</td>
 				</tr>
 			</c:forEach>
 		</tbody>

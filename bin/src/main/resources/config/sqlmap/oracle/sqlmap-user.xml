@@ -11,10 +11,10 @@
 	</sql> -->
 
 	<select id="userLogin" parameterType="user" resultType="user">
-		select * from users where email = #{email} and password = #{password}
+		select no, email, type, name, phone, to_char(reg_date,'yyyy-mm-dd') as regDate from users where email = #{email} and password = #{password}
 	</select>
 	<select id="userInfo" parameterType="user" resultType="user">
-		select * from users where email = #{email}
+		select no, email, type, name, phone, to_char(reg_date,'yyyy-mm-dd') as regDate from users where no = #{no}
 	</select>
 	<!-- user join sql -->
 	<insert id="userInsert" parameterType="user">

@@ -6,8 +6,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header" align="center">
-				<img class="img-circle" id="img_logo" src="img/cheapRoom_logo.png"
-					width="30%" height="30%">
+				<img class="img-circle" id="img_logo" src="${ pageContext.request.contextPath }/img/cheapRoom_logo.png" width="30%" height="30%">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -25,7 +24,9 @@
 						</div>
 						<input id="email" name="email" class="form-control" type="text" placeholder="이메일" required> 
 						<input id="password" name="password" class="form-control" type="password" placeholder="비밀번호" required>
-						<label>사업자 로그인 <input name="loginType" onclick="changeFormAction(this)" type="checkbox" value="${ pageContext.request.contextPath }/owner/login.cr"/></label>
+						<div class="checkbox">
+						<label><input name="loginType" onclick="changeFormAction(this)" type="checkbox" value="${ pageContext.request.contextPath }/owner/login.cr"/>사업자 로그인 </label>
+						</div>
 						<!-- <div class="checkbox">
 							<label> <input type="checkbox"> 아이디 저장
 							</label>

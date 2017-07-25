@@ -178,7 +178,7 @@
 							<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 								<%-- <c:set var="bookig" value="${room.booking}"/>--%>
 								<c:if test="${room.booking=='Y'}"> 
-									<a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=${ room.no }&startDate=${search.startDate}&endDate=${search.endDate}&personNo=2">
+									<a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=${ room.no }&startDate=${search.startDate}&endDate=${search.endDate}&personNo=${search.personNo}">
 									<button type="submit" class="btn btn-info">
 									예약하기<i class="fa fa-check spaceLeft"></i>
 									</button></a>

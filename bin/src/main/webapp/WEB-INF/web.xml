@@ -33,11 +33,22 @@
   	</init-param>
   </filter>
 
+  <filter>
+    <filter-name>httpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  
   <filter-mapping>
   	<filter-name>encodingFilter</filter-name>
 	<url-pattern>/*</url-pattern>  
   </filter-mapping>
   
+
+  <filter-mapping>
+      <filter-name>httpMethodFilter</filter-name>
+      <servlet-name>petclinic</servlet-name>
+  </filter-mapping>
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

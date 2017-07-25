@@ -36,24 +36,7 @@
 <script src="${ pageContext.request.contextPath}/js/jquery.slim.min.js"></script>
 <script src="${ pageContext.request.contextPath}/js/scale.fix.js"></script>
 <script src="${ pageContext.request.contextPath}/dist/star-rating.min.js"></script>
-<script type="text/javascript">
-	function showModal(){
-		var hotelNo = arguments[0];
-		var userNo = arguments[1];
-		alert("hotelNo : " + hotelNo + "    userNo : " + userNo);		
-		//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
-		//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다.. 
-		$('input[name="hotelNo"]').val(hotelNo);
-		$('input[name="userNo"]').val(userNo);
-	    //$("#myModalLabel").val(hotelNo);
-		//$("#modalHotelNo").val(hotelNo);
-		//s$("#modalUserNo").val(userNo);
-	    $("#review-modal").modal('show');
-	}
-
-</script>
 </head>
-
 <body>
 	<table class="table table-striped" style="width: 80%; margin: auto">
 		<thead>
