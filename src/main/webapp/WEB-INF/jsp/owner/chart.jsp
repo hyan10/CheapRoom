@@ -242,9 +242,9 @@ window.onload = function () {
 												<h4><span><b>${chart.month}월</b></span></h4>
 											</div>
 											<ul class="details">
-												<li><span>총 예약 건수 :</span>${chart.count}</li>
-												<li><span>총 예약 인원 :</span>${chart.totalPerson}</li>
-												<li><span>예약 총액 :</span>${chart.profit}</li>
+												<li><span>총 예약 건수 :</span>${chart.count}건</li>
+												<li><span>총 예약 인원 :</span>${chart.totalPerson}명</li>
+												<li><span>예약 총액 :</span>${chart.profit}원</li>
 												<!-- <li><span>Date :</span> 03 March 2014</li>
 												<li><span>Project URL :</span> <a href="#">www.bestjquery.com</a></li> -->
 											</ul>

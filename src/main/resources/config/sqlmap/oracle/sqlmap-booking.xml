@@ -176,7 +176,7 @@
 	</select>
 	
 	<!-- 사업자의 n월 예약 조회 -->
-	<select id="selectHistoryLastMonthByOwnerNo" parameterType="hashMap" resultType="chart">
+	<select id="selectHistoryLastMonthByOwnerNo" parameterType="hashMap" resultType="booking">
 		<include refid="selectHistoryList"/>
 		where owner_no = #{no} and to_char(b.start_date, 'MM') = to_char(to_date(#{month},'mm'),'mm')
 	</select>

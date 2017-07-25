@@ -105,14 +105,14 @@ public class AdminController {
 		request.setAttribute("maxMonth", maxMonth);
 		
 		// 이번 달 통계
-		/*if(maxMonth == month){
+		if(maxMonth == month){
 			chartList = chartService.chartThisMonth();
 			bookingList = bookingService.bookingHistoryList(month);
 		}else {
 			// n월의 통계
-*/			chartList = chartService.chartLastMonth(month);
+			chartList = chartService.chartLastMonth(month);
 			bookingList = bookingService.bookingHistoryList(month);
-		/*}*/
+		}
 		
 		if(chartList.isEmpty()){
 			chartList = new ArrayList<>();

@@ -202,3 +202,30 @@ alter table review add (no number)
 alter table review add (reg_date date)
 
 create sequence review_seq
+
+select * from booking_history
+select * from chart where hotel_no=83
+
+select month, sum(count) as count, sum(profit) as profit, sum(total_person) as totalPerson
+	      from chart
+	      group by month
+	      having month=4
+	      
+  select * from chart where month=6
+
+select sum(total_price) as profit, sum(total_person) as totalPerson, count(*) as count
+from booking_history bh where to_char(bh.start_date, 'MM') = to_char(to_date(6,'mm'),'mm')
+
+
+	      select h.no as hotelNo, count(*) as roomCount 
+from hotel h left outer join booking b on h.no=b.hotel_no
+where (total_person>10) and ((trunc(start_date) between to_date('2017-07-26','yyyy-mm-dd') and to_date('2017-07-28','yyyy-mm-dd'))
+ or (trunc(end_date) between to_date('2017-07-26','yyyy-mm-dd') and to_date('2017-07-28','yyyy-mm-dd')) )
+group by h.no order by 1;
+
+select sum(total_price) as profit, sum(total_person) as totalPerson, count(*) as count
+from booking_history bh
+where type='Y' and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM')
+
+
+

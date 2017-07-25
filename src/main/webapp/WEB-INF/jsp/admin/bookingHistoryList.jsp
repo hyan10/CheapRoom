@@ -87,7 +87,7 @@
 					<div class="widget_title dividerHeading">
 					<!-- ${chartList[0].year} -->
 					<!-- ${param.year} -->
-						<h4><span><b>2017년 ${month}월 호텔 별 통계</b></span></h4>
+						<h4><span><b>2017년 ${month}월 내역</b></span></h4>
 					</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut reiciendise voluptat maiores alias aut et perferendis doloribus asperiores ut labore.</p>
 						<p> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -101,7 +101,7 @@
 							<!-- 통계 자료 내용 -->
 							<div class="project_details">
 								<div class="widget_title">
-									<h4><span><b>${chart.hotelName}</b></span></h4>
+									<h4><span><b>통계</b></span></h4>
 								</div>
 								<ul class="details">
 									<li><span>총 예약 건수 :</span>${chart.count}건</li>
@@ -114,7 +114,7 @@
 							
 						</div> <!-- 좌측 내용 끝 -->
 						
-						<!-- 이미지 -->
+						<!-- 우측  표 -->
 						<div class="col-lg-8 col-md-8 col-sm-8">
 							<!--Project Details Page-->
 							<div class="porDetCarousel">
@@ -122,7 +122,7 @@
 									<jsp:include page="/include/bookingHistoryList.jsp"/>
 								</div>
 							</div>
-						</div> <!-- 이미지 끝 -->
+						</div> <!-- 우측 끝 -->
 						
 					</div> <!-- row_sub_content 끝 -->
 				</c:forEach>

@@ -60,13 +60,16 @@
 	
 	<!-- 이번 달 관리자용 통계 -->
 	<select id="selectChartThisMonth" resultType="chart">
-		<include refid="selectVO_sysdate"/>
+		<!-- <include refid="selectVO_sysdate"/>
 		from hotel h, (<include refid="selectInFrom"/>
 						where bh.hotel_no in (select no
 									from hotel h)
 						and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM')) u
 		where u.hotel_no = h.no
-	 	<include refid="groupBy"/>	
+	 	<include refid="groupBy"/>	 -->
+	 	select sum(total_price) as profit, sum(total_person) as totalPerson, count(*) as count
+		from booking_history bh
+		where type='Y' and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM')
 	</select>
 	
 	<!-- n월 관리자용 통계 -->
@@ -115,20 +118,26 @@
 	      from chart
 	      where owner_no=#{no}
 	      group by month
+	      order by month
 	</select>
 	
 	<!-- n월 관리자용 통계 -->
 	<select id="selectChartLastMonth" parameterType="int" resultType="chart">
-		select h.name as hotelName, count, profit, totalPerson
+		<!-- select h.name as hotelName, count, profit, totalPerson
 		from (select hotel_no as hotelNo, count(*) as count,
 				 	sum(profit) as profit, sum(total_person) as totalPerson
-				from chart where month=#{month} group by hotel_no) c join hotel h on (c.hotelNo=h.no)
+				from chart where month=#{month} group by hotel_no) c join hotel h on (c.hotelNo=h.no) -->
+		select month, sum(count) as count, sum(profit) as profit, sum(total_person) as totalPerson
+	      from chart
+	      group by month
+	      having month=#{month}
 	</select>
 	
 	<!-- 월별 전체 통계 -->
 	<select id="selectChartAll" resultType="chart">
 		select month, count(*) as count, sum(profit) as profit, sum(total_person) as totalPerson
 		from chart group by month	
+		order by month
 	</select>
 	
 </mapper>

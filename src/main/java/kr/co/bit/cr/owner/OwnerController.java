@@ -166,15 +166,24 @@ public class OwnerController {
 			bookingList = bookingService.ownerBookingHistoryList(map);
 		}
 		
-		if(chartList.isEmpty()){
-			chartList = new ArrayList<>();
-			ChartVO chart = new ChartVO();
-			chart.setHotelName(hotelService.selectHotelNameByOno(ownerNo).get(0));   
-			chart.setCount(0);
-			chart.setProfit(0);
-			chart.setTotalPerson(0);
-			chartList.add(chart);
-		}
+		 // 빈 데이터 추가
+/*		if(chartList.isEmpty()){
+			chartList = new ArrayList<>();*/
+			List<ChartVO> cList = new ArrayList<>();
+			cList.addAll(chartList);
+			for(String hotelName : hotelService.selectHotelNameByOno(ownerNo)){
+				for(ChartVO c : chartList){
+					if(!c.getHotelName().equals(hotelName)){
+						ChartVO chart = new ChartVO();
+						chart.setHotelName(hotelName);//hotelService.selectHotelNameByOno(ownerNo).get(0));   
+						chart.setCount(0);
+						chart.setProfit(0);
+						chart.setTotalPerson(0);
+						cList.add(chart);						
+					}
+				}
+			}
+//		}
 		
 		if(bookingList==null){
 			bookingList = new ArrayList<>();
@@ -183,7 +192,7 @@ public class OwnerController {
 		System.out.println(chartList);
 		
 		mav.addObject("bookingList",bookingList);
-		mav.addObject("chartList",chartList);
+		mav.addObject("chartList",cList);
 		mav.setViewName("owner/bookingHistoryList");
 		
 		return mav;

@@ -220,7 +220,10 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<button disabled="disabled" class="subscribe btn btn-success btn-lg btn-block"
-												type="button">결제 완료</button>
+												type="button">
+												<c:if test="${booking.type == 'Y' || empty booking.type}">결제 완료</c:if>
+												<c:if test="${booking.type == 'N' }">취소된 결제</c:if>
+											</button>
 										</div>
 									</div>
 									<div class="row" style="display: none;">
