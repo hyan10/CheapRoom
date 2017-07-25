@@ -64,6 +64,5 @@
      </tbody>
   </table>
   
-  <a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=1"><input type="button" value="예약하기"/></a>
 </body>
 </html>

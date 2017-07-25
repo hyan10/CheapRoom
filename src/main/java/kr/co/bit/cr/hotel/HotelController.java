@@ -251,6 +251,7 @@ public class HotelController {
 		
 		search.setCityNo(Integer.parseInt(cityNo.getValue()));
 		search.setPersonNo(Integer.parseInt(personNo.getValue()));
+		
 		list = service.hotelList(search);
 		
 		
@@ -262,6 +263,7 @@ public class HotelController {
 		System.out.println("favorite추가");
 		System.out.println(list);
 		model.addAttribute("hotelList", list);
+		model.addAttribute("search",search);
 		return "hotelList";
 	}
 
@@ -276,9 +278,11 @@ public class HotelController {
 		SearchVO search = new SearchVO();
 		search.setStartDate(startDate.getValue());
 		search.setEndDate(endDate.getValue());
+		//search.setPersonNo(personNo);
 		hotel = service.roomList(no, search);
 		
 		model.addAttribute("roomList",hotel.getRooms());
+		model.addAttribute("search",search);
 		System.out.println(hotel);
 		return "roomList";
 		

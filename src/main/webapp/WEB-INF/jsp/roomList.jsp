@@ -210,13 +210,13 @@
 							<td>
 							<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 								<%-- <c:set var="bookig" value="${room.booking}"/>--%>
-								<c:if test="${room.booking}=='Y'"> 
-									<a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=${ room.no }">
+								<c:if test="${room.booking=='Y'}"> 
+									<a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=${ room.no }&startDate=${search.startDate}&endDate=${search.endDate}&personNo=2">
 									<button type="submit" class="btn btn-info">
 									예약하기<i class="fa fa-check spaceLeft"></i>
 									</button></a>
 								</c:if>
-								<c:if test="${room.booking}=='N'">예약 불가 
+								<c:if test="${room.booking=='N'}">예약 불가 
 								</c:if>
 							<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 							</td>

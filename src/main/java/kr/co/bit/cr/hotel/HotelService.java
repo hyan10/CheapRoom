@@ -158,9 +158,10 @@ public class HotelService {
 		}		
 		
 		//조인   return 예약된 방리스트
-		List<RoomVO> bookingRooms = rDao.joinRoomAndBooking(search);
+		List<RoomVO> bookingRooms = new ArrayList<>();
+		bookingRooms = rDao.joinRoomAndBooking(search);
 
-		if(bookingRooms!=null){
+		if(!bookingRooms.isEmpty()){
 			for(RoomVO room1 : totalRooms){
 				for(RoomVO room2 : bookingRooms){
 					if(room2.getNo()==room1.getNo()){
@@ -195,6 +196,7 @@ public class HotelService {
 		List<RoomVO> rooms = new ArrayList<>();
 		RoomVO room = rDao.selectRoomByNo(rNo);
 		rooms.add(room);
+		System.out.println("room : "+room);
 		HotelVO hotel = hDao.selectHotelByNo(room.getHotelNo());
 		hotel.setRooms(rooms);
 		return hotel;

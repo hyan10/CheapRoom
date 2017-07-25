@@ -15,7 +15,7 @@
 	
 	<select id="selectRoomByNo" parameterType="int" resultType="room">
 		<include refid="select"/>
-		 where hotel_no = #{no}
+		 where no = #{no}
 	</select>
 	
 	<insert id="registerRoom" parameterType="room">

@@ -36,7 +36,6 @@ public class BookingDAO {
 	// 유저 예약 조회
 	public List<BookingVO> selectByUser(int userNo){
 		System.out.println(userNo);
-		System.out.println(sqlSessionTemplate);
 		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByUserNo",userNo);
 	}
 

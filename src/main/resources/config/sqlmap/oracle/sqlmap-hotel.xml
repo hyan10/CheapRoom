@@ -16,7 +16,7 @@
 	
 	<select id="selectHotelByNo" parameterType="int" resultType="hotel">
 		<include refid="select"/>
-		 where no=#{no}
+		 where no=#{no} order by no
 		
 	</select>
 	
