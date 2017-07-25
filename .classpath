@@ -33,7 +33,11 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/Users/KS_MacAir/Downloads/json_simple-1.1.jar">
+=======
+	<classpathentry kind="lib" path="/Users/henry/Desktop/json_simple-1.1.jar">
+>>>>>>> 0aedcc4eab38662dddbddd91dd866ed0cc1772d1
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

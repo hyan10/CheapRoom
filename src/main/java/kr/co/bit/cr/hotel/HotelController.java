@@ -251,16 +251,19 @@ public class HotelController {
 		
 		search.setCityNo(Integer.parseInt(cityNo.getValue()));
 		search.setPersonNo(Integer.parseInt(personNo.getValue()));
+		
 		list = service.hotelList(search);
 		
 		
 		System.out.println(list);
 		//owner user 체크
 		UserVO user = (UserVO)session.getAttribute("loginUser");
+		System.out.println("favorite들어가기전");
 		list = service.favoriteList(list, user);
 		System.out.println("favorite추가");
 		System.out.println(list);
 		model.addAttribute("hotelList", list);
+		model.addAttribute("search",search);
 		return "hotelList";
 	}
 
@@ -275,9 +278,11 @@ public class HotelController {
 		SearchVO search = new SearchVO();
 		search.setStartDate(startDate.getValue());
 		search.setEndDate(endDate.getValue());
+		//search.setPersonNo(personNo);
 		hotel = service.roomList(no, search);
 		
 		model.addAttribute("roomList",hotel.getRooms());
+		model.addAttribute("search",search);
 		System.out.println(hotel);
 		return "roomList";
 		
