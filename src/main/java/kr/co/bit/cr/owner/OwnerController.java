@@ -146,9 +146,15 @@ public class OwnerController {
 		}
 		
 		// 이번 달 통계
-		if(maxMonth == month){
-			chartList = chartService.chartThisMonthByOwnerNo(ownerNo);
-			bookingList = bookingService.ownerBookingHistoryList(ownerNo);
+		 if(maxMonth == month){
+	         chartList = chartService.chartThisMonthByOwnerNo(ownerNo);
+	         Map<String,Integer> map = new HashMap<>();
+	         
+	         map.put("no", ownerNo); 
+	         map.put("month", month);
+
+	         //bookingList = bookingService.ownerBookingHistoryList(ownerNo);
+	         bookingList = bookingService.ownerBookingHistoryList(map);
 		}else {
 			// n월의 통계
 			Map<String,Integer> map = new HashMap<>();
