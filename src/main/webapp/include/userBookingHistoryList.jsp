@@ -66,6 +66,7 @@
 				<th>체크아웃날짜</th>
 				<th>인원</th>
 				<th>요금</th>
+				<th>후기 남기기</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -90,6 +91,12 @@
 					<td><button class="label label-default"
 							onclick="javascript:location.href='${pageContext.request.contextPath}/booking/historyDetail.cr?bookingNo=${booking.no}'">내역
 							보기</button></td>
+					<c:choose>
+						<c:when test="${booking.type}=='N'">후기등록 불가</c:when>
+						<c:otherwise>
+							<td><a href="#" class="btn btn-primary btn-lg" role="button" onclick="showModal(${ booking.hotelNo}, ${ loginUser.no});">후기 등록</a></td>
+						</c:otherwise>
+					</c:choose>
 				</tr>
 			</c:forEach>
 			<%-- <td><a href="#" class="btn btn-primary btn-lg" role="button" onclick="showModal(3, ${ loginUser.no});">후기 등록</a></td> --%>

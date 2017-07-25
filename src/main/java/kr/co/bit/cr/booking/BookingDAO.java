@@ -27,10 +27,10 @@ public class BookingDAO {
 	}
 
 	// 예약 취소
-	public int cancleBook(BookingVO booking) {
+	public int cancleBook(int bookingNo) {
 		
-		sqlSessionTemplate.insert("booking.BookingDAO.insertBookHistory", booking);
-		return sqlSessionTemplate.delete("booking.BookingDAO.deleteBook", booking.getNo());
+		//sqlSessionTemplate.insert("booking.BookingDAO.insertBookHistory", bookingNo);
+		return sqlSessionTemplate.delete("booking.BookingDAO.deleteBook", bookingNo);
 	}
 	
 	// 유저 예약 조회

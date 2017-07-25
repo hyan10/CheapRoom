@@ -20,15 +20,22 @@
 				<!-- end col-sm-2-1 -->
 				<c:if test="${ loginUser.type eq 'U' }">
 					<jsp:include page="/include/userMenu.jsp" />
-              		[${ loginUser.email}님 접속중]
-					<a href="${ pageContext.request.contextPath }/user/logout.cr"
+              		<font color="white">[${ loginUser.email}님 접속중]</font>
+				<a href="${ pageContext.request.contextPath }/user/logout.cr"
 						class="btn btn-primary btn-lg" role="button">로그아웃</a>
 				</c:if>
 				<c:if test="${ loginUser.type eq 'O' }">
-              		   <jsp:include page="/include/ownerMenu.jsp"/>
-               		[${ loginUser.email} 사업자님 접속중]
-					<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-               </c:if>
+					<jsp:include page="/include/ownerMenu.jsp" />
+              		<font color="white">[${ loginUser.email} 사업자님 접속중]</font>
+				<a href="${ pageContext.request.contextPath }/owner/logout.cr"
+						class="btn btn-primary btn-lg" role="button">로그아웃</a>
+				</c:if>
+				<c:if test="${ loginUser.type eq 'S' }">
+					<jsp:include page="/include/adminMenu.jsp" />
+              		<font color="white">[${ loginUser.email} 관리자님 접속중]</font>
+				<a href="${ pageContext.request.contextPath }/user/logout.cr"
+						class="btn btn-primary btn-lg" role="button">로그아웃</a>
+				</c:if>
 				<!-- end col-sm-2-2 -->
 			</div>
 			<!-- end row -->

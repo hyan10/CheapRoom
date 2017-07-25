@@ -9,14 +9,14 @@
 				
 			</li>
 
-			<li><a href="">현재 예약 현황</a>
+			<li><a href="${ pageContext.request.contextPath }/owner/bookingList.cr">현재 예약 현황</a>
 			
 			</li>
 
-			<li><a href="#">지난 예약 보기</a>
+			<li><a href="${ pageContext.request.contextPath }/owner/bookingHistoryList.cr">지난 예약 보기</a>
 			
 			</li>
-			<li><a href="#">수입 통계</a>
+			<li><a href="${ pageContext.request.contextPath }/owner/chart.cr">수입 통계</a>
 			
 			</li>
 		</ul>

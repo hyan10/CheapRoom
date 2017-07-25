@@ -204,40 +204,7 @@ function payWithStripe() {
 </head>
 <body>
 
-	<!--Start Header-->
-	<header id="header" class="clearfix">
-	    <!-- Nav Bar -->
-	    <div id="nav-bar" class="clearfix">
-	        <div class="container">
-	            <div class="row">
-	                <!-- Logo / Mobile Menu -->
-					<div class="col-sm-2">
-						<div id="logo">
-							<h1>
-								<a href="index.jsp"><img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
-							</h1>
-						</div> <!-- end logo -->
-					</div> <!-- end col-sm-2-1 -->
-			
-					<!-- Navigation
-	                ================================================== -->
-	                <!-- Nav menu -->     
-					<jsp:include page="/include/userMenu.jsp"/>              
-	                <!-- Nav menu end -->
-	                
-	                <div class="col-sm-2">
-							<c:if test="${ not empty user }">
-			                		[${ user.email}님 접속중]
-								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-			                </c:if>
-	                </div> <!-- end col-sm-2-2 -->
-	            </div> <!-- end row -->
-	        </div> <!-- end container  -->
-	    </div> <!-- end nav-bar -->
-	    <!-- End Nav Bar -->
-	</header>
-		<!--End Header-->
-		
+	<jsp:include page="/include/header.jsp"/>		
 		
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -257,7 +224,8 @@ function payWithStripe() {
 					</div>
 				</div>
 			</div>
-		</section>  <!-- end header -->
+		</section>
+	</section>  <!-- end header -->
 
 
 	<!-- Start content -->
@@ -273,7 +241,7 @@ function payWithStripe() {
 	 
 		      <jsp:include page="/include/favoriteList.jsp"/>
 
-		  </table>
+		  	</table>
 		 </section>
 		
 		<div class="row" style="display: none;">

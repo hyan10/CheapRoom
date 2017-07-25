@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>예약 현황</title>
+	<title>싸다방</title>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Optional theme -->
@@ -36,19 +36,17 @@
      
 	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
-		    
 </head>
-
 <body>
-<jsp:include page="/include/header.jsp" />
+	<jsp:include page="/include/header.jsp"/>
 	
-		<!--start wrapper-->
+	<!--start wrapper-->
 	<section class="wrapper">
 		<section class="page_head">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<h2>예약 현황</h2>
+						<h2>통계</h2>
 						<nav id="breadcrumbs">
 							<ul>
 								<li>You are here:</li>
@@ -62,12 +60,75 @@
 			</div>
 		</section>
 	</section>  <!-- end wrapper -->
-	
-	<section class="content" style="height:700px; margin-top:50px">
-		<jsp:include page="/include/bookingList.jsp"/>
-	</section>
-	
-	
+		
+		<!-- 통계 영역 -->
+		<section class="content portfolio_single">
+			<div class="container">
+
+				<!-- 월 선택 -->	
+				<form name="monthForm" action="${pageContext.request.contextPath}/owner/bookingHistoryList.cr" method="get">
+					<div style="width:100%; margin-bottom:50px">		
+						월 선택: <select class="form-control" name="month" style="display:inline-block !important; width:20% !important">
+							<c:forEach var="i" begin="1" end="${maxMonth}">
+								<option value="${i}" 
+									<c:if test="${i eq month}">
+										selected="selected"
+									</c:if>s
+								>${i}월</option>								
+							</c:forEach>						
+						</select>						
+						<input type="submit" value="검색"/>
+					</div>
+				</form>
+			
+				<!-- 설명할거 있으면 여기에 -->
+				<div class="project_description">
+					<div class="widget_title dividerHeading">
+					<!-- ${chartList[0].year} -->
+					<!-- ${param.year} -->
+						<h4><span><b>2017년 ${month}월 호텔 별 통계</b></span></h4>
+					</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut reiciendise voluptat maiores alias aut et perferendis doloribus asperiores ut labore.</p>
+						<p> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				</div> <!-- end description -->
+						
+				<!-- for문 -->
+				<c:forEach var="chart" items="${chartList}">
+					<div class="row sub_content">
+						<!-- 좌측 내용 -->
+						<div class="col-lg-4 col-md-4 col-sm-4">	
+							<!-- 통계 자료 내용 -->
+							<div class="project_details">
+								<div class="widget_title">
+									<h4><span><b>${chart.hotelName}</b></span></h4>
+								</div>
+								<ul class="details">
+									<li><span>총 예약 건수 :</span>${chart.count}건</li>
+									<li><span>총 예약 인원 :</span>${chart.totalPerson}명</li>
+									<li><span>예약 총액 :</span>${chart.profit}원</li>
+									<!-- <li><span>Date :</span> 03 March 2014</li>
+									<li><span>Project URL :</span> <a href="#">www.bestjquery.com</a></li> -->
+								</ul>
+							</div> <!-- end detail -->
+							
+						</div> <!-- 좌측 내용 끝 -->
+						
+						<!-- 이미지 -->
+						<div class="col-lg-8 col-md-8 col-sm-8">
+							<!--Project Details Page-->
+							<div class="porDetCarousel">
+								<div class="carousel-content">
+									<jsp:include page="/include/bookingHistoryList.jsp"/>
+								</div>
+							</div>
+						</div> <!-- 이미지 끝 -->
+						
+					</div> <!-- row_sub_content 끝 -->
+				</c:forEach>
+				<!-- for문 끝 -->
+			</div> <!-- end container -->
+		</section>
+		
 	<!--start footer-->
 	<footer class="footer">
 		<jsp:include page="/include/footer.jsp" />
@@ -117,12 +178,6 @@
 
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	
-	<script>
-		window.onload = function(){
-			if('${param.msg}'!=''){
-				alert('${param.msg}');
-			}
-		}
-	</script>
+	
 </body>
 </html>

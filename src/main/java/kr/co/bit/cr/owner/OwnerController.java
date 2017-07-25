@@ -103,25 +103,29 @@ public class OwnerController {
 	public void ownerInfo(){
 		
 	}
+	
+	/**
+	 * owner가 소유한 호텔의 현재 진행중인 예약 내역
+	 * @return
+	 */
 	@RequestMapping("/bookingList.cr")
-	public void ownerBookingList(){
-	}
-	@RequestMapping("/bookingHistory.cr")
-	public void ownerBookingHistory(){
+	public ModelAndView ownerBookingList(){
+		ModelAndView mav = new ModelAndView();
+		List<BookingVO> bookingList = new ArrayList<>();
+		bookingList = bookingService.ownerBookingList(((OwnerVO)session.getAttribute("loginUser")).getNo());
 		
-	}
-	@RequestMapping("/review.cr")
-	public void ownerReview(){
+		mav.addObject("bookingList", bookingList);
+		mav.setViewName("owner/bookingList");
 		
+		return mav;
 	}
 	
 	/**
-	 * owner의 기본 통계
-	 * @param request
+	 * owner가 소유한 호텔 예약 지난내역
 	 * @return
 	 */
-	@RequestMapping("/chart.cr")
-	public ModelAndView ownerChart(HttpServletRequest request){
+	@RequestMapping("/bookingHistoryList.cr")
+	public ModelAndView ownerBookingHistory(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		List<ChartVO> chartList = new ArrayList<>();
 		List<BookingVO> bookingList = new ArrayList<>();
@@ -158,7 +162,7 @@ public class OwnerController {
 		if(chartList.isEmpty()){
 			chartList = new ArrayList<>();
 			ChartVO chart = new ChartVO();
-			chart.setHotelName("");  // hotelService.selectHotelNameByOno(ownerNo)
+			chart.setHotelName(hotelService.selectHotelNameByOno(ownerNo).get(0));   
 			chart.setCount(0);
 			chart.setProfit(0);
 			chart.setTotalPerson(0);
@@ -173,20 +177,24 @@ public class OwnerController {
 		
 		mav.addObject("bookingList",bookingList);
 		mav.addObject("chartList",chartList);
-		mav.setViewName("owner/chart");
+		mav.setViewName("owner/bookingHistoryList");
 		
 		return mav;
+	}
+	@RequestMapping("/review.cr")
+	public void ownerReview(){
+		
 	}
 	
 	/**
 	 * owner의 전체 통계
 	 * @return
 	 */
-	@RequestMapping("/chartAll.cr")
+	@RequestMapping("/chart.cr")
 	public ModelAndView ownerChartAll(){
 		ModelAndView mav = new ModelAndView();
 		List<ChartVO> chartList = new ArrayList<>();
-		
+		int month = new Date().getMonth()+1;
 		// 1. ownerNo 가져오기
 		int ownerNo = 1;
 		OwnerVO owner = (OwnerVO)session.getAttribute("loginUser");
@@ -195,9 +203,18 @@ public class OwnerController {
 		}
 		
 		chartList = chartService.chartAllByOwnerNo(ownerNo);
-		
+		if(chartList.isEmpty()){
+			chartList = new ArrayList<>();
+			ChartVO chart = new ChartVO();
+			chart.setHotelName(hotelService.selectHotelNameByOno(ownerNo).get(0));   
+			chart.setCount(0);
+			chart.setProfit(0);
+			chart.setMonth(month);
+			chart.setTotalPerson(0);
+			chartList.add(chart);
+		}
 		mav.addObject("chartList",chartList);
-		mav.setViewName("owner/chartAll");
+		mav.setViewName("owner/chart");
 		
 		return mav;
 	}

@@ -177,7 +177,7 @@ public class BookingController {
 		int result = service.updateBook(booking);
 		
 		ModelAndView mav = new ModelAndView("/process/alertProcess");
-		mav.addObject("url","/booking/test.cr");
+		mav.addObject("url","/user/bookingList.cr");
 		
 		// 수정 성공
 		if (result == 1) {
@@ -191,12 +191,12 @@ public class BookingController {
 	
 
 	// 예약 취소
-	@RequestMapping("/cancle.cr")
-	public ModelAndView cancleBook(BookingVO booking) {
-		int result = service.cancleBook(booking);
+	@RequestMapping(value="/cancle.cr", method=RequestMethod.GET)
+	public ModelAndView cancleBook(@RequestParam("bookingNo") int bookingNo) {
+		int result = service.cancleBook(bookingNo);
 
 		ModelAndView mav = new ModelAndView("/process/alertProcess");
-		mav.addObject("url","/booking/test.cr");
+		mav.addObject("url","/user/bookingHistoryList.cr");
 		
 		// 취소 성공
 		if (result == 1) {

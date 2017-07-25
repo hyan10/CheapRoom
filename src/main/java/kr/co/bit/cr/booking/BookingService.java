@@ -21,8 +21,8 @@ public class BookingService {
 			return dao.updateBook(booking);
 		}
 		//예약 취소
-		public int cancleBook(BookingVO booking){
-			return dao.cancleBook(booking);
+		public int cancleBook(int bookingNo){
+			return dao.cancleBook(bookingNo);
 		}
 		
 		// 유저 예약 조회
