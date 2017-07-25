@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -215,7 +216,7 @@ public class HotelController {
 		int result = service.registerHotel(hotel);
 		session.removeAttribute("hotel");
 		if(result==1){
-			return "redirect:/owner/info.cr";
+			return "redirect:/owner/ownerPage.cr";
 		}
 		return "redirect:/";
 	}
@@ -268,9 +269,11 @@ public class HotelController {
 	}
 
 	@RequestMapping(value="/roomList.cr", method=RequestMethod.GET)
-	public String roomList(@RequestParam("hotelNo") int no, @RequestParam("hotelNo") String datarange, 
+	public String roomList(@RequestParam("hotelNo") int no,
+						 @CookieValue(value="cityNo",required=true)Cookie cityNo,
 						 @CookieValue(value="startDate",required=true)Cookie startDate,
 						 @CookieValue(value="endDate",required=true)Cookie endDate,
+						 @CookieValue(value="personNo",required=true)Cookie personNo,
 						 Model model){
 		//1. 쿠키 가져와서 시작날짜 - 끝나는날짜 검색
 		//Booking Table 예약기간이랑 겹치지 않는 거 가져오기 
@@ -278,7 +281,8 @@ public class HotelController {
 		SearchVO search = new SearchVO();
 		search.setStartDate(startDate.getValue());
 		search.setEndDate(endDate.getValue());
-		//search.setPersonNo(personNo);
+		search.setPersonNo(Integer.parseInt(personNo.getValue()));
+		search.setCityNo(Integer.parseInt(cityNo.getValue()));
 		hotel = service.roomList(no, search);
 		
 		model.addAttribute("roomList",hotel.getRooms());

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.bit.cr.search.SearchVO;
 import kr.co.bit.cr.user.UserVO;
 
 @Repository
@@ -76,6 +77,11 @@ public class BookingDAO {
 	// n월 전체 예약 조회
 	public List<BookingVO> selectHistoryAll(int month) {
 		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryAll", month);
+	}
+
+	public List<Integer> selectHotelNobyDate(SearchVO search) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHotelNobyDate", search);
 	}
 	
 	

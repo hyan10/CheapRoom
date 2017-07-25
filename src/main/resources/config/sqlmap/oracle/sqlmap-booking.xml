@@ -192,4 +192,11 @@
 		where to_char(b.start_date, 'MM') = to_char(to_date(#{month},'mm'),'mm')
 	</select>
 	
+	<!-- 날짜로 호텔번호 조회 -->
+	<select id="selectHotelNobyDate" parameterType="search" resultType="int">
+		select DISTINCT hotel_no as hotelNo from booking
+			where (trunc(start_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd'))
+ 			or (trunc(end_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd'))
+ 			order by 1
+	</select>
 </mapper>

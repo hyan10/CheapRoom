@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.bit.cr.booking.BookingDAO;
 import kr.co.bit.cr.favorite.FavoriteDAO;
 import kr.co.bit.cr.favorite.FavoriteVO;
 import kr.co.bit.cr.image.ImageDAO;
@@ -29,6 +30,8 @@ public class HotelService {
 	private ImageDAO iDao;
 	@Autowired
 	private FavoriteDAO fDao;
+	@Autowired
+	private BookingDAO bDao;
 
 	
 	/**
@@ -92,10 +95,12 @@ public class HotelService {
 		
 		//1.지역번호로 호텔이랑 방조회해서 호텔세팅
 		//원래 조인으로 해야댐ㅠ
+		System.out.println(search);
 		List<HotelVO> list = hDao.selectHotelByCno(search.getCityNo());
-		System.out.println("도시번호로 조회");
-		for(HotelVO t1 : list){
-		}
+		List<Integer> numList = bDao.selectHotelNobyDate(search);
+		
+		System.out.println("비교하기전 사이즈 : "+list.size());
+
 		Map<Integer, HotelVO> fList = new HashMap<>();
 		Map<Integer, Integer> roomCount = new HashMap<>();
 		for(HotelVO hotel : list){
@@ -104,14 +109,25 @@ public class HotelService {
 			hotel.setRooms(rooms);
 			roomCount.put(hotelNo, rooms.size());
 			fList.put(hotelNo, hotel);
+			//부킹을날짜로 조회해서 호텔번호를 뽑아옴
+			//호텔리스트에서 해당번호 객체 삭제
+			if(numList.contains(hotel.getNo())){
+				System.out.println("booking목록에 있는 호텔 삭제");
+				list.remove(hotel);
+			}
 		}
 		
+		System.out.println("list size:"+list.size());
+		
 		//2.호텔의 룸 카운트를세서 예약+룸 카운트가 그것보다 작으면 남는방이 있는거니까 보여준다.
+		//호텔 부킹 조인할 때 where절에 호텔리스트 번호추가
 		Map<Integer, Integer> joinMap = hDao.joinHotelAndBooking(search);
 		System.out.println(joinMap);
 		if(joinMap.isEmpty()){
 			return list;
 		}
+		
+		//조인비교시 해당하면 기존호텔리스트에 추가
 		List<HotelVO> resultList = new ArrayList<>();
 		Iterator<Integer> iterator = joinMap.keySet().iterator();
 	    while (iterator.hasNext()) {
@@ -124,18 +140,21 @@ public class HotelService {
 	    		if(roomCount.get(hotelNo)>joinMap.get(hotelNo)){
 	    			System.out.println("조인비교");
 	    			HotelVO h = fList.get(hotelNo);
-	    			System.out.println("hotel : "+h);
-	    			resultList.add(h);
+	    			System.out.println("hotel : "+h.getNo());
+	    			//resultList.add(h);
+	    			list.add(h);
 	    		}
 	    	}
 	    }
 
 		//남은 결과 조회해서 리턴
-	    System.out.println(resultList);
-	    if(resultList.isEmpty()){
-	    	return list;
-	    }
-		return resultList;
+	    //System.out.println(resultList);
+	    for(HotelVO h1 : list)
+	    	System.out.println(h1.getNo());
+//	    if(resultList.isEmpty()){
+//	    	return list;
+//	    }
+		return list;
 	}
 	
 	/**
@@ -159,9 +178,19 @@ public class HotelService {
 		
 		//조인   return 예약된 방리스트
 		List<RoomVO> bookingRooms = new ArrayList<>();
-		bookingRooms = rDao.joinRoomAndBooking(search);
-
+		System.out.println("===========");
+		System.out.println(search);
+		//bookingRooms = rDao.selectRoomByHno(no);
+		Map<String, Object> bMap = new HashMap<>();
+		bMap.put("no", no);
+		bMap.put("search", search);
+		
+		
+		bookingRooms = rDao.joinRoomAndBooking(bMap);
+	
+		System.out.println(bookingRooms);
 		if(!bookingRooms.isEmpty()){
+			System.out.println("not empty");
 			for(RoomVO room1 : totalRooms){
 				for(RoomVO room2 : bookingRooms){
 					if(room2.getNo()==room1.getNo()){
@@ -174,6 +203,7 @@ public class HotelService {
 				}
 			}	
 		}else{
+			System.out.println("empty");
 			for(RoomVO room1 : totalRooms){
 				room1.setBooking("Y");
 			}
@@ -181,6 +211,9 @@ public class HotelService {
 	
 		
 		hotel.setRooms(totalRooms);
+		for(RoomVO r : hotel.getRooms()){
+			System.out.println(r.getBooking());
+		}
 		return hotel;
 	}
 	
