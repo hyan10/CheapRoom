@@ -86,7 +86,7 @@
            	 <div class="col-md-6">
            	 	<jsp:include page="/include/searchForm.jsp"/>
            	 </div>
-           	 <img src="img/fraction-slider/base-1.png" width="1920" height="450">
+           	 <img src="${ pageContext.request.contextPath }/img/room2.jpg" width="1920" height="450">
         </div>      
                
 

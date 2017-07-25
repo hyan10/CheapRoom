@@ -62,7 +62,7 @@
 	href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
 
 </head>
-
+<jsp:include page="/include/reviewModal.jsp" />
 <body>
 	<jsp:include page="/include/header.jsp" />
 

@@ -66,7 +66,8 @@ public class OwnerController {
 		if(owner == null){			
 			model.addAttribute("msg", "사업자 아이디 또는 패스워드가 잘못되었습니다.");
 			System.out.println("사업자 로그인 실패");
-			return "redirect:/";
+			model.addAttribute("url", "");
+			return "process/alertProcess";
 		} else {
 			System.out.println(owner + " 사업자 로그인 성공");
 		}

@@ -53,7 +53,7 @@
 
 </script>
 </head>
-<jsp:include page="/include/reviewModal.jsp" />
+
 <body>
 	<table class="table table-striped" style="width: 80%; margin: auto">
 		<thead>

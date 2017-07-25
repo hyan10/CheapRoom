@@ -69,8 +69,9 @@ public class UserController {
 		UserVO user = userService.login(userVO); 
 		if(user == null){
 			model.addAttribute("msg", "아이디 또는 패스워드가 잘못되었습니다.");
+			model.addAttribute("url", "");
 			System.out.println("아이디 또는 패스워드가 잘못되었습니다.");
-			return "redirect:/";
+			return "process/alertProcess";
 		} else {
 			System.out.println("로그인 성공 : " + user);
 		}

@@ -42,7 +42,7 @@
 	</script>
 </head>
 
-<body>
+<body   style=" background-image: url(${ pageContext.request.contextPath }/img/room4.jpg)">
 <jsp:include page="/include/header.jsp"/>
 
 	<!-- <div class="slider-wrapper"> -->

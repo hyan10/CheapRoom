@@ -28,7 +28,22 @@
 							<p>${hotel.description}</p>
 							
 							<!-- 오른쪽 하단 -->
-							<div align="right">
+							<div align="left">
+								<c:if test="${ hotel.pool == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/swimmingPool.png" width="70px">									
+								</c:if>
+								<c:if test="${ hotel.wifi == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/wifi_icon.png" width="70px">									
+								</c:if>
+								<c:if test="${ hotel.parking == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/parking_icon.png" width="70px">									
+								</c:if>
+								<c:if test="${ hotel.smoking == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/smoking_icon.png" width="70px">									
+								</c:if>
+								<c:if test="${ hotel.bbq == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/bbq2_icon.png" width="70px">									
+								</c:if>
 								<h3>1박요금: <font color="red">${hotel.rooms[0].price}</font></h3>
 								<br/>
 								<a class="btn btn-small btn-default" href="${pageContext.request.contextPath}/hotel/roomList.cr?hotelNo=${hotel.no}">객실 보기</a>

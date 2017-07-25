@@ -54,7 +54,9 @@
 
 <body>
 <!--Start Header-->
-<header id="header" class="clearfix">
+<%-- <jsp:include page="/include/loginModal.jsp"/> --%>
+<jsp:include page="/include/header.jsp"/>
+<%-- <header id="header" class="clearfix">
     <!-- Nav Bar -->
     <div id="nav-bar" class="clearfix">
         <div class="container">
@@ -71,7 +73,7 @@
 				<!-- Navigation
                 ================================================== -->
                 <!-- Nav menu -->
-                <jsp:include page="/include/loginModal.jsp"/>
+                
                 
                 <c:choose>
 	                <c:when test="${ empty loginUser}">
@@ -99,7 +101,7 @@
             </div>
         </div>
     <!-- End Nav Bar -->
-</header>
+</header> --%>
 	<!--End Header-->
 	<!--Start Slider-->
         <div class="slider-wrapper">       	
@@ -108,7 +110,7 @@
            	 <div class="col-md-6">
            	 	<jsp:include page="/include/searchForm.jsp"/>
            	 </div>
-           	 <img src="img/fraction-slider/base-1.png" width="1920" height="450">
+           	 <img src="${ pageContext.request.contextPath }/img/background1.jpg" width="1920" height="400">
         </div>      
                
 
@@ -211,8 +213,8 @@
 	<script src="js/vendor/bootstrap.js"></script>
 	<script src="js/jquery.easing.1.3.js"></script>
 	<script src="js/retina-1.1.0.min.js"></script>
-	<script type="text/javascript" src="js/jquery.cookie.js"></script> jQuery cookie
-	<script type="text/javascript" src="js/styleswitch.js"></script> Style Colors Switcher
+	<script type="text/javascript" src="js/jquery.cookie.js"></script> <!-- jQuery cookie -->
+	<script type="text/javascript" src="js/styleswitch.js"></script> <!-- Style Colors Switcher -->
     <script src="js/jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
 
     <script src="js/jquery.superfish.js"></script>
