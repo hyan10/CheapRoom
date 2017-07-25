@@ -23,6 +23,18 @@ public class ReviewVO {
 	private String roomName;
 	
 	
+	public String getHotelName() {
+		return hotelName;
+	}
+	public void setHotelName(String hotelName) {
+		this.hotelName = hotelName;
+	}
+	public String getRoomName() {
+		return roomName;
+	}
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
 	public ReviewVO() {
 		// TODO Auto-generated constructor stub
 	}

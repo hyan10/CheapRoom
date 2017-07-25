@@ -271,6 +271,7 @@ public class HotelController {
 	public String roomList(@RequestParam("hotelNo") int no, @RequestParam("hotelNo") String datarange, 
 						 @CookieValue(value="startDate",required=true)Cookie startDate,
 						 @CookieValue(value="endDate",required=true)Cookie endDate,
+						 @CookieValue(value="personNo",required=true)Cookie personNo,
 						 Model model){
 		//1. 쿠키 가져와서 시작날짜 - 끝나는날짜 검색
 		//Booking Table 예약기간이랑 겹치지 않는 거 가져오기 
@@ -278,7 +279,7 @@ public class HotelController {
 		SearchVO search = new SearchVO();
 		search.setStartDate(startDate.getValue());
 		search.setEndDate(endDate.getValue());
-		//search.setPersonNo(personNo);
+		search.setPersonNo(Integer.parseInt(personNo.getValue()));
 		hotel = service.roomList(no, search);
 		
 		model.addAttribute("roomList",hotel.getRooms());

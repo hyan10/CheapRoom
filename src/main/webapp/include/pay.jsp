@@ -45,7 +45,7 @@
 								</div>
 								<div class="col-xs-5 col-md-5 pull-right">
 									<div class="form-group">
-										<label for="cardCVC">CV CODE</label> <input type="tel"
+										<label for="cardCVC">Card Type</label> <input type="text"
 											class="form-control" name="cardType" placeholder="cardType"
 											autocomplete="cc-csc" required />
 									</div>
@@ -61,8 +61,8 @@
 							</div> -->
 							<div class="row">
 								<div class="col-xs-12">
-									<button class="subscribe btn btn-success btn-lg btn-block"
-										type="button">결제 요청</button>
+									<input id="payBtn" class="subscribe btn btn-success btn-lg btn-block"
+										type="button" value="결제 요청" onclick="clickPay()">
 								</div>
 							</div>
 							<div class="row" style="display: none;">

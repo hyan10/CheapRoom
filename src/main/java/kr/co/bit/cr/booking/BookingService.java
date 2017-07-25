@@ -20,14 +20,36 @@ public class BookingService {
 		public int updateBook(BookingVO booking){
 			return dao.updateBook(booking);
 		}
+		
 		//예약 취소
 		public int cancleBook(int bookingNo){
-			return dao.cancleBook(bookingNo);
+			
+			int result = 0;
+			
+			// 조회
+			BookingVO booking = dao.selectByNo(bookingNo);
+			
+			// 취소일 경우 type="N" 추가해서 history table에 추가
+			if(booking!=null) {
+				booking.setType("N");
+				result = dao.insertBookHistory(booking);
+				
+				// 추가 후 booking table에서 제거
+				if(result==1) {
+					result = dao.cancleBook(bookingNo);
+				}else {
+					result = -2;
+				}
+			}else {
+				result = -1;
+			}
+			
+			return result;  // 0: cancle 실패, -1: select 실패, -2: insert 실패
 		}
 		
 		// 유저 예약 조회
 		public List<BookingVO> userBookingList(int userNo) {
-			return dao.selectByUser(userNo);
+			return dao.selectByUserNo(userNo);
 		}
 		
 		// 사업자 예약 조회
