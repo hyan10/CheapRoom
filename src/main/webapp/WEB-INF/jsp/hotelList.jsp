@@ -63,53 +63,7 @@
     
 </head>
 <body>
-	<header id="header" class="clearfix">
-    <!-- Nav Bar -->
-    <div id="nav-bar" class="clearfix">
-        <div class="container">
-            <div class="row">
-                <!-- Logo / Mobile Menu -->
-				<div class="col-sm-2">
-					<div id="logo">
-						<h1>
-							<a href="${ pageContext.request.contextPath }"><img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
-						</h1>
-					</div>
-				</div>
-		
-				<!-- Navigation
-                ================================================== -->
-                <!-- Nav menu -->
-                <jsp:include page="/include/loginModal.jsp"/>
-                
-                <c:choose>
-	                <c:when test="${ empty loginUser}">
-		                <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a>                		
-	                </c:when>
-					<c:otherwise>
-						<c:if test="${ loginUser.type eq 'U' }">
-							<jsp:include page="/include/userMenu.jsp"/>
-			                		[${ loginUser.email}님 접속중]
-								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-						<c:if test="${ loginUser.type eq 'S' }">
-						<jsp:include page="/include/adminMenu.jsp"/>
-		                		[${ loginUser.email} 관리자님 접속중]
-							<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-		                <c:if test="${ loginUser.type eq 'O' }">
-		               		   <jsp:include page="/include/ownerMenu.jsp"/>
-		                		[${ loginUser.email} 사업자님 접속중]
-							<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-					</c:otherwise>                
-                </c:choose>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Nav Bar -->
-</header>
+	<jsp:include page="/include/header.jsp"/>
 	
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -129,8 +83,8 @@
 					</div>
 				</div>
 			</div>
-		</section>  <!-- end wrapper -->
-		
+		</section>
+	</section>  <!-- end wrapper -->
 		
 		<section class="content blog">
 			<div class="container">

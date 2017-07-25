@@ -136,33 +136,9 @@ function addForm(){
 </script>
 </head>
 <body>
-	<!--Start Header-->
-	<header id="header" class="clearfix"> <!-- Nav Bar -->
-	<div id="nav-bar" class="clearfix">
-		<div class="container">
-			<div class="row">
-				<!-- Logo / Mobile Menu -->
-				<div class="col-sm-2">
-					<div id="logo">
-						<h1>
-							<a href="${ pageContext.request.contextPath }"><img
-								src="${ pageContext.request.contextPath }/img/logo.png"
-								alt="League" /></a>
-						</h1>
-					</div>
-				</div>
 
-				<c:if test="${ loginUser.type eq 'O' }">
-					<jsp:include page="/include/ownerMenu.jsp" />
-               		[${ loginUser.email} 사업자님 접속중]
-				<a href="${ pageContext.request.contextPath }/owner/logout.cr"
-						class="btn btn-primary btn-lg" role="button">로그아웃</a>
-				</c:if>
+	<jsp:include page="/include/header.jsp"/>	
 
-			</div>
-		</div>
-	</div>
-	</header>
 	<div class="container" style="margin: 10px;">
 		<div class="row">
 			<div class="col-md-2">

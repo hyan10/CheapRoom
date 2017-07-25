@@ -96,25 +96,29 @@ public class OwnerController {
 	public void ownerInfo(){
 		
 	}
+	
+	/**
+	 * owner가 소유한 호텔의 현재 진행중인 예약 내역
+	 * @return
+	 */
 	@RequestMapping("/bookingList.cr")
-	public void ownerBookingList(){
-	}
-	@RequestMapping("/bookingHistory.cr")
-	public void ownerBookingHistory(){
+	public ModelAndView ownerBookingList(){
+		ModelAndView mav = new ModelAndView();
+		List<BookingVO> bookingList = new ArrayList<>();
+		bookingList = bookingService.ownerBookingList(((OwnerVO)session.getAttribute("loginUser")).getNo());
 		
-	}
-	@RequestMapping("/review.cr")
-	public void ownerReview(){
+		mav.addObject("bookingList", bookingList);
+		mav.setViewName("owner/bookingList");
 		
+		return mav;
 	}
 	
 	/**
-	 * owner의 기본 통계
-	 * @param request
+	 * owner가 소유한 호텔 예약 지난내역
 	 * @return
 	 */
-	@RequestMapping("/chart.cr")
-	public ModelAndView ownerChart(HttpServletRequest request){
+	@RequestMapping("/bookingHistoryList.cr")
+	public ModelAndView ownerBookingHistory(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		List<ChartVO> chartList = new ArrayList<>();
 		List<BookingVO> bookingList = new ArrayList<>();
@@ -166,9 +170,13 @@ public class OwnerController {
 		
 		mav.addObject("bookingList",bookingList);
 		mav.addObject("chartList",chartList);
-		mav.setViewName("owner/chart");
+		mav.setViewName("owner/bookingHistoryList");
 		
 		return mav;
+	}
+	@RequestMapping("/review.cr")
+	public void ownerReview(){
+		
 	}
 	
 	/**
@@ -190,7 +198,7 @@ public class OwnerController {
 		chartList = chartService.chartAllByOwnerNo(ownerNo);
 		
 		mav.addObject("chartList",chartList);
-		mav.setViewName("owner/chartAll");
+		mav.setViewName("owner/chart");
 		
 		return mav;
 	}
