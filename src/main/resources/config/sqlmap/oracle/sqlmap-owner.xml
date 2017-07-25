@@ -8,7 +8,7 @@
 		insert into owner(no, email, password, name, phone, crn, reg_date) values(owner_SEQ.NEXTVAL, #{email}, #{password}, #{name}, #{phone}, #{crn}, sysdate)
 	</insert>
 	<select id="loginOwner" parameterType="owner" resultType="owner">
-		select * from owner where email = #{email} and password = #{password}
+		select no, email, type, name, phone, to_char(reg_date,'yyyy-mm-dd') as regDate, crn from owner where email = #{email} and password = #{password}
 	</select>
 	
 	<select id="selectOwnerByType" parameterType="String" resultType="owner">

@@ -30,7 +30,9 @@ public class HotelDAO {
 	public HotelVO selectHotelByNo(int no){
 		return sqlSession.selectOne("hotel.dao.HotelDAO.selectHotelByNo", no);
 	}
-	
+	public List<HotelVO> selectHotelListByOno(int ownerNo){
+		return sqlSession.selectList("hotel.dao.HotelDAO.selectHotelListByOno", ownerNo);
+	}
 	public int deleteHotelByNo(HotelVO hotel){
 		return sqlSession.delete("hotel.dao.HotelDAO.deleteHotelByNo", hotel.getNo());
 	}

@@ -219,5 +219,20 @@ public class HotelService {
 	public List<String> selectHotelNameByOno(int ownerNo){
 		return hDao.selectHotelNameByOno(ownerNo);
 	}
+	
+	public List<HotelVO> selectHotelListByOno(int ownerNo){
+		List<HotelVO> list = hDao.selectHotelListByOno(ownerNo);
+		Map<Integer, HotelVO> fList = new HashMap<>();
+		Map<Integer, Integer> roomCount = new HashMap<>();
+		for(HotelVO hotel : list){
+			int hotelNo = hotel.getNo();
+			List<RoomVO> rooms = rDao.selectRoomByHno(hotelNo);
+			hotel.setRooms(rooms);
+			roomCount.put(hotelNo, rooms.size());
+			fList.put(hotelNo, hotel);
+		}
+		
+		return list;
+	}
 
 }

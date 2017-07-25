@@ -22,6 +22,8 @@ import kr.co.bit.cr.booking.BookingVO;
 import kr.co.bit.cr.chart.ChartService;
 import kr.co.bit.cr.chart.ChartVO;
 import kr.co.bit.cr.hotel.HotelService;
+import kr.co.bit.cr.hotel.HotelVO;
+import oracle.net.aso.h;
 
 @Controller
 @RequestMapping("/owner")
@@ -72,8 +74,13 @@ public class OwnerController {
 		///model.addAttribute("loginUser", owner);
 		return "redirect:/owner/ownerPage.cr";
 	}
+	//사업자 번호로 호텔리스트 조회(사업자 페이지 출력용)
 	@RequestMapping("/ownerPage.cr")
-	public String url(){
+	public String selectHotelListByOwerNo(Model model, HttpSession session){
+		OwnerVO owner = (OwnerVO) session.getAttribute("loginUser");
+		List<HotelVO> hotelList = hotelService.selectHotelListByOno(owner.getNo());
+		model.addAttribute("hotelList", hotelList);
+		System.out.println(owner);
 		return "ownerPage";
 	}
 	@RequestMapping("/logout.cr")

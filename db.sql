@@ -1,5 +1,9 @@
 --KS Test SQL
-
+select no, owner_no as ownerNo, city_no as cityNo, name, blind, tel, parking, wifi, smoking, pool, bbq, 
+		description, checkin, checkout, addr, to_char(reg_date,'yyyy-mm-dd') as regDate, imgurl
+		from hotel where owner_no = 21
+		
+		
 select * from booking;
 select *from booking where user_no = (select no from users where email = 'admin')
 select * from users

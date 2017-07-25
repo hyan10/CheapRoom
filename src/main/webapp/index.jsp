@@ -46,7 +46,7 @@
 	<script>
 		function changeFormAction(checkbox){
 		    document.getElementById("login-form").action = checkbox.value;
-		    alert('changed action url');
+		    //alert('changed action url');
 		}
 		
 	</script>

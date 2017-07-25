@@ -3,17 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hotel.dao.HotelDAO">
+
 	<sql id="select">
 		select no, owner_no as ownerNo, city_no as cityNo, name, blind, tel, parking, wifi, smoking, pool, bbq, 
 		description, checkin, checkout, addr, to_char(reg_date,'yyyy-mm-dd') as regDate, imgurl
 		from hotel
-	</sql>
+	</sql> 
 	
 	<select id="selectAll">
 		<include refid="select"/>
 		
 	</select>
-	
+	<!-- owner 번호로 owner가 등록한 호텔과 방 리스트 가져오기 -->
+	<select id="selectHotelListByOno" parameterType="int" resultType="hotel">
+		<include refid="select"/>
+		 where owner_no=#{ownerNo}
+		
+	</select>
 	<select id="selectHotelByNo" parameterType="int" resultType="hotel">
 		<include refid="select"/>
 		 where no=#{no}
