@@ -310,7 +310,7 @@
 				folder = 'user';
 				break;
 			case 'S':
-				folder = 's';
+				folder = 'admin';
 				break;
 			case 'O' :
 				folder = 'owner';

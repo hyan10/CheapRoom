@@ -106,11 +106,15 @@
 	
 	<!-- 사업자의 월 별 전체 통계 -->
 	<select id="selectChartAllByOwnerNo" parameterType="int" resultType="chart">
-		select h.no as hotelNo, h.city_no as cityNo, h.name as hotelName,
+		<!-- select h.no as hotelNo, h.city_no as cityNo, h.name as hotelName,
 				c.year, c.month, c.count, c.profit, c.total_person as totalPerson
 		from chart c join hotel h on c.hotel_no=h.no
 		where c.owner_no=#{no}
-		order by c.month
+		order by c.month -->
+		select month, sum(count) as count, sum(profit) as profit, sum(total_person) as totalPerson
+	      from chart
+	      where owner_no=#{no}
+	      group by month
 	</select>
 	
 	<!-- n월 관리자용 통계 -->

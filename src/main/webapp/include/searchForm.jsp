@@ -45,9 +45,8 @@
 				</div>
 			</div>
 			<div class="col-sm-offset-4 col-sm-5">
-				<input type="submit" class="btn btn-info"  value="검색"/>
-				<%-- <a href="${ pageContext.request.contextPath }/hotel/hotelList.cr">검색</a> --%>
-				
+				<!-- <input type="submit" class="btn btn-info"  value="검색"/> -->
+				<button type="submit" class="btn btn-success btn-submit">검색</button>				
 			</div>
 		</form>
 	</div>

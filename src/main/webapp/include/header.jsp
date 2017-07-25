@@ -42,6 +42,12 @@
 				<a href="${ pageContext.request.contextPath }/user/logout.cr"
 						class="btn btn-primary btn-lg" role="button">로그아웃</a>
 				</c:if>
+				<c:if test="${ loginUser.type eq 'N' }">
+					<jsp:include page="/include/adminMenu.jsp" />
+              		<font color="white">[${ loginUser.email} 사업자님 접속중]<br/>(관리자의 가입 승인이 필요합니다.)</font>
+				<a href="${ pageContext.request.contextPath }/owner/logout.cr"
+						class="btn btn-primary btn-lg" role="button">로그아웃</a>
+				</c:if>
 				<!-- end col-sm-2-2 -->
 			</div>
 			<!-- end row -->

@@ -215,7 +215,7 @@ public class HotelController {
 		int result = service.registerHotel(hotel);
 		session.removeAttribute("hotel");
 		if(result==1){
-			return "redirect:/owner/info.cr";
+			return "redirect:/owner/ownerPage.cr";
 		}
 		return "redirect:/";
 	}

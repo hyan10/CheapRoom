@@ -41,7 +41,7 @@
 				<!-- <th style="width:12%">Check/UnCheck</th> -->
 				<th style="width: 10%">호텔 이름</th>
 				<th>후기 내용</th>
-				<th>등록 날짜</th>
+				<th>후기 등록 날짜</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,11 +49,37 @@
 			<c:forEach var="review" items="${reviewList}">
 				<tr class="row-content">
 					<td>${review.hotelName}</td>
-					<td>청결도 - ${review.cleanliness}<br/>
-					편안함 - ${review.comfort}<br/>
-					호텔 접근성 - ${review.location}<br/>
-					부대시설 - ${review.facilities}<br/>
-					친절도 - ${review.staff}</td>
+					<td>청결도는
+					<c:choose>
+						<c:when test="${review.cleanliness lt 3}">너무 별로에요.</c:when>
+						<c:when test="${review.cleanliness eq 3}">그냥 그래요.</c:when>
+						<c:otherwise>너무 좋아요!</c:otherwise>
+					</c:choose><br/>
+					편안함은
+					<c:choose>
+						<c:when test="${review.comfort lt 3}">너무 별로에요.</c:when>
+						<c:when test="${review.comfort eq 3}">그냥 그래요.</c:when>
+						<c:otherwise>너무 좋아요!</c:otherwise>
+					</c:choose><br/>
+					호텔 접근성은
+					<c:choose>
+						<c:when test="${review.location lt 3}">너무 별로에요.</c:when>
+						<c:when test="${review.location eq 3}">그냥 그래요.</c:when>
+						<c:otherwise>너무 좋아요!</c:otherwise>
+					</c:choose><br/>
+					부대시설은
+					<c:choose>
+						<c:when test="${review.facilities lt 3}">너무 별로에요.</c:when>
+						<c:when test="${review.facilities eq 3}">그냥 그래요.</c:when>
+						<c:otherwise>너무 좋아요!</c:otherwise>
+					</c:choose><br/>
+					직원 친절도는
+					<c:choose>
+						<c:when test="${review.facilities lt 3}">너무 별로에요.</c:when>
+						<c:when test="${review.facilities eq 3}">그냥 그래요.</c:when>
+						<c:otherwise>너무 좋아요!</c:otherwise>
+					</c:choose>
+					</td>
 					<td>${review.regDate}</td>
 				</tr>
 			</c:forEach>

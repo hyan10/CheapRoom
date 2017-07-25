@@ -40,7 +40,7 @@
 	function showModal(){
 		var hotelNo = arguments[0];
 		var userNo = arguments[1];
-		 alert("hotelNo : " + hotelNo + "    userNo : " + userNo);		
+		//alert("hotelNo : " + hotelNo + "    userNo : " + userNo);		
 		//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
 		//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다.. 
 		$('input[name="hotelNo"]').val(hotelNo);
@@ -48,12 +48,14 @@
 	    //$("#myModalLabel").val(hotelNo);
 		//$("#modalHotelNo").val(hotelNo);
 		//s$("#modalUserNo").val(userNo);
+		
 	    $("#review-modal").modal('show');
+	    $('#reviewBtn').hide();
 	}
 
 </script>
 </head>
-<jsp:include page="/include/reviewModal.jsp" />
+<%-- <jsp:include page="/include/reviewModal.jsp" /> --%>
 <body>
 	<table class="table table-striped" style="width: 80%; margin: auto">
 		<thead>
@@ -92,9 +94,9 @@
 							onclick="javascript:location.href='${pageContext.request.contextPath}/booking/historyDetail.cr?bookingNo=${booking.no}'">내역
 							보기</button></td>
 					<c:choose>
-						<c:when test="${booking.type=='N'}">후기등록 불가</c:when>
+						<c:when test="${booking.type=='N'}"><td>후기등록 불가</td></c:when>
 						<c:otherwise>
-							<td><a href="#" class="btn btn-primary btn-lg" role="button" onclick="showModal(${ booking.hotelNo}, ${ loginUser.no})">후기 등록</a></td>
+							<td><a href="#" id="reviewBtn" class="btn btn-primary btn-lg" role="button" onclick="showModal(${ booking.hotelNo}, ${ loginUser.no})">후기 등록</a></td>
 						</c:otherwise>
 					</c:choose>
 				</tr>

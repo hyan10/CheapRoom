@@ -48,7 +48,18 @@
 		    document.getElementById("login-form").action = checkbox.value;
 		    //alert('changed action url');
 		}
-		
+		function checkDateForm(){
+			var personNo = document.getElementById("personNo").value;
+			if(${ empty loginUser }){
+				alert("로그인 또는 회원가입 후 이용할 수 있습니다.");
+				return false;
+			}
+			if(personNo == ""){
+				alert("인원수를 입력하세요.");
+				return false;
+			}
+			return true;
+		}
 	</script>
 </head>
 
@@ -56,53 +67,7 @@
 <!--Start Header-->
 <%-- <jsp:include page="/include/loginModal.jsp"/> --%>
 <jsp:include page="/include/header.jsp"/>
-<%-- <header id="header" class="clearfix">
-    <!-- Nav Bar -->
-    <div id="nav-bar" class="clearfix">
-        <div class="container">
-            <div class="row">
-                <!-- Logo / Mobile Menu -->
-				<div class="col-sm-2">
-					<div id="logo">
-						<h1>
-							<a href="index.jsp"><img src="img/logo.png" alt="League" /></a>
-						</h1>
-					</div>
-				</div>
-		
-				<!-- Navigation
-                ================================================== -->
-                <!-- Nav menu -->
-                
-                
-                <c:choose>
-	                <c:when test="${ empty loginUser}">
-		                <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a>                		
-	                </c:when>
-					<c:otherwise>
-						<c:if test="${ loginUser.type eq 'U' }">
-							<jsp:include page="/include/userMenu.jsp"/>
-			                		[${ loginUser.email}님 접속중]
-								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-						<c:if test="${ loginUser.type eq 'S' }">
-						<jsp:include page="/include/adminMenu.jsp"/>
-		                		[${ loginUser.email} 관리자님 접속중]
-							<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-		                <c:if test="${ loginUser.type eq 'O' }">
-		               		   <jsp:include page="/include/ownerMenu.jsp"/>
-		                		[${ loginUser.email} 사업자님 접속중]
-							<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-					</c:otherwise>                
-                </c:choose>
-                </div>
-            </div>
-        </div>
-    <!-- End Nav Bar -->
-</header> --%>
-	<!--End Header-->
+
 	<!--Start Slider-->
         <div class="slider-wrapper">       	
               <!-- <div class="col-sm-10">

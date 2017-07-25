@@ -48,7 +48,7 @@ window.onload = function () {
 	var barDataPoints=[];
 	var lineDataPoints_count=[];
 	var lineDataPoints_person=[];
-	var hotelName = data[0].hotelName; 
+	/* var hotelName = data[0].hotelName; */ 
 	
 	console.log(data);
 	console.log(data.length);
@@ -69,7 +69,7 @@ window.onload = function () {
     var barChart = new CanvasJS.Chart("barChartContainer",
     {
       title:{
-        text: hotelName+"의 수익"  
+        text: "월별 수익"  
       },
       animationEnabled: true,
      /*  axisY: {
@@ -98,7 +98,7 @@ window.onload = function () {
     var lineChart = new CanvasJS.Chart("lineChartContainer",
     		{
     			title:{
-    				text: hotelName+"의 예약 건수, 방문객 수"
+    				text: "월별 예약 건수, 방문객 수"
     				/* ,fontSize: 30 */
     			},
                             animationEnabled: true,
