@@ -69,21 +69,22 @@
 
 	<!--start wrapper-->
 	<section class="wrapper"> <section class="page_head">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<h2>내가 등록한 후기</h2>
-				<nav id="breadcrumbs">
-				<ul>
-					<li>You are here:</li>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="index.html">Blog</a></li>
-					<li>Blog Medium Images</li>
-				</ul>
-				</nav>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<h2>내가 등록한 후기</h2>
+					<nav id="breadcrumbs">
+					<ul>
+						<li>You are here:</li>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="index.html">Blog</a></li>
+						<li>Blog Medium Images</li>
+					</ul>
+					</nav>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 	</section> <!-- end wrapper --> <section style="height:700px; margin-top:50px">
 	<jsp:include page="/include/reviewList.jsp" /> </section> <!--start footer--> <footer
 		class="footer"> <jsp:include page="/include/footer.jsp" /> </footer> <!--end footer-->

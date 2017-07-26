@@ -123,7 +123,7 @@
 						<div id="div-register-msg">
 							<div id="icon-register-msg"
 								class="glyphicon glyphicon-chevron-right"></div>
-							<span id="text-register-msg">${ pageContext.request.contextPath }일반 사용자 회원가입</span>
+							<span id="text-register-msg">일반 사용자 회원가입</span>
 						</div>
 						<div class="form-group">
 							<label for="InputEmail">이메일 주소(ID)</label>

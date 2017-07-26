@@ -28,9 +28,29 @@
 							<p>${hotel.description}</p>
 							
 							<!-- 오른쪽 하단 -->
-							<div align="right">
+							<div align="left">
+								<c:if test="${ hotel.pool == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/swimmingPool.png" width="70px">									
+								</c:if>
+								<c:if test="${ hotel.wifi == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/wifi_icon.png" width="70px">									
+								</c:if>
+								<c:if test="${ hotel.parking == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/parking_icon.png" width="70px">									
+								</c:if>
+								<c:if test="${ hotel.smoking == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/smoking_icon.png" width="70px">									
+								</c:if>
+								<c:if test="${ hotel.bbq == 'Y'}">
+									<img src="${pageContext.request.contextPath}/img/bbq2_icon.png" width="70px">									
+								</c:if>
 								<h3>1박요금: <font color="red">${hotel.rooms[0].price}</font></h3>
 								<br/>
+								청결도 : ${hotel.review.cleanliness }
+							편안함 : ${hotel.review.comfort }
+							위치  : ${hotel.review.location }
+							시설  : ${hotel.review.facilities }
+							직원  : ${hotel.review.staff }
 								<a class="btn btn-small btn-default" href="${pageContext.request.contextPath}/hotel/roomList.cr?hotelNo=${hotel.no}">객실 보기</a>
 							</div>
 						</div> <!-- 내용 끝 -->
@@ -40,12 +60,12 @@
 						<c:choose>
 							<c:when test="${hotel.favorite == 'Y' }">
 								<a>
-									<span class="day"><i id="favorite" class="fa fa-heart"></i></span>
+									<span class="day"><i id="favorite${hotel.no }"  class="fa fa-heart"></i></span>
 								</a>
 							</c:when>
 							<c:when test="${hotel.favorite == 'N' }">
 								<a>
-									<span class="day"><i id="favorite" class="fa fa-heart-o"></i></span>
+									<span class="day"><i id="favorite${hotel.no }" class="fa fa-heart-o"></i></span>
 								</a>
 							</c:when>
 							<c:otherwise>
@@ -60,20 +80,28 @@
 									<!-- </a> -->
 									<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 									<script>
-									    $('.day').click(function(){
+										
+									    $('#favorite'+'${hotel.no}').click(function(){
 									        $.ajax({
 									            url:"${pageContext.request.contextPath}/user/favorite.cr",
 									            type:'GET',
 									            data:{hotelNo: ${hotel.no}
 									            },
 									            success:function(data){
-									            	console.log(data);
-									                if(data == 'N'){
+									            	//console.dir(data);
+									                var data = JSON.parse(data);
+									                console.dir(data);
+									            	//console.dir(data.hotelNo);
+									            	var attr = "#favorite"+data.hotelNo;
+									            	console.log(attr);
+									                if(data.msg == 'N'){
 									                	alert('찜취소');
-										                $("#favorite").attr('class','fa fa-heart-o');
+										               //$("#favorite"+data.hotelNo).attr('class','fa fa-heart-o');
+										                $(attr).attr('class','fa fa-heart-o');
 									                }else{
 									                	alert('찜');
-									                	$("#favorite").attr('class','fa fa-heart');
+//									                	$("#favorite"+data.hotelNo).attr('class','fa fa-heart');
+									                	$(attr).attr('class','fa fa-heart');
 									                }
 									                
 									            }
@@ -81,6 +109,7 @@
 									    });
 									</script>
 						</div> <!-- 찜하기 끝 -->
+
 					</article>
 				</c:forEach>
 			</div>

@@ -70,14 +70,15 @@
 }
 </style>
 <script type="text/javascript">
-	$(document).ready(function() {		
-		$('#myCarousel').carousel({
+var jb = jQuery.noConflict();
+	jb(document).ready(function($) {		
+		jb('#myCarousel').carousel({
 			interval : 500
 		});
 	
 		// handles the carousel thumbnails
-		$('[id^=carousel-selector-]').click(function() {
-			var id_selector = $(this).attr("id");
+		jb('[id^=carousel-selector-]').click(function() {
+			var id_selector = jb(this).attr("id");
 			var id = id_selector.substr(id_selector.length - 1);
 			id = parseInt(id);
 			$('#myCarousel').carousel(id);
@@ -86,7 +87,7 @@
 		});
 	
 		// when the carousel slides, auto update
-		$('#myCarousel').on('slid', function(e) {
+		jb('#myCarousel').on('slid', function(e) {
 			var id = $('.item.active').data('slide-number');
 			id = parseInt(id);
 			$('[id^=carousel-selector-]').removeClass('selected');
@@ -98,40 +99,7 @@
 </head>
 
 <body>
-	<!--Start Header-->
-	<header id="header" class="clearfix"> <!-- Nav Bar -->
-	<div id="nav-bar" class="clearfix">
-		<div class="container">
-			<div class="row">
-				<!-- Logo / Mobile Menu -->
-				<div class="col-sm-2">
-					<div id="logo">
-						<h1>
-							
-							<a href="${ pageContext.request.contextPath }">
-							<img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
-						</h1>
-					</div>
-				</div>
-
-				<!-- Navigation
-                ================================================== -->
-				<!-- Nav menu -->
-
-				<c:if test="${ loginUser.type eq 'U' }">
-					<jsp:include page="/include/userMenu.jsp" />
-               		[${ loginUser.email}님 접속중]
-				<a href="${ pageContext.request.contextPath }/user/logout.cr"
-						class="btn btn-primary btn-lg" role="button">로그아웃</a>
-				</c:if>
-
-			</div>
-		</div>
-	</div>
-	<!-- End Nav Bar --> </header>
-	<!--End Header-->
-	<!--Start Slider-->
-	<!--start wrapper-->
+	<jsp:include page="/include/header.jsp"/>
 
 	<section class="page_head">
 	<div class="container">
@@ -172,10 +140,10 @@
 										<div id="myCarousel" class="carousel slide">
 											<!-- main slider carousel items -->
 											<div class="carousel-inner">
-												<c:forEach var="image" items="${room.images}" varStatus="status">
+												<c:forEach var="image" items="${room.images}">
 												<div class="active item" data-slide-number="${status.index}">
 													<!-- <img src="http://placehold.it/630x320&amp;text=one" class="img-responsive"> -->
-													<img src="https://s3.ap-northeast-2.amazonaws.com/cheaproom/upload/room/${image.url}" class="img-responsive" width="100%" height="100%">													
+													<img src="https://s3.ap-northeast-2.amazonaws.com/cheaproom/upload/room/${image.url}" class="img-responsive" width="100px" height="100px">													
 												</div>
 												</c:forEach>
 											</div>
@@ -210,13 +178,13 @@
 							<td>
 							<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 								<%-- <c:set var="bookig" value="${room.booking}"/>--%>
-								<c:if test="${room.booking}=='Y'"> 
-									<a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=${ room.no }">
+								<c:if test="${room.booking=='Y'}"> 
+									<a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=${ room.no }&startDate=${search.startDate}&endDate=${search.endDate}&personNo=${search.personNo}">
 									<button type="submit" class="btn btn-info">
 									예약하기<i class="fa fa-check spaceLeft"></i>
 									</button></a>
 								</c:if>
-								<c:if test="${room.booking}=='N'">예약 불가 
+								<c:if test="${room.booking=='N'}">예약 불가 
 								</c:if>
 							<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 							</td>

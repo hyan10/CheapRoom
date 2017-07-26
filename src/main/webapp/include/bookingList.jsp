@@ -50,7 +50,7 @@
            <td>${booking.totalPerson }</td>
            <td>${booking.totalPrice }</td>
            <td>
-              <a class="btn btn-danger edit" href="${pageContext.request.contextPath}/booking/cancle.cr" aria-label="Settings">
+              <a class="btn btn-danger edit" href="${pageContext.request.contextPath}/booking/cancle.cr?bookingNo=${booking.no}" aria-label="Settings">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </a>
               &nbsp 
@@ -64,6 +64,5 @@
      </tbody>
   </table>
   
-  <a href="${pageContext.request.contextPath}/booking/book.cr?roomNo=1"><input type="button" value="예약하기"/></a>
 </body>
 </html>

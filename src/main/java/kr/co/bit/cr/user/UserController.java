@@ -69,8 +69,9 @@ public class UserController {
 		UserVO user = userService.login(userVO); 
 		if(user == null){
 			model.addAttribute("msg", "아이디 또는 패스워드가 잘못되었습니다.");
+			model.addAttribute("url", "");
 			System.out.println("아이디 또는 패스워드가 잘못되었습니다.");
-			return "redirect:/";
+			return "process/alertProcess";
 		} else {
 			System.out.println("로그인 성공 : " + user);
 		}
@@ -79,6 +80,10 @@ public class UserController {
 		if(user.getType().equals("S")){
 			return "redirect:/admin/admissionList.cr";
 		}
+		return "search";
+	}
+	@RequestMapping("/search.cr")
+	public String search(){
 		return "search";
 	}
 	/*@RequestMapping(value="/login.cr", method=RequestMethod.POST)
@@ -138,9 +143,10 @@ public class UserController {
 	@RequestMapping("/bookingHistoryList.cr")
 	public ModelAndView userBookingHistory(HttpSession session){
 		UserVO user = (UserVO) session.getAttribute("loginUser");
-		List<BookingVO> bookingHistoryList = bookingService.userBookingList(user.getNo());
+		List<BookingVO> bookingList = bookingService.userBookingHistoryList(user.getNo());
+		System.out.println(bookingList);
 		ModelAndView mav = new ModelAndView("/user/bookingHistoryList"); //예약 현황 페이
-		mav.addObject("bookingHistoryList", bookingHistoryList);
+		mav.addObject("bookingList", bookingList);
 		return mav;
 	}
 	/*
@@ -166,7 +172,7 @@ public class UserController {
 	}
 	@RequestMapping(value="/favorite.cr",method=RequestMethod.GET)
 	@ResponseBody
-	public String Favorite(HttpSession session, @RequestParam("hotelNo")int hotelNo){
+	public Result Favorite(HttpSession session, @RequestParam("hotelNo")int hotelNo){
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		FavoriteVO favorite = new FavoriteVO();
 		favorite.setUserNo(user.getNo());
@@ -180,9 +186,13 @@ public class UserController {
 		//return "redirect:/hotel/hotelList.cr?msg="+msg;
 		//호텔 셋 favorite
 		System.out.println(msg);
-		
-		return msg;
+		Result res = new Result();
+		res.setMsg(msg);
+		res.setHotelNo(hotelNo);
+		return res;
 	}
+	
+	
 	
 	@RequestMapping(value="/favoriteList.cr",method=RequestMethod.GET)
 	public String FavoriteList(HttpSession session, Model model){
@@ -207,4 +217,32 @@ public class UserController {
 		return "redirect:/user/favoriteList.cr";
 	}
 	  
+}
+class Result{
+	private String msg;
+	private int hotelNo;
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	public int getHotelNo() {
+		return hotelNo;
+	}
+	public void setHotelNo(int hotelNo) {
+		this.hotelNo = hotelNo;
+	}
+	
+	public Result() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Result(String msg, int hotelNo) {
+		super();
+		this.msg = msg;
+		this.hotelNo = hotelNo;
+	}
+	
+	
 }

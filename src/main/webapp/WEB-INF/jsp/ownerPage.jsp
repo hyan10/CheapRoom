@@ -36,96 +36,126 @@
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 	
 	<script type="text/javascript">
-		var j = jQuery.noConflict();
-		j(function(){
-		    j('input[name="daterange"]').daterangepicker({
-		    		locale: {
-			    		format : 'YYYY-MM-DD',
-			    		cancelLabel : '취소',
-			    		applyLabel : '확인'
-			    }			    
-		    }, 
-		    function(start, end, label) {
-			    alert("예약 날짜 : " + start.format('YYYY-MM-DD') + '에서 ' + end.format('YYYY-MM-DD') + '까지 예약하시겠습니까?');
-			});
-		    j('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
-				$(this).val('');
-			});
-		});
 		function changeFormAction(checkbox){
 		    document.getElementById("login-form").action = checkbox.value;
 		}
 	</script>
-		    
 </head>
 
-<body>
-<!--Start Header-->
-<header id="header" class="clearfix">
-    <!-- Nav Bar -->
-    <div id="nav-bar" class="clearfix">
-        <div class="container">
-            <div class="row">
-                <!-- Logo / Mobile Menu -->
-				<div class="col-sm-2">
-					<div id="logo">
-						<h1>
-							<a href="${ pageContext.request.contextPath }"><img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
-						</h1>
+<body   style=" background-image: url(${ pageContext.request.contextPath }/img/room4.jpg)">
+<jsp:include page="/include/header.jsp"/>
+
+	<!-- <div class="slider-wrapper"> -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9  toppad  pull-right col-md-offset-3 ">
+					<br/>
+				</div>
+				<div
+					class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<h3 class="panel-title">사업자 가입정보</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class=" col-md-12 col-lg-12 ">
+									<table class="table table-user-information">
+										<tbody>
+											<tr>
+												<td>회원 아이디</td>
+												<td>${loginUser.email}</td>
+											</tr>
+											<tr>
+												<td>이름</td>
+												<td>${loginUser.name}</td>
+											</tr>
+											<tr>
+												<td>전화번호</td>
+												<c:choose>
+													<c:when test="${not empty loginUser.phone}">
+														<td>${loginUser.phone}</td>
+													</c:when>
+													<c:otherwise>
+														<td>전화번호를 등록하세요
+														<td />
+													</c:otherwise>
+												</c:choose>
+											</tr>
+
+											<tr>
+												<td>이메일</td>
+												<td>${loginUser.email}</td>
+											</tr>
+											<tr>
+												<td>사업자번호</td>
+												<td>${loginUser.crn}</td>
+											</tr>
+											<tr>
+												<td>가입일</td>
+												<td>${loginUser.regDate}</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- 사업정보 -->
+						<div class="panel-heading">
+							<h3 class="panel-title">호텔 정보</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class=" col-md-12 col-lg-12 ">
+									<table class="table table-user-information">
+										<tbody>
+											<c:forEach var="hotel" items="${hotelList}">
+												<tr>
+													<th colspan=3>[${ hotel.name }]</th>
+												</tr>
+												<c:if test="${ not empty hotel.rooms }">												
+													<tr>
+														<td>방 이름</td>
+														<td>최소/최대 인원</td>
+														<td>가격</td>
+														<td>추가 요금</td>
+														<td>수정하기</td>
+													</tr>
+													<c:forEach var="room" items="${hotel.rooms}">
+														<tr>
+															<td>${ room.name }</td>
+															<td>${ room.minPerson } / ${ room.maxPerson }명</td>
+															<td>${ room.price }</td>
+															<td>${ room.addPrice }</td>
+															<td>
+																<a href="#" data-original-title="Edit this user" data-toggle="tooltip"
+																	type="button" class="btn btn-sm btn-warning">
+																	<i class="glyphicon glyphicon-edit"></i></a> 
+															</td>
+														</tr>
+													</c:forEach>
+												</c:if>
+												
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<a data-original-title="Broadcast Message" data-toggle="tooltip"
+								type="button" class="btn btn-sm btn-primary"><i
+								class="glyphicon glyphicon-envelope"></i></a> <span
+								class="pull-right"> <a href="edit.html"
+								data-original-title="Edit this user" data-toggle="tooltip"
+								type="button" class="btn btn-sm btn-warning"><i
+									class="glyphicon glyphicon-edit"></i></a> 
+							</span>
+						</div>
 					</div>
 				</div>
-		
-				<!-- Navigation
-                ================================================== -->
-                <!-- Nav menu -->
-                
-                <c:if test="${ loginUser.type eq 'O' }">
-              		   <jsp:include page="/include/ownerMenu.jsp"/>
-               		[${ loginUser.email} 사업자님 접속중]
-				<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-               </c:if>
-                <%-- 	<jsp:include page="/include/loginModal.jsp"/>
-                
-                <c:choose>
-	                <c:when test="${ empty loginUser}">
-		                <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a>                		
-	                </c:when>
-					<c:otherwise>
-						<c:if test="${ loginUser.type eq 'U' }">
-							<jsp:include page="/include/userMenu.jsp"/>
-			                		[${ loginUser.email}님 접속중]
-								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-						<c:if test="${ loginUser.type eq 'S' }">
-						<jsp:include page="/include/adminMenu.jsp"/>
-		                		[${ loginUser.email} 관리자님 접속중]
-							<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-		                <c:if test="${ loginUser.type eq 'O' }">
-		               		   <jsp:include page="/include/ownerMenu.jsp"/>
-		                		[${ loginUser.email} 사업자님 접속중]
-							<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-					</c:otherwise>                
-                </c:choose> --%>			
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Nav Bar -->
-</header>
-	<!--End Header-->
-	<!--Start Slider-->
-        <div class="slider-wrapper">       	
-              <!-- <div class="col-sm-10">
-              </div> -->
-           	 <%-- <div class="col-md-6">
-           	 	<jsp:include page="/include/searchForm.jsp"/>
-           	 </div> --%>
-           	 <img src="img/fraction-slider/base-1.png" width="1920" height="450">
-        </div>      
-     
-	</section>
+			</div>
+		</div>
 
 </body>
 </html>

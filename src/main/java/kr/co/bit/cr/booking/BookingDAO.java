@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.bit.cr.search.SearchVO;
 import kr.co.bit.cr.user.UserVO;
 
 @Repository
@@ -27,16 +28,20 @@ public class BookingDAO {
 	}
 
 	// 예약 취소
-	public int cancleBook(BookingVO booking) {
+	public int cancleBook(int bookingNo) {
 		
-		sqlSessionTemplate.insert("booking.BookingDAO.insertBookHistory", booking);
-		return sqlSessionTemplate.delete("booking.BookingDAO.deleteBook", booking.getNo());
+		//sqlSessionTemplate.insert("booking.BookingDAO.insertBookHistory", bookingNo);
+		return sqlSessionTemplate.delete("booking.BookingDAO.deleteBook", bookingNo);
+	}
+	
+	// 지난 예약 내역에 추가
+	public int insertBookHistory(BookingVO booking) {
+		return sqlSessionTemplate.insert("booking.BookingDAO.insertBookHistory", booking);
 	}
 	
 	// 유저 예약 조회
-	public List<BookingVO> selectByUser(int userNo){
+	public List<BookingVO> selectByUserNo(int userNo){
 		System.out.println(userNo);
-		System.out.println(sqlSessionTemplate);
 		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByUserNo",userNo);
 	}
 
@@ -77,6 +82,11 @@ public class BookingDAO {
 	// n월 전체 예약 조회
 	public List<BookingVO> selectHistoryAll(int month) {
 		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHistoryAll", month);
+	}
+
+	public List<Integer> selectHotelNobyDate(SearchVO search) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectList("booking.BookingDAO.selectHotelNobyDate", search);
 	}
 	
 	

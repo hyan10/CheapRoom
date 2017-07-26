@@ -68,13 +68,31 @@ public class AdminController {
 		return "redirect:/admin/admissionList.cr";
 	}
 	
+	
 	/**
-	 * admin의 기본 통계
+	 * 현재 예약 진행중인 내역
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/chart.cr")
-	public ModelAndView ownerChart(HttpServletRequest request){
+	@RequestMapping("/bookingList.cr")
+	public ModelAndView bookingList(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		List<BookingVO> bookingList = new ArrayList<>();
+		bookingList = bookingService.bookingList();
+		
+		mav.addObject("bookingList", bookingList);
+		mav.setViewName("admin/bookingList");
+		
+		return mav;
+	}
+	
+	/**
+	 * admin의 월별 지난 내역
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/bookingHistoryList.cr")
+	public ModelAndView bookingHistoryList(HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
 		List<ChartVO> chartList = new ArrayList<>();
 		List<BookingVO> bookingList = new ArrayList<>();
@@ -87,14 +105,14 @@ public class AdminController {
 		request.setAttribute("maxMonth", maxMonth);
 		
 		// 이번 달 통계
-		/*if(maxMonth == month){
+		if(maxMonth == month){
 			chartList = chartService.chartThisMonth();
 			bookingList = bookingService.bookingHistoryList(month);
 		}else {
 			// n월의 통계
-*/			chartList = chartService.chartLastMonth(month);
+			chartList = chartService.chartLastMonth(month);
 			bookingList = bookingService.bookingHistoryList(month);
-		/*}*/
+		}
 		
 		if(chartList.isEmpty()){
 			chartList = new ArrayList<>();
@@ -114,7 +132,7 @@ public class AdminController {
 		
 		mav.addObject("bookingList",bookingList);
 		mav.addObject("chartList",chartList);
-		mav.setViewName("admin/chart");
+		mav.setViewName("admin/bookingHistoryList");
 		
 		return mav;
 	}
@@ -123,15 +141,15 @@ public class AdminController {
 	 * admin의 전체 통계
 	 * @return
 	 */
-	@RequestMapping("/chartAll.cr")
-	public ModelAndView ownerChartAll(){
+	@RequestMapping("/chart.cr")
+	public ModelAndView chart(){
 		ModelAndView mav = new ModelAndView();
 		List<ChartVO> chartList = new ArrayList<>();
 		
 		chartList = chartService.chartAll();
 		
 		mav.addObject("chartList",chartList);
-		mav.setViewName("admin/chartAll");
+		mav.setViewName("admin/chart");
 		
 		return mav;
 	}

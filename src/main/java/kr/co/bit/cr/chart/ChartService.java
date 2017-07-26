@@ -26,7 +26,8 @@ public class ChartService {
 	
 	// 관리자의 n월 통계
 	public List<ChartVO> chartLastMonth(int month){
-		return dao.chartLastMonth(month);
+		return dao.selectChartByMonth(month);
+	//	return dao.chartLastMonth(month);
 	}
 
 	// 사업자의 n월 통계

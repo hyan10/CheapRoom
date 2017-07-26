@@ -36,24 +36,7 @@
 <script src="${ pageContext.request.contextPath}/js/jquery.slim.min.js"></script>
 <script src="${ pageContext.request.contextPath}/js/scale.fix.js"></script>
 <script src="${ pageContext.request.contextPath}/dist/star-rating.min.js"></script>
-<script type="text/javascript">
-	function showModal(){
-		var hotelNo = arguments[0];
-		var userNo = arguments[1];
-		alert("hotelNo : " + hotelNo + "    userNo : " + userNo);		
-		//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
-		//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다.. 
-		$('input[name="hotelNo"]').val(hotelNo);
-		$('input[name="userNo"]').val(userNo);
-	    //$("#myModalLabel").val(hotelNo);
-		//$("#modalHotelNo").val(hotelNo);
-		//s$("#modalUserNo").val(userNo);
-	    $("#review-modal").modal('show');
-	}
-
-</script>
 </head>
-<jsp:include page="/include/reviewModal.jsp" />
 <body>
 	<table class="table table-striped" style="width: 80%; margin: auto">
 		<thead>
@@ -66,7 +49,6 @@
 				<th>체크아웃날짜</th>
 				<th>인원</th>
 				<th>요금</th>
-				<th>후기 남기기</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -91,12 +73,6 @@
 					<td><button class="label label-default"
 							onclick="javascript:location.href='${pageContext.request.contextPath}/booking/historyDetail.cr?bookingNo=${booking.no}'">내역
 							보기</button></td>
-					<c:choose>
-						<c:when test="${booking.type}=='N'">후기등록 불가</c:when>
-						<c:otherwise>
-							<td><a href="#" class="btn btn-primary btn-lg" role="button" onclick="showModal(${ booking.hotelNo}, ${ loginUser.no});">후기 등록</a></td>
-						</c:otherwise>
-					</c:choose>
 				</tr>
 			</c:forEach>
 			<%-- <td><a href="#" class="btn btn-primary btn-lg" role="button" onclick="showModal(3, ${ loginUser.no});">후기 등록</a></td> --%>

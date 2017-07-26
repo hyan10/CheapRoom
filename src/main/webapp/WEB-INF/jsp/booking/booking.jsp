@@ -67,7 +67,6 @@
 </script>
 
 <script type="text/javascript">
-
 var $form = $('#payment-form');
 $form.find('.subscribe').on('click', payWithStripe);
 /* If you're using Stripe for payments */
@@ -204,40 +203,7 @@ function payWithStripe() {
 </head>
 <body>
 
-	<!--Start Header-->
-	<header id="header" class="clearfix">
-	    <!-- Nav Bar -->
-	    <div id="nav-bar" class="clearfix">
-	        <div class="container">
-	            <div class="row">
-	                <!-- Logo / Mobile Menu -->
-					<div class="col-sm-2">
-						<div id="logo">
-							<h1>
-								<a href="index.jsp"><img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
-							</h1>
-						</div> <!-- end logo -->
-					</div> <!-- end col-sm-2-1 -->
-			
-					<!-- Navigation
-	                ================================================== -->
-	                <!-- Nav menu -->     
-					<jsp:include page="/include/userMenu.jsp"/>              
-	                <!-- Nav menu end -->
-	                
-	                <div class="col-sm-2">
-							<c:if test="${ not empty user }">
-			                		[${ user.email}님 접속중]
-								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-			                </c:if>
-	                </div> <!-- end col-sm-2-2 -->
-	            </div> <!-- end row -->
-	        </div> <!-- end container  -->
-	    </div> <!-- end nav-bar -->
-	    <!-- End Nav Bar -->
-	</header>
-		<!--End Header-->
-		
+	<jsp:include page="/include/header.jsp"/>		
 		
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -257,7 +223,8 @@ function payWithStripe() {
 					</div>
 				</div>
 			</div>
-		</section>  <!-- end header -->
+		</section>
+	</section>  <!-- end header -->
 
 
 	<!-- Start content -->
@@ -265,7 +232,7 @@ function payWithStripe() {
 	
 	
 	<form name="bookingForm" role="form" id="payment-form" method="POST"
-		action="${pageContext.request.contextPath}/booking/book.cr" onclick="checkForm()">
+		action="${pageContext.request.contextPath}/booking/book.cr" onsubmit="return checkForm()">
 	<div class="dividerHeading">
 		<h4><span>[회원정보]</span></h4>
 	</div>
@@ -276,7 +243,7 @@ function payWithStripe() {
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
 					<label for="userName"><i class="fa fa-user"></i> 예약자 성명</label>
-						<input type="text" class="form-control" name="userName"
+						<input type="text" class="form-control" name="userName" value="${loginUser.name}"
 							placeholder="예약자 성명" required autofocus />
 				</div>
 			</div>
@@ -286,7 +253,7 @@ function payWithStripe() {
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
 					<label for="userEmail"><i class="fa fa-envelope"></i> 예약자 이메일</label>
-						<input type="text" class="form-control" name="userEmail"
+						<input type="text" class="form-control" name="userEmail" value="${loginUser.email}"
 						placeholder="email@cheaproom.com" required />
 				</div>
 			</div>
@@ -296,7 +263,7 @@ function payWithStripe() {
 			<div class="col-xs-7 col-md-7">
 				<div class="form-group">
 					<label for="userPhone"><i class="fa fa-phone"></i> 예약자 연락처</label>
-					<input type="text" class="form-control" name="userPhone" />
+					<input type="text" class="form-control" name="userPhone" value="${loginUser.phone}"/>
 				</div>
 			</div>
 		</div>
@@ -378,10 +345,14 @@ function payWithStripe() {
 		
 		<!-- 예약 완료 버튼 -->
 		<div class="row">
-			<div class="col-xs-3 col-md-3" style="float:right; margin-right:30px" >
-				<button class="subscribe btn btn-success btn-lg btn-block"
-					type="submit">예약완료</button>
-			</div>
+			<span class="col-xs-2 col-md-2" style="float:right; margin-right:10px" >
+				<button class="subscribe btn btn-success btn-lg btn-block" onclick="goBack()"
+					type="button">취소</button>
+			</span>
+			<span class="col-xs-3 col-md-3" style="float:right; margin-right:10px" >
+				<input class="subscribe btn btn-success btn-lg btn-block"
+					type="submit" value="예약완료"/>
+			</span>
 		</div>
 		
 		</form>
@@ -438,6 +409,18 @@ function payWithStripe() {
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	
 	<script>
+	
+	function clickPay(){
+		if(checkPayForm()){
+			alert("결제 요청이 완료되었습니다.");
+			var btn = document.getElementById("payBtn");
+			btn.disabled = "disabled";
+			btn.value="결제 완료";
+		}else {
+			// alert("결제 요청이 실패했습니다.\n 다시 시도해주세요.");
+		}
+	}
+	
 		function checkUserForm(){
 			var result = false;
 			var name = document.bookingForm.userName.value;
@@ -461,10 +444,41 @@ function payWithStripe() {
 			return result;		
 		}
 		
+		function checkPayForm(){
+			var result = false;
+			var cardNo = document.bookingForm.cardNo.value;
+			var cardType = document.bookingForm.cardType.value;
+			var cardDate = document.bookingForm.cardDate.value;
+			if(cardNo==""){
+				alert("카드번호를 입력해주세요.");
+				console.log(cardNo);
+			}else {	
+				if(cardType==""){
+					alert("카드 타입을 입력해주세요.");
+					console.log(cardType);
+				}else {
+					if(cardDate==""){
+						alert("카드 날짜를 입력해주세요.");
+						console.log(cardDate);
+					}else {
+						result = true;
+					}
+				}
+			}
+			console.log("pay: "+result);
+			return result;
+		}
+		
 		function checkForm(){
 			if(checkUserForm()){
-				console.log('true');
+				document.bookingForm.submit;
+			}else {
+				alert("모든 정보를 정확히 입력해주세요.");
 			}
+		}
+		
+		function goBack(){
+			location.href = "${pageContext.request.contextPath}/roomList.cr?hotelNo=${param.hotelNo}";
 		}
 	</script>
 </body>

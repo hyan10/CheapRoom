@@ -76,55 +76,8 @@
 </head>
 
 <body>
-<!--Start Header-->
-<header id="header" class="clearfix">
-    <!-- Nav Bar -->
-    <div id="nav-bar" class="clearfix">
-        <div class="container">
-            <div class="row">
-                <!-- Logo / Mobile Menu -->
-				<div class="col-sm-2">
-					<div id="logo">
-						<h1>
-							<a href="${ pageContext.request.contextPath }"><img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
-						</h1>
-					</div>
-				</div>
-		
-				<!-- Navigation
-                ================================================== -->
-                <!-- Nav menu -->
-                <jsp:include page="/include/loginModal.jsp"/>
-                
-                <c:choose>
-	                <c:when test="${ empty loginUser}">
-		                <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">로그인</a>                		
-	                </c:when>
-					<c:otherwise>
-						<c:if test="${ loginUser.type eq 'U' }">
-							<jsp:include page="/include/userMenu.jsp"/>
-			                		[${ loginUser.email}님 접속중]
-								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-						<c:if test="${ loginUser.type eq 'S' }">
-						<jsp:include page="/include/adminMenu.jsp"/>
-		                		[${ loginUser.email} 관리자님 접속중]
-							<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-		                <c:if test="${ loginUser.type eq 'O' }">
-		               		   <jsp:include page="/include/ownerMenu.jsp"/>
-		                		[${ loginUser.email} 사업자님 접속중]
-							<a href="${ pageContext.request.contextPath }/owner/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-		                </c:if>
-					</c:otherwise>                
-                </c:choose>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Nav Bar -->
-</header>
-	<!--End Header-->
+	<jsp:include page="/include/header.jsp"/>
+	
 	<!--Start Slider-->
         <div class="slider-wrapper">       	
               <!-- <div class="col-sm-10">
@@ -133,12 +86,12 @@
            	 <div class="col-md-6">
            	 	<jsp:include page="/include/searchForm.jsp"/>
            	 </div>
-           	 <img src="img/fraction-slider/base-1.png" width="1920" height="450">
+           	 <img src="${ pageContext.request.contextPath }/img/room2.jpg" width="1920" height="450">
         </div>      
                
 
 	<!--start footer-->
-	<!-- <footer class="footer">
+	<footer class="footer">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-md-3 col-lg-3">
@@ -207,7 +160,6 @@
 			</div>
 		</div>
 	</footer>
-	end footer
 
 	<section class="footer_bottom">
 		<div class="container">
@@ -229,6 +181,6 @@
 				</div>
 			</div>
 		</div>
-	</section> -->
+	</section>
 </body>
 </html>

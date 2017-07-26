@@ -39,39 +39,7 @@
 </head>
 <body>
 
-	<!--Start Header-->
-	<header id="header" class="clearfix">
-	    <!-- Nav Bar -->
-	    <div id="nav-bar" class="clearfix">
-	        <div class="container">
-	            <div class="row">
-	                <!-- Logo / Mobile Menu -->
-					<div class="col-sm-2">
-						<div id="logo">
-							<h1>
-								<a href="index.jsp"><img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
-							</h1>
-						</div> <!-- end logo -->
-					</div> <!-- end col-sm-2-1 -->
-			
-					<!-- Navigation
-	                ================================================== -->
-	                <!-- Nav menu -->     
-					<jsp:include page="/include/userMenu.jsp"/>              
-	                <!-- Nav menu end -->
-	                
-	                <div class="col-sm-2">
-							<c:if test="${ not empty user }">
-			                		[${ user.email}님 접속중]
-								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-			                </c:if>
-	                </div> <!-- end col-sm-2-2 -->
-	            </div> <!-- end row -->
-	        </div> <!-- end container  -->
-	    </div> <!-- end nav-bar -->
-	    <!-- End Nav Bar -->
-	</header>
-		<!--End Header-->\
+	<jsp:include page="/include/header.jsp"/>
 		
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -252,7 +220,10 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<button disabled="disabled" class="subscribe btn btn-success btn-lg btn-block"
-												type="button">결제 완료</button>
+												type="button">
+												<c:if test="${booking.type == 'Y' || empty booking.type}">결제 완료</c:if>
+												<c:if test="${booking.type == 'N' }">취소된 결제</c:if>
+											</button>
 										</div>
 									</div>
 									<div class="row" style="display: none;">
@@ -342,7 +313,7 @@
 				folder = 'user';
 				break;
 			case 'S':
-				folder = 's';
+				folder = 'admin';
 				break;
 			case 'O' :
 				folder = 'owner';

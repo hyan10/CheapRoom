@@ -62,40 +62,45 @@
 	href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
 
 </head>
-
 <body>
 	<jsp:include page="/include/header.jsp" />
-
+	<jsp:include page="/include/reviewModal.jsp" />
 	<!--start wrapper-->
-	<section class="wrapper"> <section class="page_head">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-				<h2>지난 예약 내역</h2>
-				<nav id="breadcrumbs">
-				<ul>
-					<li>You are here:</li>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="index.html">Blog</a></li>
-					<li>Blog Medium Images</li>
-				</ul>
-				</nav>
+	<section class="wrapper">
+		<section class="page_head">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<h2>지난 예약 내역</h2>
+						<nav id="breadcrumbs">
+							<ul>
+								<li>You are here:</li>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="index.html">Blog</a></li>
+								<li>Blog Medium Images</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-	</section> <!-- end wrapper --> <section style="height:700px; margin-top:50px">
-	<jsp:include page="/include/bookingHistoryList.jsp" /> </section> <!--start footer-->
-	<footer class="footer"> <jsp:include
-		page="/include/footer.jsp" /> </footer> <!--end footer--> <section
-		class="footer_bottom">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6">
-				<p class="copyright">
-					&copy; Copyright 2014 League | Powered by <a
-						href="http://www.jqueryrain.com/">jQuery Rain</a>
-				</p>
-			</div>
+		</section>
+	</section> <!-- end wrapper -->
+	
+	<section style="height:700px; margin-top:50px">
+	<jsp:include page="/include/userBookingHistoryList.jsp" /> </section> <!--start footer-->
+	<footer class="footer">
+		<jsp:include page="/include/footer.jsp"/>
+	</footer> <!--end footer-->
+	
+	<section class="footer_bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					<p class="copyright">
+						&copy; Copyright 2014 League | Powered by <a
+							href="http://www.jqueryrain.com/">jQuery Rain</a>
+					</p>
+				</div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6">
 				<div class="footer_social">
@@ -113,11 +118,13 @@
 							data-toggle="tooltip" title="Skype"><i class="fa fa-skype"></i></a></li>
 						<li><a class="rss" href="#." data-placement="top"
 							data-toggle="tooltip" title="RSS"><i class="fa fa-rss"></i></a></li>
-					</ul>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
+	
 	</section> <script type="text/javascript"
 		src="${pageContext.request.contextPath}/js/vendor/jquery-1.10.2.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/vendor/bootstrap.js"></script>

@@ -39,40 +39,7 @@
 </head>
 <body>
 
-	<!--Start Header-->
-	<header id="header" class="clearfix">
-	    <!-- Nav Bar -->
-	    <div id="nav-bar" class="clearfix">
-	        <div class="container">
-	            <div class="row">
-	                <!-- Logo / Mobile Menu -->
-					<div class="col-sm-2">
-						<div id="logo">
-							<h1>
-								<a href="index.jsp"><img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
-							</h1>
-						</div> <!-- end logo -->
-					</div> <!-- end col-sm-2-1 -->
-			
-					<!-- Navigation
-	                ================================================== -->
-	                <!-- Nav menu -->     
-					<jsp:include page="/include/userMenu.jsp"/>              
-	                <!-- Nav menu end -->
-	                
-	                <div class="col-sm-2">
-							<c:if test="${ not empty user }">
-			                		[${ user.email}님 접속중]
-								<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-			                </c:if>
-	                </div> <!-- end col-sm-2-2 -->
-	            </div> <!-- end row -->
-	        </div> <!-- end container  -->
-	    </div> <!-- end nav-bar -->
-	    <!-- End Nav Bar -->
-	</header>
-		<!--End Header-->
-
+	<jsp:include page="/include/header.jsp"/>
 
 	<!-- Start content -->
 	<section style="width:80%; margin-top:70px; margin-left:auto; margin-right:auto; margin-bottom:50px">
@@ -356,7 +323,7 @@
 		}
 		
 		function goBack(){
-			location.href = "${pageContext.request.contextPath}/booking/test.cr";
+			location.href = "${pageContext.request.contextPath}/user/bookingList.cr";
 		}
 	</script>
 </body>

@@ -5,68 +5,161 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>싸다방</title>
-	<meta name="description" content="">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<!-- CSS FILES -->
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/vendor/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" media="screen" data-name="skins">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style-fraction.css" type="text/css" charset="utf-8" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/fractionslider.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/switcher.css" media="screen" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>싸다방</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- CSS FILES -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/vendor/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" media="screen" data-name="skins">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style-fraction.css" type="text/css" charset="utf-8" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/fractionslider.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/switcher.css" media="screen" />
+
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+    
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
 	
+	<!-- 통계 -->
+<!-- <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script> -->
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+window.onload = function () {
 	
-	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-     
-	<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+	var data = ${chartList};
+	var barDataPoints=[];
+	var lineDataPoints_count=[];
+	var lineDataPoints_person=[];
+
+	
+	console.log(data);
+	console.log(data.length);
+		
+	  for(var i=0; i<data.length ; i++){
+		 barDataPoints.push({ y: data[i].profit,
+							label: data[i].month+"월"});	
+		 lineDataPoints_count.push({x: data[i].month,
+			 						y: data[i].count});		 
+		 lineDataPoints_person.push({x: data[i].month,
+			 						y: data[i].totalPerson});
+	 }
+	
+	  console.log(lineDataPoints_count);
+	  console.log(lineDataPoints_person);
+	
+	// 금액 그래프
+    var barChart = new CanvasJS.Chart("barChartContainer",
+    {
+      title:{
+        text: "월별 수익"  
+      },
+      animationEnabled: true,
+     /*  axisY: {
+        title: "Reserves(MMbbl)"
+      }, */
+      legend: {
+        verticalAlign: "bottom",
+        horizontalAlign: "center"
+      },
+      theme: "theme2",
+      data: [
+
+      {        
+        type: "column",  
+        showInLegend: true, 
+        legendMarkerColor: "grey",
+        /* legendText: "MMbbl = one million barrels", */
+        dataPoints: barDataPoints
+      }   
+      ]
+    });
+
+    barChart.render();
+    
+    // 건수 그래프
+    var lineChart = new CanvasJS.Chart("lineChartContainer",
+    		{
+    			title:{
+    				text: "월 별 예약 건수, 방문객 수"
+    				/* ,fontSize: 30 */
+    			},
+                            animationEnabled: true,
+    			axisX:{
+
+    				gridColor: "Silver",
+    				tickColor: "silver"
+    				/* ,valueFormatString: "DD/MMM" */
+
+    			},                        
+                            toolTip:{
+                              shared:true
+                            },
+    			theme: "theme2",
+    			axisY: {
+    				gridColor: "Silver",
+    				tickColor: "silver"
+    			},
+    			legend:{
+    				verticalAlign: "center",
+    				horizontalAlign: "right"
+    			},
+    			data: [
+    			{        
+    				type: "line",
+    				showInLegend: true,
+    				lineThickness: 2,
+    				name: "예약 건수",
+    				color: "#F08080",
+    				dataPoints: lineDataPoints_count
+    			},
+    			{        
+    				type: "line",
+    				showInLegend: true,
+    				name: "방문객 수",
+    				markerType: "square",
+    				color: "#20B2AA",
+    				lineThickness: 2,
+    				dataPoints: lineDataPoints_person
+    			}
+    			],
+              legend:{
+                cursor:"pointer",
+                itemclick:function(e){
+                  if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                  	e.dataSeries.visible = false;
+                  }
+                  else{
+                    e.dataSeries.visible = true;
+                  }
+                  lineChart.render();
+                }
+              }
+    		});
+
+    lineChart.render();
+  }
+</script>
 </head>
 <body>
-	 <!-- Nav Bar -->
-    <div id="nav-bar" class="clearfix">
-        <div class="container">
-            <div class="row">
-                <!-- Logo / Mobile Menu -->
-				<div class="col-sm-2">
-					<div id="logo">
-						<h1>
-							<a href="${ pageContext.request.contextPath }"><img src="${ pageContext.request.contextPath }/img/logo.png" alt="League" /></a>
-						</h1>
-					</div>
-				</div>
-		
-				<!-- Navigation
-                ================================================== -->
-                <!-- Nav menu -->
-                
-                <c:if test="${ loginUser.type eq 'S' }">
-              		   <jsp:include page="/include/adminMenu.jsp"/>
-               		[${ loginUser.email} 관리자님 접속중]
-					<a href="${ pageContext.request.contextPath }/user/logout.cr" class="btn btn-primary btn-lg" role="button">로그아웃</a>
-               </c:if>
-               
-            </div> <!-- end row -->
-        </div> <!-- end container  -->
-    </div> <!-- end nav-bar -->
-    <!-- End Nav Bar -->
-</header>
-	<!--End Header-->
+	<jsp:include page="/include/header.jsp"/>
 	
 	<!--start wrapper-->
 	<section class="wrapper">
@@ -86,16 +179,18 @@
 					</div>
 				</div>
 			</div>
-		</section>  <!-- end wrapper -->
+		</section>
+	</section>  <!-- end wrapper -->
 		
 		<!-- 통계 영역 -->
-		<section class="content portfolio_single">
+		<section class="content blog">
 			<div class="container">
+			
 
-				<!-- 월 선택 -->	
-				<form name="monthForm" action="${pageContext.request.contextPath}/admin/chart.cr" method="get">
-					<div style="width:100%; margin-bottom:50px">		
-						월 선택: <select class="form-control" name="month" style="display:inline-block !important; width:20% !important">
+				<div class="row" style="margin-bottom:50px;" align="center">
+			<%-- 	<form name="monthForm" action="${pageContext.request.contextPath}/booking/testChart.cr" method="get">
+					<div class="col-md-8">		
+						월 선택: <select class="form-control col-lg-3" name="month">
 							<c:forEach var="i" begin="1" end="${maxMonth}">
 								<option value="${i}" 
 									<c:if test="${i eq month}">
@@ -104,55 +199,66 @@
 								>${i}월</option>								
 							</c:forEach>						
 						</select>						
-						<input type="submit" value="검색"/>
+						<input type="submit" value="통계 보기"/>
 					</div>
-				</form>
+				</form> --%>
 			
 				<!-- 설명할거 있으면 여기에 -->
 				<div class="project_description">
 					<div class="widget_title dividerHeading">
 					<!-- ${chartList[0].year} -->
 					<!-- ${param.year} -->
-						<h4><span><b>2017년 ${month}월 호텔 별 통계</b></span></h4>
+						<h4><span><b>2017년 통계 리스트</b></span></h4>
 					</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adip, sed do eiusmod tempor incididunt ut aut reiciendise voluptat maiores alias aut et perferendis doloribus asperiores ut labore.</p>
 						<p> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 				</div> <!-- end description -->
-						
-				<!-- for문 -->
-				<c:forEach var="chart" items="${chartList}">
-					<div class="row sub_content">
-						<!-- 좌측 내용 -->
-						<div class="col-lg-4 col-md-4 col-sm-4">	
-							<!-- 통계 자료 내용 -->
-							<div class="project_details">
-								<div class="widget_title">
-									<h4><span><b>${chart.hotelName}</b></span></h4>
-								</div>
-								<ul class="details">
-									<li><span>총 예약 건수 :</span>${chart.count}건</li>
-									<li><span>총 예약 인원 :</span>${chart.totalPerson}명</li>
-									<li><span>예약 총액 :</span>${chart.profit}원</li>
-									<!-- <li><span>Date :</span> 03 March 2014</li>
-									<li><span>Project URL :</span> <a href="#">www.bestjquery.com</a></li> -->
-								</ul>
-							</div> <!-- end detail -->
-							
-						</div> <!-- 좌측 내용 끝 -->
-						
-						<!-- 이미지 -->
-						<div class="col-lg-8 col-md-8 col-sm-8">
-							<!--Project Details Page-->
-							<div class="porDetCarousel">
-								<div class="carousel-content">
-									<jsp:include page="/include/bookingHistoryList.jsp"/>
-								</div>
-							</div>
-						</div> <!-- 이미지 끝 -->
-						
-					</div> <!-- row_sub_content 끝 -->
-				</c:forEach>
-				<!-- for문 끝 -->
+				
+				<!-- 금액 그래프 -->
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="margin-bottom:50px;">
+					<div id="barChartContainer" style="height: 300px; width: 100%;"></div>
+				</div>
+				
+				<!-- 건수 그래프 -->
+				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+					<div id="lineChartContainer" style="height:300px; width:100%;"></div>
+				</div>
+			</div> <!-- end row -->
+				
+				
+				<div class="row">
+				<!--Sidebar Widget--> <!-- 월별 리스트 -->
+					<div>  <!-- class="col-xs-12 col-md-4 col-lg-4 col-sm-4"> -->
+						<div class="sidebar">
+	
+							<!-- for문 -->
+							<c:forEach var="chart" items="${chartList}">
+								<!-- <div class="row sub_content"> -->
+									
+									<div class="col-lg-4 col-md-4 col-sm-4">	
+										<!-- 통계 자료 내용 -->						
+										<div class="project_details">
+											<div class="widget_title">
+												<h4><span><b>${chart.month}월</b></span></h4>
+											</div>
+											<ul class="details">
+												<li><span>총 예약 건수 :</span>${chart.count}</li>
+												<li><span>총 예약 인원 :</span>${chart.totalPerson}</li>
+												<li><span>예약 총액 :</span>${chart.profit}</li>
+												<!-- <li><span>Date :</span> 03 March 2014</li>
+												<li><span>Project URL :</span> <a href="#">www.bestjquery.com</a></li> -->
+											</ul>
+										</div> <!-- end detail -->
+										
+									</div> 
+								<!-- </div> --> <!-- row_sub_content 끝 한줄씩 나옴, 지우면 옆으로 쭉쭉 -->
+							</c:forEach>
+							<!-- for문 끝 -->
+	
+						</div> <!-- end class=sidebar -->
+					 </div> <!-- end class col-xs/md/sm --> <!-- 좌측 내용 끝 -->
+					<!-- end Sidebar -->
+				</div> <!-- end row -->
 			</div> <!-- end container -->
 		</section>
 		

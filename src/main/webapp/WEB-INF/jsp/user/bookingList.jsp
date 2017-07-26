@@ -60,7 +60,8 @@
 					</div>
 				</div>
 			</div>
-		</section>  <!-- end wrapper -->
+		</section>
+	</section>  <!-- end wrapper -->
 	
 	<section class="content" style="height:700px; margin-top:50px">
 		<jsp:include page="/include/bookingList.jsp"/>

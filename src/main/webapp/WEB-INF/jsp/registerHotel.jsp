@@ -65,47 +65,29 @@
 </head>
 
 <body>
-	<!--Start Header-->
-	<header id="header" class="clearfix"> <!-- Nav Bar -->
-	<div id="nav-bar" class="clearfix">
-		<div class="container">
-			<div class="row">
-				<!-- Logo / Mobile Menu -->
-				<div class="col-sm-2">
-					<div id="logo">
-						<h1>
-							<a href="${ pageContext.request.contextPath }"><img
-								src="${ pageContext.request.contextPath }/img/logo.png"
-								alt="League" /></a>
-						</h1>
+	<jsp:include page="/include/header.jsp"/>
+	<!--start wrapper-->
+	<section class="wrapper" style="margin-bottom: 50px">
+		<section class="page_head">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+						<h2>호텔 등록</h2>
+						<nav id="breadcrumbs">
+							<ul>
+								<li>You are here:</li>
+								<li><a href="index.html">Home</a></li>
+								<li><a href="index.html">Blog</a></li>
+								<li>Blog Medium Images</li>
+							</ul>
+						</nav>
 					</div>
 				</div>
-
-				<!-- Navigation
-                ================================================== -->
-				<!-- Nav menu -->
-
-				<c:if test="${ loginUser.type eq 'O' }">
-					<jsp:include page="/include/ownerMenu.jsp" />
-               		[${ loginUser.email} 사업자님 접속중]
-				<a href="${ pageContext.request.contextPath }/owner/logout.cr"
-						class="btn btn-primary btn-lg" role="button">로그아웃</a>
-				</c:if>
-
 			</div>
-		</div>
-	</div>
-	<!-- End Nav Bar --> </header>
-	<!--End Header-->
-	<!--Start Slider-->
-	<!-- <div class="slider-wrapper"> -->
-		
-		<div class="container" style="margin: 10px;">
-			<div class="row">
-				<h2>호텔 등록</h2>
-				<hr>
-			</div>
-			<form role="form" action="${pageContext.request.contextPath}/hotel/hotelRegister.cr" method="post" enctype="multipart/form-data">
+		</section>
+	</section>  <!-- end wrapper -->
+		<div class="container" style="margin: auto; width:50%" >
+			<form role="form" name="registerForm" onsubmit="return checkHotelForm()" action="${pageContext.request.contextPath}/hotel/hotelRegister.cr" method="post" enctype="multipart/form-data">
 					<div class="form-group">
 						<div class="row">
 							<label for="firstname" class="col-md-2"> 호텔 이름 </label>
@@ -150,7 +132,7 @@
 						<label for="phonenumber" class="col-md-2"> 연락처
 						</label>
 						<div class="col-md-3">
-							<input type="tel" class="form-control" name=tel placeholder="전화번호 입력">
+							<input type="text" class="form-control" name="tel" placeholder="전화번호 입력">
 							<p class="help-block">- 제외한 숫자만 입력</p>
 						</div>
 						<label for="phonenumber" class="col-md-2"> 부대시설
@@ -164,12 +146,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group">
-					<div class="row">
+				<div class="form-group" style="display: inline-block;">
+					<div class="row" >
 						<label for="description" class="col-md-2"> 체크인 시간 </label>
-						<input type="text" class="form-control" name="checkin" placeholder="체크인 시간 입력">
+						<input type="text" class=" col-md-4" name="checkin" placeholder="체크인 시간 입력">
 						<label for="description" class="col-md-2"> 체크아웃 시간 </label>
-						<input type="text" class="form-control" name="checkout" placeholder="체크아웃 시간 입력">
+						<input type="text" class=" col-md-4" name="checkout" placeholder="체크아웃 시간 입력">
 					</div>
 				</div>
 				<div class="form-group">
@@ -200,6 +182,49 @@
 		</div>
 		<%-- <img src="${pageContext.request.contextPath}/img/fraction-slider/base-1.png" width="1920" height="450"> --%>
 	<!-- </div> -->
-
+	<script>
+		function checkHotelForm(){
+			var result = false;
+			var name = document.registerForm.name.value;
+			var addr = document.registerForm.addr.value;
+			var tel = document.registerForm.tel.value;
+			var checkin = document.registerForm.checkin.value;
+			var checkout = document.registerForm.checkout.value;
+			var description = document.registerForm.description.value;
+			
+			if(name==""){
+				alert("호텔 이름을 입력해주세요.");
+				return false;
+			}
+			if(addr==""){
+				alert("호텔 주소를 입력해주세요.");
+				return false;
+			}
+			if(tel==""){
+				alert("호텔 전화번호를 입력해주세요.");
+				return false;
+			}
+			if(checkin==""){
+				alert("호텔 체크인 시간을 입력해주세요.");
+				return false;
+			}
+			if(checkout==""){
+				alert("호텔 체크아웃 시간을 입력해주세요.");
+				return false;
+			}
+			if(description==""){
+				alert("호텔 설명을 입력해주세요.");
+				return false;
+			}
+			return true;		
+		}
+		
+		function checkForm(){
+			if(checkUserForm()){
+				console.log('true');
+			}
+		}
+	</script>
 </body>
+
 </html>

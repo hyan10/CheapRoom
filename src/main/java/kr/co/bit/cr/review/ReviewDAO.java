@@ -17,4 +17,7 @@ public class ReviewDAO {
 	public List<ReviewVO> selectReviewByUno(int userNo){
 		return sqlSession.selectList("review.dao.ReviewDAO.selectReviewByUno", userNo);
 	}
+	public ReviewVO selectReviewAVGByHno(Integer no) {
+		return sqlSession.selectOne("review.dao.ReviewDAO.selectReviewAVGByHno", no);
+	}
 }

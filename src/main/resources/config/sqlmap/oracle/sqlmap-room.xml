@@ -10,12 +10,16 @@
 	
 	<select id="selectRoomByHno" parameterType="int" resultType="room">
 		<include refid="select"/>
-		 where hotel_no = #{hNo}
+		 where hotel_no = #{hNo} order by price
+	</select>
+	<select id="selectRoomByMap" parameterType="hashmap" resultType="room">
+		<include refid="select"/>
+		 where hotel_no = #{no} and max_person>#{personNo}
 	</select>
 	
 	<select id="selectRoomByNo" parameterType="int" resultType="room">
 		<include refid="select"/>
-		 where hotel_no = #{no}
+		 where no = #{no}
 	</select>
 	
 	<insert id="registerRoom" parameterType="room">
@@ -32,11 +36,11 @@
 		delete from room where no=#{no}
 	</delete>
 	
-	<select id="joinRoomAndBooking" parameterType="search" resultType="room">
+	<select id="joinRoomAndBooking" parameterType="hashmap" resultType="room">
 		select r.no ,r.hotel_no as hotelNo , r.name, r.price, r.min_person as minPerson , r.max_person as maxPerson, r.add_price as addPrice, r.cooking, r.TV, r.AC 
-		from room r join booking b on r.no=b.room_no where (r.hotel_no=#{hotelNo})
-		and (trunc(b.start_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) or 
-		(trunc(b.end_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) and r.hotel_no=#{hotelNo}
+		from room r join booking b on r.no=b.room_no where (r.hotel_no=#{no})
+		and (trunc(b.start_date) between to_date(#{search.startDate},'yyyy-mm-dd') and to_date(#{search.endDate},'yyyy-mm-dd')) or 
+		(trunc(b.end_date) between to_date(#{search.startDate},'yyyy-mm-dd') and to_date(#{search.endDate},'yyyy-mm-dd'))
 	</select>
 	
 	<select id="selectRoomSeq" resultType="int">
