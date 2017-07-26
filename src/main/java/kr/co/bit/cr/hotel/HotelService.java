@@ -1,6 +1,8 @@
 package kr.co.bit.cr.hotel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -103,59 +105,136 @@ public class HotelService {
 
 		Map<Integer, HotelVO> fList = new HashMap<>();
 		Map<Integer, Integer> roomCount = new HashMap<>();
+		List<HotelVO> copyList = new ArrayList<>();
+		copyList.addAll(list);
 		for(HotelVO hotel : list){
+			//Map<String, Object> paramMap = new HashMap<>(); 
 			int hotelNo = hotel.getNo();
+			//paramMap.put("no", hotelNo);
+			//paramMap.put("personNo", search.getPersonNo());
+			//사람수체크해서 맞는 경우만 가져옴 
 			List<RoomVO> rooms = rDao.selectRoomByHno(hotelNo);
 			hotel.setRooms(rooms);
 			roomCount.put(hotelNo, rooms.size());
+			System.out.println("룸사이즈"+rooms.size());
 			fList.put(hotelNo, hotel);
 			//부킹을날짜로 조회해서 호텔번호를 뽑아옴
 			//호텔리스트에서 해당번호 객체 삭제
 			if(numList.contains(hotel.getNo())){
 				System.out.println("booking목록에 있는 호텔 삭제");
-				list.remove(hotel);
+				copyList.remove(hotel);
 			}
 		}
-		
+		list.clear();
+		list.addAll(copyList);
 		System.out.println("list size:"+list.size());
 		
 		//2.호텔의 룸 카운트를세서 예약+룸 카운트가 그것보다 작으면 남는방이 있는거니까 보여준다.
 		//호텔 부킹 조인할 때 where절에 호텔리스트 번호추가
-		Map<Integer, Integer> joinMap = hDao.joinHotelAndBooking(search);
+		Map<Integer, Integer> joinMap = new HashMap<>();
+		joinMap = hDao.joinHotelAndBooking(search);
+		System.out.println("joinMap");
 		System.out.println(joinMap);
-		if(joinMap.isEmpty()){
-			return list;
-		}
+		
+		//검색목록이 없는것과 인원수에 따라 없는거 구분 
+//		if(joinMap.isEmpty()){
+//			for(list)
+//			return list;
+//		}
 		
 		//조인비교시 해당하면 기존호텔리스트에 추가
-		List<HotelVO> resultList = new ArrayList<>();
-		Iterator<Integer> iterator = joinMap.keySet().iterator();
-	    while (iterator.hasNext()) {
-	    	System.out.println("while문안");
-	    	int hotelNo = (Integer) iterator.next();
-	    	if(roomCount.get(hotelNo)!=null && joinMap.get(hotelNo)!=null){
-	    		System.out.println("if들어가기전");
-	    		System.out.println(roomCount.get(hotelNo));
-	    		System.out.println(joinMap.get(hotelNo));
-	    		if(roomCount.get(hotelNo)>joinMap.get(hotelNo)){
-	    			System.out.println("조인비교");
-	    			HotelVO h = fList.get(hotelNo);
-	    			System.out.println("hotel : "+h.getNo());
-	    			//resultList.add(h);
-	    			list.add(h);
-	    		}
-	    	}
-	    }
+		if(!joinMap.isEmpty()){
+			List<HotelVO> resultList = new ArrayList<>();
+			Iterator<Integer> iterator = joinMap.keySet().iterator();
+			while (iterator.hasNext()) {
+				int hotelNo = (Integer) iterator.next();
+				if(roomCount.get(hotelNo)!=null && joinMap.get(hotelNo)!=null){
+					System.out.println(roomCount.get(hotelNo));
+					System.out.println(joinMap.get(hotelNo));
+					if(roomCount.get(hotelNo)>joinMap.get(hotelNo)){
+						System.out.println("조인비교");
+						HotelVO h = fList.get(hotelNo);
+						System.out.println("hotel : "+h.getNo());
+						//resultList.add(h);
+						list.add(h);
+					}
+				}
+			}
+			System.out.println("join not empty");
+			//return list;
+		}
+//		else{
+//			for(Iterator<HotelVO> iterator = list.iterator();iterator.hasNext();){
+//				HotelVO hotel = iterator.next();
+//				System.out.println(hotel.getRooms());
+//				if(hotel.getRooms().isEmpty()){
+//					iterator.remove();
+//				}
+//			}
+//			for(HotelVO hh : list){
+//			List<Integer> tmp = new ArrayList<>();
+//				if(hh.getRooms().isEmpty()){
+//					System.out.println("isemtpy");
+//				}
+//				if(hh.getRooms()==null){
+//					System.out.println("is null");
+//					list.remove(hh);
+//				}
+//			int size = list.size();
+//			for(int i=0;i<size-1;i++){
+//				System.out.println(list.get(i).getRooms());
+//				List<RoomVO> rr = new ArrayList<>();
+//				rr = list.get(i).getRooms();
+//				System.out.println(rr==null);
+//				System.out.println(rr.equals(null));
+//				System.out.println(rr.isEmpty());
+//				System.out.println(rr.size()==0);
+//				System.out.println("=======");
+//				if(rr.isEmpty()){
+//					list.remove();
+//					tmp.add(i);
+//				}else{
+//					System.out.println("null아님");
+//				}
+//			}
+//			System.out.println("tmp size : "+tmp.size());
+//			for(int i=0;i<tmp.size();i++){
+//				System.out.println(i);
+//				list.remove(i);
+//				//객체로 지워야하는듯;;
+//			}
+			//return list;
+//			}
+		
+
+	    //인원수 체크
 
 		//남은 결과 조회해서 리턴
 	    //System.out.println(resultList);
-	    for(HotelVO h1 : list)
-	    	System.out.println(h1.getNo());
+//	    for(HotelVO h1 : list){
+//	    	System.out.println("hotel no : "+h1.getNo());
+//	    	System.out.println("room  : "+h1.getRooms());
+//	    	System.out.println(h1.getRooms()==null);
+//	    	System.out.println("======");
+//	    	System.out.println(h1.getRooms().size()==0);
+//	    	System.out.println(h1.getRooms().isEmpty());
+//	    }
 //	    if(resultList.isEmpty()){
 //	    	return list;
 //	    }
+//		정렬 
+		Collections.sort(list, new Compare());
+		System.out.println(list.size());
 		return list;
 	}
+
+	class Compare implements Comparator<HotelVO> {
+		@Override
+		public int compare(HotelVO o1, HotelVO o2) {
+			return o1.getRooms().get(0).getPrice().compareTo(o2.getRooms().get(0).getPrice());
+		}
+	}
+
 	
 	/**
 	 * 선택한 호텔+날짜로 호텔+룸 리턴

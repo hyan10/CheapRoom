@@ -44,4 +44,8 @@ public class RoomDAO {
 	public RoomVO selectRoomByNo(int no){
 		return sqlSession.selectOne("room.dao.RoomDAO.selectRoomByNo",no);
 	}
+
+	public List<RoomVO> selectRoomByMap(Map<String, Object> paramMap) {
+		return sqlSession.selectList("room.dao.RoomDAO.selectRoomByMap",paramMap);
+	}
 }

@@ -265,6 +265,8 @@ public class HotelController {
 		System.out.println(list);
 		model.addAttribute("hotelList", list);
 		model.addAttribute("search",search);
+		
+		
 		return "hotelList";
 	}
 
