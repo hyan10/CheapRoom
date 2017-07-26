@@ -203,7 +203,7 @@ alter table review add (reg_date date)
 
 create sequence review_seq
 
-select * from booking_history
+select * from booking_history where to_char(start_Date, 'mm')='05'
 select * from chart where hotel_no=83
 
 select month, sum(count) as count, sum(profit) as profit, sum(total_person) as totalPerson
@@ -211,7 +211,7 @@ select month, sum(count) as count, sum(profit) as profit, sum(total_person) as t
 	      group by month
 	      having month=4
 	      
-  select * from chart where month=6
+  select * from chart where month=5
 
 select sum(total_price) as profit, sum(total_person) as totalPerson, count(*) as count
 from booking_history bh where to_char(bh.start_date, 'MM') = to_char(to_date(6,'mm'),'mm')
@@ -228,4 +228,13 @@ from booking_history bh
 where type='Y' and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM')
 
 
+select count(*) as count, sum(total_person) as totalPerson, sum(total_price) as profit
+from booking_history
+where to_char(start_date, 'mm')=to_char(to_date(5,'mm'),'mm') 
 
+
+select to_char(start_date, 'mm'), count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson
+		from booking_history
+		where type='Y'
+		group by to_char(start_date, 'mm')	
+		order by to_char(start_date, 'mm')

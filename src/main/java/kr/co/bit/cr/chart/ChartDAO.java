@@ -42,7 +42,12 @@ public class ChartDAO {
 
 	// 관리자의 전체 통계
 	public List<ChartVO> chartAll() {
-		return sqlSessionTemplate.selectList("chart.ChartDAO.selectChartAll");
+		//return sqlSessionTemplate.selectList("chart.ChartDAO.selectChartAll");
+		return sqlSessionTemplate.selectList("chart.ChartDAO.selectChartAllFromBH");
+	}
+
+	public List<ChartVO> selectChartByMonth(int month) {
+		return sqlSessionTemplate.selectList("chart.ChartDAO.selectChartByMonth", month);
 	}
 
 }

@@ -1,16 +1,23 @@
 package kr.co.bit.cr.booking;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.bit.cr.review.ReviewDAO;
+import kr.co.bit.cr.review.ReviewVO;
+
 @Service
 public class BookingService {
 	
 	@Autowired
 	private BookingDAO dao;
+	
+	@Autowired
+	private ReviewDAO rDao;
 	
 		//예약
 		public int book(BookingVO booking){
@@ -64,7 +71,26 @@ public class BookingService {
 		
 		// 유저 이전 예약 내역 조회
 		public List<BookingVO> userBookingHistoryList(int userNo){
-			return dao.selectHistoryByUser(userNo);
+			List<BookingVO> list = dao.selectHistoryByUser(userNo);
+			List<ReviewVO> reviews = rDao.selectReviewByUno(userNo);
+			
+			System.out.println(reviews);
+			List<Integer> rList = new ArrayList<>();
+			for(ReviewVO r : reviews) {
+				rList.add(r.getHotelNo());
+			}
+			
+			System.out.println(rList);
+			
+			for(BookingVO booking : list) {
+				if(rList.contains(booking.getHotelNo())) {
+					booking.setType("R");
+					System.out.println(booking);
+				}
+			}
+			
+			//return dao.selectHistoryByUser(userNo);
+			return list;
 		}
 		
 		// 사업자 이전 예약 내역 전체 조회

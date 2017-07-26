@@ -140,4 +140,21 @@
 		order by month
 	</select>
 	
+		
+	<!-- 월 별 통계 실제 값 구하기 -->
+	<select id="selectChartByMonth" parameterType="int" resultType="chart">
+		select count(*) as count, sum(total_person) as totalPerson, sum(total_price) as profit
+		from booking_history
+		where to_char(start_date, 'mm')=to_char(to_date(#{month},'mm'),'mm') and type='Y'
+	</select>
+	
+		<!-- 월별 전체 통계 실제 값 -->
+	<select id="selectChartAllFromBH" resultType="chart">
+		select to_char(start_date, 'mm') as month, count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson
+		from booking_history
+		where type='Y'
+		group by to_char(start_date, 'mm')	
+		order by to_char(start_date, 'mm')
+	</select>
+	
 </mapper>

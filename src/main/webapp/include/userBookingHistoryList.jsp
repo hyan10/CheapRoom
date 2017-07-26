@@ -94,7 +94,8 @@
 							onclick="javascript:location.href='${pageContext.request.contextPath}/booking/historyDetail.cr?bookingNo=${booking.no}'">내역
 							보기</button></td>
 					<c:choose>
-						<c:when test="${booking.type=='N'}"><td>후기등록 불가</td></c:when>
+						<c:when test="${booking.type=='N'}"><td><font color="red">후기등록 불가</font></td></c:when>
+						<c:when test="${booking.type=='R'}"><td><font color="green">호텔 평가 완료</font></td></c:when>
 						<c:otherwise>
 							<td><a href="#" id="reviewBtn" class="btn btn-primary btn-lg" role="button" onclick="showModal(${ booking.hotelNo}, ${ loginUser.no})">후기 등록</a></td>
 						</c:otherwise>

@@ -5,7 +5,7 @@
 <mapper namespace="review.dao.ReviewDAO">
 	<select id="selectReviewByUno" parameterType="int" resultType="review">
 		<!-- select * from review where user_no = #{ userNo } -->
-		select h.name as hotelName, to_char(r.reg_date, 'YYYY-MM-DD') as regDate,
+		select h.no as hotelNo, h.name as hotelName, to_char(r.reg_date, 'YYYY-MM-DD') as regDate,
 			   cleanliness, comfort, location, facilities, staff 
 		from review r, hotel h
 		where r.hotel_no = h.no 
