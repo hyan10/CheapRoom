@@ -168,7 +168,7 @@ public class UserController {
 	}
 	@RequestMapping(value="/favorite.cr",method=RequestMethod.GET)
 	@ResponseBody
-	public String Favorite(HttpSession session, @RequestParam("hotelNo")int hotelNo){
+	public Result Favorite(HttpSession session, @RequestParam("hotelNo")int hotelNo){
 		UserVO user = (UserVO)session.getAttribute("loginUser");
 		FavoriteVO favorite = new FavoriteVO();
 		favorite.setUserNo(user.getNo());
@@ -182,9 +182,13 @@ public class UserController {
 		//return "redirect:/hotel/hotelList.cr?msg="+msg;
 		//호텔 셋 favorite
 		System.out.println(msg);
-		
-		return msg;
+		Result res = new Result();
+		res.setMsg(msg);
+		res.setHotelNo(hotelNo);
+		return res;
 	}
+	
+	
 	
 	@RequestMapping(value="/favoriteList.cr",method=RequestMethod.GET)
 	public String FavoriteList(HttpSession session, Model model){
@@ -209,4 +213,32 @@ public class UserController {
 		return "redirect:/user/favoriteList.cr";
 	}
 	  
+}
+class Result{
+	private String msg;
+	private int hotelNo;
+	public String getMsg() {
+		return msg;
+	}
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+	public int getHotelNo() {
+		return hotelNo;
+	}
+	public void setHotelNo(int hotelNo) {
+		this.hotelNo = hotelNo;
+	}
+	
+	public Result() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Result(String msg, int hotelNo) {
+		super();
+		this.msg = msg;
+		this.hotelNo = hotelNo;
+	}
+	
+	
 }

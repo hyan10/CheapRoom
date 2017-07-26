@@ -60,12 +60,12 @@
 						<c:choose>
 							<c:when test="${hotel.favorite == 'Y' }">
 								<a>
-									<span class="day"><i id="favorite" class="fa fa-heart"></i></span>
+									<span class="day"><i id="favorite${hotel.no }"  class="fa fa-heart"></i></span>
 								</a>
 							</c:when>
 							<c:when test="${hotel.favorite == 'N' }">
 								<a>
-									<span class="day"><i id="favorite" class="fa fa-heart-o"></i></span>
+									<span class="day"><i id="favorite${hotel.no }" class="fa fa-heart-o"></i></span>
 								</a>
 							</c:when>
 							<c:otherwise>
@@ -80,20 +80,28 @@
 									<!-- </a> -->
 									<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 									<script>
-									    $('.day').click(function(){
+										
+									    $('#favorite'+'${hotel.no}').click(function(){
 									        $.ajax({
 									            url:"${pageContext.request.contextPath}/user/favorite.cr",
 									            type:'GET',
 									            data:{hotelNo: ${hotel.no}
 									            },
 									            success:function(data){
-									            	console.log(data);
-									                if(data == 'N'){
+									            	//console.dir(data);
+									                var data = JSON.parse(data);
+									                console.dir(data);
+									            	//console.dir(data.hotelNo);
+									            	var attr = "#favorite"+data.hotelNo;
+									            	console.log(attr);
+									                if(data.msg == 'N'){
 									                	alert('찜취소');
-										                $("#favorite").attr('class','fa fa-heart-o');
+										               //$("#favorite"+data.hotelNo).attr('class','fa fa-heart-o');
+										                $(attr).attr('class','fa fa-heart-o');
 									                }else{
 									                	alert('찜');
-									                	$("#favorite").attr('class','fa fa-heart');
+//									                	$("#favorite"+data.hotelNo).attr('class','fa fa-heart');
+									                	$(attr).attr('class','fa fa-heart');
 									                }
 									                
 									            }
