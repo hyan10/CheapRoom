@@ -7,8 +7,39 @@
 		select no ,hotel_no as hotelNo , name, price, min_person as minPerson , max_person as maxPerson, add_price as addPrice, cooking, TV, AC 
 		 from room
 	</sql>
+	
+	<select id="selectRoomByHno" parameterType="int" resultType="room">
+		<include refid="select"/>
+		 where hotel_no = #{hNo}
+	</select>
+	
+	<select id="selectRoomByNo" parameterType="int" resultType="room">
+		<include refid="select"/>
+		 where no = #{no}
+	</select>
+	
 	<insert id="registerRoom" parameterType="room">
 		INSERT INTO room (no ,hotel_no, name, price, min_person, max_person, add_price, cooking, tv, ac) 
-		 VALUES (room_seq.nextval,#{hotelNo}, #{name}, #{price}, #{minPerson}, #{maxPerson}, #{addPrice}, #{cooking}, #{tv}, #{ac})
+		 VALUES (#{no},#{hotelNo}, #{name}, #{price}, #{minPerson}, #{maxPerson}, #{addPrice}, #{cooking}, #{tv}, #{ac})
 	</insert>
+	
+	<update id="updateRoom" parameterType="room">
+		update room set hotel_no=#{hotelNo}, name=#{name}, price=#{price}, min_person=#{minPerson}, max_person=#{maxPerson}, add_price=#{addPrice}, cooking=#{cooking}, tv=#{tv}, ac=#{ac}
+		 where no = #{no}
+	</update>
+	
+	<delete id="deleteRoomByNo" parameterType="room">
+		delete from room where no=#{no}
+	</delete>
+	
+	<select id="joinRoomAndBooking" parameterType="search" resultType="room">
+		select r.no ,r.hotel_no as hotelNo , r.name, r.price, r.min_person as minPerson , r.max_person as maxPerson, r.add_price as addPrice, r.cooking, r.TV, r.AC 
+		from room r join booking b on r.no=b.room_no where (r.hotel_no=#{hotelNo})
+		and (trunc(b.start_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) or 
+		(trunc(b.end_date) between to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) and r.hotel_no=#{hotelNo}
+	</select>
+	
+	<select id="selectRoomSeq" resultType="int">
+		SELECT room_seq.nextval FROM DUAL   
+	</select>
 </mapper>

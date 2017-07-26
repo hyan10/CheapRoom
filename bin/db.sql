@@ -1,5 +1,9 @@
 --KS Test SQL
-
+select no, owner_no as ownerNo, city_no as cityNo, name, blind, tel, parking, wifi, smoking, pool, bbq, 
+		description, checkin, checkout, addr, to_char(reg_date,'yyyy-mm-dd') as regDate, imgurl
+		from hotel where owner_no = 21
+		
+		
 select * from booking;
 select *from booking where user_no = (select no from users where email = 'admin')
 select * from users
@@ -58,14 +62,12 @@ CREATE TABLE owner
     email       VARCHAR2(50)    NOT NULL, 
     password    VARCHAR2(50)    NOT NULL, 
     name        VARCHAR2(10)    NOT NULL, 
-    phone       VARCHAR2(20)    NOT NULL, 
+    phone       NUMBER          NOT NULL, 
     CRN         NUMBER          NOT NULL, 
     reg_date    DATE            NULL, 
     CONSTRAINT OWNER_PK PRIMARY KEY (no)
 )
 /
-
-alter table owner modify (phone varchar2(20))
 
 CREATE SEQUENCE owner_SEQ
 START WITH 1
@@ -515,10 +517,6 @@ ALTER TABLE chart
     ADD CONSTRAINT FK_chart_city_no_city_no FOREIGN KEY (city_no)
         REFERENCES city (no)
 /
-//////////////////////////////////////////
-더미데이터
-owner
-select * from owner
 INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 01', 'password 01', 'name 01', 01, 01, sysdate);
 INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 02', 'password 02', 'name 02', 02, 02, sysdate);
 INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 03', 'password 03', 'name 03', 03, 03, sysdate);
@@ -539,7 +537,7 @@ INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owne
 INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 18', 'password 18', 'name 18', 18, 18, sysdate);
 INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 19', 'password 19', 'name 19', 19, 19, sysdate);
 INSERT INTO owner (no, email, password, name, phone, CRN, reg_date) VALUES (owner_SEQ.nextval,'email 20', 'password 20', 'name 20', 20, 20, sysdate);
-//////////////////////////////////////////////
+\
 INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 01, 01, 'name 01', 'N', 01, 'N', 'N', 'N', 'N', 'N', 'description 01', 'checkin 01', 'checkout 01', 'addr 01', sysdate);
 INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 02, 02, 'name 02', 'N', 02, 'N', 'N', 'N', 'N', 'N', 'description 02', 'checkin 02', 'checkout 02', 'addr 02', sysdate);
 INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 03, 03, 'name 03', 'N', 03, 'N', 'N', 'N', 'N', 'N', 'description 03', 'checkin 03', 'checkout 03', 'addr 03', sysdate);
@@ -561,26 +559,27 @@ INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoki
 INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 19, 19, 'name 19', 'N', 19, 'N', 'N', 'N', 'N', 'N', 'description 19', 'checkin 19', 'checkout 19', 'addr 19', sysdate);
 INSERT INTO hotel (no, owner_no, city_no, name, blind, tel, parking, wifi, smoking, pool, BBQ, description, checkin, checkout, addr, reg_date) VALUES (hotel_seq.nextval, 20, 20, 'name 20', 'N', 20, 'N', 'N', 'N', 'N', 'N', 'description 20', 'checkin 20', 'checkout 20', 'addr 20', sysdate);
 ////////////////////////////////////////////////
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 01, 'name 01', 01, 01, 01, 01, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 02, 'name 02', 02, 02, 02, 02, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 03, 'name 03', 03, 03, 03, 03, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 04, 'name 04', 04, 04, 04, 04, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 05, 'name 05', 05, 05, 05, 05, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 06, 'name 06', 06, 06, 06, 06, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 07, 'name 07', 07, 07, 07, 07, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 08, 'name 08', 08, 08, 08, 08, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 09, 'name 09', 09, 09, 09, 09, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 10, 'name 10', 10, 10, 10, 10, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 11, 'name 11', 11, 11, 11, 11, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 12, 'name 12', 12, 12, 12, 12, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 13, 'name 13', 13, 13, 13, 13, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 14, 'name 14', 14, 14, 14, 14, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 15, 'name 15', 15, 15, 15, 15, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 16, 'name 16', 16, 16, 16, 16, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 17, 'name 17', 17, 17, 17, 17, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 18, 'name 18', 18, 18, 18, 18, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 19, 'name 19', 19, 19, 19, 19, 'N', 'N', 'N');
-INSERT INTO room (no, hotel_no, name, price, min_person, max_person, add_price, cooking, TV, AC) VALUES (room_seq.nextval, 41, '테스트', 20, 20, 20, 20, 'N', 'N', 'N');
-
-select * from hotel
-/////////////제약조건 설정
+select * from hotel where city_no=1
+select * from room
+select h.no, count(*) from hotel h join booking b on h.no=b.hotel_no where (start_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) or (end_date between to_date('2017-07-18','yyyy-mm-dd') and to_date('2017-07-19','yyyy-mm-dd')) and h.no=1 group by h.no order by 1;
+select h.no as hotelNo , count(*) as roomCount from hotel h join booking b on h.no=b.hotel_no where h.no=1 group by h.no
+select * from hotel h join booking b on h.no=b.hotel_no 
+group by h.no h rder by 1
+select * from image
+select * from booking
+alter table hotel add(imgUrl varchar2(50))
+////////////////////////////제약조건
+alter table review drop constraint fk_review_hotel_no_hotel_no;
+alter table review drop constraint fk_review_user_no_user_no;
+alter table room drop constraint fk_room_hotel_no_hotel_no;
+alter table hotel drop constraint fk_hotel_owner_no_owner_no;
+alter table image drop constraint fk_image_room_no_room_no;
+alter table review add constraint fk_review_hotel_no_hotel_no foreign key(hotel_no) references hotel(no) on delete cascade; 
+alter table review add constraint fk_review_user_no_user_no foreign key(user_no) references users(no) on delete set null; 
+alter table blind_list add constraint fk_blind_list_user_no_user_no foreign key(user_no) references users(no) on delete set null; 
+alter table chart add constraint fk_chart_hotel_no_hotel_no foreign key(hotel_no) references hotel(no) on delete set null; 
+alter table room add constraint fk_room_hotel_no_hotel_no foreign key(hotel_no) references hotel(no) on delete cascade; 
+alter table hotel add constraint fk_hotel_owner_no_owner_no foreign key(owner_no) references owner(no) on delete cascade; 
+alter table image add constraint fk_image_room_no_room_no foreign key(room_no) references room(no) on delete cascade; 
+select * from owner
+alter table owner add (type char(1) default 'O')

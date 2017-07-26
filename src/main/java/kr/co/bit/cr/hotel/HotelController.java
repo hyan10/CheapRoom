@@ -293,6 +293,7 @@ public class HotelController {
 		search.setEndDate(endDate.getValue());
 		search.setPersonNo(Integer.parseInt(personNo.getValue()));
 		search.setCityNo(Integer.parseInt(cityNo.getValue()));
+
 		hotel = service.roomList(no, search);
 		
 		model.addAttribute("roomList",hotel.getRooms());

@@ -48,7 +48,7 @@ window.onload = function () {
 	var barDataPoints=[];
 	var lineDataPoints_count=[];
 	var lineDataPoints_person=[];
-	var hotelName = data[0].hotelName; 
+	/* var hotelName = data[0].hotelName; */ 
 	
 	console.log(data);
 	console.log(data.length);
@@ -69,7 +69,7 @@ window.onload = function () {
     var barChart = new CanvasJS.Chart("barChartContainer",
     {
       title:{
-        text: hotelName+"의 수익"  
+        text: "월별 수익"  
       },
       animationEnabled: true,
      /*  axisY: {
@@ -98,7 +98,7 @@ window.onload = function () {
     var lineChart = new CanvasJS.Chart("lineChartContainer",
     		{
     			title:{
-    				text: hotelName+"의 예약 건수, 방문객 수"
+    				text: "월별 예약 건수, 방문객 수"
     				/* ,fontSize: 30 */
     			},
                             animationEnabled: true,
@@ -242,9 +242,9 @@ window.onload = function () {
 												<h4><span><b>${chart.month}월</b></span></h4>
 											</div>
 											<ul class="details">
-												<li><span>총 예약 건수 :</span>${chart.count}</li>
-												<li><span>총 예약 인원 :</span>${chart.totalPerson}</li>
-												<li><span>예약 총액 :</span>${chart.profit}</li>
+												<li><span>총 예약 건수 :</span>${chart.count}건</li>
+												<li><span>총 예약 인원 :</span>${chart.totalPerson}명</li>
+												<li><span>예약 총액 :</span>${chart.profit}원</li>
 												<!-- <li><span>Date :</span> 03 March 2014</li>
 												<li><span>Project URL :</span> <a href="#">www.bestjquery.com</a></li> -->
 											</ul>

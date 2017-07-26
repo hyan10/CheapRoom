@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- Include Required Prerequisites -->
-<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
  
@@ -14,12 +15,7 @@
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
-<script type="text/javascript">
-	
-	
-</script>
-<script type="text/javascript">
-	moment.locale('ko');
+<script type="text/javascript">	
 	$(function(){
 	    $('input[name="daterange"]').daterangepicker({
 	    		locale: {
@@ -39,8 +35,6 @@
 </script>
 </head>
 <body>
-	<!-- <input type="text" id="fromDate" placeholder="시작 날짜 입력"/>
-	<input type="text" id="toDate" placeholder="종료 날짜 입력"/> -->
 	<div class='col-md-5'>
 		<div class='col-md-5'>
 			<div class="form-group">
@@ -52,30 +46,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- <input class="input-group-date" type="text" name="daterange" value="01/01/2015 - 01/31/2015" /> -->
 	</div>
-	
-	<!-- <div class="container">
-		<div class='col-md-5'>
-			<div class="form-group">
-				<div class='input-group date' id='datetimepicker6'>
-					<input type='text' class="form-control" /> <span
-						class="input-group-addon"> <span
-						class="glyphicon glyphicon-calendar"></span>
-					</span>
-				</div>
-			</div>
-		</div>
-		<div class='col-md-5'>
-			<div class="form-group">
-				<div class='input-group date' id='datetimepicker7'>
-					<input type='text' class="form-control" /> <span
-						class="input-group-addon"> <span
-						class="glyphicon glyphicon-calendar"></span>
-					</span>
-				</div>
-			</div>
-		</div>
-	</div> -->
 </body>
 </html>

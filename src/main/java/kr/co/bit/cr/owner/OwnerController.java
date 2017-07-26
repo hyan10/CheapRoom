@@ -66,7 +66,8 @@ public class OwnerController {
 		if(owner == null){			
 			model.addAttribute("msg", "사업자 아이디 또는 패스워드가 잘못되었습니다.");
 			System.out.println("사업자 로그인 실패");
-			return "redirect:/";
+			model.addAttribute("url", "");
+			return "process/alertProcess";
 		} else {
 			System.out.println(owner + " 사업자 로그인 성공");
 		}
@@ -145,9 +146,15 @@ public class OwnerController {
 		}
 		
 		// 이번 달 통계
-		if(maxMonth == month){
-			chartList = chartService.chartThisMonthByOwnerNo(ownerNo);
-			bookingList = bookingService.ownerBookingHistoryList(ownerNo);
+		 if(maxMonth == month){
+	         chartList = chartService.chartThisMonthByOwnerNo(ownerNo);
+	         Map<String,Integer> map = new HashMap<>();
+	         
+	         map.put("no", ownerNo); 
+	         map.put("month", month);
+
+	         //bookingList = bookingService.ownerBookingHistoryList(ownerNo);
+	         bookingList = bookingService.ownerBookingHistoryList(map);
 		}else {
 			// n월의 통계
 			Map<String,Integer> map = new HashMap<>();
@@ -159,14 +166,32 @@ public class OwnerController {
 			bookingList = bookingService.ownerBookingHistoryList(map);
 		}
 		
+		 // 빈 데이터 추가
+			List<ChartVO> cList = new ArrayList<>();
+			cList.addAll(chartList);
+			for(String hotelName : hotelService.selectHotelNameByOno(ownerNo)){
+				for(ChartVO c : chartList){
+					if(!c.getHotelName().equals(hotelName)){
+						ChartVO chart = new ChartVO();
+						chart.setHotelName(hotelName);//hotelService.selectHotelNameByOno(ownerNo).get(0));   
+						chart.setCount(0);
+						chart.setProfit(0);
+						chart.setTotalPerson(0);
+						cList.add(chart);						
+					}
+				}
+			}
+			
 		if(chartList.isEmpty()){
 			chartList = new ArrayList<>();
-			ChartVO chart = new ChartVO();
-			chart.setHotelName(hotelService.selectHotelNameByOno(ownerNo).get(0));   
-			chart.setCount(0);
-			chart.setProfit(0);
-			chart.setTotalPerson(0);
-			chartList.add(chart);
+			for(String hotelName : hotelService.selectHotelNameByOno(ownerNo)){
+				ChartVO chart = new ChartVO();
+				chart.setHotelName(hotelName);//hotelService.selectHotelNameByOno(ownerNo).get(0));   
+				chart.setCount(0);
+				chart.setProfit(0);
+				chart.setTotalPerson(0);
+				cList.add(chart);	
+			}
 		}
 		
 		if(bookingList==null){
@@ -176,7 +201,7 @@ public class OwnerController {
 		System.out.println(chartList);
 		
 		mav.addObject("bookingList",bookingList);
-		mav.addObject("chartList",chartList);
+		mav.addObject("chartList",cList);
 		mav.setViewName("owner/bookingHistoryList");
 		
 		return mav;

@@ -4,8 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="image.dao.ImageDAO">
 
+	<select id="selectImageByRno" parameterType="int" resultType="image">
+		select no, room_no as roomNo, url  from image where room_no=#{room_no}
+	</select>
 	
 	<insert id="registerImage" parameterType="image">
 		insert into image (no, room_no, url) values(image_seq.nextval, #{roomNo}, #{url})
 	</insert>
+	
+	<update id="updateImage" parameterType="image">
+		update image set room_no=#{roomNo}, url=#{url} where no=#{no}
+	</update>
+	<delete id="deleteImageByNo" parameterType="image">
+		delete from image where no=#{no}
+	</delete>
 </mapper>

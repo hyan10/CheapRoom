@@ -323,7 +323,7 @@
 		}
 		
 		function goBack(){
-			location.href = "${pageContext.request.contextPath}/booking/test.cr";
+			location.href = "${pageContext.request.contextPath}/user/bookingList.cr";
 		}
 	</script>
 </body>

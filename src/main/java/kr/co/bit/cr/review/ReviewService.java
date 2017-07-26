@@ -12,7 +12,7 @@ public class ReviewService {
 	
 	public int registerReview(ReviewVO reviewVO){
 		System.out.println(reviewVO);
-		return 0;//dao.registerReview(reviewVO);
+		return dao.registerReview(reviewVO);
 	}
 	public List<ReviewVO> userReviewList(int userNo){
 		return dao.selectReviewByUno(userNo);

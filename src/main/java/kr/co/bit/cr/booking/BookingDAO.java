@@ -34,8 +34,13 @@ public class BookingDAO {
 		return sqlSessionTemplate.delete("booking.BookingDAO.deleteBook", bookingNo);
 	}
 	
+	// 지난 예약 내역에 추가
+	public int insertBookHistory(BookingVO booking) {
+		return sqlSessionTemplate.insert("booking.BookingDAO.insertBookHistory", booking);
+	}
+	
 	// 유저 예약 조회
-	public List<BookingVO> selectByUser(int userNo){
+	public List<BookingVO> selectByUserNo(int userNo){
 		System.out.println(userNo);
 		return sqlSessionTemplate.selectList("booking.BookingDAO.selectByUserNo",userNo);
 	}

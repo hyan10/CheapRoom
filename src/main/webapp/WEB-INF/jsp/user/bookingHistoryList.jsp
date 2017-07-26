@@ -62,10 +62,9 @@
 	href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
 
 </head>
-
 <body>
 	<jsp:include page="/include/header.jsp" />
-
+	<jsp:include page="/include/reviewModal.jsp" />
 	<!--start wrapper-->
 	<section class="wrapper">
 		<section class="page_head">

@@ -8,7 +8,7 @@
 </style>
 <div class="modal contact-modal fade" id="review-modal"
 	data-backdrop="false" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
+	aria-labelledby="myModalLabel" aria-hidden="true" style="z-index:100000">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header" >

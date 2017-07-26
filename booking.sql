@@ -7,8 +7,10 @@ VALUES (booking_SEQ.nextval,1, 3, 1, sysdate+1, sysdate+3, 3, 50000, 'card_type 
 INSERT INTO booking (no, user_no, hotel_no, room_no, start_date, end_date, total_person, total_price, card_type, card_no, card_date, reg_date, user_name, user_email, user_phone)
 VALUES (booking_SEQ.nextval,1, 4, 1, sysdate, sysdate+2, 4, 70000, 'card_type 04', '04', 'card_date 04', sysdate, 'user_name 04', 'user_email 04', '0102222');
 
+SELECT * FROM review
 select * from booking
 select * from booking_history
+select * from users
 
 <!-- 유저의 예약 리스트 - 호텔이름,방이름 --!>
 select h.name, r.name, total_person, user_name
@@ -189,3 +191,50 @@ from hotel h, (select bh.total_price as total_price, total_person, hotel_no
 				 	sum(profit) as profit, sum(total_person) as totalPerson
 				from chart where month=6 group by hotel_no) c join hotel h on (c.hotelNo=h.no)
 		order by c.month
+
+update booking_history set type='Y' where no=44
+
+select * from booking_history
+
+select * from review
+
+alter table review add (no number)
+alter table review add (reg_date date)
+
+create sequence review_seq
+
+select * from booking_history where to_char(start_Date, 'mm')='05'
+select * from chart where hotel_no=83
+
+select month, sum(count) as count, sum(profit) as profit, sum(total_person) as totalPerson
+	      from chart
+	      group by month
+	      having month=4
+	      
+  select * from chart where month=5
+
+select sum(total_price) as profit, sum(total_person) as totalPerson, count(*) as count
+from booking_history bh where to_char(bh.start_date, 'MM') = to_char(to_date(6,'mm'),'mm')
+
+
+	      select h.no as hotelNo, count(*) as roomCount 
+from hotel h left outer join booking b on h.no=b.hotel_no
+where (total_person>10) and ((trunc(start_date) between to_date('2017-07-26','yyyy-mm-dd') and to_date('2017-07-28','yyyy-mm-dd'))
+ or (trunc(end_date) between to_date('2017-07-26','yyyy-mm-dd') and to_date('2017-07-28','yyyy-mm-dd')) )
+group by h.no order by 1;
+
+select sum(total_price) as profit, sum(total_person) as totalPerson, count(*) as count
+from booking_history bh
+where type='Y' and trunc(bh.start_date, 'MM') = trunc(sysdate, 'MM')
+
+
+select count(*) as count, sum(total_person) as totalPerson, sum(total_price) as profit
+from booking_history
+where to_char(start_date, 'mm')=to_char(to_date(5,'mm'),'mm') 
+
+
+select to_char(start_date, 'mm'), count(*) as count, sum(total_price) as profit, sum(total_person) as totalPerson
+		from booking_history
+		where type='Y'
+		group by to_char(start_date, 'mm')	
+		order by to_char(start_date, 'mm')

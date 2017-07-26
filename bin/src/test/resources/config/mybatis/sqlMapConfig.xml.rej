@@ -1,9 +1,0 @@
-diff a/src/test/resources/config/mybatis/sqlMapConfig.xml b/src/test/resources/config/mybatis/sqlMapConfig.xml	(rejected hunks)
-@@ -0,6 +0,7 @@
- 		<typeAlias type="kr.co.bit.cr.hotel.HotelVO" alias="hotel" />
- 		<typeAlias type="kr.co.bit.cr.room.RoomVO" alias="room" />
- 		<typeAlias type="kr.co.bit.cr.image.ImageVO" alias="image" />
-+=======
- 		<!-- <typeAlias type="kr.co.bit.board.vo.BoardVO" alias="board" /> -->
- 		<typeAlias type="kr.co.bit.cr.user.UserVO" alias="user"/>
- 		<typeAlias type="kr.co.bit.cr.owner.OwnerVO" alias="owner"/>
