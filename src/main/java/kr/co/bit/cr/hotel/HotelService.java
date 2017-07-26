@@ -17,6 +17,8 @@ import kr.co.bit.cr.favorite.FavoriteDAO;
 import kr.co.bit.cr.favorite.FavoriteVO;
 import kr.co.bit.cr.image.ImageDAO;
 import kr.co.bit.cr.image.ImageVO;
+import kr.co.bit.cr.review.ReviewDAO;
+import kr.co.bit.cr.review.ReviewVO;
 import kr.co.bit.cr.room.RoomDAO;
 import kr.co.bit.cr.room.RoomVO;
 import kr.co.bit.cr.search.SearchVO;
@@ -34,7 +36,8 @@ public class HotelService {
 	private FavoriteDAO fDao;
 	@Autowired
 	private BookingDAO bDao;
-
+	@Autowired
+	private ReviewDAO reviewDAO;
 	
 	/**
 	 * 사업자가 호텔+방+사진 등록
@@ -366,6 +369,26 @@ public class HotelService {
 			fList.put(hotelNo, hotel);
 		}
 		
+		return list;
+	}
+
+	public List<HotelVO> reviewList(List<HotelVO> list) {
+		for(HotelVO hotel : list){
+			ReviewVO review = new ReviewVO();
+			review = reviewDAO.selectReviewAVGByHno(hotel.getNo());
+			if(review==null){
+				ReviewVO review0 = new ReviewVO();
+				review0.setHotelNo(hotel.getNo());
+				review0.setCleanliness(0);
+				review0.setComfort(0);
+				review0.setFacilities(0);
+				review0.setLocation(0);
+				review0.setStaff(0);
+				hotel.setReview(review0);
+			}else{
+				hotel.setReview(review);
+			}
+		}
 		return list;
 	}
 

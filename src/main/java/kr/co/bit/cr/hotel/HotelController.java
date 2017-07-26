@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -263,6 +264,13 @@ public class HotelController {
 		list = service.favoriteList(list, user);
 		System.out.println("favorite추가");
 		System.out.println(list);
+		
+		list = service.reviewList(list);
+		System.out.println("review추가");
+		for(HotelVO hotel: list){
+			System.out.println("============");
+			System.out.println(hotel.getReview());
+		}
 		model.addAttribute("hotelList", list);
 		model.addAttribute("search",search);
 		

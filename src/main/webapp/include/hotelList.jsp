@@ -31,6 +31,11 @@
 							<div align="right">
 								<h3>1박요금: <font color="red">${hotel.rooms[0].price}</font></h3>
 								<br/>
+								청결도 : ${hotel.review.cleanliness }
+							편안함 : ${hotel.review.comfort }
+							위치  : ${hotel.review.location }
+							시설  : ${hotel.review.facilities }
+							직원  : ${hotel.review.staff }
 								<a class="btn btn-small btn-default" href="${pageContext.request.contextPath}/hotel/roomList.cr?hotelNo=${hotel.no}">객실 보기</a>
 							</div>
 						</div> <!-- 내용 끝 -->
@@ -81,6 +86,7 @@
 									    });
 									</script>
 						</div> <!-- 찜하기 끝 -->
+
 					</article>
 				</c:forEach>
 			</div>

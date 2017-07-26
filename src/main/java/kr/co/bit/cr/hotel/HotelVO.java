@@ -2,10 +2,7 @@ package kr.co.bit.cr.hotel;
 
 import java.util.List;
 
-import javax.validation.constraints.AssertTrue;
-
-import org.springframework.stereotype.Repository;
-
+import kr.co.bit.cr.review.ReviewVO;
 import kr.co.bit.cr.room.RoomVO;
 
 public class HotelVO {
@@ -56,6 +53,9 @@ public class HotelVO {
     //찜 여부
     private String favorite;
     
+    //별점
+    private ReviewVO review;
+    
     public HotelVO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -87,6 +87,18 @@ public class HotelVO {
 	}
 
 	
+
+	public ReviewVO getReview() {
+		return review;
+	}
+
+
+
+	public void setReview(ReviewVO review) {
+		this.review = review;
+	}
+
+
 
 	public String getFavorite() {
 		return favorite;

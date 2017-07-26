@@ -16,4 +16,10 @@
 		insert into review values(review_seq.nextval, #{ hotelNo }, #{ userNo }, #{ cleanliness },
 							      #{ comfort }, #{ location }, #{ facilities }, #{ staff }, sysdate)
 	</insert>
+	
+	<select id="selectReviewAVGByHno" parameterType="int" resultType="review">
+		select hotel_no as hotelNo, avg(cleanliness) as cleanliness,avg(comfort) as comfort,avg(location) as location,avg(facilities) as facilities,avg(staff) as staff 
+		 from review where hotel_no=#{no} group by hotel_no
+		
+	</select>
 </mapper>
