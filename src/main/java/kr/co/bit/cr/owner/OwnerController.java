@@ -169,21 +169,24 @@ public class OwnerController {
 		 // 빈 데이터 추가
 			List<ChartVO> cList = new ArrayList<>();
 			cList.addAll(chartList);
-			for(String hotelName : hotelService.selectHotelNameByOno(ownerNo)){
-				for(ChartVO c : chartList){
-					if(!c.getHotelName().equals(hotelName)){
-						ChartVO chart = new ChartVO();
-						chart.setHotelName(hotelName);//hotelService.selectHotelNameByOno(ownerNo).get(0));   
-						chart.setCount(0);
-						chart.setProfit(0);
-						chart.setTotalPerson(0);
-						cList.add(chart);						
-					}
-				}
-			}
+//			for(String hotelName : hotelService.selectHotelNameByOno(ownerNo)){
+//				for(ChartVO c : chartList){
+//					System.out.println(c.getHotelName());
+//					System.out.println(hotelName);
+//					if(!c.getHotelName().equals(hotelName)){
+//						ChartVO chart = new ChartVO();
+//						chart.setHotelName(hotelName);//hotelService.selectHotelNameByOno(ownerNo).get(0));   
+//						chart.setCount(0);
+//						chart.setProfit(0);
+//						chart.setTotalPerson(0);
+//						cList.add(chart);
+//						System.out.println(cList);
+//						break;
+//					}
+//				}
+//			}
 			
-		if(chartList.isEmpty()){
-			chartList = new ArrayList<>();
+		if(cList.isEmpty()){
 			for(String hotelName : hotelService.selectHotelNameByOno(ownerNo)){
 				ChartVO chart = new ChartVO();
 				chart.setHotelName(hotelName);//hotelService.selectHotelNameByOno(ownerNo).get(0));   
@@ -194,11 +197,12 @@ public class OwnerController {
 			}
 		}
 		
+		
 		if(bookingList==null){
 			bookingList = new ArrayList<>();
 		}
 		
-		System.out.println(chartList);
+		System.out.println(cList);
 		
 		mav.addObject("bookingList",bookingList);
 		mav.addObject("chartList",cList);

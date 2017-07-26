@@ -11,9 +11,19 @@
 				<div class="col-sm-2">
 					<div id="logo">
 						<h1>
-							<a href="${ pageContext.request.contextPath }"><img
-								src="${pageContext.request.contextPath}/img/hotel.png"
-								alt="League" /></a>
+							<c:choose>
+								<c:when test="${ not empty loginUser }">
+									<a href="${ pageContext.request.contextPath }/user/search.cr"><img
+									src="${pageContext.request.contextPath}/img/hotel.png"
+									alt="League" /></a>
+								</c:when>
+								<c:otherwise>
+									<a href="${ pageContext.request.contextPath }"><img
+									src="${pageContext.request.contextPath}/img/hotel.png"
+									alt="League" /></a>
+								</c:otherwise>
+							</c:choose>
+							
 						</h1>
 					</div>
 					<!-- end logo -->

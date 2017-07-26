@@ -91,7 +91,7 @@
                
 
 	<!--start footer-->
-	<!-- <footer class="footer">
+	<footer class="footer">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6 col-md-3 col-lg-3">
@@ -160,7 +160,6 @@
 			</div>
 		</div>
 	</footer>
-	end footer
 
 	<section class="footer_bottom">
 		<div class="container">
@@ -182,6 +181,6 @@
 				</div>
 			</div>
 		</div>
-	</section> -->
+	</section>
 </body>
 </html>

@@ -82,6 +82,10 @@ public class UserController {
 		}
 		return "search";
 	}
+	@RequestMapping("/search.cr")
+	public String search(){
+		return "search";
+	}
 	/*@RequestMapping(value="/login.cr", method=RequestMethod.POST)
 	public String login(HttpServletRequest request, UserVO userVO, Model model, HttpSession session){
 		String loginType = request.getParameter("loginType");
